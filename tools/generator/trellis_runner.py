@@ -28,6 +28,9 @@ def main() -> int:
 
     os.makedirs(args.output_dir, exist_ok=True)
 
+    # Alocador com segmentos expansíveis: reduz fragmentação e evita OOM real
+    # observado no FlexiCubes com 12 GB (evidence fase1, smoke plugin).
+    os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
     os.environ.setdefault("ATTN_BACKEND", "flash-attn")
     os.environ.setdefault("SPCONV_ALGO", "native")
 
@@ -56,14 +59,16 @@ def main() -> int:
 
     image = Image.open(args.image)
 
-    # Formats: mesh é obrigatório (scoring); gaussian só p/ GLB texturizado.
+    # Formats: mesh é o artefato do benchmark (scoring geométrico). "gaussian"
+    # só alimentaria o GLB texturizado (pendência nvdiffrast) e dobra o churn
+    # de VRAM — causa do OOM real documentado no smoke test do plugin.
     import inspect
 
     run_kwargs = {"seed": args.seed}
     try:
         params = inspect.signature(pipe.run).parameters
         if "formats" in params:
-            run_kwargs["formats"] = ["mesh", "gaussian"]
+            run_kwargs["formats"] = ["mesh"]
     except (TypeError, ValueError):
         pass
 
@@ -88,19 +93,22 @@ def main() -> int:
     ext = tm.extents
     report["bbox"] = [round(float(x), 4) for x in ext]
 
-    # GLB texturizado (usa renderer — documentado que pode falhar sem nvcc)
+    # GLB texturizado (requer nvdiffrast — pendência documentada; só se houver gaussian)
     glb_path = os.path.join(args.output_dir, "textured.glb")
-    try:
-        from trellis.utils import postprocessing_utils
+    if "gaussian" in outputs:
+        try:
+            from trellis.utils import postprocessing_utils
 
-        glb = postprocessing_utils.to_glb(
-            outputs["gaussian"][0], outputs["mesh"][0], simplify=0.95, texture_size=1024
-        )
-        glb.export(glb_path)
-        report["glb"] = glb_path
-    except Exception as e:  # noqa: BLE001
+            glb = postprocessing_utils.to_glb(
+                outputs["gaussian"][0], outputs["mesh"][0], simplify=0.95, texture_size=1024
+            )
+            glb.export(glb_path)
+            report["glb"] = glb_path
+        except Exception as e:  # noqa: BLE001
+            report["glb"] = None
+            report["erros"].append(f"glb_texturizado: {type(e).__name__}: {e}")
+    else:
         report["glb"] = None
-        report["erros"].append(f"glb_texturizado: {type(e).__name__}: {e}")
 
     report["tempo_total_s"] = round(time.time() - t_total0, 2)
     report["cuda_ok"] = True
