@@ -7,7 +7,7 @@
 
 ## Fase 0 — Fundação e Documentação
 
-**Status:** `[~]` concluída tecnicamente — **aguardando aprovação do dono (👍)** para abrir a Fase 1.
+**Status:** `[x]` concluída e **aprovada pelo dono (👍 em 2026-11-04)**.
 
 | # | Tarefa | Status |
 |---|---|---|
@@ -22,7 +22,23 @@
 | 9 | Skeleton `tools/{forja,generator,pose,validation}` + `evidence/` (sem código) | [x] |
 | 10 | `PROGRESS.md` + `HANDOFF.md` refletindo estado real | [x] |
 | 11 | Todos os commits pushed (`git log origin/main..HEAD` vazio) | [x] |
-| 12 | Aprovação do dono | [ ] |
+| 12 | Aprovação do dono | [x] 👍 2026-11-04 |
+
+---
+
+## Fase 1 — Gerador de Peças: venv isolado + TRELLIS + benchmark `[~] EM ANDAMENTO (aberta 2026-11-04)`
+
+| # | Tarefa | Status |
+|---|---|---|
+| 0 | Abertura formal da fase (roadmap + PROGRESS + commit + push) | [~] |
+| 1 | venv `printer3d-ia` (Python 3.11) + torch CUDA + deps base + evidência de isolamento do `game-ai3d` | [ ] |
+| 2 | Instalação TRELLIS (decisão TRELLIS 1 vs TRELLIS.2 com dono informado; `docs/operations/trellis-install.md` passo a passo; 1 geração ponta a ponta) | [ ] |
+| 3 | TripoSR com venv novo (clone próprio `~/tools/TripoSR`) + 1 geração ponta a ponta | [ ] |
+| 4 | Interface de plugin comum + `gpu_guard.py` (threshold 10.000 MiB, fila serial, poller VRAM 1 Hz) | [ ] |
+| 5 | Set de testes 10 casos fixos com `manifest.json` (procedência por imagem) | [ ] |
+| 6 | Benchmark automático 10×2 + `results.json` + `scores.md` + galeria (mesmo ângulo/luz) | [ ] |
+| 7 | Fechamento: PROGRESS/HANDOFF + relatório ao dono + votação do default mode (→ ADR-005) | [ ] |
+
 
 ### Registros da sessão fundadora (2026-11-03)
 

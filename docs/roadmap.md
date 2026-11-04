@@ -6,7 +6,7 @@ Legenda: `[x]` concluído · `[~]` em andamento · `[ ]` pendente · `[!]` bloqu
 
 ---
 
-## Fase 0 — Fundação e Documentação `(ESTA — status técnico: concluída, aguardando aprovação do dono)`
+## Fase 0 — Fundação e Documentação `[x] concluída — aprovada pelo dono em 2026-11-04`
 
 **Objetivo:** governança, documentação e auditoria de ambiente. Sem instalação de IA, sem código de pipeline.
 
@@ -22,11 +22,11 @@ Critérios de aceite:
 - [x] Skeleton de pastas `tools/forja|generator|pose|validation` + `evidence/` (sem código)
 - [x] `PROGRESS.md` + `HANDOFF.md` refletindo estado real
 - [x] Todos os commits pushed (`git log origin/main..HEAD` vazio)
-- [ ] **Aprovação do dono (👍)** — gate de abertura da Fase 1
+- [x] **Aprovação do dono (👍)** — gate de abertura da Fase 1 · concedida em conversa, 2026-11-04
 
 ---
 
-## Fase 1 — Gerador de Peças: venv isolado + TRELLIS + benchmark comparativo
+## Fase 1 — Gerador de Peças: venv isolado + TRELLIS + benchmark comparativo `(ESTA — [~] em andamento)`
 
 **Objetivo:** colocar o gerador image→3D multi-modo de pé e escolher o modo default com **dados objetivos**, não impressão.
 
