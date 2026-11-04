@@ -1,0 +1,141 @@
+{
+  "descricao": "Set de testes fixo do benchmark Fase 1 (10 casos). IMUTÁVEL após aprovação — comparabilidade entre runs e modos.",
+  "criado": "2026-11-03",
+  "regras": [
+    "Mesmas 10 imagens para todos os modos (TRELLIS, TripoSR, futuros)",
+    "Objetos isolados com fundo limpo (requisito dos geradores image→3D)",
+    "Composição: 7 imagens MIT do repo oficial TRELLIS + 3 renders locais procedurais CC0 (uso real do dono: props/miniaturas/peças funcionais)"
+  ],
+  "casos": [
+    {
+      "id": "trex_figurine",
+      "arquivo": "trex_figurine.png",
+      "categoria": "miniatura",
+      "origem": {
+        "url": "https://github.com/microsoft/TRELLIS/blob/main/assets/example_image/T.png",
+        "autor": "Microsoft (repo TRELLIS)",
+        "licenca": "MIT",
+        "triage": "verde",
+        "retrieved_at": "2026-11-03",
+        "transformacoes": ["copiado sem alteracao"]
+      }
+    },
+    {
+      "id": "humanoide_dragonborn",
+      "arquivo": "humanoide_dragonborn.png",
+      "categoria": "miniatura humanoide (caso de uso do Estúdio de Pose — Fase 3)",
+      "origem": {
+        "url": "https://github.com/microsoft/TRELLIS/blob/main/assets/example_image/typical_humanoid_dragonborn.png",
+        "autor": "Microsoft (repo TRELLIS)",
+        "licenca": "MIT",
+        "triage": "verde",
+        "retrieved_at": "2026-11-03",
+        "transformacoes": ["renomeado"]
+      }
+    },
+    {
+      "id": "criatura_dragao",
+      "arquivo": "criatura_dragao.png",
+      "categoria": "criatura detalhada",
+      "origem": {
+        "url": "https://github.com/microsoft/TRELLIS/blob/main/assets/example_image/typical_creature_dragon.png",
+        "autor": "Microsoft (repo TRELLIS)",
+        "licenca": "MIT",
+        "triage": "verde",
+        "retrieved_at": "2026-11-03",
+        "transformacoes": ["renomeado"]
+      }
+    },
+    {
+      "id": "estrutura_castelo",
+      "arquivo": "estrutura_castelo.png",
+      "categoria": "estrutura",
+      "origem": {
+        "url": "https://github.com/microsoft/TRELLIS/blob/main/assets/example_image/typical_building_castle.png",
+        "autor": "Microsoft (repo TRELLIS)",
+        "licenca": "MIT",
+        "triage": "verde",
+        "retrieved_at": "2026-11-03",
+        "transformacoes": ["renomeado"]
+      }
+    },
+    {
+      "id": "estrutura_piramide",
+      "arquivo": "estrutura_piramide.png",
+      "categoria": "estrutura geométrica simples",
+      "origem": {
+        "url": "https://github.com/microsoft/TRELLIS/blob/main/assets/example_image/typical_building_maya_pyramid.png",
+        "autor": "Microsoft (repo TRELLIS)",
+        "licenca": "MIT",
+        "triage": "verde",
+        "retrieved_at": "2026-11-03",
+        "transformacoes": ["renomeado"]
+      }
+    },
+    {
+      "id": "prop_caixote",
+      "arquivo": "prop_caixote.png",
+      "categoria": "prop simples",
+      "origem": {
+        "url": "https://github.com/microsoft/TRELLIS/blob/main/assets/example_image/typical_misc_crate.png",
+        "autor": "Microsoft (repo TRELLIS)",
+        "licenca": "MIT",
+        "triage": "verde",
+        "retrieved_at": "2026-11-03",
+        "transformacoes": ["renomeado"]
+      }
+    },
+    {
+      "id": "robo_caranguejo",
+      "arquivo": "robo_caranguejo.png",
+      "categoria": "hard surface",
+      "origem": {
+        "url": "https://github.com/microsoft/TRELLIS/blob/main/assets/example_image/typical_creature_robot_crab.png",
+        "autor": "Microsoft (repo TRELLIS)",
+        "licenca": "MIT",
+        "triage": "verde",
+        "retrieved_at": "2026-11-03",
+        "transformacoes": ["renomeado"]
+      }
+    },
+    {
+      "id": "local_caneca",
+      "arquivo": "local_caneca.png",
+      "categoria": "peça funcional (uso real do dono)",
+      "origem": {
+        "url": "gerado-localmente",
+        "autor": "Bruno (procedural Blender 5.0.1 headless — tools/generator/make_testset_local.py)",
+        "licenca": "CC0",
+        "triage": "verde",
+        "retrieved_at": "2026-11-03",
+        "transformacoes": ["geometria procedural (cilindro+torus+boolean), render Cycles 800px fundo claro"]
+      }
+    },
+    {
+      "id": "local_engrenagem",
+      "arquivo": "local_engrenagem.png",
+      "categoria": "peça funcional mecânica",
+      "origem": {
+        "url": "gerado-localmente",
+        "autor": "Bruno (procedural Blender 5.0.1 headless — tools/generator/make_testset_local.py)",
+        "licenca": "CC0",
+        "triage": "verde",
+        "retrieved_at": "2026-11-03",
+        "transformacoes": ["geometria procedural (cilindro+dentes+ boolean), render Cycles 800px fundo claro"]
+      }
+    },
+    {
+      "id": "local_gancho",
+      "arquivo": "local_gancho.png",
+      "categoria": "peça funcional (impressão prática)",
+      "origem": {
+        "url": "gerado-localmente",
+        "autor": "Bruno (procedural Blender 5.0.1 headless — tools/generator/make_testset_local.py)",
+        "licenca": "CC0",
+        "triage": "verde",
+        "retrieved_at": "2026-11-03",
+        "transformacoes": ["geometria procedural (base+braço+gancho), render Cycles 800px fundo claro"]
+      }
+    }
+  ]
+}
