@@ -16,7 +16,7 @@ env/
 data/
 output/
 renders/
-benchmark/
+/benchmark/
 
 # Modelos de IA e pesos baixados (Fase 1+: ~13 GB — JAMAIS commitar)
 models/
