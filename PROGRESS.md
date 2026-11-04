@@ -56,6 +56,16 @@
 - Demo visual para o dono: 3 renders + 1 OBJ em `C:\Users\Bruno\AppData\Local\Temp\opencode\demo\`; malhas em `~/printer3d-work/benchmark/<caso>/trellis/mesh.obj` (WSL).
 - Comando de retomada: `wsl bash ~/printer3d-work/retry_trellis.sh` → `wsl bash ~/printer3d-work/run_bench.sh triposr` → `... render` → `... publish` (nesta ordem).
 
+### Fase 1 — Forja (módulo de reparo/printabilidade, 2026-11-04) — `[x]` CONCLUÍDA
+
+- **Pacote** `tools/forja/forja/` (mirror do workspace `~/printer3d-work/forja/`): `cli.py` (`python -m forja repair|batch`), `pipeline.py` (8 etapas com métricas antes/depois), `report.py`, `render.py` (antes/depois 512px CPU, câmera do benchmark), `blender_mod.py` (voxel remesh/decimate headless), `tests/`.
+- **Pipeline**: limpeza (duplicados/degenerados/componentes; `--keep-all-components`, `--min-component-tris`) → normais (`fix_normals`) → PyMeshFix (watertight) → `--smooth N` (opc.) → `--voxel` (opc., Blender) → `--max-tris` (opc., Blender) → `--target-height mm` (escala pela maior dimensão; sem o parâmetro reporta unitário) → STL binário + `forja_report.json`.
+- **Testes sintéticos 3/3 PASS** (esfera c/ furo→watertight; cubo c/ face invertida→winding ok+volume+; 2 componentes→mantém maior).
+- **Lote 7/7 TRELLIS PASS** no gate (`wt ∧ is_volume ∧ winding ∧ maxdim=100mm`): `evidence/fase1-forja/gate_final.txt` + `forja_index.json`. Renders antes/depois: 14/14 em `~/printer3d-work/forja_out/<caso>/`.
+- **Decisões**: (1) `--target-height` escala pela MAIOR dimensão da bbox (malhas de gerador não têm orientação canônica — documentado no report); (2) autointerseção: proxy de faces duplicadas + **limitação conhecida** (checagem completa fora do escopo, conforme spec/timebox); (3) decimação/remesh via Blender headless (CPU, não toca VRAM — usuário jogando em paralelo).
+- **Bug corrigido no caminho**: glob default do batch era `*/trellis/*.obj` (pegava `mesh_reparada.obj` junto → 14 itens duplicados) → agora `*/trellis/mesh.obj`.
+- APIs: trimesh 5.2 (sem `unique_vertices_mask`) e pymeshfix novo (`.points`/`.faces`).
+
 ### Comparativo extra a pedido do dono (2026-11-04, escultura complexa)
 
 - Escultura procedural Blender (pedestal+coluna+nó tófita+esfera+anel, bronze) → mesma input nos 2 modos.

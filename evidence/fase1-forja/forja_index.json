@@ -1,0 +1,320 @@
+{
+ "raiz": "benchmark/",
+ "padrao": "*/trellis/mesh.obj",
+ "casos": [
+  {
+   "caso": "criatura_dragao",
+   "ok": true,
+   "antes": {
+    "vertices": 260934,
+    "triangulos": 521854,
+    "watertight": false,
+    "winding_consistent": true,
+    "volume": 0.019024199328829258,
+    "componentes": 2,
+    "bbox": [
+     1.0024,
+     0.9831,
+     0.8252
+    ]
+   },
+   "final": {
+    "vertices": 260750,
+    "triangulos": 521512,
+    "watertight": true,
+    "winding_consistent": true,
+    "volume": 18918.85944818297,
+    "componentes": 1,
+    "bbox": [
+     100.0,
+     98.0771,
+     82.3262
+    ],
+    "arquivo": "forja_out/criatura_dragao/forja.stl",
+    "bbox_mm": [
+     100.0,
+     98.077,
+     82.326
+    ]
+   },
+   "avisos": [
+    "1 componente(s) descartados (mantido o maior)",
+    "checagem completa de autointerseção não implementada (limitação conhecida desta fase)"
+   ],
+   "stl": "forja_out/criatura_dragao/forja.stl",
+   "renders": {
+    "forja_out/criatura_dragao/criatura_dragao_antes.png": true,
+    "forja_out/criatura_dragao/criatura_dragao_depois.png": true
+   }
+  },
+  {
+   "caso": "estrutura_piramide",
+   "ok": true,
+   "antes": {
+    "vertices": 469066,
+    "triangulos": 938428,
+    "watertight": true,
+    "winding_consistent": true,
+    "volume": 0.01090747491669524,
+    "componentes": 19,
+    "bbox": [
+     0.9997,
+     0.9645,
+     0.8626
+    ]
+   },
+   "final": {
+    "vertices": 468825,
+    "triangulos": 938018,
+    "watertight": true,
+    "winding_consistent": true,
+    "volume": 10916.333067957747,
+    "componentes": 1,
+    "bbox": [
+     100.0,
+     96.4797,
+     86.2883
+    ],
+    "arquivo": "forja_out/estrutura_piramide/forja.stl",
+    "bbox_mm": [
+     100.0,
+     96.48,
+     86.288
+    ]
+   },
+   "avisos": [
+    "18 componente(s) descartados (mantido o maior)",
+    "checagem completa de autointerseção não implementada (limitação conhecida desta fase)"
+   ],
+   "stl": "forja_out/estrutura_piramide/forja.stl",
+   "renders": {
+    "forja_out/estrutura_piramide/estrutura_piramide_antes.png": true,
+    "forja_out/estrutura_piramide/estrutura_piramide_depois.png": true
+   }
+  },
+  {
+   "caso": "humanoide_dragonborn",
+   "ok": true,
+   "antes": {
+    "vertices": 272517,
+    "triangulos": 545042,
+    "watertight": false,
+    "winding_consistent": true,
+    "volume": 0.023163413888420636,
+    "componentes": 25,
+    "bbox": [
+     0.7714,
+     0.5113,
+     1.0007
+    ]
+   },
+   "final": {
+    "vertices": 271026,
+    "triangulos": 542168,
+    "watertight": true,
+    "winding_consistent": true,
+    "volume": 23204.222280703532,
+    "componentes": 1,
+    "bbox": [
+     77.0877,
+     51.0947,
+     100.0
+    ],
+    "arquivo": "forja_out/humanoide_dragonborn/forja.stl",
+    "bbox_mm": [
+     77.088,
+     51.095,
+     100.0
+    ]
+   },
+   "avisos": [
+    "24 componente(s) descartados (mantido o maior)",
+    "checagem completa de autointerseção não implementada (limitação conhecida desta fase)"
+   ],
+   "stl": "forja_out/humanoide_dragonborn/forja.stl",
+   "renders": {
+    "forja_out/humanoide_dragonborn/humanoide_dragonborn_antes.png": true,
+    "forja_out/humanoide_dragonborn/humanoide_dragonborn_depois.png": true
+   }
+  },
+  {
+   "caso": "local_caneca",
+   "ok": true,
+   "antes": {
+    "vertices": 234682,
+    "triangulos": 469292,
+    "watertight": true,
+    "winding_consistent": true,
+    "volume": 0.019142440785085403,
+    "componentes": 20,
+    "bbox": [
+     0.6319,
+     0.7456,
+     0.6082
+    ]
+   },
+   "final": {
+    "vertices": 231798,
+    "triangulos": 463600,
+    "watertight": true,
+    "winding_consistent": true,
+    "volume": 46593.354126265585,
+    "componentes": 1,
+    "bbox": [
+     84.7602,
+     100.0,
+     81.5756
+    ],
+    "arquivo": "forja_out/local_caneca/forja.stl",
+    "bbox_mm": [
+     84.76,
+     100.0,
+     81.576
+    ]
+   },
+   "avisos": [
+    "19 componente(s) descartados (mantido o maior)",
+    "checagem completa de autointerseção não implementada (limitação conhecida desta fase)"
+   ],
+   "stl": "forja_out/local_caneca/forja.stl",
+   "renders": {
+    "forja_out/local_caneca/local_caneca_antes.png": true,
+    "forja_out/local_caneca/local_caneca_depois.png": true
+   }
+  },
+  {
+   "caso": "local_engrenagem",
+   "ok": true,
+   "antes": {
+    "vertices": 149308,
+    "triangulos": 298632,
+    "watertight": true,
+    "winding_consistent": true,
+    "volume": 0.005480178904882685,
+    "componentes": 1,
+    "bbox": [
+     0.7304,
+     0.7285,
+     0.1069
+    ]
+   },
+   "final": {
+    "vertices": 149308,
+    "triangulos": 298632,
+    "watertight": true,
+    "winding_consistent": true,
+    "volume": 14062.479148593533,
+    "componentes": 1,
+    "bbox": [
+     100.0,
+     99.7339,
+     14.6417
+    ],
+    "arquivo": "forja_out/local_engrenagem/forja.stl",
+    "bbox_mm": [
+     100.0,
+     99.734,
+     14.642
+    ]
+   },
+   "avisos": [
+    "checagem completa de autointerseção não implementada (limitação conhecida desta fase)"
+   ],
+   "stl": "forja_out/local_engrenagem/forja.stl",
+   "renders": {
+    "forja_out/local_engrenagem/local_engrenagem_antes.png": true,
+    "forja_out/local_engrenagem/local_engrenagem_depois.png": true
+   }
+  },
+  {
+   "caso": "local_gancho",
+   "ok": true,
+   "antes": {
+    "vertices": 125234,
+    "triangulos": 250440,
+    "watertight": true,
+    "winding_consistent": true,
+    "volume": 0.010225343754454086,
+    "componentes": 11,
+    "bbox": [
+     1.0008,
+     0.3399,
+     0.4342
+    ]
+   },
+   "final": {
+    "vertices": 95342,
+    "triangulos": 190684,
+    "watertight": true,
+    "winding_consistent": true,
+    "volume": 14186.277321984837,
+    "componentes": 1,
+    "bbox": [
+     100.0,
+     33.9569,
+     43.3802
+    ],
+    "arquivo": "forja_out/local_gancho/forja.stl",
+    "bbox_mm": [
+     100.0,
+     33.957,
+     43.38
+    ]
+   },
+   "avisos": [
+    "10 componente(s) descartados (mantido o maior)",
+    "checagem completa de autointerseção não implementada (limitação conhecida desta fase)"
+   ],
+   "stl": "forja_out/local_gancho/forja.stl",
+   "renders": {
+    "forja_out/local_gancho/local_gancho_antes.png": true,
+    "forja_out/local_gancho/local_gancho_depois.png": true
+   }
+  },
+  {
+   "caso": "trex_figurine",
+   "ok": true,
+   "antes": {
+    "vertices": 292695,
+    "triangulos": 585744,
+    "watertight": false,
+    "winding_consistent": true,
+    "volume": 0.024219236893665588,
+    "componentes": 90,
+    "bbox": [
+     0.8913,
+     0.4033,
+     0.9992
+    ]
+   },
+   "final": {
+    "vertices": 275572,
+    "triangulos": 551900,
+    "watertight": true,
+    "winding_consistent": true,
+    "volume": 26469.068247245323,
+    "componentes": 1,
+    "bbox": [
+     89.2521,
+     39.4861,
+     100.0
+    ],
+    "arquivo": "forja_out/trex_figurine/forja.stl",
+    "bbox_mm": [
+     89.252,
+     39.486,
+     100.0
+    ]
+   },
+   "avisos": [
+    "89 componente(s) descartados (mantido o maior)",
+    "checagem completa de autointerseção não implementada (limitação conhecida desta fase)"
+   ],
+   "stl": "forja_out/trex_figurine/forja.stl",
+   "renders": {
+    "forja_out/trex_figurine/trex_figurine_antes.png": true,
+    "forja_out/trex_figurine/trex_figurine_depois.png": true
+   }
+  }
+ ]
+}

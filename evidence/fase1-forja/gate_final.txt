@@ -1,0 +1,9 @@
+criatura_dragao          wt=True vol=True wind=True tris=521512 maxdim=100.0mm -> PASS
+estrutura_piramide       wt=True vol=True wind=True tris=938018 maxdim=100.0mm -> PASS
+humanoide_dragonborn     wt=True vol=True wind=True tris=542168 maxdim=100.0mm -> PASS
+local_caneca             wt=True vol=True wind=True tris=463600 maxdim=100.0mm -> PASS
+local_engrenagem         wt=True vol=True wind=True tris=298632 maxdim=100.0mm -> PASS
+local_gancho             wt=True vol=True wind=True tris=190684 maxdim=100.0mm -> PASS
+trex_figurine            wt=True vol=True wind=True tris=551900 maxdim=100.0mm -> PASS
+renders_antes_depois=14 (esperado 14)
+GATE_FINAL=PASS

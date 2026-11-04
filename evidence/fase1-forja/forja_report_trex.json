@@ -1,0 +1,151 @@
+{
+ "entrada": "benchmark/trex_figurine/trellis/mesh.obj",
+ "saida": "forja_out/trex_figurine/forja.stl",
+ "ts": "2026-11-04T19:26:30",
+ "etapas": [
+  {
+   "nome": "limpeza",
+   "antes": {
+    "vertices": 292695,
+    "triangulos": 585744,
+    "watertight": false,
+    "winding_consistent": true,
+    "volume": 0.024219236893665588,
+    "componentes": 90,
+    "bbox": [
+     0.8913,
+     0.4033,
+     0.9992
+    ]
+   },
+   "depois": {
+    "vertices": 276383,
+    "triangulos": 553496,
+    "watertight": false,
+    "winding_consistent": true,
+    "volume": 0.026357150096074745,
+    "componentes": 1,
+    "bbox": [
+     0.8913,
+     0.3943,
+     0.9986
+    ]
+   }
+  },
+  {
+   "nome": "normais",
+   "antes": {
+    "vertices": 276383,
+    "triangulos": 553496,
+    "watertight": false,
+    "winding_consistent": true,
+    "volume": 0.026357150096074745,
+    "componentes": 1,
+    "bbox": [
+     0.8913,
+     0.3943,
+     0.9986
+    ]
+   },
+   "depois": {
+    "vertices": 276383,
+    "triangulos": 553496,
+    "watertight": false,
+    "winding_consistent": true,
+    "volume": 0.026357150096074745,
+    "componentes": 1,
+    "bbox": [
+     0.8913,
+     0.3943,
+     0.9986
+    ]
+   }
+  },
+  {
+   "nome": "pymeshfix",
+   "antes": {
+    "vertices": 276383,
+    "triangulos": 553496,
+    "watertight": false,
+    "winding_consistent": true,
+    "volume": 0.026357150096074745,
+    "componentes": 1,
+    "bbox": [
+     0.8913,
+     0.3943,
+     0.9986
+    ]
+   },
+   "depois": {
+    "vertices": 275572,
+    "triangulos": 551900,
+    "watertight": true,
+    "winding_consistent": true,
+    "volume": 0.026357183400605427,
+    "componentes": 1,
+    "bbox": [
+     0.8913,
+     0.3943,
+     0.9986
+    ]
+   }
+  },
+  {
+   "nome": "escala",
+   "params": {
+    "target_height_mm": 100.0,
+    "fator": 100.141298,
+    "criterio": "maior dimensão da bbox (malha de gerador não tem orientação canônica)"
+   },
+   "antes": {
+    "bbox": [
+     0.8913,
+     0.3943,
+     0.9986
+    ]
+   },
+   "depois": {
+    "bbox": [
+     89.252,
+     39.486,
+     100.0
+    ]
+   }
+  }
+ ],
+ "avisos": [
+  "89 componente(s) descartados (mantido o maior)",
+  "checagem completa de autointerseção não implementada (limitação conhecida desta fase)"
+ ],
+ "parametros": {
+  "target_height_mm": 100.0,
+  "smooth": 0,
+  "voxel": null,
+  "max_tris": null,
+  "keep_all_components": false,
+  "min_component_tris": 50
+ },
+ "final": {
+  "vertices": 275572,
+  "triangulos": 551900,
+  "watertight": true,
+  "winding_consistent": true,
+  "volume": 26469.068247245323,
+  "componentes": 1,
+  "bbox": [
+   89.2521,
+   39.4861,
+   100.0
+  ],
+  "arquivo": "forja_out/trex_figurine/forja.stl",
+  "bbox_mm": [
+   89.252,
+   39.486,
+   100.0
+  ]
+ },
+ "renders": {
+  "forja_out/trex_figurine/trex_figurine_antes.png": true,
+  "forja_out/trex_figurine/trex_figurine_depois.png": true
+ }
+}

@@ -4,11 +4,11 @@
 
 ## Estado atual (2026-11-04)
 
-- **Fase 1: benchmark CONCLUÍDO** (`evidence/benchmark/`: results.json, scores.md, gallery.md + 34 renders). Resumo: trellis 7/10 (3 OOM confirmados 2× em casos densos — limite físico da 3060 12GB), mediana 65,7s, VRAM 12.070 MiB, manifold 4/10, casca fina (pct5 0,002-0,008); triposr 10/10, mediana 27,3s, VRAM 3.588 MiB, manifold 9/10, casca mais grossa (0,016-0,176).
+- **Fase 1 benchmark CONCLUÍDO** (`evidence/benchmark/`) e **Fase 1 Forja CONCLUÍDA** (`tools/forja/forja/` no repo; workspace `~/printer3d-work/forja/`): 7/7 TRELLIS reparados (watertight+winding+100mm), gate PASS em `evidence/fase1-forja/gate_final.txt`. STLs/renders em `~/printer3d-work/forja_out/<caso>/` (forja.stl, mesh obj, forja_report.json, <caso>_antes/depois.png).
 - **Único passo restante da Fase 1**: votação 👍/👎 do dono por caso na `gallery.md` → **ADR-005 (default mode)** → item 7 `[x]`.
 - Repo: `git@github.com:brunomrtns/3dprinter-setup-ia.git` · branch `main` · tudo pushed.
-- Infra pronta e validada: venv `/home/bruno/.venvs/printer3d-ia` (py3.11, torch 2.5.1+cu121), TRELLIS em `~/tools/TRELLIS` (pesos `~/ai-models/trellis/TRELLIS-image-large`), TripoSR em `~/tools/TripoSR`, plugins + `gpu_guard.py` em `tools/generator/` (repo).
-- Malhas do benchmark em `~/printer3d-work/benchmark/<caso>/<modo>/` (mesh.obj, mesh_reparada.obj, report.json) — insumo da Fase 2 (Forja).
+- Infra pronta e validada: venv `/home/bruno/.venvs/printer3d-ia` (py3.11, torch 2.5.1+cu121), TRELLIS em `~/tools/TRELLIS`, TripoSR em `~/tools/TripoSR`, plugins + `gpu_guard.py` em `tools/generator/`.
+- **Forja é CPU-only** (PyMeshFix + Blender headless): pode rodar enquanto o dono joga. Não altera entradas; saídas sempre em `forja_out/`. APIs novas: trimesh 5.2, pymeshfix `.points/.faces`.
 
 ## Decisões que você não deve reabrir sem motivo forte
 
