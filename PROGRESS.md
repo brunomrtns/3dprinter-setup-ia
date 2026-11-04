@@ -30,13 +30,13 @@
 
 | # | Tarefa | Status |
 |---|---|---|
-| 0 | Abertura formal da fase (roadmap + PROGRESS + commit + push) | [~] |
-| 1 | venv `printer3d-ia` (Python 3.11) + torch CUDA + deps base + evidência de isolamento do `game-ai3d` | [ ] |
-| 2 | Instalação TRELLIS (decisão TRELLIS 1 vs TRELLIS.2 com dono informado; `docs/operations/trellis-install.md` passo a passo; 1 geração ponta a ponta) | [ ] |
-| 3 | TripoSR com venv novo (clone próprio `~/tools/TripoSR`) + 1 geração ponta a ponta | [ ] |
-| 4 | Interface de plugin comum + `gpu_guard.py` (threshold 10.000 MiB, fila serial, poller VRAM 1 Hz) | [ ] |
-| 5 | Set de testes 10 casos fixos com `manifest.json` (procedência por imagem) | [ ] |
-| 6 | Benchmark automático 10×2 + `results.json` + `scores.md` + galeria (mesmo ângulo/luz) | [ ] |
+| 0 | Abertura formal da fase (roadmap + PROGRESS + commit + push) | [x] |
+| 1 | venv `printer3d-ia` (Python 3.11) + torch CUDA + deps base + evidência de isolamento do `game-ai3d` | [x] |
+| 2 | Instalação TRELLIS (`docs/operations/trellis-install.md` passo a passo; geração ponta a ponta na 3060) | [x] |
+| 3 | TripoSR com venv novo (clone próprio `~/tools/TripoSR`) + geração ponta a ponta (run 1.1s, VRAM 4.2GB) | [x] |
+| 4 | Interface de plugin comum + `gpu_guard.py` (threshold 10.000 MiB, fila serial, poller 1Hz) + smoke test ponta a ponta | [x] |
+| 5 | Set de testes 10 casos fixos com `manifest.json` (procedência por imagem) | [x] |
+| 6 | Benchmark automático 10×2 + `results.json` + `scores.md` + galeria (mesmo ângulo/luz) | [~] ver registro abaixo |
 | 7 | Fechamento: PROGRESS/HANDOFF + relatório ao dono + votação do default mode (→ ADR-005) | [ ] |
 
 
@@ -46,6 +46,15 @@
 - Identidade git estava ausente em todos os escopos → configurada: `Bruno Martins / brunomartinsss@gmail.com`, `init.defaultBranch=main`
 - **Nada foi instalado e nenhum código de pipeline foi escrito** (respeitado o escopo da Fase 0)
 - Histórico: 9 commits convencionais, todos pushed (init → README → AGENTS → architecture → roadmap → knowledge → ADRs → skeleton → audit → PROGRESS/HANDOFF)
+
+### Registro da sessão Fase 1 (2026-11-04, benchmark parcial)
+
+- Commits: `5e31265` venv · `d238c72` TRELLIS · `2ef118a` TripoSR · `b4cd489` plugins+guard (smoke aprovado: 73.5s, VRAM pico 11.405 MiB, 304k verts) · `7cce4a3` testset 10 casos (7 MIT TRELLIS + 3 procedurais CC0 Blender).
+- `run_benchmark.py` (estágios resumíveis: trellis|triposr|render|publish): **trellis 7/10 OK** — tempos 57-74s/caso, VRAM pico 11,7-11,9 GB, manifold True em pirâmide/caneca/engrenagem/gancho, False no resto (fill_holes não fecha buracos FlexiCubes — reparo pesado é Fase 2 Forja).
+- **[!] 3 OOM reais** (estrutura_castelo, prop_caixote, robo_caranguejo — casos densos estouram ~11,9 GB úteis no decode FlexiCubes). Mitigação aplicada no runner (`garbage_collection_threshold:0.8,max_split_size_mb:256`) — **retry pendente, aguardando GPU livre** (dono usando a máquina pra jogar; guard espera VRAM, sem conflito).
+- TripoSR (10 casos), render de galeria (40 previews, CPU) e publish (`evidence/benchmark/`) pendentes.
+- Demo visual para o dono: 3 renders + 1 OBJ em `C:\Users\Bruno\AppData\Local\Temp\opencode\demo\`; malhas em `~/printer3d-work/benchmark/<caso>/trellis/mesh.obj` (WSL).
+- Comando de retomada: `wsl bash ~/printer3d-work/retry_trellis.sh` → `wsl bash ~/printer3d-work/run_bench.sh triposr` → `... render` → `... publish` (nesta ordem).
 
 ## Pendências herdadas do audit (nenhuma bloqueia a Fase 1 — detalhes em `docs/operations/environment-audit.md`)
 

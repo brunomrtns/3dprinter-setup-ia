@@ -28,9 +28,12 @@ def main() -> int:
 
     os.makedirs(args.output_dir, exist_ok=True)
 
-    # Alocador com segmentos expansíveis: reduz fragmentação e evita OOM real
-    # observado no FlexiCubes com 12 GB (evidence fase1, smoke plugin).
-    os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
+    # Alocador: segmentos expansíveis + GC agressivo + blocos menores — mitiga
+    # OOM real no decode FlexiCubes de casos densos (castelo/caixote/robô) com
+    # ~11,9 GB úteis na 3060 12GB (benchmark Fase 1, 2026-11-04).
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = (
+        "expandable_segments:True,garbage_collection_threshold:0.8,max_split_size_mb:256"
+    )
     os.environ.setdefault("ATTN_BACKEND", "flash-attn")
     os.environ.setdefault("SPCONV_ALGO", "native")
 
