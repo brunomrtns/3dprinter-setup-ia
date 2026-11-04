@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Ambientes virtuais (o venv canônico vive em ~/.venvs/printer3d-ia no WSL — fora do repo)
+.venv/
+venv/
+env/
+
+# Segredos / configuração local
+.env
+.env.*
+
+# Dados e artefatos gerados (não versionar — evidências de texto em evidence/ entram no commit)
+data/
+output/
+renders/
+benchmark/
+
+# Modelos de IA e pesos baixados (Fase 1+: ~13 GB — JAMAIS commitar)
+models/
+checkpoints/
+weights/
+*.ckpt
+*.safetensors
+*.pth
+*.onnx
+
+# Blender: arquivos de backup automáticos
+*.blend1
+*.blend2
+
+# OS / nuvem
+Thumbs.db
+.DS_Store
+desktop.ini
