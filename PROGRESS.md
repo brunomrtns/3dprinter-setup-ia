@@ -56,6 +56,13 @@
 - Demo visual para o dono: 3 renders + 1 OBJ em `C:\Users\Bruno\AppData\Local\Temp\opencode\demo\`; malhas em `~/printer3d-work/benchmark/<caso>/trellis/mesh.obj` (WSL).
 - Comando de retomada: `wsl bash ~/printer3d-work/retry_trellis.sh` → `wsl bash ~/printer3d-work/run_bench.sh triposr` → `... render` → `... publish` (nesta ordem).
 
+### Comparativo extra a pedido do dono (2026-11-04, escultura complexa)
+
+- Escultura procedural Blender (pedestal+coluna+nó tófita+esfera+anel, bronze) → mesma input nos 2 modos.
+- TRELLIS: seed 42 → **OOM** (12.039 MiB); seed 7 → OK (221k verts, 68s, 11.915 MiB). TripoSR: OK de primeira (47k verts, 48s, 3.567 MiB).
+- Comparação interativa web (three.js, GLB, laranja=TRELLIS/azul=TripoSR): `~/printer3d-work/sculpture/viewer/` + `python -m http.server 8765`.
+- Reforça o padrão: TRELLIS no limite de VRAM em entradas densas; votação do dono (ADR-005) ainda pendente.
+
 ### Resultado final do benchmark (2026-11-04T12:32, `evidence/benchmark/scores.md`)
 
 | modo | tempo mediana | VRAM pico | vértices médios | manifold pós-reparo | erros |
