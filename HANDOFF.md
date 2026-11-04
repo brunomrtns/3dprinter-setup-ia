@@ -2,21 +2,13 @@
 
 > Leia isto DEPOIS de `PROGRESS.md` (fonte da verdade) e ANTES de executar qualquer coisa. Contexto mínimo para um agente frio continuar o projeto sem conversa anterior.
 
-## Estado atual (2026-11-04, noite)
+## Estado atual (2026-11-04)
 
-- **Fase 1 em andamento**: itens 1-5 concluídos; item 6 (benchmark) PARCIAL — trellis 7/10 OK, 3 OOM com retry pendente, triposr/render/publish pendentes (detalhes e comandos em `PROGRESS.md` §Registro Fase 1).
+- **Fase 1: benchmark CONCLUÍDO** (`evidence/benchmark/`: results.json, scores.md, gallery.md + 34 renders). Resumo: trellis 7/10 (3 OOM confirmados 2× em casos densos — limite físico da 3060 12GB), mediana 65,7s, VRAM 12.070 MiB, manifold 4/10, casca fina (pct5 0,002-0,008); triposr 10/10, mediana 27,3s, VRAM 3.588 MiB, manifold 9/10, casca mais grossa (0,016-0,176).
+- **Único passo restante da Fase 1**: votação 👍/👎 do dono por caso na `gallery.md` → **ADR-005 (default mode)** → item 7 `[x]`.
 - Repo: `git@github.com:brunomrtns/3dprinter-setup-ia.git` · branch `main` · tudo pushed.
 - Infra pronta e validada: venv `/home/bruno/.venvs/printer3d-ia` (py3.11, torch 2.5.1+cu121), TRELLIS em `~/tools/TRELLIS` (pesos `~/ai-models/trellis/TRELLIS-image-large`), TripoSR em `~/tools/TripoSR`, plugins + `gpu_guard.py` em `tools/generator/` (repo).
-- Workdir do benchmark: `~/printer3d-work/benchmark/<caso>/<modo>/` (mesh.obj, mesh_reparada.obj, report.json por caso) — **estado resumível por design**.
-
-## Retomada do benchmark (ordem exata)
-
-1. `wsl bash ~/printer3d-work/retry_trellis.sh` — refaz os 3 OOM (castelo/caixote/robô) com alloc conf novo; se OOM persistir, registra como dado (VRAM é critério do benchmark, não bug).
-2. `wsl bash ~/printer3d-work/run_bench.sh triposr` — 10 casos (~8 min GPU).
-3. `wsl bash ~/printer3d-work/run_bench.sh render` — 40 previews Blender CPU (dono pode jogar durante esta etapa).
-4. `wsl bash ~/printer3d-work/run_bench.sh publish` — escreve `evidence/benchmark/{results.json,scores.md,gallery.md,gallery/}`.
-5. Revisar evidências → commit + push → dono vota 👍/👎 por caso → **ADR-005 default mode** → item 7 `[x]`.
-- Caller script sempre re-copia `tools/generator/*.py` para `~/printer3d-work/gen/` (não editar em ~/printer3d-work, editar no repo).
+- Malhas do benchmark em `~/printer3d-work/benchmark/<caso>/<modo>/` (mesh.obj, mesh_reparada.obj, report.json) — insumo da Fase 2 (Forja).
 
 ## Decisões que você não deve reabrir sem motivo forte
 

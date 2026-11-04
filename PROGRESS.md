@@ -36,8 +36,8 @@
 | 3 | TripoSR com venv novo (clone próprio `~/tools/TripoSR`) + geração ponta a ponta (run 1.1s, VRAM 4.2GB) | [x] |
 | 4 | Interface de plugin comum + `gpu_guard.py` (threshold 10.000 MiB, fila serial, poller 1Hz) + smoke test ponta a ponta | [x] |
 | 5 | Set de testes 10 casos fixos com `manifest.json` (procedência por imagem) | [x] |
-| 6 | Benchmark automático 10×2 + `results.json` + `scores.md` + galeria (mesmo ângulo/luz) | [~] ver registro abaixo |
-| 7 | Fechamento: PROGRESS/HANDOFF + relatório ao dono + votação do default mode (→ ADR-005) | [ ] |
+| 6 | Benchmark automático 10×2 + `results.json` + `scores.md` + galeria (mesmo ângulo/luz) | [x] `evidence/benchmark/` |
+| 7 | Fechamento: PROGRESS/HANDOFF + relatório ao dono + votação do default mode (→ ADR-005) | [~] aguardando votação do dono |
 
 
 ### Registros da sessão fundadora (2026-11-03)
@@ -55,6 +55,16 @@
 - TripoSR (10 casos), render de galeria (40 previews, CPU) e publish (`evidence/benchmark/`) pendentes.
 - Demo visual para o dono: 3 renders + 1 OBJ em `C:\Users\Bruno\AppData\Local\Temp\opencode\demo\`; malhas em `~/printer3d-work/benchmark/<caso>/trellis/mesh.obj` (WSL).
 - Comando de retomada: `wsl bash ~/printer3d-work/retry_trellis.sh` → `wsl bash ~/printer3d-work/run_bench.sh triposr` → `... render` → `... publish` (nesta ordem).
+
+### Resultado final do benchmark (2026-11-04T12:32, `evidence/benchmark/scores.md`)
+
+| modo | tempo mediana | VRAM pico | vértices médios | manifold pós-reparo | erros |
+|---|---|---|---|---|---|
+| trellis | 65,7s | 12.070 MiB | 257.777 | 4/10 | **3/10 (OOM confirmado 2× — casos densos)** |
+| triposr | 27,3s | 3.588 MiB | 74.032 | 9/10 | 0/10 |
+
+- **Dado inesperado e relevante**: espessura pct5 do TRELLIS é baixíssima (0,002-0,008 em malha unitária — casca fina, frágil pra impressão) vs TripoSR (0,016-0,176). TRELLIS gera 3,5× mais detalhe (vértices), mas casca fina; TripoSR gera sólidos mais "imprimíveis".
+- Galeria (34 renders, câmera/luz idênticas): `evidence/benchmark/gallery.md` — **aguardando votação 👍/👎 do dono por caso** → ADR-005.
 
 ## Pendências herdadas do audit (nenhuma bloqueia a Fase 1 — detalhes em `docs/operations/environment-audit.md`)
 
