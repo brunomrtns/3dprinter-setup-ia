@@ -1,0 +1,155 @@
+{
+ "entrada": "jubarte/trellis_77/mesh.obj",
+ "saida": "jubarte/forja_77/forja.stl",
+ "ts": "2026-11-04T21:39:06",
+ "etapas": [
+  {
+   "nome": "limpeza",
+   "antes": {
+    "vertices": 161912,
+    "triangulos": 323812,
+    "watertight": true,
+    "winding_consistent": true,
+    "volume": 0.008548708979991312,
+    "componentes": 3,
+    "bbox": [
+     0.7126,
+     0.2594,
+     1.0003
+    ]
+   },
+   "depois": {
+    "vertices": 92436,
+    "triangulos": 184868,
+    "watertight": true,
+    "winding_consistent": true,
+    "volume": 0.04891141348719299,
+    "componentes": 1,
+    "bbox": [
+     0.7126,
+     0.2594,
+     1.0003
+    ]
+   }
+  },
+  {
+   "nome": "normais",
+   "antes": {
+    "vertices": 92436,
+    "triangulos": 184868,
+    "watertight": true,
+    "winding_consistent": true,
+    "volume": 0.04891141348719299,
+    "componentes": 1,
+    "bbox": [
+     0.7126,
+     0.2594,
+     1.0003
+    ]
+   },
+   "depois": {
+    "vertices": 92436,
+    "triangulos": 184868,
+    "watertight": true,
+    "winding_consistent": true,
+    "volume": 0.04891141348719299,
+    "componentes": 1,
+    "bbox": [
+     0.7126,
+     0.2594,
+     1.0003
+    ]
+   }
+  },
+  {
+   "nome": "pymeshfix",
+   "antes": {
+    "vertices": 92436,
+    "triangulos": 184868,
+    "watertight": true,
+    "winding_consistent": true,
+    "volume": 0.04891141348719299,
+    "componentes": 1,
+    "bbox": [
+     0.7126,
+     0.2594,
+     1.0003
+    ]
+   },
+   "depois": {
+    "vertices": 92436,
+    "triangulos": 184868,
+    "watertight": true,
+    "winding_consistent": true,
+    "volume": 0.04891141348719299,
+    "componentes": 1,
+    "bbox": [
+     0.7126,
+     0.2594,
+     1.0003
+    ]
+   }
+  },
+  {
+   "nome": "escala",
+   "params": {
+    "target_height_mm": 200.0,
+    "fator": 199.930908,
+    "criterio": "maior dimensão da bbox (malha de gerador não tem orientação canônica)"
+   },
+   "antes": {
+    "bbox": [
+     0.7126,
+     0.2594,
+     1.0003
+    ]
+   },
+   "depois": {
+    "bbox": [
+     142.479,
+     51.866,
+     200.0
+    ]
+   }
+  }
+ ],
+ "avisos": [
+  "2 componente(s) descartados (mantido o maior)",
+  "checagem completa de autointerseção não implementada (limitação conhecida desta fase)",
+  "espessura pct5 6.177mm >= 2.4mm (ok)"
+ ],
+ "parametros": {
+  "target_height_mm": 200.0,
+  "smooth": 0,
+  "voxel": null,
+  "max_tris": null,
+  "keep_all_components": false,
+  "min_component_tris": 50
+ },
+ "espessura": {
+  "pct5": 6.177,
+  "min": 2.506,
+  "amostras": 300,
+  "sem_parede_oposta": 0,
+  "unidade": "mm"
+ },
+ "final": {
+  "vertices": 92436,
+  "triangulos": 184868,
+  "watertight": true,
+  "winding_consistent": true,
+  "volume": 390885.92068910383,
+  "componentes": 1,
+  "bbox": [
+   142.479,
+   51.8663,
+   200.0
+  ],
+  "arquivo": "jubarte/forja_77/forja.stl",
+  "bbox_mm": [
+   142.479,
+   51.866,
+   200.0
+  ]
+ }
+}

@@ -1,0 +1,31 @@
+{
+ "ts": "2026-11-04T21:36:23",
+ "modo": "trellis",
+ "seed": 7,
+ "rodadas": [
+  {
+   "input": "cand_42.png",
+   "outdir": "/home/bruno/printer3d-work/jubarte/trellis_42",
+   "mesh_ok": false,
+   "tempo_s": 82.05,
+   "vram_pico_mib": 11902,
+   "vertices": null,
+   "faces": null,
+   "manifold_antes": null,
+   "erros": [
+    "runner_exit_1: \", line 124, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File \"/home/bruno/printer3d-work/trellis_runner.py\", line 79, in main\n    outputs = pipe.run(image, **run_kwargs)\n   "
+   ]
+  },
+  {
+   "input": "cand_77.png",
+   "outdir": "/home/bruno/printer3d-work/jubarte/trellis_77",
+   "mesh_ok": true,
+   "tempo_s": 59.1,
+   "vram_pico_mib": 11646,
+   "vertices": 161912,
+   "faces": 323812,
+   "manifold_antes": true,
+   "erros": []
+  }
+ ]
+}

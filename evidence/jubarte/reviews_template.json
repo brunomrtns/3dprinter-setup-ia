@@ -1,0 +1,14 @@
+{
+ "peca": "jubarte_nas_ondas",
+ "aguardando": "veredito do dono",
+ "fichas": {
+  "A_cand_77": {
+   "aprovado": null,
+   "notas": "baleia reconhecível? anel de onda ok? espessura ok?"
+  },
+  "B_cand_42": {
+   "aprovado": false,
+   "notas": "OOM — sem malha"
+  }
+ }
+}

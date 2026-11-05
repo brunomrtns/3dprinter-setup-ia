@@ -56,14 +56,16 @@
 - Demo visual para o dono: 3 renders + 1 OBJ em `C:\Users\Bruno\AppData\Local\Temp\opencode\demo\`; malhas em `~/printer3d-work/benchmark/<caso>/trellis/mesh.obj` (WSL).
 - Comando de retomada: `wsl bash ~/printer3d-work/retry_trellis.sh` → `wsl bash ~/printer3d-work/run_bench.sh triposr` → `... render` → `... publish` (nesta ordem).
 
-### Peça Vitrine — "Jubarte nas Ondas" (2026-11-04) — `[~]` ETAPA GPU BLOQUEADA
+### Peça Vitrine — "Jubarte nas Ondas" (2026-11-04) — `[~]` AGUARDANDO VEREDITO DO DONO
 
 - **[x] SD setup**: venv novo `printer3d-sd` (torch 2.5.1+cu121, diffusers 0.31). **SD 2.1 está gated no HF** (401 anônimo; todos os repos stabilityai) → fallback `CompVis/stable-diffusion-v1-4` público (CreativeML OpenRAIL-M). Workarounds: token HF inválido desativado + `HF_HUB_DISABLE_XET=1` (backend xet com I/O error).
 - **[x] 4 candidatos** gerados (seeds 11/23/42/77, 512px, ~4,5s cada, VRAM alloc pico 2.679 MiB, processo encerrado → VRAM liberada) — `~/printer3d-work/jubarte/sd/` + `sd_report.json`. **Seleção objetiva (sem olho)**: bg_std + descentramento + cobertura + componentes → **cand_42 (nota 44,3) e cand_77 (39,4)**; ranking completo em `evidence/jubarte/selecao.json`. Sidecars de procedência ADR-003 para todos.
 - **[x] Forja — campo novo `espessura`** (raycast −normal, 300 amostras, pct5+mín em mm; aviso automático < 2,4mm com sugestão de Solidify NÃO implementado — próximo passo registrado). Validado: caneca@200mm pct5=2,673mm; testes sintéticos continuam 3/3.
-- **[!] TRELLIS ×2 BLOQUEADO por VRAM**: threshold do guard é 10GB; Windows retém 2,4GB (browsers/viewers) → livre ~9,9GB. Espera automática de 15 min sem liberação. Sem ≥10,2GB livres a geração OOMa de qualquer forma (pico real 11,9GB). **Ação do dono: fechar browsers/abas 3D e avisar "vai"** → roda `~/printer3d-work/wait_and_gen.sh`.
-- Próximos passos pós-VRAM: 2 gerações TRELLIS (`experimento.json`) → Forja 200mm + espessura → fichas review (`:8765/review`) → **PARAR e aguardar veredito em reviews.json** (sem veredito, sem STL final). Receita de impressão `impressao_jubarte.md` só na rodada seguinte.
-- Orçamento GPU respeitado: 0/2 TRELLIS usados; SD 4/4 usados.
+- **[x] TRELLIS ×2 (orçamento 2/2 usado)**: cand_77 → **malha OK** (161.912v, 59s, VRAM 11.646 MiB); cand_42 → **OOM no decode** (82s, 11.902 MiB — caso denso; mesmo padrão do benchmark). Sem retry conforme regra. `experimento.json` em `evidence/jubarte/`.
+- **[x] Forja cand_77 @200mm**: watertight ✅ winding ✅ 142×52×200mm · 184.868 tris · **espessura pct5 6,177mm / mín 2,506mm (acima do limiar 2,4)** · 2 componentes lixo descartados · volume ~391 cm³.
+- **[x] Review**: fichas em `http://localhost:8765/review/` (entrada + 3 ângulos + métricas + ficha de falha do cand_42). Servidor: `~/printer3d-work/dashboard/` na porta 8765.
+- **[!] FLUXO PARADO**: aguardando veredito do dono em `~/printer3d-work/jubarte/reviews.json` (`"aprovado": true/false` na ficha A_cand_77). **Sem veredito, sem STL final** (regra da sessão).
+- Próximos passos pós-veredito: STL final 200mm do vencedor + `impressao_jubarte.md` (camada 0,2mm, suportes tree na cauda/barbatanas, anel tocando a mesa, PLA prata/branco seda/mármore, tempo estimado).
 
 ### Fase 1 — Forja (módulo de reparo/printabilidade, 2026-11-04) — `[x]` CONCLUÍDA
 
