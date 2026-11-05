@@ -49,6 +49,30 @@ def _faces_duplicadas(m: trimesh.Trimesh) -> int:
     return dup
 
 
+def espessura_estimada(m: trimesh.Trimesh, n_amostras: int = 300) -> dict:
+    """Raycast −normal (open3d BVH): pct5 e mín em unidades atuais da malha."""
+    import open3d as o3d
+
+    pts, face_idx = trimesh.sample.sample_surface(m, n_amostras, seed=7)
+    normals = m.face_normals[face_idx]
+    scene = o3d.t.geometry.RaycastingScene()
+    scene.add_triangles(
+        o3d.core.Tensor(np.asarray(m.vertices, dtype=np.float32)),
+        o3d.core.Tensor(np.asarray(m.faces, dtype=np.uint32)),
+    )
+    rays = np.hstack([pts, -normals]).astype(np.float32)
+    t = scene.cast_rays(o3d.core.Tensor(rays))["t_hit"].numpy()
+    validos = t[np.isfinite(t) & (t > 1e-3)]
+    sem_parede = int(np.sum(~np.isfinite(t)))
+    if len(validos) == 0:
+        return {"pct5": None, "min": None, "amostras": n_amostras,
+                "sem_parede_oposta": sem_parede, "unidade": "auto"}
+    return {"pct5": round(float(np.percentile(validos, 5)), 3),
+            "min": round(float(validos.min()), 3),
+            "amostras": n_amostras, "sem_parede_oposta": sem_parede,
+            "unidade": "auto"}
+
+
 def carregar(caminho: str) -> trimesh.Trimesh:
     cena = trimesh.load(caminho, force="mesh", process=False)
     return cena
@@ -165,6 +189,24 @@ def reparar(
         })
     else:
         rel["avisos"].append("sem --target-height: escala UNITÁRIA (bbox reportada em unidades de malha)")
+
+    # 7.5 Espessura estimada (mm quando escalado) — campo novo, aviso < 2.4mm
+    esp = espessura_estimada(m)
+    esp["unidade"] = "mm" if target_height_mm is not None else "unidades de malha"
+    rel["espessura"] = esp
+    if target_height_mm is not None:
+        limiar_mm = 2.4
+        ref = esp.get("pct5")
+        if ref is not None and ref < limiar_mm:
+            rel["avisos"].append(
+                f"ESPRESSURA CRÍTICA: pct5 {ref}mm < {limiar_mm}mm — risco de fragilidade "
+                "em área estrutural. Correção sugerida: Solidify no Blender (NÃO implementado "
+                "nesta fase — registrado como próximo passo)."
+            )
+        elif ref is not None:
+            rel["avisos"].append(f"espessura pct5 {ref}mm >= {limiar_mm}mm (ok)")
+    etapa(f"7.5.espessura: pct5={esp.get('pct5')} {esp['unidade']} "
+          f"sem_parede={esp['sem_parede_oposta']}/{esp['amostras']}")
 
     # 8. Export
     os.makedirs(os.path.dirname(os.path.abspath(saida_stl)), exist_ok=True)

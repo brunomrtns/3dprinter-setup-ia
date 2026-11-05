@@ -1,0 +1,42 @@
+{
+ "ts": "2026-11-04T21:02:32",
+ "criterio": "bg_std (fundo uniforme) + descentramento + cobertura ~0.38 + poucos componentes",
+ "ranking": [
+  {
+   "bg_std": 23.0,
+   "cobertura": 0.352,
+   "descentramento": 0.113,
+   "componentes": 3,
+   "nota": 44.3,
+   "arquivo": "cand_42.png"
+  },
+  {
+   "bg_std": 39.9,
+   "cobertura": 0.529,
+   "descentramento": 0.023,
+   "componentes": 1,
+   "nota": 39.4,
+   "arquivo": "cand_77.png"
+  },
+  {
+   "bg_std": 24.5,
+   "cobertura": 0.145,
+   "descentramento": 0.148,
+   "componentes": 1,
+   "nota": 27.2,
+   "arquivo": "cand_11.png"
+  },
+  {
+   "bg_std": 31.4,
+   "cobertura": 0.271,
+   "descentramento": 0.225,
+   "componentes": 2,
+   "nota": 17.3,
+   "arquivo": "cand_23.png"
+  }
+ ],
+ "escolhidos": [
+  "cand_42.png",
+  "cand_77.png"
+ ]
+}

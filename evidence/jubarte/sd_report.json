@@ -1,0 +1,38 @@
+{
+ "modelo": "CompVis/stable-diffusion-v1-4",
+ "nota": "SD2.1 gated no HF (401 an\u00f4nimo) \u2014 fallback v1-4 p\u00fablico, licen\u00e7a CreativeML OpenRAIL",
+ "fp16": true,
+ "prompt": "stylized sculpture of a humpback whale diving through a circular wave ring, matte clay material, chunky stylization, thick curves, no thin fragile parts, single object, centered, neutral gray background, studio lighting, 3/4 view, high detail, no text",
+ "negativo": "text, watermark, multiple objects, floating parts, thin fragile parts, photo, humans",
+ "steps": 30,
+ "guidance": 7.5,
+ "resolucao": 512,
+ "tempo_load_s": 60.3,
+ "candidatos": [
+  {
+   "seed": 11,
+   "arquivo": "/home/bruno/printer3d-work/jubarte/sd/cand_11.png",
+   "tempo_s": 4.6,
+   "vram_pico_alloc_mib": 2679
+  },
+  {
+   "seed": 23,
+   "arquivo": "/home/bruno/printer3d-work/jubarte/sd/cand_23.png",
+   "tempo_s": 3.9,
+   "vram_pico_alloc_mib": 2679
+  },
+  {
+   "seed": 42,
+   "arquivo": "/home/bruno/printer3d-work/jubarte/sd/cand_42.png",
+   "tempo_s": 4.3,
+   "vram_pico_alloc_mib": 2679
+  },
+  {
+   "seed": 77,
+   "arquivo": "/home/bruno/printer3d-work/jubarte/sd/cand_77.png",
+   "tempo_s": 4.9,
+   "vram_pico_alloc_mib": 2679
+  }
+ ],
+ "ts": "2026-11-04T21:02:04"
+}
