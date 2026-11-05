@@ -1,0 +1,19 @@
+{
+  "peca": "jubarte_nas_ondas_r2",
+  "veredito": "REPROVADA pelo dono em 2026-11-04 — 'ficou ruim'",
+  "input": "ref/input.jpg (Gemini, escolhida a olho pelo dono)",
+  "fatos": {
+    "trellis": "94722v · 64.5s · 11578 MiB",
+    "forja": "watertight · 200mm · espessura pct5 3.717mm · 4 fragmentos descartados"
+  },
+  "diagnostico_sistemico": [
+    "2 rodadas reprovadas com inputs DIFERENTES (SD1.4 escolhido às cegas; Gemini escolhido a olho pelo dono) — o problema recorrente e o gerador TRELLIS para sujeito organico complexo, nao a escolha de input",
+    "consistente com o benchmark: TRELLIS so foi manifold em 4/10 e OOMou nos casos densos; melhor em props/estruturas do que em escultura organica",
+    "agente nao tem visao — o unico par de olhos do pipeline e o dono; qualquer iteracao precisa do veredito dele cedo"
+  ],
+  "opcoes_para_o_dono": [
+    "A: mesma imagem Gemini no TripoSR (27s, 3.6GB, barato) — A/B direto do gerador",
+    "B: baleia procedural no Blender (controle total, deterministico, sem IA) + anel na Forja",
+    "C: cancelar a peca vitrine e aceitar o aprendizado (TRELLIS para props simples)"
+  ]
+}

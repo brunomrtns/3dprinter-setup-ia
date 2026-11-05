@@ -58,6 +58,10 @@
 
 ### Peça Vitrine — "Jubarte nas Ondas" (2026-11-04) — `[!]` REPROVADA PELO DONO — encerrada a rodada
 
+- **r2 (noite 2026-11-04): também REPROVADA** — input Gemini escolhido a olho pelo dono → TRELLIS 94.722v ok, Forja @200mm ok (espessura 3,72mm), mas visual reprovado ("ficou ruim"). `jubarte2/reviews2.json`.
+- **Diagnóstico sistêmico (2 rodadas, inputs diferentes)**: o elo fraco é o **TRELLIS para escultura orgânica complexa** — consistente com o benchmark (manifold 4/10, OOM nos densos, melhor em props). Pipeline técnico (SD/Gemini→TRELLIS→Forja→review) funciona; a qualidade do gerador para o sujeito, não.
+- **Opções abertas ao dono**: (A) mesma imagem no TripoSR — A/B barato de gerador; (B) baleia procedural Blender + anel na Forja; (C) cancelar vitrine e direcionar TRELLIS a props simples.
+
 - **VEREDITO (2026-11-04): Ficha A REPROVADA** — "não dá pra entender nada" (baleia irreconhecível). Registrado em `~/printer3d-work/jubarte/reviews.json` + `evidence/jubarte/`. Sem iteração adicional na sessão (regra).
 - **Diagnóstico honesto**: o elo fraco foi a **seleção de input sem visão** — heurísticas (fundo/centralização/cobertura) não medem "parece baleia". Entrada ambígua do SD1.4 → malha ambígua do TRELLIS. Pipeline técnico funcionou de ponta a ponta (SD→TRELLIS→Forja→review), o conceito não sobreviveu.
 - **Licores aproveitáveis**: SD venv próprio + workaround do HF gated/xet; campo espessura da Forja validado em caso real (6,18mm@200mm); fluxo review com parada para veredito funciona.
