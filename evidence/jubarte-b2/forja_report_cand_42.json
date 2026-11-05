@@ -1,0 +1,115 @@
+{
+ "candidato": "cand_42",
+ "entrada": "/home/bruno/printer3d-work/jubarte_b2/trellis_42/mesh.obj",
+ "ts": "2026-11-05T13:19:49",
+ "avisos": [
+  "4 componente(s) descartados pela regra dos 2% (menores que 2% das faces)",
+  "ESPRESSURA < 2.4mm no componente 0 (mín 0.315mm, 47 amostras finas, centro aprox. x=0.53 y=0.42 z=0.07 em coords normalizadas do componente) — risco nos caracóis/pontas"
+ ],
+ "etapas": [
+  {
+   "nome": "componentes",
+   "antes": {
+    "vertices": 503956,
+    "triangulos": 1007948,
+    "watertight": true,
+    "winding_consistent": true,
+    "volume": 0.047618511321838364,
+    "componentes": 5,
+    "bbox": [
+     0.9954,
+     0.8189,
+     0.9984
+    ]
+   },
+   "depois": {
+    "componentes_entrada": 5,
+    "mantidos": 1,
+    "descartados": 4,
+    "faces_mantidas": 1006416
+   }
+  },
+  {
+   "nome": "pymeshfix_individual",
+   "antes": {
+    "vertices": 503956,
+    "triangulos": 1007948,
+    "watertight": true,
+    "winding_consistent": true,
+    "volume": 0.047618511321838364,
+    "componentes": 5,
+    "bbox": [
+     0.9954,
+     0.8189,
+     0.9984
+    ]
+   },
+   "depois": {
+    "vertices": 503182,
+    "triangulos": 1006416,
+    "watertight": true,
+    "winding_consistent": true,
+    "volume": 0.047665527324148256,
+    "componentes": 1,
+    "bbox": [
+     0.9954,
+     0.8189,
+     0.9984
+    ]
+   }
+  },
+  {
+   "nome": "escala",
+   "fator": 200.312614,
+   "bbox_antes": [
+    0.9954,
+    0.8189,
+    0.9984
+   ],
+   "bbox_depois_mm": [
+    199.38,
+    164.04,
+    200.0
+   ]
+  }
+ ],
+ "uniao_manifold": {
+  "tentada": false,
+  "ok": null
+ },
+ "parametros": {
+  "regra_componentes": "> 2% das faces",
+  "target_height_mm": 200.0,
+  "limiar_espessura_mm": 2.4
+ },
+ "watertight_pos_reparo": true,
+ "espessura_por_componente": [
+  {
+   "componente": 0,
+   "faces": 1006416,
+   "pct5_mm": 0.573,
+   "min_mm": 0.315
+  }
+ ],
+ "espessura_minima_mm": 0.315,
+ "final": {
+  "vertices": 503182,
+  "triangulos": 1006416,
+  "watertight": true,
+  "winding_consistent": true,
+  "volume": 383115.1230983461,
+  "componentes": 1,
+  "bbox": [
+   199.3828,
+   164.0357,
+   200.0
+  ],
+  "bbox_mm": [
+   199.38,
+   164.04,
+   200.0
+  ]
+ },
+ "stl": "/home/bruno/printer3d-work/forja_out/jubarte_cand_42.stl",
+ "n_avisos": 2
+}

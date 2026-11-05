@@ -1,0 +1,34 @@
+{
+ "ts": "2026-11-05T13:15:43",
+ "input": "inputs/jubarte_b2.png",
+ "rodadas": [
+  {
+   "candidato": "cand_42",
+   "seed": 42,
+   "vram_antes_mib": 11031,
+   "mesh_ok": true,
+   "tempo_s": 98.39,
+   "vram_pico_mib": 12094,
+   "vertices": 503956,
+   "faces": 1007948,
+   "erros": []
+  },
+  {
+   "candidato": "cand_777",
+   "seed": 777,
+   "vram_antes_mib": 11996,
+   "mesh_ok": true,
+   "tempo_s": 81.62,
+   "vram_pico_mib": 12076,
+   "vertices": 509184,
+   "faces": 1018460,
+   "erros": []
+  }
+ ],
+ "vencedor": {
+  "candidato": "cand_42",
+  "criterio": "watertight: True; esp_min 0.315mm vs 0.289mm; avisos 2; escores (1, 0.315, -2, -0.2192148256522799) vs (1, 0.289, -2, -0.21263566361486697) (critério 2 decidiu)",
+  "seed": 42,
+  "fragilidade": "ATENÇÃO: espessura mínima < 1.6mm em área estrutural — peça potencialmente FRÁGIL no FDM"
+ }
+}

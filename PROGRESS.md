@@ -58,6 +58,13 @@
 
 ### Peça Vitrine — "Jubarte nas Ondas" (2026-11-04) — `[!]` REPROVADA PELO DONO — encerrada a rodada
 
+- **r3 "B2" (2026-11-05): ENTREGUE SEM APROVAÇÃO INTERMEDIÁRIA (ordem do dono)** — input `jubarte_b2.png` (cerâmica cinza-pedra) fornecido pelo dono em Downloads, procedência: uso pessoal.
+- **[x] TRELLIS 2/2** (seeds 42/777; VRAM confirmada antes de cada: 11.031 → 11.996 MiB): cand_42 503.956v/98s/12.094 MiB · cand_777 509.184v/82s/12.076 MiB.
+- **[x] Forja B2 multi-componente**: regra dos **2% das faces** implementada (nunca "maior apenas") — ambos candidatos vieram com baleia+anel **fundidos num único componente** (4 e 2 fragmentos <2% descartados); união manifold3d não necessária. PyMeshFix individual, escala 200mm, espessura com localização.
+- **[x] Vencedor automático (critério registrado)**: **cand_42** — ambos watertight; decidiu o critério 2 (espessura mínima 0,315 > 0,289mm). `experimento_jubarte.json`.
+- **[!] FRAGILIDADE**: espessura mínima 0,315mm (<1,6mm) — pontas/caracóis podem quebrar no FDM; localização registrada (x≈0,53 y≈0,42 z≈0,07 do componente). Correção (Solidify) = fase futura.
+- **[x] Entrega**: `forja_out/jubarte_final.stl` (200mm, watertight) + 6 renders 1600px clay (2 cand × frente-3/4/perfil/traseira-3/4) + `impressao_jubarte.md` (0,2mm, tree só cauda/barbatanas/caracóis, brim no pedestal, PLA mármore/prata/pedra).
+
 - **r2 (noite 2026-11-04): também REPROVADA** — input Gemini escolhido a olho pelo dono → TRELLIS 94.722v ok, Forja @200mm ok (espessura 3,72mm), mas visual reprovado ("ficou ruim"). `jubarte2/reviews2.json`.
 - **Diagnóstico sistêmico (2 rodadas, inputs diferentes)**: o elo fraco é o **TRELLIS para escultura orgânica complexa** — consistente com o benchmark (manifold 4/10, OOM nos densos, melhor em props). Pipeline técnico (SD/Gemini→TRELLIS→Forja→review) funciona; a qualidade do gerador para o sujeito, não.
 - **Opções abertas ao dono**: (A) mesma imagem no TripoSR — A/B barato de gerador; (B) baleia procedural Blender + anel na Forja; (C) cancelar vitrine e direcionar TRELLIS a props simples.
