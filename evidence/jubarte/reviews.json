@@ -1,0 +1,24 @@
+{
+  "peca": "jubarte_nas_ondas",
+  "veredito": "REPROVADA pelo dono em 2026-11-04 — 'não dá pra entender nada, nada faz sentido'",
+  "fichas": {
+    "A_cand_77": {
+      "aprovado": false,
+      "notas": "baleia não reconhecível; formas sem sentido"
+    },
+    "B_cand_42": {
+      "aprovado": false,
+      "notas": "OOM — sem malha"
+    }
+  },
+  "analise_da_falha": [
+    "elo mais fraco: seleção de input 100% heurística (bg_std/centralização/cobertura) — esses números não medem 'parece uma baleia'. Agente sem visão escolheu às cegas entre 4 imagens",
+    "SD1.4 + prompt de escultura complexa (baleia atravessando anel) tende a ambiguidade — conceito de 2 elementos é difícil pra SD e pro TRELLIS",
+    "TRELLIS preserva a ambiguidade da entrada: entrada confusa → malha confusa"
+  ],
+  "plano_proxima_rodada": [
+    "dono escolhe a imagem de entrada COM OLHO (mostrar os 4+ candidatos antes de queimar geração GPU)",
+    "ou: input de referência Blender procedural (controlável) como guia/sketch pra SD (img2img)",
+    "ou: dividir o conceito — baleia sozinha primeiro, anel de onda como peça separada na Forja"
+  ]
+}

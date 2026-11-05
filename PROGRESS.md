@@ -56,7 +56,13 @@
 - Demo visual para o dono: 3 renders + 1 OBJ em `C:\Users\Bruno\AppData\Local\Temp\opencode\demo\`; malhas em `~/printer3d-work/benchmark/<caso>/trellis/mesh.obj` (WSL).
 - Comando de retomada: `wsl bash ~/printer3d-work/retry_trellis.sh` → `wsl bash ~/printer3d-work/run_bench.sh triposr` → `... render` → `... publish` (nesta ordem).
 
-### Peça Vitrine — "Jubarte nas Ondas" (2026-11-04) — `[~]` AGUARDANDO VEREDITO DO DONO
+### Peça Vitrine — "Jubarte nas Ondas" (2026-11-04) — `[!]` REPROVADA PELO DONO — encerrada a rodada
+
+- **VEREDITO (2026-11-04): Ficha A REPROVADA** — "não dá pra entender nada" (baleia irreconhecível). Registrado em `~/printer3d-work/jubarte/reviews.json` + `evidence/jubarte/`. Sem iteração adicional na sessão (regra).
+- **Diagnóstico honesto**: o elo fraco foi a **seleção de input sem visão** — heurísticas (fundo/centralização/cobertura) não medem "parece baleia". Entrada ambígua do SD1.4 → malha ambígua do TRELLIS. Pipeline técnico funcionou de ponta a ponta (SD→TRELLIS→Forja→review), o conceito não sobreviveu.
+- **Licores aproveitáveis**: SD venv próprio + workaround do HF gated/xet; campo espessura da Forja validado em caso real (6,18mm@200mm); fluxo review com parada para veredito funciona.
+- **Próxima rodada (propostas, a decidir com o dono)**: (1) dono escolhe a imagem de entrada com olho antes de queimar GPU; (2) sketch Blender procedural como guia img2img; (3) dividir conceito (baleia e anel separados, unidos na Forja).
+- Fatos da rodada: SD 4/4 gerados (v1-4; 2.1 gated no HF) · TRELLIS 1/2 com malha (cand_42 OOM) · Forja @200mm watertight/espessura ok · commits `1a2e25f`..`d8886f3`.
 
 - **[x] SD setup**: venv novo `printer3d-sd` (torch 2.5.1+cu121, diffusers 0.31). **SD 2.1 está gated no HF** (401 anônimo; todos os repos stabilityai) → fallback `CompVis/stable-diffusion-v1-4` público (CreativeML OpenRAIL-M). Workarounds: token HF inválido desativado + `HF_HUB_DISABLE_XET=1` (backend xet com I/O error).
 - **[x] 4 candidatos** gerados (seeds 11/23/42/77, 512px, ~4,5s cada, VRAM alloc pico 2.679 MiB, processo encerrado → VRAM liberada) — `~/printer3d-work/jubarte/sd/` + `sd_report.json`. **Seleção objetiva (sem olho)**: bg_std + descentramento + cobertura + componentes → **cand_42 (nota 44,3) e cand_77 (39,4)**; ranking completo em `evidence/jubarte/selecao.json`. Sidecars de procedência ADR-003 para todos.
