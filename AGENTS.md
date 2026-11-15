@@ -11,10 +11,10 @@ Este documento é a autoridade central e **vinculante** para qualquer agente de 
 3. **Documentação antes de código.** Nenhuma funcionalidade é implementada sem estar descrita no `docs/roadmap.md` (fase + critérios de aceite) e, quando houver decisão estrutural, em um ADR (`docs/decisions/`).
 4. **"Código que roda" ≠ concluído.** Concluído (`[x]`) exige: validação determinística executada + evidência real salva em `evidence/` + `PROGRESS.md` atualizado. Demonstração visual não substitui gate objetivo.
 5. **Auditoria é real.** Proibido inventar output de comando, versão, medida ou número. O que falhar é registrado como pendência `[!]` com o erro real, causa provável e o que será preciso para resolver — e a sessão segue adiante.
-6. **Ambiente dual Windows + WSL.** O host é Windows 11; a carga pesada (Blender/bpy, CUDA, IA generativa) roda **exclusivamente no WSL2 Ubuntu**. Padrão de invocação: `wsl blender -b -P <script.py> -- <args>` e `wsl /home/bruno/.venvs/printer3d-ia/bin/python <script.py>`. Caminhos Windows→WSL: `C:\foo` → `/mnt/c/foo` (helper `convert_to_wsl_path()` quando houver tooling, padrão do projeto gamedev-setup-ia).
+6. **Ambiente dual Windows + WSL.** O host é Windows 11; a carga pesada (Blender/bpy, CUDA, IA generativa) roda **exclusivamente no WSL2 Ubuntu**. Padrão de invocação: `wsl blender -b -P <script.py> -- <args>` e `wsl tools/setup/py.sh <script.py>`. **Proibido hardcodar username em comandos** (nada de `/home/<usuario>/...`): use `~/.venvs/printer3d-ia/bin/python` ou o helper `tools/setup/py.sh`, que resolve o venv correto em qualquer máquina (ADR-006). Caminhos Windows→WSL: `C:\foo` → `/mnt/c/foo` (helper `convert_to_wsl_path()` quando houver tooling, padrão do projeto gamedev-setup-ia). Convenção dual-shell (agente no Windows vs. agente dentro do WSL) na tabela de comandos canônicos do `README.md`.
 7. **PROIBIDO commit sem push.** Cada marco concluído = commit convencional + `git push` imediato no remote. Ao final de qualquer etapa: `git status` limpo + `git log origin/main..HEAD` vazio. Commit só-local é **falha de sessão**.
 8. **Uma fase por vez.** Não instalar dependências, pesos de IA ou escrever código fora do escopo da fase corrente do `docs/roadmap.md` (ex.: TRELLIS/torch só na Fase 1; código de pipeline não existe na Fase 0).
-9. **GPU é recurso compartilhado e serializado.** A RTX 3060 12GB é disputada entre Windows (desktop, navegador, overlays) e WSL. Antes de qualquer job pesado: guard de VRAM (`nvidia-smi --query-gpu=memory.free --format=csv`). Jobs de GPU **nunca** rodam em paralelo entre si — fila serial única (ver `docs/architecture.md`).
+9. **GPU é recurso compartilhado e serializado.** A GPU local (perfil de máquina em `docs/operations/machine-profiles/`) é disputada entre Windows (desktop, navegador, overlays) e WSL. Antes de qualquer job pesado: guard de VRAM (`tools/generator/gpu_guard.py`, paramétrico por perfil — nunca o número de outra máquina). Jobs de GPU **nunca** rodam em paralelo entre si — fila serial única (ver `docs/architecture.md`).
 10. **Local-first + procedência obrigatória.** Nenhum arquivo de terceiro sai da máquina. Todo asset que entra no sistema ganha sidecar de procedência (origem/autor/licença/triage) antes de qualquer operação — ver `docs/knowledge/licencas-e-procedencia.md`. Remix de asset 🔴/🟡 jamais é publicado.
 11. **PT-BR nos docs.** Direto, técnico, sem marketing. Commits: conventional commits (`feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `test:`) com subject curto e descritivo.
 12. **Autonomia com responsabilidade.** Executar passos rotineiros sem pedir permissão. Interromper o dono SOMENTE para: decisão destrutiva, credenciais/pagamentos, ambiguidade real de escopo, ou aprovação de resultado (gates de fase).
@@ -39,9 +39,12 @@ Este documento é a autoridade central e **vinculante** para qualquer agente de 
 │   │   ├── blender-headless.md
 │   │   ├── wsl-gpu.md
 │   │   └── licencas-e-procedencia.md
+│   ├── onboarding/            # Entrada de novos contribuidores e máquinas
 │   └── operations/
-│       └── environment-audit.md   # Auditoria com OUTPUTS REAIS (nunca inventar)
+│       ├── environment-audit.md   # Auditoria com OUTPUTS REAIS (nunca inventar)
+│       └── machine-profiles/      # Perfis de máquina (guard de VRAM, hardware)
 ├── tools/                     # Ferramentas determinísticas (por fase)
+│   ├── setup/                 # Setup multi-máquina: scripts bash idempotentes + py.sh
 │   ├── forja/                 # Fase 2 — ops bpy (reparo, booleana, oco, deform...)
 │   ├── generator/             # Fase 1 — plugins TRELLIS/TripoSR + benchmark
 │   ├── pose/                  # Fase 3 — auto-rig + biblioteca de poses JSON
@@ -95,5 +98,5 @@ Uma tarefa só vira `[x]` quando **todas** as aplicáveis forem verdade:
 - **VRAM:** antes de job GPU, rodar o guard (`docs/knowledge/wsl-gpu.md`). Se VRAM livre insuficiente: não iniciar, avisar o dono (futuro: toast do Windows) e/ou aguardar. Serialização estrita de jobs GPU.
 - **Procedência:** nenhum asset entra no pipeline sem sidecar JSON de procedência (ADR-003). Triage 🟢 CC0/CC-BY · 🟡 uso pessoal · 🔴 sem licença clara.
 - **Integração PrintFlow3D:** endpoints reais em `docs/architecture.md` §6. Nunca subir arquivo sem os metadados mínimos registrados localmente.
-- **Isolamento de venv:** este projeto usa `/home/bruno/.venvs/printer3d-ia` (ADR-004). O venv `game-ai3d` do projeto de games é **somente referência** — nunca instalar, atualizar ou reutilizar.
+- **Isolamento de venv:** este projeto usa o venv `~/.venvs/printer3d-ia` do WSL de cada máquina (ADR-004; nome fixo, caminho absoluto varia por usuário — resolva com `tools/setup/py.sh`). O venv `game-ai3d` do projeto de games é **somente referência** — nunca instalar, atualizar ou reutilizar.
 - **Reproducibilidade:** pesos de IA nunca são commitados (`.gitignore`); instalação de pesos é procedimento documentado de cada fase.

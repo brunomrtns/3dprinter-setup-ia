@@ -42,7 +42,7 @@ Todo resultado, de qualquer módulo, passa pelo **pipeline comum**: `entrada →
 | Host / GPU | Windows 11 + WSL2 Ubuntu 26.04 · RTX 3060 12GB (CUDA via driver Windows) |
 | Automação 3D | Blender 5.0.1 headless (`bpy`) — já presente no WSL |
 | IA generativa | TRELLIS (MIT, modo principal planejado) · TripoSR (legado, já funcional) |
-| Runtime Python | venv próprio `/home/bruno/.venvs/printer3d-ia` (isolado do `game-ai3d`) |
+| Runtime Python | venv próprio `~/.venvs/printer3d-ia` no WSL local (isolado do `game-ai3d`) |
 | Entrega | PrintFlow3D — API REST local |
 
 ## Estrutura de pastas
@@ -69,20 +69,34 @@ Todo resultado, de qualquer módulo, passa pelo **pipeline comum**: `entrada →
 
 ## Comandos canônicos
 
-> Placeholders — definidos e validados nas fases 1–3. Não instalar nada na Fase 0.
+> Portáveis: nenhum comando depende do username da máquina. O venv é sempre `~/.venvs/printer3d-ia` dentro do WSL (nome fixo); `tools/setup/py.sh` resolve o python correto em qualquer máquina.
+
+### Convenção dual-shell (agente no Windows × agente dentro do WSL)
+
+Ambos os estilos são **válidos e equivalentes**. O agente usa o prefixo `wsl` quando roda no Windows (PowerShell); roda direto quando já está dentro do WSL (bash). Nunca misture os dois num mesmo pipeline de comando.
+
+| Ação | Agente no Windows (PowerShell) | Agente dentro do WSL (bash) |
+|---|---|---|
+| Python do venv do projeto | `wsl tools/setup/py.sh <script.py> <args>` | `tools/setup/py.sh <script.py> <args>` |
+| Python do venv (caminho direto) | `wsl ~/.venvs/printer3d-ia/bin/python <script.py>` | `~/.venvs/printer3d-ia/bin/python <script.py>` |
+| Blender headless | `wsl blender -b -P <script.py> -- <args>` | `blender -b -P <script.py> -- <args>` |
+| Guard de VRAM | `wsl nvidia-smi --query-gpu=memory.free --format=csv` | `nvidia-smi --query-gpu=memory.free --format=csv` |
+| Versão do Python 3.11 | `wsl python3.11 --version` | `python3.11 --version` |
+| Caminho do repo | `C:\...\3dprinter-setup-ia` | `/mnt/c/...\3dprinter-setup-ia` (mesma pasta via `/mnt/c`) |
 
 ```bash
-# Blender headless (WSL) — padrão de toda op da Forja (Fase 2)
-wsl blender -b -P tools/forja/<op>.py -- --input <arquivo> --output <arquivo>
+# Blender headless — padrão de toda op da Forja (Fase 2) [no Windows: prefixar com wsl]
+blender -b -P tools/forja/<op>.py -- --input <arquivo> --output <arquivo>
 
-# Python do venv do projeto (Fase 1)
-wsl /home/bruno/.venvs/printer3d-ia/bin/python <script.py> <args>
+# Python do venv do projeto (Fase 1) — helper resolve em qualquer máquina
+tools/setup/py.sh <script.py> <args>
 
 # Benchmark de geradores image→3D (Fase 1)
-wsl /home/bruno/.venvs/printer3d-ia/bin/python tools/generator/benchmark.py   # a criar
+tools/setup/py.sh tools/generator/run_benchmark.py
 
-# Guard de VRAM antes de job pesado
-wsl nvidia-smi --query-gpu=memory.free,memory.total --format=csv
+# Guard de VRAM antes de job pesado (limite vem do perfil da máquina)
+tools/setup/py.sh tools/generator/gpu_guard.py
+nvidia-smi --query-gpu=memory.free,memory.total --format=csv
 ```
 
 ## Governança (leia antes de operar)

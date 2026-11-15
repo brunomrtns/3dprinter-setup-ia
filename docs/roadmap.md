@@ -31,7 +31,7 @@ Critérios de aceite:
 **Objetivo:** colocar o gerador image→3D multi-modo de pé e escolher o modo default com **dados objetivos**, não impressão.
 
 Escopo:
-1. Criar venv próprio `/home/bruno/.venvs/printer3d-ia` no WSL (**isolado** do `game-ai3d` — ADR-004). Nada é instalado no venv de games.
+1. Criar venv próprio `~/.venvs/printer3d-ia` no WSL local (**isolado** do `game-ai3d` — ADR-004; nome fixo em qualquer máquina — ADR-006). Nada é instalado no venv de games.
 2. Instalar TRELLIS no WSL (Microsoft, MIT; pesos ~13 GB; CUDA na RTX 3060 12GB; 1024³, ~90s/modelo esperado). Registrar procedimento de instalação + evidências.
 3. Garantir que o modo legado TripoSR continua funcionando (referência funcional existente).
 4. Definir a interface de plugin comum (`generate(image, output, params) -> GenerationReport`) e implementar os dois plugins.

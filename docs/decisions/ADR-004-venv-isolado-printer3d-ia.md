@@ -8,7 +8,7 @@ O projeto de games (gamedev-setup-ia) mantém o venv `/home/bruno/.venvs/game-ai
 
 ## Decisão
 
-1. Este projeto cria e usa **exclusivamente** o venv `/home/bruno/.venvs/printer3d-ia` no WSL (Fase 1);
+1. Este projeto cria e usa **exclusivamente** o venv `~/.venvs/printer3d-ia` no WSL da máquina local (Fase 1; caminho absoluto original era `/home/bruno/.venvs/printer3d-ia` no PC de referência — tornado portável por ADR-006);
 2. O venv `game-ai3d` é **somente referência** (padrões, versões conhecidas, prova de que CUDA funciona) — **proibido** instalar, atualizar ou apagar pacotes nele a partir deste projeto;
 3. Pesos de IA ficam fora do repo (`.gitignore`) e fora de `/mnt/c` — filesystem nativo do WSL (ver `docs/knowledge/wsl-gpu.md` §5).
 
