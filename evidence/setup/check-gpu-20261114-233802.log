@@ -1,0 +1,12 @@
+[23:38:02] === check-gpu — início ===
+[23:38:02] -- nvidia-smi (WSL) --
+name, driver_version, memory.total [MiB], memory.free [MiB]
+NVIDIA GeForce RTX 3060, 621.01, 12288 MiB, 10026 MiB
+[23:38:03] -- torch no venv do projeto --
+torch 2.5.1+cu121
+cuda_available True
+device NVIDIA GeForce RTX 3060
+capability (8, 6)
+vram_free_mib 11240 of 12287
+[23:38:06] OK: CUDA funcionando no venv
+[23:38:06] === check-gpu — fim (log: /mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/setup/check-gpu-20261114-233802.log) ===

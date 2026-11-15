@@ -1,0 +1,10 @@
+[23:38:00] === check-prereqs — início ===
+[23:38:00] OK: rodando dentro do WSL (microsoft)
+[23:38:00] OK: python3.11 disponível
+[23:38:00] OK: git disponível
+[23:38:00] OK: curl disponível
+[23:38:00] OK: nvidia-smi disponível (GPU visível)
+[23:38:00] OK: venv do projeto (~/.venvs/printer3d-ia)
+[23:38:00] OK: Blender no PATH
+[23:38:00] OK: disco livre em $HOME: 836 GB (>= 30 GB)
+[23:38:00] === check-prereqs — fim (0 item(ns) pendente(s); log: /mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/setup/check-prereqs-20261114-233800.log) ===

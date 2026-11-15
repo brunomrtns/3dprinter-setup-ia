@@ -1,0 +1,6 @@
+[23:38:00] === check-blender — início ===
+[23:38:00] OK: blender no PATH: /usr/bin/blender
+[23:38:02] versão: Blender 5.0.1
+[23:38:02] OK: Blender 5.x — compatível com o projeto (referência: 5.0.1)
+[23:38:02] OK: modo headless (-b) funcionando
+[23:38:02] === check-blender — fim (log: /mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/setup/check-blender-20261114-233800.log) ===
