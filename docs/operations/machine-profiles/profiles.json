@@ -1,0 +1,18 @@
+{
+  "_comentario": "Fonte canônica de limites do gpu_guard.py por perfil de máquina. Valores 'A VALIDAR' ainda não foram medidos (proibido tratá-los como medida — AGENTS.md §1.5).",
+  "perfis": {
+    "rtx3060-12gb": {
+      "guard_min_free_mib": 10000,
+      "vram_total_mib": 12288,
+      "status": "medido (audit 2026-11-03 + benchmark 2026-11-04)",
+      "fonte": "docs/operations/machine-profiles/rtx3060-12gb.md"
+    },
+    "rtx5060ti-8gb": {
+      "guard_min_free_mib": 6500,
+      "vram_total_mib": 8192,
+      "status": "A VALIDAR (proposto; trocar pelo valor medido após benchmark local)",
+      "fonte": "docs/operations/machine-profiles/rtx5060ti-8gb.md"
+    }
+  },
+  "default": "rtx3060-12gb"
+}
