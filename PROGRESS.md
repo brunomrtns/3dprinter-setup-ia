@@ -127,8 +127,8 @@ Preparação do repo para o 2º contribuidor (leigo, outra máquina: Windows 11,
 
 ### Pendências deste update (não bloqueiam o merge)
 
-- [!] Números da máquina do colega **A VALIDAR**: driver/CUDA/VRAM livres/torch cu128/Blender/benchmark TripoSR → chegam via PR do colega (Fase B); o dono atualiza `rtx5060ti-8gb.md` e o guard do perfil.
-- [ ] Guard proposto da 5060 Ti (~6.500 MiB) é chute calibrado, NÃO medida — trocar pelo valor medido.
+- [~] Números da máquina do colega — **Fase A CHEGOU e foi integrada (2026-11-15)**: audit real em `evidence/rtx5060ti-8gb/environment-audit-fase-a.md`; perfil `rtx5060ti-8gb.md` e `profiles.json` atualizados com valores medidos. Faltam os da **Fase B** (torch cu128 exato, Blender, benchmark TripoSR nesta máquina) — via PR do colega.
+- [x] Guard da 5060 Ti **confirmado como seguro**: livre medido 6803 MiB (desktop ativo usando 1090 MiB dos 8151 MiB) → 6500 MiB com margem ~303 MiB. Nota operacional registrada no perfil: fechar navegadores/jogos/overlay NVIDIA antes de jobs GPU nesta máquina.
 - [ ] Votação do dono na galeria do benchmark → ADR-005 (default mode) — segue pendente, intocada neste update.
 - [ ] Monitor WSL: nesta máquina o watcher (`WSLIconWatcher` na chave Run) não estava rodando na coleta (reinício recente) — inofensivo (janela mostra estado correto); registrar na cabeça se o ícone congelar.
 

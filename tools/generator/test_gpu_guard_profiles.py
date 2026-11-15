@@ -53,7 +53,7 @@ class TestResolveGuard(unittest.TestCase):
         valor, log = resolver(profile="rtx5060ti-8gb")
         self.assertEqual(valor, 6_500)
         self.assertIn("rtx5060ti-8gb", log)
-        self.assertIn("A VALIDAR", log)
+        self.assertIn("confirmado", log)  # audit Fase A 2026-11-15: livre 6803 MiB > guard 6500
 
     def test_env_absoluto_vence_perfil(self):
         valor, log = resolver(profile="rtx5060ti-8gb", absolute="7000")
@@ -79,7 +79,8 @@ class TestResolveGuard(unittest.TestCase):
         perfis = gpu_guard._load_profiles()["perfis"]
         self.assertEqual(perfis["rtx3060-12gb"]["guard_min_free_mib"], 10_000)
         self.assertEqual(perfis["rtx5060ti-8gb"]["guard_min_free_mib"], 6_500)
-        self.assertIn("A VALIDAR", perfis["rtx5060ti-8gb"]["status"])
+        self.assertEqual(perfis["rtx5060ti-8gb"]["vram_total_mib"], 8151)
+        self.assertIn("medido", perfis["rtx5060ti-8gb"]["status"])
 
 
 if __name__ == "__main__":

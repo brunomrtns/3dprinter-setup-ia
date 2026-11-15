@@ -1,0 +1,30 @@
+# Revalidação do gpu_guard com perfil rtx5060ti-8gb medido - 2026-11-15T17:15:05-03:00
+python: Python 3.11.16 @ /usr/bin/python3.11
+
+## unittest (7 casos)
+test_arg_explicito_vence_tudo (__main__.TestResolveGuard.test_arg_explicito_vence_tudo) ... ok
+test_default_sem_env_e_3060 (__main__.TestResolveGuard.test_default_sem_env_e_3060) ... ok
+test_env_absoluto_vence_perfil (__main__.TestResolveGuard.test_env_absoluto_vence_perfil) ... ok
+test_env_invalido_cai_no_default (__main__.TestResolveGuard.test_env_invalido_cai_no_default) ... ok
+test_perfil_desconhecido_cai_no_default (__main__.TestResolveGuard.test_perfil_desconhecido_cai_no_default) ... ok
+test_perfil_rtx5060ti (__main__.TestResolveGuard.test_perfil_rtx5060ti) ... ok
+test_profiles_json_existe_no_repo (__main__.TestResolveGuard.test_profiles_json_existe_no_repo) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.027s
+
+OK
+exit_code=0
+
+## Módulo real — perfil default (rtx3060-12gb, sem env)
+[gpu_guard] perfil de máquina: rtx3060-12gb → guard 10000 MiB (medido (audit 2026-11-03 + benchmark 2026-11-04))
+[gpu_guard] VRAM used=1377 MiB free=10734 MiB threshold=10000 MiB
+[gpu_guard] OK para despachar job GPU
+exit_code=0
+
+## Módulo real — PRINTER3D_MACHINE_PROFILE=rtx5060ti-8gb (números ainda da GPU local:
+##   o que importa aqui é o threshold resolvido=6500 MiB 'confirmado', não a VRAM desta máquina)
+[gpu_guard] perfil de máquina: rtx5060ti-8gb → guard 6500 MiB (medido Fase A 2026-11-15 (VRAM livre 6803 MiB com desktop ativo; guard 6500 confirmado seguro; benchmark do TripoSR pendente na Fase B))
+[gpu_guard] VRAM used=1377 MiB free=10734 MiB threshold=6500 MiB
+[gpu_guard] OK para despachar job GPU
+exit_code=0

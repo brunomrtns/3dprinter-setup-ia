@@ -9,9 +9,9 @@
     },
     "rtx5060ti-8gb": {
       "guard_min_free_mib": 6500,
-      "vram_total_mib": 8192,
-      "status": "A VALIDAR (proposto; trocar pelo valor medido após benchmark local)",
-      "fonte": "docs/operations/machine-profiles/rtx5060ti-8gb.md"
+      "vram_total_mib": 8151,
+      "status": "medido Fase A 2026-11-15 (VRAM livre 6803 MiB com desktop ativo; guard 6500 confirmado seguro; benchmark do TripoSR pendente na Fase B)",
+      "fonte": "docs/operations/machine-profiles/rtx5060ti-8gb.md + evidence/rtx5060ti-8gb/environment-audit-fase-a.md"
     }
   },
   "default": "rtx3060-12gb"
