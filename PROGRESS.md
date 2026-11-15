@@ -111,6 +111,27 @@
 - **Dado inesperado e relevante**: espessura pct5 do TRELLIS é baixíssima (0,002-0,008 em malha unitária — casca fina, frágil pra impressão) vs TripoSR (0,016-0,176). TRELLIS gera 3,5× mais detalhe (vértices), mas casca fina; TripoSR gera sólidos mais "imprimíveis".
 - Galeria (34 renders, câmera/luz idênticas): `evidence/benchmark/gallery.md` — **aguardando votação 👍/👎 do dono por caso** → ADR-005.
 
+## Onboarding multi-máquina (2026-11-14) — branch `feat/onboarding-multi-maquina` `[~] aguardando merge do dono`
+
+Preparação do repo para o 2º contribuidor (leigo, outra máquina: Windows 11, WSL2 a instalar, RTX 5060 Ti 8GB Blackwell/sm_120). Contexto: ADR-006.
+
+| # | Tarefa | Status |
+|---|---|---|
+| 1 | Monitor WSL da área de trabalho investigado e documentado (`docs/onboarding/monitor-wsl.md`) + fontes em `evidence/onboarding/` | [x] |
+| 2 | AGENTS.md/README despersonalizados (`~/.venvs/printer3d-ia`, helper `tools/setup/py.sh`, tabela dual-shell, ADR-006) | [x] |
+| 3 | Perfis de máquina: `docs/operations/machine-profiles/` (rtx3060-12gb medido · rtx5060ti-8gb "A VALIDAR" · profiles.json) | [x] |
+| 4 | `gpu_guard.py` paramétrico por perfil (env `PRINTER3D_MACHINE_PROFILE`/`PRINTER3D_GUARD_MIN_FREE_MIB`, default 3060 = 10.000 MiB intacto) + 7 testes + evidência (`evidence/gpu-guard-parametric/`) | [x] |
+| 5 | Onboarding: `onboarding-novato.md` (Fases A/B com GATEs), `glossario.md`, `PROMPT-ONBOARDING-A.md`, `PROMPT-ONBOARDING-B.md` | [x] |
+| 6 | `tools/setup/`: check-prereqs / install-python311 / make-venv / check-blender / check-gpu / collect-audit — idempotentes, logados, validados na 3060 (`evidence/setup/`) | [x] |
+| 7 | Governança multi-pessoa no AGENTS.md §7 Contribuidores | [x] |
+
+### Pendências deste update (não bloqueiam o merge)
+
+- [!] Números da máquina do colega **A VALIDAR**: driver/CUDA/VRAM livres/torch cu128/Blender/benchmark TripoSR → chegam via PR do colega (Fase B); o dono atualiza `rtx5060ti-8gb.md` e o guard do perfil.
+- [ ] Guard proposto da 5060 Ti (~6.500 MiB) é chute calibrado, NÃO medida — trocar pelo valor medido.
+- [ ] Votação do dono na galeria do benchmark → ADR-005 (default mode) — segue pendente, intocada neste update.
+- [ ] Monitor WSL: nesta máquina o watcher (`WSLIconWatcher` na chave Run) não estava rodando na coleta (reinício recente) — inofensivo (janela mostra estado correto); registrar na cabeça se o ícone congelar.
+
 ## Pendências herdadas do audit (nenhuma bloqueia a Fase 1 — detalhes em `docs/operations/environment-audit.md`)
 
 - [~] **#1** venv da Fase 1 deve usar `/usr/bin/python3.11` (default do WSL é 3.14.4 — muito novo para stack CUDA)
