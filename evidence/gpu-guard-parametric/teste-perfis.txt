@@ -1,0 +1,35 @@
+# Teste do gpu_guard paramétrico (ADR-006) - 2026-11-14T23:33:44-03:00
+python: Python 3.11.16 @ /usr/bin/python3.11
+repo: /mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia
+
+## unittest (7 casos)
+test_arg_explicito_vence_tudo (__main__.TestResolveGuard.test_arg_explicito_vence_tudo) ... ok
+test_default_sem_env_e_3060 (__main__.TestResolveGuard.test_default_sem_env_e_3060) ... ok
+test_env_absoluto_vence_perfil (__main__.TestResolveGuard.test_env_absoluto_vence_perfil) ... ok
+test_env_invalido_cai_no_default (__main__.TestResolveGuard.test_env_invalido_cai_no_default) ... ok
+test_perfil_desconhecido_cai_no_default (__main__.TestResolveGuard.test_perfil_desconhecido_cai_no_default) ... ok
+test_perfil_rtx5060ti (__main__.TestResolveGuard.test_perfil_rtx5060ti) ... ok
+test_profiles_json_existe_no_repo (__main__.TestResolveGuard.test_profiles_json_existe_no_repo) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.022s
+
+OK
+exit_code=0
+
+## Módulo real — perfil default (rtx3060-12gb, sem env)
+[gpu_guard] perfil de máquina: rtx3060-12gb → guard 10000 MiB (medido (audit 2026-11-03 + benchmark 2026-11-04))
+[gpu_guard] VRAM used=2169 MiB free=9942 MiB threshold=10000 MiB
+[gpu_guard] INSUFICIENTE — não iniciar job GPU (aguardar/liberar)
+exit_code=2
+
+## Módulo real — PRINTER3D_MACHINE_PROFILE=rtx5060ti-8gb
+[gpu_guard] perfil de máquina: rtx5060ti-8gb → guard 6500 MiB (A VALIDAR (proposto; trocar pelo valor medido após benchmark local))
+[gpu_guard] VRAM used=2169 MiB free=9942 MiB threshold=6500 MiB
+[gpu_guard] OK para despachar job GPU
+exit_code=0
+
+## NOTA: default da 3060 = comportamento histórico (10.000 MiB).
+## Na coleta o desktop Windows usava VRAM extra (navegador/overlays); se o guard
+## recusou com exit 2 no perfil 3060 e aceitou no 5060ti, o mecanismo paramétrico
+## está correto — exit code é a evidência objetiva.
