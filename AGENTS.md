@@ -100,3 +100,16 @@ Uma tarefa só vira `[x]` quando **todas** as aplicáveis forem verdade:
 - **Integração PrintFlow3D:** endpoints reais em `docs/architecture.md` §6. Nunca subir arquivo sem os metadados mínimos registrados localmente.
 - **Isolamento de venv:** este projeto usa o venv `~/.venvs/printer3d-ia` do WSL de cada máquina (ADR-004; nome fixo, caminho absoluto varia por usuário — resolva com `tools/setup/py.sh`). O venv `game-ai3d` do projeto de games é **somente referência** — nunca instalar, atualizar ou reutilizar.
 - **Reproducibilidade:** pesos de IA nunca são commitados (`.gitignore`); instalação de pesos é procedimento documentado de cada fase.
+
+---
+
+## 7. Contribuidores (governança multi-pessoa, ADR-006)
+
+O projeto tem um dono (Bruno) e pode ter múltiplos contribuidores, cada qual numa máquina própria. Regras:
+
+1. **Máquina = identidade de evidência.** Toda evidência de uma máquina vai em `evidence/<perfil-da-máquina>/` (ex.: `evidence/rtx5060ti-8gb/`). Evidências de máquinas diferentes **nunca se misturam**; comparar métricas entre máquinas é só com os dois registros lado a lado. Números "A VALIDAR" (`docs/operations/machine-profiles/`) são promissórios, não medidas — proibido citá-los como medidos (§1.5).
+2. **Branch própria, nunca a main.** Contribuidor só faz push em `feat/<nome>/<topico>` (ex.: `feat/fulano/setup-inicial`) e abre PR. Push direto na main por contribuidor é **falha de sessão**.
+3. **`PROGRESS.md` e `HANDOFF.md` são integrados na main só pelo dono.** O contribuidor propõe suas atualizações na própria branch (o PR pode incluí-los); em conflito, o dono resolve no merge. A visão canônica do estado é sempre a da main.
+4. **README mantém o badge de fase** — só o dono altera badges/estado geral; contribuidor não "promove" fase no README.
+5. **Onboarding de máquina nova** segue `docs/onboarding/onboarding-novato.md` (Fase A ambiente / Fase B projeto) e registra o perfil em `docs/operations/machine-profiles/`.
+6. **Comandos canônicos são portáveis** (ADR-006): sem username hardcoded; agente no Windows usa prefixo `wsl`, agente no WSL roda direto — tabela em `README.md`.
