@@ -5,7 +5,7 @@
 ## Estado atual (2026-11-14)
 
 - **Fase 1** segue com o único passo pendente: votação 👍/👎 do dono por caso na `gallery.md` → **ADR-005 (default mode)**.
-- **Novo: onboarding multi-máquina** na branch `feat/onboarding-multi-maquina` (aguardando merge do dono): perfis de máquina (`docs/operations/machine-profiles/`), guard de VRAM paramétrico, `tools/setup/` idempotente, `docs/onboarding/` completo + ADR-006. 2º contribuidor (máquina RTX 5060 Ti 8GB, Blackwell sm_120): **Fase A concluída e auditada 2026-11-15** (`evidence/rtx5060ti-8gb/environment-audit-fase-a.md`); Fase B após o merge (`PROMPT-ONBOARDING-B.md`).
+- **Onboarding multi-máquina NA MAIN** (merge 2026-11-16): perfis de máquina (`docs/operations/machine-profiles/`), guard de VRAM paramétrico, `tools/setup/` idempotente, `docs/onboarding/` completo + ADR-006. 2º contribuidor (máquina RTX 5060 Ti 8GB, Blackwell sm_120): **Fase A e Fase B concluídas e integradas** (PR #1, merge 2026-11-16) — benchmark do TripoSR medido: 10/10 OK, mediana 14,4s, pico 4385 MiB; TRELLIS inviável confirmada por execução (10/10 sem mesh).
 - **Fase 1 Forja CONCLUÍDA** (`tools/forja/forja/`; workspace `~/printer3d-work/forja/`): 7/7 TRELLIS reparados, gate PASS em `evidence/fase1-forja/gate_final.txt`.
 - Benchmark Fase 1 concluído (`evidence/benchmark/`): TRELLIS 65,7s/12.070 MiB (3/10 OOM em casos densos) · TripoSR 27,3s/3.588 MiB (0/10 erros).
 - Repo: `git@github.com:brunomrtns/3dprinter-setup-ia.git` · main + branch `feat/onboarding-multi-maquina` · tudo pushed.
@@ -38,7 +38,6 @@
 
 ## Próximo gatilho
 
-1. Dono revisa e mergeia `feat/onboarding-multi-maquina` na main.
-2. Colega: Fase A **concluída e auditada** (2026-11-15, `evidence/rtx5060ti-8gb/environment-audit-fase-a.md`) — base da máquina pronta (WSL2 + Ubuntu 26.04.1, RTX 5060 Ti visível no WSL, python3.11.18, git configurado).
-3. Após merge: colega roda Fase B (`PROMPT-ONBOARDING-B.md`) → Blender + venv torch cu128 + TripoSR + benchmark local → dono troca os "A VALIDAR (Fase B)" restantes no `rtx5060ti-8gb.md`.
-4. Dono vota na galeria → ADR-005 fecha a Fase 1.
+1. ~~Dono revisa e mergeia `feat/onboarding-multi-maquina` na main~~ — feito (2026-11-16).
+2. ~~Colega: Fase A~~ — concluída e auditada (2026-11-15). ~~Fase B (PR #1)~~ — revisada, corrigida e **mergeada na main (2026-11-16)**: Blender 5.0.1, torch 2.11.0+cu128 (capability (12,0) ✓), TripoSR benchmarkado — 10/10 OK, mediana 14,4s, VRAM pico 4385 MiB < guard 6500. Perfil `rtx5060ti-8gb.md` sem nenhum "A VALIDAR" restante.
+3. **Único passo pendente da Fase 1**: dono vota 👍/👎 nas duas galerias (`evidence/benchmark/gallery.md` da 3060 e `evidence/rtx5060ti-8gb/benchmark/gallery.md` da 5060 Ti) → **ADR-005 (default mode por máquina)** fecha a Fase 1.

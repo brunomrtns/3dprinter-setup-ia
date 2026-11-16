@@ -125,10 +125,18 @@ Preparação do repo para o 2º contribuidor (leigo, outra máquina: Windows 11,
 | 6 | `tools/setup/`: check-prereqs / install-python311 / make-venv / check-blender / check-gpu / collect-audit — idempotentes, logados, validados na 3060 (`evidence/setup/`) | [x] |
 | 7 | Governança multi-pessoa no AGENTS.md §7 Contribuidores | [x] |
 
+### Integração do PR #1 — Fase B na máquina do colega (2026-11-16) `[x]`
+
+- PR `feat/yuriiyuriiyurii91-afk/setup-inicial` revisado pelo dono e **mergeado na main** (`614c3ac` + 2 commits de correção do dono: `1fb513f`, `b560d77`).
+- Setup Fase B na 5060 Ti: Blender 5.0.1, venv torch **2.11.0+cu128** (capability (12,0) ✓), TripoSR @ 107cefd + pin **transformers 4.46.2** (5.x quebra o load do ckpt — descoberta real do setup, corrige nota da Fase 1 sem reescrever evidência).
+- **Benchmark TripoSR na 5060 Ti: 10/10 OK, 0 erros** — mediana 14,4s, VRAM pico 4385 MiB (< guard 6500 ✓), manifold 9/10. TRELLIS 10/10 sem mesh (inviável confirmada por execução). Evidência: `evidence/rtx5060ti-8gb/benchmark/`.
+- Correções do dono na revisão: (1) removidas 8 duplicatas de logs da máquina do colega em `evidence/setup/` (violação §7.1 — copias namespaced já existiam); (2) meta do benchmark agora reporta o python real (`platform.python_version()` — estava `py3.11.16` hardcode; o results.json da 5060 Ti mantém o metadado gerado, divergência registrada aqui e no perfil).
+- Perfil `rtx5060ti-8gb.md` + `profiles.json` atualizados pelo dono com os números medidos da Fase B — **nenhum "A VALIDAR" restante neste perfil**.
+
 ### Pendências deste update (não bloqueiam o merge)
 
-- [~] Números da máquina do colega — **Fase A CHEGOU e foi integrada (2026-11-15)**: audit real em `evidence/rtx5060ti-8gb/environment-audit-fase-a.md`; perfil `rtx5060ti-8gb.md` e `profiles.json` atualizados com valores medidos. Faltam os da **Fase B** (torch cu128 exato, Blender, benchmark TripoSR nesta máquina) — via PR do colega.
-- [x] Guard da 5060 Ti **confirmado como seguro**: livre medido 6803 MiB (desktop ativo usando 1090 MiB dos 8151 MiB) → 6500 MiB com margem ~303 MiB. Nota operacional registrada no perfil: fechar navegadores/jogos/overlay NVIDIA antes de jobs GPU nesta máquina.
+- [~] Números da máquina do colega — **Fase A CHEGOU e foi integrada (2026-11-15)**: audit real em `evidence/rtx5060ti-8gb/environment-audit-fase-a.md`; perfil `rtx5060ti-8gb.md` e `profiles.json` atualizados com valores medidos. **Fase B também chegou e foi integrada (2026-11-16, PR #1)** — perfil sem nenhum "A VALIDAR" restante.
+- [x] Guard da 5060 Ti **confirmado como seguro**: livre medido 6803 MiB (desktop ativo usando 1090 MiB dos 8151 MiB) → 6500 MiB com margem ~303 MiB. **Validado em produção no benchmark Fase B**: liberou 10/10 jobs (6687–6691 MiB livres), pico do TripoSR 4385 MiB. Nota operacional registrada no perfil: fechar navegadores/jogos/overlay NVIDIA antes de jobs GPU nesta máquina.
 - [ ] Votação do dono na galeria do benchmark → ADR-005 (default mode) — segue pendente, intocada neste update.
 - [ ] Monitor WSL: nesta máquina o watcher (`WSLIconWatcher` na chave Run) não estava rodando na coleta (reinício recente) — inofensivo (janela mostra estado correto); registrar na cabeça se o ícone congelar.
 

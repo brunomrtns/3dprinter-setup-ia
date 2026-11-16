@@ -53,7 +53,7 @@ class TestResolveGuard(unittest.TestCase):
         valor, log = resolver(profile="rtx5060ti-8gb")
         self.assertEqual(valor, 6_500)
         self.assertIn("rtx5060ti-8gb", log)
-        self.assertIn("confirmado", log)  # audit Fase A 2026-11-15: livre 6803 MiB > guard 6500
+        self.assertIn("validado em produção", log)  # Fase B 2026-11-16: 10/10 jobs liberados, pico 4385 < 6500
 
     def test_env_absoluto_vence_perfil(self):
         valor, log = resolver(profile="rtx5060ti-8gb", absolute="7000")
