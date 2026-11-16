@@ -148,3 +148,19 @@ Preparação do repo para o 2º contribuidor (leigo, outra máquina: Windows 11,
 6. Dono avalia 👍/👎 por caso → ADR-005 registra o default mode.
 
 Escopo completo e critérios de aceite: `docs/roadmap.md` §Fase 1.
+
+## Registro — Fase B setup na máquina rtx5060ti-8gb (2026-11-16, contribuidor yuriiyuriiyurii91-afk)
+
+- Perfil ativado: `PRINTER3D_MACHINE_PROFILE=rtx5060ti-8gb` (`~/.bashrc` + `~/.profile`).
+- Repo clonado em `~/projetos/3dprinter-setup-ia`; remote de push em SSH.
+- Blender 5.0.1 headless instalado (tarball oficial em /opt + symlink; libs do sistema: libsm6, libxext6, libgl1, libusb-1.0-0). `check-blender.sh` OK.
+- venv `printer3d-ia`: Python 3.11.18, **torch 2.11.0+cu128**, `cuda.is_available()=True`, capability **(12, 0)** — `check-gpu.sh` OK.
+- TripoSR em `~/tools/TripoSR` @ `107cefd` — repo oficial **VAST-AI-Research/TripoSR** (o caminho "microsoft/TripoSR" não existe; API GitHub responde 404). Pesos `model.ckpt` = 1.677.246.742 bytes (stabilityai/TripoSR, MIT) em `~/tools/TripoSR/`.
+- Deps no venv: **transformers 4.46.2** (5.x quebra o load do ckpt — keys do ViT renomeadas em 5.x; 4.46.2 é a pinada pelo TRELLIS) · omegaconf 2.4.0 · rembg[cpu] (backend bria-rmbg-2.0, ~1 GB baixado) · open3d 0.20.0 · trimesh 5.2.1 · scikit-image 0.26.0 (base do shim torchmcubes) · pytorch-lightning 2.6.6 · einops · xatlas · imageio · pillow · huggingface-hub.
+  - Nota: `evidence/fase1/triposr-install-notes.md` registra "transformers não é importado" — **incorreto no clone 107cefd** (`tsr/models/tokenizers/image.py` importa transformers). Na 3060 funcionou porque o TRELLIS já trazia transformers no venv.
+- Shim torchmcubes recriado em `~/printer3d-work/shim/torchmcubes/` (skimage, sem CUDA/nvcc no WSL — conforme notes da Fase 1). Plugins (`base_plugin.py`, `triposr_plugin.py`, `gpu_guard.py`) em `~/printer3d-work/gen/`; runner sincronizado via `GENERATOR_SRC` (override de env — sem editar repo).
+- Portabilidade (ADR-006): commit `b0818b6` — `run_benchmark.py` deriva testset/render/evidência do próprio repo (antes: caminhos hardcoded do PC de referência, violando §1.6); evidência de benchmark namespaced por `PRINTER3D_MACHINE_PROFILE`.
+- **Benchmark TripoSR nesta máquina — 10/10 OK, 0 erros:** pico **4385 MiB** (todos os casos) · tempo **13,42–31,11 s**/caso · vértices 45.976–107.770 · manifold **9/10** (`estrutura_castelo` False→False) · guard OK (liberado com 6687–6691 MiB; linha de base desktop ~1,2 GB). Log: `evidence/rtx5060ti-8gb/benchmark-triposr-2026-11-16.log`; `results.json`/`scores.md`/`gallery.md`+20 renders: `evidence/rtx5060ti-8gb/benchmark/`. TRELLIS não executado (inviável nesta GPU — decisão por descarte já registrada no perfil).
+- Auditoria Fase B consolidada: `evidence/rtx5060ti-8gb/audit-fase-b-2026-11-16.md` (log do collect-audit no mesmo diretório).
+- Rodadas de setup falhadas arquivadas em `~/printer3d-work/benchmark-run1-failed-2026-11-16/` e `benchmark-run2-failed-2026-11-16/` (erros reais: transformers ausente; transformers 5.x incompatível).
+- PR: `feat/yuriiyuriiyurii91-afk/setup-inicial` → main — revisão do dono pendente (trocar os "A VALIDAR (Fase B)" do perfil pelos valores acima).

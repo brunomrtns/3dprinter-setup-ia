@@ -1,0 +1,20 @@
+[17:51:22] === check-blender — início ===
+[17:51:22] AVISO: blender não está no PATH
+[17:51:22] Para instalar (Ubuntu, versão nova via tarball oficial — apt costuma ter versão velha):
+[17:51:22]   1. baixe https://download.blender.org/release/Blender5.0/ (linux x64 tar.xz)
+[17:51:22]   2. sudo tar -xJf blender-5.0.1-linux-x64.tar.xz -C /opt/
+[17:51:22]   3. sudo ln -sf /opt/blender-5.0.1-linux-x64/blender /usr/local/bin/blender
+[17:51:22]   4. rode este script de novo
+[17:51:22] === check-blender — fim (log: /home/ander/projetos/3dprinter-setup-ia/evidence/setup/check-blender-20261115-175122.log) ===
+[17:51:51] === check-blender — início ===
+[17:51:51] OK: blender no PATH: /usr/local/bin/blender
+[17:51:51] versão: 
+[17:51:51] FALHA: não consegui ler a versão do blender (ver log)
+[17:51:51] FALHA: blender -b não respondeu — sem display/GPU pode faltar; ver log
+[17:51:51] === check-blender — fim (log: /home/ander/projetos/3dprinter-setup-ia/evidence/setup/check-blender-20261115-175151.log) ===
+[17:52:07] === check-blender — início ===
+[17:52:07] OK: blender no PATH: /usr/local/bin/blender
+[17:52:07] versão: Blender 5.0.1
+[17:52:07] OK: Blender 5.x — compatível com o projeto (referência: 5.0.1)
+[17:52:08] OK: modo headless (-b) funcionando
+[17:52:08] === check-blender — fim (log: /home/ander/projetos/3dprinter-setup-ia/evidence/setup/check-blender-20261115-175207.log) ===

@@ -1,0 +1,12 @@
+[17:51:17] === check-prereqs — início ===
+[17:51:17] OK: rodando dentro do WSL (microsoft)
+[17:51:17] OK: python3.11 disponível
+[17:51:17] OK: git disponível
+[17:51:17] OK: curl disponível
+[17:51:17] OK: nvidia-smi disponível (GPU visível)
+[17:51:17] AVISO: venv do projeto (~/.venvs/printer3d-ia) — AUSENTE
+[17:51:17] AVISO: Blender no PATH — AUSENTE
+[17:51:17] OK: disco livre em $HOME: 954 GB (>= 30 GB)
+[17:51:17] === check-prereqs — fim (2 item(ns) pendente(s); log: /home/ander/projetos/3dprinter-setup-ia/evidence/setup/check-prereqs-20261115-175117.log) ===
+[17:51:17] Para instalar python3.11: bash tools/setup/install-python311.sh
+[17:51:17] Para criar o venv: bash tools/setup/make-venv.sh

@@ -1,0 +1,694 @@
+{
+ "meta": {
+  "data": "2026-11-16T10:58:41",
+  "seed_trellis": 42,
+  "seed_triposr": null,
+  "torch": "2.11.0+cu128",
+  "gpu": "NVIDIA GeForce RTX 5060 Ti, 8151 MiB, 621.24",
+  "venv": "printer3d-ia (py3.11.16)",
+  "trellis_repo": "microsoft/TRELLIS @ main 2026-10-27",
+  "triposr_repo": "VAST-AI-Research/TripoSR @ 107cefd"
+ },
+ "resultados": [
+  {
+   "caso": "trex_figurine",
+   "mode": "trellis",
+   "erros": [
+    "sem report"
+   ]
+  },
+  {
+   "mode": "triposr",
+   "model": "stabilityai/TripoSR",
+   "image": "/home/ander/printer3d-work/testset/trex_figurine.png",
+   "mesh_path": "/home/ander/printer3d-work/benchmark/trex_figurine/triposr/mesh.obj",
+   "mesh_reparada_path": "/home/ander/printer3d-work/benchmark/trex_figurine/triposr/mesh_reparada.obj",
+   "texturas": [],
+   "seed": null,
+   "tempo_s": 18.84,
+   "tempo_load_s": 5.39,
+   "tempo_run_s": 0.92,
+   "vram_pico_mib": 4385,
+   "vram_baseline_mib": 1206,
+   "vertices": 70097,
+   "faces": 140154,
+   "bbox": [
+    1.0818,
+    0.7735,
+    0.6457
+   ],
+   "manifold_antes": true,
+   "manifold_depois_reparo": true,
+   "reparo_ok": true,
+   "erros": [],
+   "saida_raw": {
+    "mode": "triposr",
+    "model": "stabilityai/TripoSR",
+    "image": "/home/ander/printer3d-work/testset/trex_figurine.png",
+    "seed": null,
+    "erros": [],
+    "tempo_load_s": 5.39,
+    "tempo_preproc_s": 2.39,
+    "tempo_run_s": 0.92,
+    "tempo_extract_s": 7.02,
+    "obj": "/home/ander/printer3d-work/benchmark/trex_figurine/triposr/mesh.obj",
+    "vertices": 70097,
+    "faces": 140154,
+    "watertight_bruto": true,
+    "winding_consistent": true,
+    "bbox": [
+     1.0818,
+     0.7735,
+     0.6457
+    ],
+    "device": "cuda:0",
+    "tempo_total_s": 18.05,
+    "cuda_ok": true
+   },
+   "espessura": {
+    "espessura_pct5": 0.01614,
+    "espessura_min": 0.00368,
+    "amostras": 300,
+    "sem_parede_oposta": 0,
+    "metodo": "raycast -normal, 300 amostras, pct5, unidades da malha"
+   },
+   "vertices_reparada": 70097,
+   "faces_reparada": 140154,
+   "caso": "trex_figurine",
+   "categoria": "miniatura",
+   "ts": "2026-11-16T10:53:58"
+  },
+  {
+   "caso": "humanoide_dragonborn",
+   "mode": "trellis",
+   "erros": [
+    "sem report"
+   ]
+  },
+  {
+   "mode": "triposr",
+   "model": "stabilityai/TripoSR",
+   "image": "/home/ander/printer3d-work/testset/humanoide_dragonborn.png",
+   "mesh_path": "/home/ander/printer3d-work/benchmark/humanoide_dragonborn/triposr/mesh.obj",
+   "mesh_reparada_path": "/home/ander/printer3d-work/benchmark/humanoide_dragonborn/triposr/mesh_reparada.obj",
+   "texturas": [],
+   "seed": null,
+   "tempo_s": 14.73,
+   "tempo_load_s": 6.37,
+   "tempo_run_s": 0.95,
+   "vram_pico_mib": 4385,
+   "vram_baseline_mib": 1202,
+   "vertices": 45976,
+   "faces": 91924,
+   "bbox": [
+    1.0098,
+    0.7787,
+    0.5152
+   ],
+   "manifold_antes": true,
+   "manifold_depois_reparo": true,
+   "reparo_ok": true,
+   "erros": [],
+   "saida_raw": {
+    "mode": "triposr",
+    "model": "stabilityai/TripoSR",
+    "image": "/home/ander/printer3d-work/testset/humanoide_dragonborn.png",
+    "seed": null,
+    "erros": [],
+    "tempo_load_s": 6.37,
+    "tempo_preproc_s": 2.43,
+    "tempo_run_s": 0.95,
+    "tempo_extract_s": 2.25,
+    "obj": "/home/ander/printer3d-work/benchmark/humanoide_dragonborn/triposr/mesh.obj",
+    "vertices": 45976,
+    "faces": 91924,
+    "watertight_bruto": true,
+    "winding_consistent": true,
+    "bbox": [
+     1.0098,
+     0.7787,
+     0.5152
+    ],
+    "device": "cuda:0",
+    "tempo_total_s": 13.99,
+    "cuda_ok": true
+   },
+   "espessura": {
+    "espessura_pct5": 0.0471,
+    "espessura_min": 0.02262,
+    "amostras": 300,
+    "sem_parede_oposta": 0,
+    "metodo": "raycast -normal, 300 amostras, pct5, unidades da malha"
+   },
+   "vertices_reparada": 45976,
+   "faces_reparada": 91924,
+   "caso": "humanoide_dragonborn",
+   "categoria": "miniatura humanoide (caso de uso do Estúdio de Pose — Fase 3)",
+   "ts": "2026-11-16T10:54:13"
+  },
+  {
+   "caso": "criatura_dragao",
+   "mode": "trellis",
+   "erros": [
+    "sem report"
+   ]
+  },
+  {
+   "mode": "triposr",
+   "model": "stabilityai/TripoSR",
+   "image": "/home/ander/printer3d-work/testset/criatura_dragao.png",
+   "mesh_path": "/home/ander/printer3d-work/benchmark/criatura_dragao/triposr/mesh.obj",
+   "mesh_reparada_path": "/home/ander/printer3d-work/benchmark/criatura_dragao/triposr/mesh_reparada.obj",
+   "texturas": [],
+   "seed": null,
+   "tempo_s": 13.5,
+   "tempo_load_s": 5.17,
+   "tempo_run_s": 0.95,
+   "vram_pico_mib": 4385,
+   "vram_baseline_mib": 1202,
+   "vertices": 53039,
+   "faces": 106082,
+   "bbox": [
+    0.8525,
+    0.9421,
+    0.7215
+   ],
+   "manifold_antes": true,
+   "manifold_depois_reparo": true,
+   "reparo_ok": true,
+   "erros": [],
+   "saida_raw": {
+    "mode": "triposr",
+    "model": "stabilityai/TripoSR",
+    "image": "/home/ander/printer3d-work/testset/criatura_dragao.png",
+    "seed": null,
+    "erros": [],
+    "tempo_load_s": 5.17,
+    "tempo_preproc_s": 2.33,
+    "tempo_run_s": 0.95,
+    "tempo_extract_s": 2.29,
+    "obj": "/home/ander/printer3d-work/benchmark/criatura_dragao/triposr/mesh.obj",
+    "vertices": 53039,
+    "faces": 106082,
+    "watertight_bruto": true,
+    "winding_consistent": true,
+    "bbox": [
+     0.8525,
+     0.9421,
+     0.7215
+    ],
+    "device": "cuda:0",
+    "tempo_total_s": 12.75,
+    "cuda_ok": true
+   },
+   "espessura": {
+    "espessura_pct5": 0.02728,
+    "espessura_min": 0.0063,
+    "amostras": 300,
+    "sem_parede_oposta": 0,
+    "metodo": "raycast -normal, 300 amostras, pct5, unidades da malha"
+   },
+   "vertices_reparada": 53039,
+   "faces_reparada": 106082,
+   "caso": "criatura_dragao",
+   "categoria": "criatura detalhada",
+   "ts": "2026-11-16T10:54:27"
+  },
+  {
+   "caso": "estrutura_castelo",
+   "mode": "trellis",
+   "erros": [
+    "sem report"
+   ]
+  },
+  {
+   "mode": "triposr",
+   "model": "stabilityai/TripoSR",
+   "image": "/home/ander/printer3d-work/testset/estrutura_castelo.png",
+   "mesh_path": "/home/ander/printer3d-work/benchmark/estrutura_castelo/triposr/mesh.obj",
+   "mesh_reparada_path": "/home/ander/printer3d-work/benchmark/estrutura_castelo/triposr/mesh_reparada.obj",
+   "texturas": [],
+   "seed": null,
+   "tempo_s": 13.98,
+   "tempo_load_s": 5.44,
+   "tempo_run_s": 0.98,
+   "vram_pico_mib": 4385,
+   "vram_baseline_mib": 1202,
+   "vertices": 67180,
+   "faces": 134184,
+   "bbox": [
+    0.8117,
+    0.8159,
+    0.6775
+   ],
+   "manifold_antes": false,
+   "manifold_depois_reparo": false,
+   "reparo_ok": false,
+   "erros": [],
+   "saida_raw": {
+    "mode": "triposr",
+    "model": "stabilityai/TripoSR",
+    "image": "/home/ander/printer3d-work/testset/estrutura_castelo.png",
+    "seed": null,
+    "erros": [],
+    "tempo_load_s": 5.44,
+    "tempo_preproc_s": 2.31,
+    "tempo_run_s": 0.98,
+    "tempo_extract_s": 2.42,
+    "obj": "/home/ander/printer3d-work/benchmark/estrutura_castelo/triposr/mesh.obj",
+    "vertices": 67180,
+    "faces": 134184,
+    "watertight_bruto": false,
+    "winding_consistent": true,
+    "bbox": [
+     0.8117,
+     0.8159,
+     0.6775
+    ],
+    "device": "cuda:0",
+    "tempo_total_s": 13.21,
+    "cuda_ok": true
+   },
+   "espessura": {
+    "espessura_pct5": 0.02367,
+    "espessura_min": 0.01295,
+    "amostras": 300,
+    "sem_parede_oposta": 0,
+    "metodo": "raycast -normal, 300 amostras, pct5, unidades da malha"
+   },
+   "vertices_reparada": 67180,
+   "faces_reparada": 134184,
+   "caso": "estrutura_castelo",
+   "categoria": "estrutura",
+   "ts": "2026-11-16T10:54:42"
+  },
+  {
+   "caso": "estrutura_piramide",
+   "mode": "trellis",
+   "erros": [
+    "sem report"
+   ]
+  },
+  {
+   "mode": "triposr",
+   "model": "stabilityai/TripoSR",
+   "image": "/home/ander/printer3d-work/testset/estrutura_piramide.png",
+   "mesh_path": "/home/ander/printer3d-work/benchmark/estrutura_piramide/triposr/mesh.obj",
+   "mesh_reparada_path": "/home/ander/printer3d-work/benchmark/estrutura_piramide/triposr/mesh_reparada.obj",
+   "texturas": [],
+   "seed": null,
+   "tempo_s": 13.5,
+   "tempo_load_s": 5.22,
+   "tempo_run_s": 0.98,
+   "vram_pico_mib": 4385,
+   "vram_baseline_mib": 1202,
+   "vertices": 98443,
+   "faces": 196866,
+   "bbox": [
+    0.9393,
+    1.2184,
+    1.2399
+   ],
+   "manifold_antes": true,
+   "manifold_depois_reparo": true,
+   "reparo_ok": true,
+   "erros": [],
+   "saida_raw": {
+    "mode": "triposr",
+    "model": "stabilityai/TripoSR",
+    "image": "/home/ander/printer3d-work/testset/estrutura_piramide.png",
+    "seed": null,
+    "erros": [],
+    "tempo_load_s": 5.22,
+    "tempo_preproc_s": 2.1,
+    "tempo_run_s": 0.98,
+    "tempo_extract_s": 2.34,
+    "obj": "/home/ander/printer3d-work/benchmark/estrutura_piramide/triposr/mesh.obj",
+    "vertices": 98443,
+    "faces": 196866,
+    "watertight_bruto": true,
+    "winding_consistent": true,
+    "bbox": [
+     0.9393,
+     1.2184,
+     1.2399
+    ],
+    "device": "cuda:0",
+    "tempo_total_s": 12.74,
+    "cuda_ok": true
+   },
+   "espessura": {
+    "espessura_pct5": 0.02617,
+    "espessura_min": 0.00339,
+    "amostras": 300,
+    "sem_parede_oposta": 0,
+    "metodo": "raycast -normal, 300 amostras, pct5, unidades da malha"
+   },
+   "vertices_reparada": 98443,
+   "faces_reparada": 196866,
+   "caso": "estrutura_piramide",
+   "categoria": "estrutura geométrica simples",
+   "ts": "2026-11-16T10:54:57"
+  },
+  {
+   "caso": "prop_caixote",
+   "mode": "trellis",
+   "erros": [
+    "sem report"
+   ]
+  },
+  {
+   "mode": "triposr",
+   "model": "stabilityai/TripoSR",
+   "image": "/home/ander/printer3d-work/testset/prop_caixote.png",
+   "mesh_path": "/home/ander/printer3d-work/benchmark/prop_caixote/triposr/mesh.obj",
+   "mesh_reparada_path": "/home/ander/printer3d-work/benchmark/prop_caixote/triposr/mesh_reparada.obj",
+   "texturas": [],
+   "seed": null,
+   "tempo_s": 14.06,
+   "tempo_load_s": 5.54,
+   "tempo_run_s": 1.06,
+   "vram_pico_mib": 4385,
+   "vram_baseline_mib": 1202,
+   "vertices": 96609,
+   "faces": 193194,
+   "bbox": [
+    1.012,
+    0.9831,
+    1.0477
+   ],
+   "manifold_antes": true,
+   "manifold_depois_reparo": true,
+   "reparo_ok": true,
+   "erros": [],
+   "saida_raw": {
+    "mode": "triposr",
+    "model": "stabilityai/TripoSR",
+    "image": "/home/ander/printer3d-work/testset/prop_caixote.png",
+    "seed": null,
+    "erros": [],
+    "tempo_load_s": 5.54,
+    "tempo_preproc_s": 2.2,
+    "tempo_run_s": 1.06,
+    "tempo_extract_s": 2.36,
+    "obj": "/home/ander/printer3d-work/benchmark/prop_caixote/triposr/mesh.obj",
+    "vertices": 96609,
+    "faces": 193194,
+    "watertight_bruto": true,
+    "winding_consistent": true,
+    "bbox": [
+     1.012,
+     0.9831,
+     1.0477
+    ],
+    "device": "cuda:0",
+    "tempo_total_s": 13.28,
+    "cuda_ok": true
+   },
+   "espessura": {
+    "espessura_pct5": 0.10906,
+    "espessura_min": 0.01447,
+    "amostras": 300,
+    "sem_parede_oposta": 0,
+    "metodo": "raycast -normal, 300 amostras, pct5, unidades da malha"
+   },
+   "vertices_reparada": 96609,
+   "faces_reparada": 193194,
+   "caso": "prop_caixote",
+   "categoria": "prop simples",
+   "ts": "2026-11-16T10:55:12"
+  },
+  {
+   "caso": "robo_caranguejo",
+   "mode": "trellis",
+   "erros": [
+    "sem report"
+   ]
+  },
+  {
+   "mode": "triposr",
+   "model": "stabilityai/TripoSR",
+   "image": "/home/ander/printer3d-work/testset/robo_caranguejo.png",
+   "mesh_path": "/home/ander/printer3d-work/benchmark/robo_caranguejo/triposr/mesh.obj",
+   "mesh_reparada_path": "/home/ander/printer3d-work/benchmark/robo_caranguejo/triposr/mesh_reparada.obj",
+   "texturas": [],
+   "seed": null,
+   "tempo_s": 13.42,
+   "tempo_load_s": 5.01,
+   "tempo_run_s": 0.95,
+   "vram_pico_mib": 4385,
+   "vram_baseline_mib": 1202,
+   "vertices": 107770,
+   "faces": 215532,
+   "bbox": [
+    0.9936,
+    1.0745,
+    0.9693
+   ],
+   "manifold_antes": true,
+   "manifold_depois_reparo": true,
+   "reparo_ok": true,
+   "erros": [],
+   "saida_raw": {
+    "mode": "triposr",
+    "model": "stabilityai/TripoSR",
+    "image": "/home/ander/printer3d-work/testset/robo_caranguejo.png",
+    "seed": null,
+    "erros": [],
+    "tempo_load_s": 5.01,
+    "tempo_preproc_s": 2.12,
+    "tempo_run_s": 0.95,
+    "tempo_extract_s": 2.35,
+    "obj": "/home/ander/printer3d-work/benchmark/robo_caranguejo/triposr/mesh.obj",
+    "vertices": 107770,
+    "faces": 215532,
+    "watertight_bruto": true,
+    "winding_consistent": true,
+    "bbox": [
+     0.9936,
+     1.0745,
+     0.9693
+    ],
+    "device": "cuda:0",
+    "tempo_total_s": 12.66,
+    "cuda_ok": true
+   },
+   "espessura": {
+    "espessura_pct5": 0.0386,
+    "espessura_min": 0.01076,
+    "amostras": 300,
+    "sem_parede_oposta": 0,
+    "metodo": "raycast -normal, 300 amostras, pct5, unidades da malha"
+   },
+   "vertices_reparada": 107770,
+   "faces_reparada": 215532,
+   "caso": "robo_caranguejo",
+   "categoria": "hard surface",
+   "ts": "2026-11-16T10:55:27"
+  },
+  {
+   "caso": "local_caneca",
+   "mode": "trellis",
+   "erros": [
+    "sem report"
+   ]
+  },
+  {
+   "mode": "triposr",
+   "model": "stabilityai/TripoSR",
+   "image": "/home/ander/printer3d-work/testset/local_caneca.png",
+   "mesh_path": "/home/ander/printer3d-work/benchmark/local_caneca/triposr/mesh.obj",
+   "mesh_reparada_path": "/home/ander/printer3d-work/benchmark/local_caneca/triposr/mesh_reparada.obj",
+   "texturas": [],
+   "seed": null,
+   "tempo_s": 27.1,
+   "tempo_load_s": 5.14,
+   "tempo_run_s": 0.98,
+   "vram_pico_mib": 4385,
+   "vram_baseline_mib": 1202,
+   "vertices": 72043,
+   "faces": 144086,
+   "bbox": [
+    0.8279,
+    1.0111,
+    0.7593
+   ],
+   "manifold_antes": true,
+   "manifold_depois_reparo": true,
+   "reparo_ok": true,
+   "erros": [],
+   "saida_raw": {
+    "mode": "triposr",
+    "model": "stabilityai/TripoSR",
+    "image": "/home/ander/printer3d-work/testset/local_caneca.png",
+    "seed": null,
+    "erros": [],
+    "tempo_load_s": 5.14,
+    "tempo_preproc_s": 15.42,
+    "tempo_run_s": 0.98,
+    "tempo_extract_s": 2.31,
+    "obj": "/home/ander/printer3d-work/benchmark/local_caneca/triposr/mesh.obj",
+    "vertices": 72043,
+    "faces": 144086,
+    "watertight_bruto": true,
+    "winding_consistent": true,
+    "bbox": [
+     0.8279,
+     1.0111,
+     0.7593
+    ],
+    "device": "cuda:0",
+    "tempo_total_s": 25.9,
+    "cuda_ok": true
+   },
+   "espessura": {
+    "espessura_pct5": 0.11982,
+    "espessura_min": 0.11402,
+    "amostras": 300,
+    "sem_parede_oposta": 0,
+    "metodo": "raycast -normal, 300 amostras, pct5, unidades da malha"
+   },
+   "vertices_reparada": 72043,
+   "faces_reparada": 144086,
+   "caso": "local_caneca",
+   "categoria": "peça funcional (uso real do dono)",
+   "ts": "2026-11-16T10:55:55"
+  },
+  {
+   "caso": "local_engrenagem",
+   "mode": "trellis",
+   "erros": [
+    "sem report"
+   ]
+  },
+  {
+   "mode": "triposr",
+   "model": "stabilityai/TripoSR",
+   "image": "/home/ander/printer3d-work/testset/local_engrenagem.png",
+   "mesh_path": "/home/ander/printer3d-work/benchmark/local_engrenagem/triposr/mesh.obj",
+   "mesh_reparada_path": "/home/ander/printer3d-work/benchmark/local_engrenagem/triposr/mesh_reparada.obj",
+   "texturas": [],
+   "seed": null,
+   "tempo_s": 31.0,
+   "tempo_load_s": 4.88,
+   "tempo_run_s": 0.96,
+   "vram_pico_mib": 4385,
+   "vram_baseline_mib": 1202,
+   "vertices": 48964,
+   "faces": 97916,
+   "bbox": [
+    0.3304,
+    0.9534,
+    0.9484
+   ],
+   "manifold_antes": true,
+   "manifold_depois_reparo": true,
+   "reparo_ok": true,
+   "erros": [],
+   "saida_raw": {
+    "mode": "triposr",
+    "model": "stabilityai/TripoSR",
+    "image": "/home/ander/printer3d-work/testset/local_engrenagem.png",
+    "seed": null,
+    "erros": [],
+    "tempo_load_s": 4.88,
+    "tempo_preproc_s": 19.37,
+    "tempo_run_s": 0.96,
+    "tempo_extract_s": 2.39,
+    "obj": "/home/ander/printer3d-work/benchmark/local_engrenagem/triposr/mesh.obj",
+    "vertices": 48964,
+    "faces": 97916,
+    "watertight_bruto": true,
+    "winding_consistent": true,
+    "bbox": [
+     0.3304,
+     0.9534,
+     0.9484
+    ],
+    "device": "cuda:0",
+    "tempo_total_s": 29.86,
+    "cuda_ok": true
+   },
+   "espessura": {
+    "espessura_pct5": 0.14725,
+    "espessura_min": 0.08446,
+    "amostras": 300,
+    "sem_parede_oposta": 0,
+    "metodo": "raycast -normal, 300 amostras, pct5, unidades da malha"
+   },
+   "vertices_reparada": 48964,
+   "faces_reparada": 97916,
+   "caso": "local_engrenagem",
+   "categoria": "peça funcional mecânica",
+   "ts": "2026-11-16T10:56:27"
+  },
+  {
+   "caso": "local_gancho",
+   "mode": "trellis",
+   "erros": [
+    "sem report"
+   ]
+  },
+  {
+   "mode": "triposr",
+   "model": "stabilityai/TripoSR",
+   "image": "/home/ander/printer3d-work/testset/local_gancho.png",
+   "mesh_path": "/home/ander/printer3d-work/benchmark/local_gancho/triposr/mesh.obj",
+   "mesh_reparada_path": "/home/ander/printer3d-work/benchmark/local_gancho/triposr/mesh_reparada.obj",
+   "texturas": [],
+   "seed": null,
+   "tempo_s": 31.11,
+   "tempo_load_s": 5.01,
+   "tempo_run_s": 0.97,
+   "vram_pico_mib": 4385,
+   "vram_baseline_mib": 1202,
+   "vertices": 80192,
+   "faces": 160380,
+   "bbox": [
+    1.0284,
+    0.9596,
+    0.8954
+   ],
+   "manifold_antes": true,
+   "manifold_depois_reparo": true,
+   "reparo_ok": true,
+   "erros": [],
+   "saida_raw": {
+    "mode": "triposr",
+    "model": "stabilityai/TripoSR",
+    "image": "/home/ander/printer3d-work/testset/local_gancho.png",
+    "seed": null,
+    "erros": [],
+    "tempo_load_s": 5.01,
+    "tempo_preproc_s": 18.53,
+    "tempo_run_s": 0.97,
+    "tempo_extract_s": 3.25,
+    "obj": "/home/ander/printer3d-work/benchmark/local_gancho/triposr/mesh.obj",
+    "vertices": 80192,
+    "faces": 160380,
+    "watertight_bruto": true,
+    "winding_consistent": true,
+    "bbox": [
+     1.0284,
+     0.9596,
+     0.8954
+    ],
+    "device": "cuda:0",
+    "tempo_total_s": 29.98,
+    "cuda_ok": true
+   },
+   "espessura": {
+    "espessura_pct5": 0.17773,
+    "espessura_min": 0.1101,
+    "amostras": 300,
+    "sem_parede_oposta": 0,
+    "metodo": "raycast -normal, 300 amostras, pct5, unidades da malha"
+   },
+   "vertices_reparada": 80192,
+   "faces_reparada": 160380,
+   "caso": "local_gancho",
+   "categoria": "peça funcional (impressão prática)",
+   "ts": "2026-11-16T10:56:59"
+  }
+ ]
+}

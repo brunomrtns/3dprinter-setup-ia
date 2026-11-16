@@ -1,0 +1,15 @@
+[17:54:00] === check-gpu — início ===
+[17:54:00] -- nvidia-smi (WSL) --
+name, driver_version, memory.total [MiB], memory.free [MiB]
+NVIDIA GeForce RTX 5060 Ti, 621.24, 8151 MiB, 6092 MiB
+[17:54:01] -- torch no venv do projeto --
+/home/ander/.venvs/printer3d-ia/lib/python3.11/site-packages/torch/_subclasses/functional_tensor.py:307: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:84.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+torch 2.11.0+cu128
+cuda_available True
+device NVIDIA GeForce RTX 5060 Ti
+capability (12, 0)
+vram_free_mib 7000 of 8123
+[17:54:02] OK: CUDA funcionando no venv
+[17:54:02] OK: capability (12, 0) = Blackwell sm_120 confirmada
+[17:54:02] === check-gpu — fim (log: /home/ander/projetos/3dprinter-setup-ia/evidence/setup/check-gpu-20261115-175400.log) ===

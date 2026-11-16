@@ -1,0 +1,6 @@
+[17:51:51] === check-blender — início ===
+[17:51:51] OK: blender no PATH: /usr/local/bin/blender
+[17:51:51] versão: 
+[17:51:51] FALHA: não consegui ler a versão do blender (ver log)
+[17:51:51] FALHA: blender -b não respondeu — sem display/GPU pode faltar; ver log
+[17:51:51] === check-blender — fim (log: /home/ander/projetos/3dprinter-setup-ia/evidence/setup/check-blender-20261115-175151.log) ===

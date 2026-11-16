@@ -1,0 +1,64 @@
+[10:53:38] trex_figurine/triposr: gerando...
+[gpu_guard] triposr: liberado com 6687 MiB livres
+[gpu_guard] triposr: fim, VRAM used=1202 free=6691
+[10:53:58] trex_figurine/triposr: OK | t=18.84s vram=4385MiB verts=70097 manifold True->True
+[10:53:58] humanoide_dragonborn/triposr: gerando...
+[gpu_guard] triposr: liberado com 6691 MiB livres
+[gpu_guard] triposr: fim, VRAM used=1202 free=6691
+[10:54:13] humanoide_dragonborn/triposr: OK | t=14.73s vram=4385MiB verts=45976 manifold True->True
+[10:54:13] criatura_dragao/triposr: gerando...
+[gpu_guard] triposr: liberado com 6691 MiB livres
+[gpu_guard] triposr: fim, VRAM used=1202 free=6691
+[10:54:27] criatura_dragao/triposr: OK | t=13.5s vram=4385MiB verts=53039 manifold True->True
+[10:54:27] estrutura_castelo/triposr: gerando...
+[gpu_guard] triposr: liberado com 6691 MiB livres
+[gpu_guard] triposr: fim, VRAM used=1202 free=6691
+[10:54:42] estrutura_castelo/triposr: OK | t=13.98s vram=4385MiB verts=67180 manifold False->False
+[10:54:42] estrutura_piramide/triposr: gerando...
+[gpu_guard] triposr: liberado com 6691 MiB livres
+[gpu_guard] triposr: fim, VRAM used=1202 free=6691
+[10:54:57] estrutura_piramide/triposr: OK | t=13.5s vram=4385MiB verts=98443 manifold True->True
+[10:54:57] prop_caixote/triposr: gerando...
+[gpu_guard] triposr: liberado com 6691 MiB livres
+[gpu_guard] triposr: fim, VRAM used=1202 free=6691
+[10:55:12] prop_caixote/triposr: OK | t=14.06s vram=4385MiB verts=96609 manifold True->True
+[10:55:12] robo_caranguejo/triposr: gerando...
+[gpu_guard] triposr: liberado com 6691 MiB livres
+[gpu_guard] triposr: fim, VRAM used=1202 free=6691
+[10:55:27] robo_caranguejo/triposr: OK | t=13.42s vram=4385MiB verts=107770 manifold True->True
+[10:55:27] local_caneca/triposr: gerando...
+[gpu_guard] triposr: liberado com 6691 MiB livres
+[gpu_guard] triposr: fim, VRAM used=1202 free=6691
+[10:55:55] local_caneca/triposr: OK | t=27.1s vram=4385MiB verts=72043 manifold True->True
+[10:55:55] local_engrenagem/triposr: gerando...
+[gpu_guard] triposr: liberado com 6691 MiB livres
+[gpu_guard] triposr: fim, VRAM used=1202 free=6691
+[10:56:27] local_engrenagem/triposr: OK | t=31.0s vram=4385MiB verts=48964 manifold True->True
+[10:56:27] local_gancho/triposr: gerando...
+[gpu_guard] triposr: liberado com 6691 MiB livres
+[gpu_guard] triposr: fim, VRAM used=1202 free=6691
+[10:56:59] local_gancho/triposr: OK | t=31.11s vram=4385MiB verts=80192 manifold True->True
+[10:56:59] stage triposr concluído
+[10:57:50] trex_figurine/trellis: sem mesh, render pulado
+[10:57:56] trex_figurine/triposr: render OK
+[10:57:56] humanoide_dragonborn/trellis: sem mesh, render pulado
+[10:58:00] humanoide_dragonborn/triposr: render OK
+[10:58:00] criatura_dragao/trellis: sem mesh, render pulado
+[10:58:05] criatura_dragao/triposr: render OK
+[10:58:05] estrutura_castelo/trellis: sem mesh, render pulado
+[10:58:09] estrutura_castelo/triposr: render OK
+[10:58:09] estrutura_piramide/trellis: sem mesh, render pulado
+[10:58:14] estrutura_piramide/triposr: render OK
+[10:58:14] prop_caixote/trellis: sem mesh, render pulado
+[10:58:19] prop_caixote/triposr: render OK
+[10:58:19] robo_caranguejo/trellis: sem mesh, render pulado
+[10:58:24] robo_caranguejo/triposr: render OK
+[10:58:24] local_caneca/trellis: sem mesh, render pulado
+[10:58:29] local_caneca/triposr: render OK
+[10:58:29] local_engrenagem/trellis: sem mesh, render pulado
+[10:58:33] local_engrenagem/triposr: render OK
+[10:58:33] local_gancho/trellis: sem mesh, render pulado
+[10:58:38] local_gancho/triposr: render OK
+[10:58:38] stage render concluído
+[10:58:41] publish: 20 PNGs novos copiados; results.json/scores.md/gallery.md escritos
+[10:58:41] stage publish concluído
