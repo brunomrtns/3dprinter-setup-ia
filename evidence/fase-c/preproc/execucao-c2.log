@@ -1,0 +1,41 @@
+# C2 — pré-processamento do testset — 2026-11-16T20:44:24-03:00
+python: Python 3.11.16
+
+## Execução
+[preprocess.c2] 10 imagem(ns); modelo rembg=u2net; upscale=OFF
+[preprocess.c2] OK criatura_dragao.png → criatura_dragao_preproc.png [719, 719]→[1024, 1024] | upscale: OFF (default)
+[preprocess.c2] OK estrutura_castelo.png → estrutura_castelo_preproc.png [704, 704]→[1024, 1024] | upscale: OFF (default)
+[preprocess.c2] OK estrutura_piramide.png → estrutura_piramide_preproc.png [504, 504]→[1024, 1024] | upscale: OFF (default)
+[preprocess.c2] OK humanoide_dragonborn.png → humanoide_dragonborn_preproc.png [500, 703]→[1024, 1024] | upscale: OFF (default)
+[preprocess.c2] OK local_caneca.png → local_caneca_preproc.png [800, 800]→[1024, 1024] | upscale: OFF (default)
+[preprocess.c2] OK local_engrenagem.png → local_engrenagem_preproc.png [800, 800]→[1024, 1024] | upscale: OFF (default)
+[preprocess.c2] OK local_gancho.png → local_gancho_preproc.png [800, 800]→[1024, 1024] | upscale: OFF (default)
+[preprocess.c2] OK prop_caixote.png → prop_caixote_preproc.png [719, 719]→[1024, 1024] | upscale: OFF (default)
+[preprocess.c2] OK robo_caranguejo.png → robo_caranguejo_preproc.png [704, 704]→[1024, 1024] | upscale: OFF (default)
+[preprocess.c2] OK trex_figurine.png → trex_figurine_preproc.png [1048, 1048]→[1024, 1024] | upscale: OFF (default)
+exit_code=0
+
+## Saída em ~/printer3d-work/testset_preproc/
+total 5800
+drwxr-xr-x  2 bruno bruno   4096 Nov 16 20:44 .
+drwxr-xr-x 19 bruno bruno   4096 Nov 16 20:44 ..
+-rw-r--r--  1 bruno bruno    732 Nov 16 20:44 criatura_dragao_preproc.json
+-rw-r--r--  1 bruno bruno 472521 Nov 16 20:44 criatura_dragao_preproc.png
+-rw-r--r--  1 bruno bruno    734 Nov 16 20:44 estrutura_castelo_preproc.json
+-rw-r--r--  1 bruno bruno 689734 Nov 16 20:44 estrutura_castelo_preproc.png
+-rw-r--r--  1 bruno bruno    735 Nov 16 20:44 estrutura_piramide_preproc.json
+-rw-r--r--  1 bruno bruno 596295 Nov 16 20:44 estrutura_piramide_preproc.png
+-rw-r--r--  1 bruno bruno    737 Nov 16 20:44 humanoide_dragonborn_preproc.json
+-rw-r--r--  1 bruno bruno 676191 Nov 16 20:44 humanoide_dragonborn_preproc.png
+-rw-r--r--  1 bruno bruno    729 Nov 16 20:44 local_caneca_preproc.json
+-rw-r--r--  1 bruno bruno 517146 Nov 16 20:44 local_caneca_preproc.png
+-rw-r--r--  1 bruno bruno    733 Nov 16 20:44 local_engrenagem_preproc.json
+-rw-r--r--  1 bruno bruno 242605 Nov 16 20:44 local_engrenagem_preproc.png
+-rw-r--r--  1 bruno bruno    729 Nov 16 20:44 local_gancho_preproc.json
+-rw-r--r--  1 bruno bruno 252207 Nov 16 20:44 local_gancho_preproc.png
+-rw-r--r--  1 bruno bruno    729 Nov 16 20:44 prop_caixote_preproc.json
+-rw-r--r--  1 bruno bruno 917966 Nov 16 20:44 prop_caixote_preproc.png
+-rw-r--r--  1 bruno bruno    732 Nov 16 20:44 robo_caranguejo_preproc.json
+-rw-r--r--  1 bruno bruno 866167 Nov 16 20:44 robo_caranguejo_preproc.png
+-rw-r--r--  1 bruno bruno    730 Nov 16 20:44 trex_figurine_preproc.json
+-rw-r--r--  1 bruno bruno 631275 Nov 16 20:44 trex_figurine_preproc.png
