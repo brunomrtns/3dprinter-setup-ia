@@ -54,3 +54,6 @@
 
 - [x] ~~Fase B: Blender, venv (torch cu128), TripoSR + benchmark local~~ — **concluída e integrada (PR #1, merge 2026-11-16)**;
 - [ ] Dono vota 👍/👎 na galeria (as duas: `evidence/benchmark/gallery.md` da 3060 e `evidence/rtx5060ti-8gb/benchmark/gallery.md` da 5060 Ti) → ADR-005 (default mode).
+  - **Atualização 2026-11-16:** ADR-005 fechado SEM default mode (dono reprovou globalmente os geradores de 1ª geração). A fase C1 (TRELLIS.2 fork nesta máquina) entra pelo roadmap §Fase C.
+
+**Fase C: TRELLIS.2 (fork) e TripoSG — A VALIDAR (proibido citar como medido antes da evidência).**

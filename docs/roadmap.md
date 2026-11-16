@@ -50,6 +50,27 @@ Critérios de aceite:
 
 ---
 
+## Fase C — Nova geração de geradores + qualidade de entrada `[~] EM ANDAMENTO (aberta 2026-11-16)`
+
+> Entra ANTES da Fase 2 (Forja) por decisão do dono — a Forja segue no roadmap como fase seguinte e não é cancelada. Contexto: ADR-005 encerrou a Fase 1 sem gerador eleito (reprovação qualitativa do dono sobre TRELLIS e TripoSR de 1ª geração).
+
+**Objetivo:** levar ao menos 1 gerador de nova geração ao gate visual do dono, com entradas padronizadas e medição pelo método do projeto (mesmo testset, mesmos gates, evidência namespaced — ADR-006). O dono não tem apego a modelo nenhum — só a resultado (fidelidade, detalhe, printabilidade). O elo mais fraco medido é a qualidade da IMAGEM DE ENTRADA.
+
+Escopo:
+- **C1** — TRELLIS.2 via fork de VRAM reduzida na máquina `rtx5060ti-8gb` (IgorAherne/TRELLIS.2-stableprojectorz; a oficial da Microsoft exige 24GB — o fork publica regras de offload para caber em 8GB);
+- **C2** — pré-processamento de entrada no repo: `tools/generator/preprocess_input.py` (fundo removido, pad quadrado sem cortar o sujeito, 1024px, sidecar ADR-003). Uso: `tools/setup/py.sh tools/generator/preprocess_input.py --batch <dir> --output-dir ~/printer3d-work/testset_preproc/`;
+- **C3** — comparativo formal na `rtx3060-12gb`: TRELLIS.2 + TripoSG (VAST-AI, MIT, 1.5B, ~8GB, shape-only — ideal para impressão) + baselines TRELLIS 1 e TripoSR na MESMA entrada pré-processada, galeria lado a lado;
+- **C4** — fila de jobs entre as duas máquinas (FUTURO, fora desta fase).
+
+Watchlist (avaliar só se os anteriores falharem no gate do dono, mesma metodologia): Hunyuan3D-2mini/2 (Tencent; shape ~5-6GB; textura 21GB — não cabe aqui) · PartCrafter (multi-peça, pesquisa) · Hitem3D 2.0 (plataforma/serviço, sem pesos abertos conhecidos — vigiar) · Hunyuan3D 3.0 (exige cluster, inviável local).
+
+Critérios de aceite:
+- [ ] Pico de VRAM e tempo por caso medidos com o guard (perfis de máquina — ADR-006);
+- [ ] Galeria de comparação mesma câmera/luz (`tools/generator/render_preview.py`);
+- [ ] Veredito do dono registrado em ADR novo (ADR-007).
+
+---
+
 ## Fase 2 — Forja de Modificação
 
 **Objetivo:** catálogo de operações determinísticas Blender headless, testadas UMA A UMA.
