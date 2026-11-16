@@ -18,6 +18,7 @@ import argparse
 import datetime
 import json
 import os
+import platform
 import shutil
 import subprocess
 import sys
@@ -193,7 +194,7 @@ def coletar_resultados() -> dict:
              "--format=csv,noheader"],
             capture_output=True, text=True, timeout=30,
         ).stdout.strip(),
-        "venv": "printer3d-ia (py3.11.16)",
+        "venv": f"printer3d-ia (py{platform.python_version()})",
         "trellis_repo": "microsoft/TRELLIS @ main 2026-10-27",
         "triposr_repo": "VAST-AI-Research/TripoSR @ 107cefd",
     }
