@@ -11,10 +11,30 @@
 |---|---|
 | 0 — Fundação | `[x]` aprovada pelo dono (2026-11-04) |
 | 1 — Gerador de Peças (venv + TRELLIS/TripoSR + benchmark) | `[x]` encerrada 2026-11-16 com **veredito NEGATIVO do dono** — sem default mode (ADR-005); infra validada e reaproveitável |
-| 2 — Forja (parcial: pacote entregue na Fase 1) | `[~]` pipeline/reparo funcionais; catálogo completo é Fase 2 propriamente dita — **aguarda direção do dono** |
+| **C — Nova geração de geradores + qualidade de entrada** | `[~]` **EM ANDAMENTO (aberta 2026-11-16)** — C2 concluído; C1 na máquina do colega; C3 na 3060 |
+| 2 — Forja (parcial: pacote entregue na Fase 1) | `[~]` pipeline/reparo funcionais; catálogo completo é Fase 2 propriamente dita — depois da Fase C |
 | 3 — Pose / 4 — Operador IA | `[ ]` não abertas |
 
-**Gatilho atual:** decisão do dono sobre o caminho das peças novas (ADR-005 §4) — nada é instalado/escrito até lá.
+**Gatilho atual:** C1 na máquina do colega (TRELLIS.2 fork na 5060 Ti) + C3 no PC do Bruno (comparativo 4 geradores na entrada pré-processada).
+
+---
+
+## Fase C — Nova geração de geradores + qualidade de entrada `[~] EM ANDAMENTO (aberta 2026-11-16)`
+
+> Contexto: ADR-005 encerrou a Fase 1 sem gerador eleito. O dono decidiu abrir a Fase C: geradores de nova geração + ataque ao elo mais fraco medido (qualidade da entrada). Detalhes no roadmap §Fase C. Entra ANTES da Fase 2 por decisão do dono.
+
+| # | Tarefa | Status |
+|---|---|---|
+| C2 | `tools/generator/preprocess_input.py` (fundo removido via rembg, pad quadrado sem corte, 1024px, sidecar ADR-003, upscale opcional OFF) + 10 casos do testset → `~/printer3d-work/testset_preproc/` + evidência `evidence/fase-c/preproc/` | [x] 10/10 OK |
+| C1 | TRELLIS.2 (fork IgorAherne, VRAM reduzida) na máquina `rtx5060ti-8gb` — tarefa do colega | [ ] aguardando |
+| C3 | Comparativo formal na 3060: TRELLIS.2 + TripoSG + TRELLIS 1 + TripoSR na mesma entrada pré-processada, galeria lado a lado | [~] iniciada (2026-11-16) |
+| C4 | Fila de jobs entre máquinas | [ ] FUTURO (fora da fase) |
+
+### Registro C2 (2026-11-16)
+
+- 10/10 casos pré-processados (log real em `evidence/fase-c/preproc/execucao-c2.log`); par antes/depois commitado (trex_figurine).
+- **Achado honesto:** o caso `trex_figurine` contém a imagem do **pergolado (trellis) do repo oficial da Microsoft** (`T.png` — manifest provava a origem desde a Fase 1) — caso MAL NOMEADO desde a criação do testset, não é bug do pré-processamento. Testset é imutável; comparação segue válida (mesma entrada para todos); renomeação fica registrada como pendência cosmética de fase futura.
+- Upscale (Real-ESRGAN): OFF por default, deps ausentes — pendência registrada, nada pesado instalado (decisão C2).
 
 ---
 
