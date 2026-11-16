@@ -27,8 +27,17 @@ import trimesh
 
 WORKDIR = os.path.expanduser("~/printer3d-work")
 BENCH = os.path.join(WORKDIR, "benchmark")
-TESTSET_SRC = "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/benchmarks/testset"
-REPO_EVID = "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/benchmark"
+# ADR-006: caminhos portáveis — derivados do próprio repositório (nada de
+# /mnt/c/Users/<nome>/ hardcode). Evidência de benchmark namespaced por máquina:
+# com PRINTER3D_MACHINE_PROFILE definido, vai para evidence/<perfil>/benchmark/.
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+MACHINE_PROFILE = os.environ.get("PRINTER3D_MACHINE_PROFILE", "")
+TESTSET_SRC = os.path.join(_REPO_ROOT, "benchmarks", "testset")
+REPO_EVID = (
+    os.path.join(_REPO_ROOT, "evidence", MACHINE_PROFILE, "benchmark")
+    if MACHINE_PROFILE
+    else os.path.join(_REPO_ROOT, "evidence", "benchmark")
+)
 SEED = 42
 N_AMOSTRAS_ESPESSURA = 300
 
@@ -138,7 +147,7 @@ def stage_gerar(mode: str) -> None:
 
 def stage_render() -> None:
     render_py = os.path.join(WORKDIR, "render_preview.py")
-    repo_render = "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/tools/generator/render_preview.py"
+    repo_render = os.path.join(_REPO_ROOT, "tools", "generator", "render_preview.py")
     shutil.copyfile(repo_render, render_py)
     gal_dir = os.path.join(WORKDIR, "benchmark", "gallery")
     os.makedirs(gal_dir, exist_ok=True)
