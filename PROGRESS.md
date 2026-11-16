@@ -5,6 +5,19 @@
 
 ---
 
+## Estado por fase (resumo rápido)
+
+| Fase | Estado |
+|---|---|
+| 0 — Fundação | `[x]` aprovada pelo dono (2026-11-04) |
+| 1 — Gerador de Peças (venv + TRELLIS/TripoSR + benchmark) | `[x]` encerrada 2026-11-16 com **veredito NEGATIVO do dono** — sem default mode (ADR-005); infra validada e reaproveitável |
+| 2 — Forja (parcial: pacote entregue na Fase 1) | `[~]` pipeline/reparo funcionais; catálogo completo é Fase 2 propriamente dita — **aguarda direção do dono** |
+| 3 — Pose / 4 — Operador IA | `[ ]` não abertas |
+
+**Gatilho atual:** decisão do dono sobre o caminho das peças novas (ADR-005 §4) — nada é instalado/escrito até lá.
+
+---
+
 ## Fase 0 — Fundação e Documentação
 
 **Status:** `[x]` concluída e **aprovada pelo dono (👍 em 2026-11-04)**.
@@ -37,7 +50,14 @@
 | 4 | Interface de plugin comum + `gpu_guard.py` (threshold 10.000 MiB, fila serial, poller 1Hz) + smoke test ponta a ponta | [x] |
 | 5 | Set de testes 10 casos fixos com `manifest.json` (procedência por imagem) | [x] |
 | 6 | Benchmark automático 10×2 + `results.json` + `scores.md` + galeria (mesmo ângulo/luz) | [x] `evidence/benchmark/` |
-| 7 | Fechamento: PROGRESS/HANDOFF + relatório ao dono + votação do default mode (→ ADR-005) | [~] aguardando votação do dono |
+| 7 | Fechamento: PROGRESS/HANDOFF + relatório ao dono + votação do default mode (→ ADR-005) | [x] **veredito do dono: REPROVADO global — sem default mode (ADR-005)** |
+
+### Fechamento da Fase 1 — veredito do dono (2026-11-16)
+
+- Dono **recusou a votação por caso** e deu veredito global nas duas galerias (3060 e 5060 Ti): **"ficou tudo ruim" / "esse TripoSR é uma bosta"** — reprovação dos dois geradores. Registrado em `evidence/benchmark/votacao-dono.md` (template arquivado, não preenchido).
+- **ADR-005** (`docs/decisions/ADR-005-sem-default-mode.md`): nenhum default mode eleito; **nenhum gerador image→3D entra em uso produtivo** até decisão do dono; benchmark permanece válido como referência técnica; Forja/pipeline não são afetados.
+- **Fase 1 encerra com veredito NEGATIVO** — critério de aceite "dono aprova" não atendido (resultado honesto; a infra/tech da fase foi entregue e validada). Consistência com os dados: TripoSR = sólidos robustos porém baixa fidelidade (~74k verts); TRELLIS = detalhe mas casca fina + OOM + 3 reprovações visuais na Jubarte.
+- Próximo passo é decisão do dono (opções em ADR-005 §4): avaliar gerador novo no mesmo benchmark, caminho procedural Blender, ou direção própria. Nenhuma instalação nova até lá (regra de uma fase por vez).
 
 
 ### Registros da sessão fundadora (2026-11-03)
@@ -137,7 +157,7 @@ Preparação do repo para o 2º contribuidor (leigo, outra máquina: Windows 11,
 
 - [~] Números da máquina do colega — **Fase A CHEGOU e foi integrada (2026-11-15)**: audit real em `evidence/rtx5060ti-8gb/environment-audit-fase-a.md`; perfil `rtx5060ti-8gb.md` e `profiles.json` atualizados com valores medidos. **Fase B também chegou e foi integrada (2026-11-16, PR #1)** — perfil sem nenhum "A VALIDAR" restante.
 - [x] Guard da 5060 Ti **confirmado como seguro**: livre medido 6803 MiB (desktop ativo usando 1090 MiB dos 8151 MiB) → 6500 MiB com margem ~303 MiB. **Validado em produção no benchmark Fase B**: liberou 10/10 jobs (6687–6691 MiB livres), pico do TripoSR 4385 MiB. Nota operacional registrada no perfil: fechar navegadores/jogos/overlay NVIDIA antes de jobs GPU nesta máquina.
-- [ ] Votação do dono na galeria do benchmark → ADR-005 (default mode) — segue pendente, intocada neste update.
+- [x] Votação do dono na galeria do benchmark → ADR-005: **fechada com veredito global NEGATIVO** (dono recusou votação por caso; reprovou os dois geradores; ADR-005 registra "sem default mode").
 - [ ] Monitor WSL: nesta máquina o watcher (`WSLIconWatcher` na chave Run) não estava rodando na coleta (reinício recente) — inofensivo (janela mostra estado correto); registrar na cabeça se o ícone congelar.
 
 ## Pendências herdadas do audit (nenhuma bloqueia a Fase 1 — detalhes em `docs/operations/environment-audit.md`)

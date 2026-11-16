@@ -1,6 +1,24 @@
-# Votação do dono — galerias do benchmark (fecha a Fase 1 → ADR-005)
+# Votação do dono — galerias do benchmark (ADR-005)
 
-> **Como votar:** marque 👍 ou 👎 em cada célula (edite este arquivo direto no GitHub pelo botão de lápis, ou avise o agente da sessão que ele transcreve). Depois responda as duas perguntas do final. Ao terminar, um ADR-005 registra o default mode por máquina e a Fase 1 fecha.
+## RESULTADO: votação por caso NÃO realizada — veredito GLOBAL NEGATIVO (2026-11-16)
+
+O dono **recusou o ritual de votação por caso** e deu veredito global sobre as duas galerias (3060 e 5060 Ti):
+
+> **"Ficou tudo ruim. Esse TripoSR é uma bosta."** — reprovado sem ressalvas.
+
+| Pergunta | Resposta |
+|---|---|
+| Voto por caso? | **Recusado pelo dono** — não haverá tabela 👍/👎 |
+| Qualidade dos outputs? | **REPROVADA globalmente** (ambos os geradores, ambas as máquinas) |
+| ADR-005 (default mode)? | **SEM default aprovado** — nenhum gerador entra em uso produtivo (ver `docs/decisions/ADR-005-sem-default-mode.md`) |
+
+O arquivo de votação por caso abaixo fica arquivado como registro do que foi proposto e recusado — **não preencher**.
+
+---
+
+## (ARQUIVADO — proposta recusada) Template original
+
+~~Marque 👍 ou 👎 em cada célula.~~
 
 ## Galeria 1 — RTX 3060 12GB (`evidence/benchmark/gallery.md`)
 
@@ -17,10 +35,6 @@
 | local_engrenagem | — | — |
 | local_gancho | — | — |
 
-**Observações (opcional):**
-
--
-
 ## Galeria 2 — RTX 5060 Ti 8GB (`evidence/rtx5060ti-8gb/benchmark/gallery.md`)
 
 | Caso | TripoSR |
@@ -35,19 +49,3 @@
 | local_caneca | — |
 | local_engrenagem | — |
 | local_gancho | — |
-
-**Observações (opcional):**
-
--
-
-## Decisão (responda com X)
-
-1. **Default mode na 3060:** `( ) TRELLIS` `( ) TripoSR` `( ) por tipo de peça (especificar abaixo)`
-2. **Default mode na 5060 Ti:** `( ) TripoSR (único viável)` `( ) outro (especificar)`
-
-**Se "por tipo de peça", especificar a regra:**
-
--
-
----
-*Voto registrado em: (data) — ADR-005: (link quando criado)*

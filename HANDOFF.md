@@ -2,15 +2,14 @@
 
 > Leia isto DEPOIS de `PROGRESS.md` (fonte da verdade) e ANTES de executar qualquer coisa. Contexto mínimo para um agente frio continuar o projeto sem conversa anterior.
 
-## Estado atual (2026-11-14)
+## Estado atual (2026-11-16)
 
-- **Fase 1** segue com o único passo pendente: votação 👍/👎 do dono por caso na `gallery.md` → **ADR-005 (default mode)**.
-- **Onboarding multi-máquina NA MAIN** (merge 2026-11-16): perfis de máquina (`docs/operations/machine-profiles/`), guard de VRAM paramétrico, `tools/setup/` idempotente, `docs/onboarding/` completo + ADR-006. 2º contribuidor (máquina RTX 5060 Ti 8GB, Blackwell sm_120): **Fase A e Fase B concluídas e integradas** (PR #1, merge 2026-11-16) — benchmark do TripoSR medido: 10/10 OK, mediana 14,4s, pico 4385 MiB; TRELLIS inviável confirmada por execução (10/10 sem mesh).
-- **Fase 1 Forja CONCLUÍDA** (`tools/forja/forja/`; workspace `~/printer3d-work/forja/`): 7/7 TRELLIS reparados, gate PASS em `evidence/fase1-forja/gate_final.txt`.
-- Benchmark Fase 1 concluído (`evidence/benchmark/`): TRELLIS 65,7s/12.070 MiB (3/10 OOM em casos densos) · TripoSR 27,3s/3.588 MiB (0/10 erros).
-- Repo: `git@github.com:brunomrtns/3dprinter-setup-ia.git` · main + branch `feat/onboarding-multi-maquina` · tudo pushed.
-- Infra pronta e validada (PC de referência): venv `~/.venvs/printer3d-ia` (py3.11, torch 2.5.1+cu121), TRELLIS em `~/tools/TRELLIS`, TripoSR em `~/tools/TripoSR`, plugins + `gpu_guard.py` em `tools/generator/`.
-- **Forja é CPU-only** (PyMeshFix + Blender headless): pode rodar enquanto o dono joga. Não altera entradas; saídas sempre em `forja_out/`. APIs novas: trimesh 5.2, pymeshfix `.points/.faces`.
+- **Fase 1 ENCERRADA com veredito NEGATIVO do dono (2026-11-16)**: ele recusou a votação por caso e reprovou globalmente os dois geradores nas duas máquinas ("ficou tudo ruim" / TripoSR reprovado sem ressalvas). **ADR-005** registra: **nenhum default mode, nenhum gerador em uso produtivo**. Benchmark técnico permanece válido como referência (`evidence/benchmark/` + `evidence/rtx5060ti-8gb/benchmark/`). Nada novo se instala até o dono decidir o caminho (opções no ADR-005 §4).
+- **Gatilho atual**: decisão do dono sobre peças novas — (a) avaliar gerador novo (o mesmo benchmark/infra mede), (b) caminho procedural Blender, (c) direção própria. Nada abre sem a aprovação dele (regra de uma fase por vez).
+- Onboarding multi-máquina NA MAIN (merge 2026-11-16): perfis de máquina, guard paramétrico, `tools/setup/`, `docs/onboarding/`, ADR-006. 2º contribuidor (RTX 5060 Ti 8GB, Blackwell sm_120): Fase A e Fase B concluídas e integradas (PR #1) — benchmark TripoSR medido: 10/10 OK, mediana 14,4s, pico 4385 MiB; TRELLIS inviável confirmada por execução (10/10 sem mesh).
+- **Fase 1 infra entregue e validada** (reaproveitável): venv por máquina (`~/.venvs/printer3d-ia`), TRELLIS em `~/tools/TRELLIS` (3060), TripoSR em `~/tools/TripoSR` (ambas), plugins + `gpu_guard.py` paramétrico em `tools/generator/`, benchmark automático.
+- **Fase 1 Forja entregue** (`tools/forja/forja/`; workspace `~/printer3d-work/forja/`): 7/7 TRELLIS reparados, gate PASS em `evidence/fase1-forja/gate_final.txt`. **Forja é CPU-only** — pode rodar com o dono jogando. APIs novas: trimesh 5.2, pymeshfix `.points/.faces`.
+- Repo: `git@github.com:brunomrtns/3dprinter-setup-ia.git` · branch `main` · tudo pushed.
 
 ## Decisões que você não deve reabrir sem motivo forte
 
@@ -19,6 +18,7 @@
 - Local-first + sidecar de procedência obrigatório em TODO asset (ADR-003)
 - venv isolado `printer3d-ia`; `game-ai3d` é intocável/referência (ADR-004)
 - Multi-máquina: caminhos portáveis, perfis por máquina, guard paramétrico, evidências namespaced (ADR-006)
+- **Sem default mode para gerador image→3D** (ADR-005): dono reprovou TRELLIS e TripoSR globalmente (benchmark + 3 reprovações visuais na Jubarte). NÃO reinstalar, NÃO reavaliar os mesmos pesos sem ordem do dono e NÃO propor "mais uma tentativa" sem caminho novo de qualidade.
 - Jobs GPU sempre serializados com guard de VRAM (`docs/knowledge/wsl-gpu.md`) — **o dono joga no Windows**: nunca iniciar job GPU sem o guard; se VRAM ocupada, o guard espera (poll 1Hz), não força.
 
 ## Cuidados conhecidos do ambiente
@@ -40,4 +40,4 @@
 
 1. ~~Dono revisa e mergeia `feat/onboarding-multi-maquina` na main~~ — feito (2026-11-16).
 2. ~~Colega: Fase A~~ — concluída e auditada (2026-11-15). ~~Fase B (PR #1)~~ — revisada, corrigida e **mergeada na main (2026-11-16)**: Blender 5.0.1, torch 2.11.0+cu128 (capability (12,0) ✓), TripoSR benchmarkado — 10/10 OK, mediana 14,4s, VRAM pico 4385 MiB < guard 6500. Perfil `rtx5060ti-8gb.md` sem nenhum "A VALIDAR" restante.
-3. **Único passo pendente da Fase 1**: dono vota 👍/👎 nas duas galerias (`evidence/benchmark/gallery.md` da 3060 e `evidence/rtx5060ti-8gb/benchmark/gallery.md` da 5060 Ti) → **ADR-005 (default mode por máquina)** fecha a Fase 1.
+3. ~~Votação do dono → ADR-005~~ — **fechada (2026-11-16)**: dono recusou votação por caso e **reprovou globalmente** os dois geradores → ADR-005 = "sem default mode", Gerador de Peças parado até decisão do dono (ADR-005 §4).
