@@ -5,53 +5,310 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Modelos 3D — Testes locais</title>
 <style>
-:root{--bg:#0d0f12;--card:#171a20;--fg:#e8eaed;--mut:#8a919c;--acc:#6cf;--line:#262a33}
+:root{
+  --bg:#0d0f12;
+  --card:#171a20;
+  --card-hi:#1f242d;
+  --fg:#e8eaed;
+  --mut:#8a919c;
+  --acc:#6cf;
+  --line:#262a33;
+  --target-size:36px;
+}
+@media (pointer:coarse){
+  :root{--target-size:44px}
+}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);
-  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;overflow:hidden}
+html,body{
+  margin:0;
+  height:100%;
+  height:100dvh;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  overflow:hidden;
+  overflow-wrap:break-word;
+}
 body{display:flex;flex-direction:column}
-header{padding:8px 12px 6px;border-bottom:1px solid var(--line);background:var(--bg);flex:0 0 auto}
-h1{font-size:15px;margin:0;font-weight:650}
+
+header{
+  padding:max(8px,env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) 6px max(12px,env(safe-area-inset-left,0px));
+  border-bottom:1px solid var(--line);
+  background:var(--bg);
+  flex:0 0 auto;
+}
+h1{font-size:15px;margin:0;font-weight:650;text-wrap:balance}
 .sub{color:var(--mut);font-size:11px;margin-top:2px}
-#cases{display:flex;gap:6px;overflow-x:auto;padding:7px 10px;scrollbar-width:none;flex:0 0 auto}
-#mbar{display:none;gap:6px;padding:5px 8px;flex:0 0 auto}
-#mbar select{flex:1 1 0;min-width:0;background:var(--card);color:var(--fg);
-  border:1px solid var(--line);border-radius:8px;padding:8px 4px;font-size:13px}
+
+#cases{
+  display:flex;
+  gap:6px;
+  overflow-x:auto;
+  padding:7px 10px;
+  scrollbar-width:none;
+  flex:0 0 auto;
+}
 #cases::-webkit-scrollbar{display:none}
-.chip{flex:0 0 auto;padding:6px 11px;border-radius:999px;border:1px solid var(--line);
-  background:var(--card);color:var(--mut);font-size:12px;cursor:pointer;white-space:nowrap}
+
+#mbar{
+  display:none;
+  align-items:center;
+  gap:6px;
+  padding:max(6px,env(safe-area-inset-top,0px)) max(8px,env(safe-area-inset-right,0px)) 6px max(8px,env(safe-area-inset-left,0px));
+  border-bottom:1px solid var(--line);
+  background:var(--bg);
+  flex:0 0 auto;
+}
+#mbar select,.vp-sel{
+  flex:1 1 0;
+  min-width:0;
+  min-block-size:var(--target-size);
+  background:var(--card);
+  color:var(--fg);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:0 10px;
+  font-size:13px;
+  font-weight:500;
+  color-scheme:dark;
+}
+#mbar select:focus-visible,.vp-sel:focus-visible,button:focus-visible{
+  outline:2px solid var(--acc);
+  outline-offset:2px;
+}
+#selCase{flex:1.25 1 0}
+#selModeA{flex:1 1 0}
+#btnSwap{
+  flex:0 0 auto;
+  min-inline-size:var(--target-size);
+  min-block-size:var(--target-size);
+  padding:0 10px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:var(--card);
+  color:var(--fg);
+  font-size:15px;
+  cursor:pointer;
+}
+#btnSwap[hidden],#selModeA[hidden]{display:none}
+
+.chip{
+  flex:0 0 auto;
+  padding:6px 11px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:var(--card);
+  color:var(--mut);
+  font-size:12px;
+  cursor:pointer;
+  white-space:nowrap;
+}
 .chip.on{background:var(--acc);border-color:var(--acc);color:#06222b;font-weight:650}
-#stage{position:relative;flex:1 1 auto;min-height:0}
-#stage.vs{display:grid;grid-template-columns:1fr 1fr;gap:2px}
-.vp{position:relative;background:radial-gradient(ellipse at 50% 35%,#1a1e26 0%,#0b0d10 75%);overflow:hidden;min-height:0}
-.vp canvas{display:block;width:100%;height:100%;touch-action:none}
-.vp .tag{position:absolute;top:6px;left:6px;background:rgba(0,0,0,.55);color:#cfd4db;
-  font-size:10px;padding:2px 6px;border-radius:5px;pointer-events:none;z-index:2;max-width:70%;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.vp .modes{position:absolute;left:6px;right:6px;bottom:26px;display:flex;gap:4px;
-  overflow-x:auto;scrollbar-width:none;z-index:3;padding:2px}
+
+#stage{
+  position:relative;
+  flex:1 1 auto;
+  min-height:0;
+  min-width:0;
+  display:grid;
+  grid-template-columns:1fr;
+  grid-template-rows:1fr;
+}
+#stage.vs{
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr;
+  gap:2px;
+  background:var(--line);
+}
+
+.vp{
+  position:relative;
+  width:100%;
+  height:100%;
+  min-width:0;
+  min-height:0;
+  background:radial-gradient(ellipse at 50% 42%,#1a1e26 0%,#0b0d10 78%);
+  overflow:hidden;
+  display:grid;
+  grid-template-rows:1fr;
+}
+.vp-bar{display:none}
+.vp-canvas-wrap{
+  position:relative;
+  width:100%;
+  height:100%;
+  min-width:0;
+  min-height:0;
+  overflow:hidden;
+}
+.vp canvas{
+  display:block;
+  width:100%;
+  height:100%;
+  touch-action:none;
+}
+.vp .tag{
+  position:absolute;top:6px;left:6px;
+  background:rgba(0,0,0,.55);color:#cfd4db;
+  font-size:10px;padding:2px 6px;border-radius:5px;
+  pointer-events:none;z-index:2;max-width:75%;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.vp .modes{
+  position:absolute;left:6px;right:6px;bottom:26px;
+  display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;z-index:3;padding:2px;
+}
 .vp .modes::-webkit-scrollbar{display:none}
-.vp .modes .chip{padding:4px 8px;font-size:10px;background:rgba(23,26,32,.75)}
-.vp .info{position:absolute;bottom:6px;left:6px;right:6px;background:rgba(0,0,0,.55);
-  color:#9aa3ad;font-size:9px;padding:3px 6px;border-radius:5px;pointer-events:none;z-index:2;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.vp .spin{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  color:var(--mut);font-size:12px;pointer-events:none}
-#controls{display:flex;gap:6px;justify-content:center;align-items:center;
-  padding:7px 10px calc(8px + env(safe-area-inset-bottom));border-top:1px solid var(--line);flex:0 0 auto}
-button.ctl{padding:7px 12px;border-radius:9px;border:1px solid var(--line);background:var(--card);
-  color:var(--fg);font-size:12px;cursor:pointer}
-button.ctl.on{border-color:var(--acc);color:var(--acc)}
+.vp .modes .chip{padding:4px 8px;font-size:10px;background:rgba(23,26,32,.78)}
+.vp .modes .chip.on{background:var(--acc);border-color:var(--acc);color:#06222b;font-weight:650}
+.vp .info{
+  position:absolute;bottom:6px;left:6px;right:6px;
+  background:rgba(0,0,0,.55);color:#9aa3ad;
+  font-size:9px;padding:3px 6px;border-radius:5px;
+  pointer-events:none;z-index:2;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.vp .spin{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--mut);font-size:13px;pointer-events:none;z-index:4;
+  background:rgba(11,13,16,.35);
+}
+
+#controls{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  align-items:center;
+  padding:6px max(10px,env(safe-area-inset-right,0px)) max(8px,env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px));
+  border-top:1px solid var(--line);
+  background:var(--bg);
+  flex:0 0 auto;
+}
+button.ctl{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  min-inline-size:var(--target-size);
+  min-block-size:var(--target-size);
+  padding:0 12px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:var(--card);
+  color:var(--fg);
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+}
+button.ctl:active{background:var(--card-hi)}
+button.ctl.on{border-color:var(--acc);color:var(--acc);background:rgba(102,204,255,.12)}
+
+#toast{
+  position:fixed;
+  left:50%;
+  bottom:calc(62px + env(safe-area-inset-bottom,0px));
+  transform:translateX(-50%) translateY(8px);
+  background:rgba(23,26,32,.95);
+  border:1px solid var(--acc);
+  color:var(--fg);
+  font-size:12px;
+  padding:7px 14px;
+  border-radius:999px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .18s ease,transform .18s ease;
+  z-index:40;
+  white-space:nowrap;
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+dialog#infoDialog{
+  width:min(360px,calc(100vw - 24px));
+  max-height:80dvh;
+  margin:auto;
+  padding:0;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--card);
+  color:var(--fg);
+  overflow:auto;
+}
+dialog#infoDialog:modal{overscroll-behavior:contain}
+dialog#infoDialog::backdrop{
+  background:rgba(0,0,0,.65);
+  overflow:hidden;
+  overscroll-behavior:contain;
+}
+.dlg-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:12px 14px;
+  border-bottom:1px solid var(--line);
+}
+.dlg-head h2{margin:0;font-size:15px;font-weight:650;text-wrap:balance}
+.dlg-close{
+  min-inline-size:36px;min-block-size:36px;
+  border-radius:8px;border:1px solid var(--line);
+  background:var(--bg);color:var(--fg);font-size:16px;cursor:pointer;
+}
+.dlg-body{padding:12px 14px 14px;font-size:13px;line-height:1.45}
+.dlg-card{
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:10px 12px;
+  margin-bottom:8px;
+}
+.dlg-card:last-child{margin-bottom:0}
+.dlg-card-title{font-weight:650;color:var(--acc);margin-bottom:4px;font-size:13px}
+.dlg-meta{color:var(--mut);font-size:12px}
+.dlg-tip{color:var(--mut);font-size:11px;margin-top:10px}
+
 @media (max-width:640px){
-  .sub{display:none}
-  h1{font-size:13px}
-  header{padding:6px 10px 4px}
+  header{display:none}
   #cases{display:none}
   #mbar{display:flex}
-  #stage.vs{grid-template-columns:1fr;grid-template-rows:1fr 1fr}
+  #stage.vs{
+    grid-template-columns:1fr;
+    grid-template-rows:1fr 1fr;
+    gap:2px;
+  }
+  #stage.vs .vp{
+    grid-template-rows:auto 1fr;
+  }
+  #stage.vs .vp .vp-bar{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:4px 8px;
+    background:#12151b;
+    border-bottom:1px solid var(--line);
+  }
+  .vp-badge{
+    flex:0 0 auto;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:20px;
+    height:20px;
+    border-radius:6px;
+    background:rgba(102,204,255,.16);
+    color:var(--acc);
+    font-size:11px;
+    font-weight:700;
+  }
+  .vp-sel{
+    min-block-size:32px;
+    font-size:12px;
+    padding:0 8px;
+    border-radius:8px;
+  }
   .vp .modes,.vp .info,.vp .tag{display:none}
-  #controls{padding:5px 8px calc(6px + env(safe-area-inset-bottom))}
-  button.ctl{padding:6px 9px;font-size:11px}
+  #controls{gap:6px}
+  button.ctl{padding:0 11px;font-size:13px}
 }
 </style>
 <script type="importmap">
@@ -64,23 +321,42 @@ button.ctl.on{border-color:var(--acc);color:var(--acc)}
 window.addEventListener('error',e=>{const b=document.getElementById('errbox');b.style.display='block';b.textContent+='[erro] '+(e.message||e.error)+' @ '+(e.filename||'')+':'+(e.lineno||'')+'\n'});
 window.addEventListener('unhandledrejection',e=>{const b=document.getElementById('errbox');b.style.display='block';b.textContent+='[promise] '+(e.reason&&e.reason.message||e.reason)+'\n'});
 </script>
+
 <header>
   <h1>Modelos 3D — comparativo local (Fase C)</h1>
   <div class="sub">mesma imagem de entrada · seed 42 · RTX 3060 · arraste p/ girar, pinça/scroll p/ zoom</div>
 </header>
-<div id="cases"></div>
-<div id="mbar">
-  <select id="selCase"></select>
-  <select id="selModeA"></select>
-  <select id="selModeB" hidden></select>
+
+<div id="cases" role="region" aria-label="Casos de teste"></div>
+
+<div id="mbar" role="region" aria-label="Seleção de modelo">
+  <select id="selCase" aria-label="Caso"></select>
+  <select id="selModeA" aria-label="Gerador"></select>
+  <button type="button" id="btnSwap" aria-label="Inverter modelos A e B" title="Inverter A ↔ B" hidden><span aria-hidden="true">⇄</span></button>
 </div>
+
 <div id="stage"></div>
-<div id="controls">
-  <button class="ctl" id="btnAuto">⏸</button>
-  <button class="ctl" id="btnVs">VS</button>
-  <button class="ctl" id="btnReset">⟲</button>
-  <button class="ctl" id="btnShare">🔗</button>
+
+<div id="controls" role="toolbar" aria-label="Controles do viewer">
+  <button type="button" class="ctl" id="btnAuto" aria-label="Alternar giro automático" aria-pressed="true"><span aria-hidden="true">⏸</span></button>
+  <button type="button" class="ctl" id="btnVs" aria-label="Comparar dois modelos" aria-pressed="false">VS</button>
+  <button type="button" class="ctl" id="btnReset" aria-label="Centralizar câmera"><span aria-hidden="true">⟲</span></button>
+  <button type="button" class="ctl" id="btnInfo" aria-label="Detalhes do modelo"><span aria-hidden="true">ℹ</span></button>
+  <button type="button" class="ctl" id="btnShare" aria-label="Copiar link compartilhável"><span aria-hidden="true">🔗</span></button>
 </div>
-<script type="module" src="./app.js"></script>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<dialog id="infoDialog" closedby="any" aria-labelledby="infoTitle">
+  <div class="dlg-head">
+    <h2 id="infoTitle">Detalhes do modelo</h2>
+    <form method="dialog">
+      <button type="submit" class="dlg-close" aria-label="Fechar" autofocus><span aria-hidden="true">✕</span></button>
+    </form>
+  </div>
+  <div class="dlg-body" id="infoBody"></div>
+</dialog>
+
+<script type="module" src="./app.js?v=3"></script>
 </body>
 </html>
