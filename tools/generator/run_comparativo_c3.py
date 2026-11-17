@@ -79,7 +79,8 @@ def stage_gerar(modes: list[str]) -> None:
                 rb.log(f"{caso['id']}/{mode}: já existe, pulando")
                 continue
             rb.log(f"{caso['id']}/{mode}: gerando...")
-            params = {"seed": SEED}
+            # triposr é determinístico (sem ruído) — runner não aceita --seed
+            params = {"seed": SEED} if mode != "triposr" else {}
             rep = gen.generate(ip, out, params)
             d = rep.to_dict()
             if d.get("mesh_reparada_path") and os.path.isfile(d["mesh_reparada_path"]):
