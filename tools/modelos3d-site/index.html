@@ -40,10 +40,15 @@ button.ctl.on{border-color:var(--acc);color:var(--acc)}
 @media (max-width:640px){#stage{height:calc(100% - 122px)}.vp .info{font-size:9px}}
 </style>
 <script type="importmap">
-{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}
+{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/jsm/"}}
 </script>
 </head>
 <body>
+<div id="errbox" style="display:none;position:fixed;inset:auto 10px 10px 10px;background:#3a1420;color:#ffd7e0;font:12px/1.5 monospace;padding:10px 14px;border-radius:10px;z-index:99;white-space:pre-wrap"></div>
+<script>
+window.addEventListener('error',e=>{const b=document.getElementById('errbox');b.style.display='block';b.textContent+='[erro] '+(e.message||e.error)+' @ '+(e.filename||'')+':'+(e.lineno||'')+'\n'});
+window.addEventListener('unhandledrejection',e=>{const b=document.getElementById('errbox');b.style.display='block';b.textContent+='[promise] '+(e.reason&&e.reason.message||e.reason)+'\n'});
+</script>
 <header>
   <h1>Modelos 3D — comparativo local (Fase C)</h1>
   <div class="sub">mesma imagem de entrada · seed 42 · RTX 3060 · arraste p/ girar, pinça/scroll p/ zoom</div>

@@ -212,7 +212,10 @@ document.getElementById('btnReset').onclick = () => {
 // ---------- boot ----------
 manifest = await fetch('manifest.json').then(r => r.json());
 state.caseId = manifest.cases[0].id;
-state.sel = [null, null];
+{
+  const avail = MODES.filter(m => manifest.cases[0].modes[m]);
+  state.sel = [avail[0] || null, avail[1] || avail[0] || null];
+}
 renderCaseChips();
 rebuildViewports();
 document.getElementById('btnAuto').classList.add('on');
