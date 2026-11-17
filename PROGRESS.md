@@ -46,6 +46,14 @@
 - **Viewer — 3 melhorias do dono**: (1) pausa de giro: **arrastar a peça PARA o giro automático** + botão `⏸/▶` claro; (2) **link compartilhável** — URL reflete o estado (`?case=anubis_a&mode=triposf512&vs=1&mode2=triposg&auto=0`) + botão `🔗 Copiar link`; (3) **DoubleSide** no material (abaixo).
 - **Trellis2 "picotado" — mitigado, NÃO curado**: receita `fix_winding+fix_normals` testada e **falhou honestamente** (winding False→False — malha FlexiCubes aberta/non-manifold; reparo pesado segue sendo da Forja). Mitigação aplicada no viewer: material `side: DoubleSide` → elimina o efeito transparente por faces invertidas em TODOS os modelos. Furos reais de geometria do 512³ sparse permanecem visíveis. **Avaliação visual do trellis2 pelo dono segue pendente** — a escolha "TripoSG > trellis2" do dono foi feita sem ver o trellis2 direito.
 
+### Registro viewer mobile-friendly (2026-11-17, noite) — `[x]` CONCLUÍDO
+
+- **Motivo**: dono compartilhou o link com um amigo; no celular "mal deu pra ver o modelo 3d na tela pq ficou um monte de coisa em cima do boneco".
+- **Fix em `tools/modelos3d-site/`** (`index.html` + `app.js`): layout `body` flex-column com `#stage` `flex:1` (canvas domina a tela); header compacto (`.sub` oculto, h1 13px); fileira de casos vira scroll horizontal de chips finos; **chips de modo saem do topo do viewport e vão para o rodapé** (antes `top:34px` inline — cobriam o modelo); `.vp .info` (stats faces/verts/VRAM) **oculto em ≤640px**; modo VS empilha **verticalmente** no mobile (`grid-template-rows:1fr 1fr`); controles inferiores reduzidos a `▶`/`⏸`, `VS`, `⟲`, `🔗`.
+- **Bug corrigido no caminho**: `index.html` tinha lixo de ferramenta colado após `</html>` — truncado; arquivo volta a terminar limpo em `</html>`.
+- **Deploy**: `tools/modelos3d-site/deploy.sh` — nginx -t OK, reload sem downtime, smoke 200.
+- **Validação real (Chrome/Edge headless, viewport 390×844, URL pública)**: DOM com `TRELLIS.2 — trex_figurine`, spinner oculto, errbox vazio; screenshot com análise de pixels: 2092 px claros na viewport single, 6652 px no VS empilhado; desktop 1280×800 OK. Sem erros de console.
+
 ### Registro C3 (2026-11-17, continuação — benchmark em execução)
 
 - **Smoke TRELLIS.2 RESOLVIDO** (7 bugs reais, todos documentados em `install-notes.md` §Atualização): BiRefNet_config/handler baixados do HF oficial; `pipeline.cuda()` adicionado; patch `needs_grad` no flex_gemm (fork desatualizado vs FlexGEMM upstream); **causa raiz do OOM = autograd ligado** (`torch.set_grad_enabled(False)` — oficial roda sob `@torch.no_grad()`); setup low_vram do decoder replicado de `decode_latent`.

@@ -25,7 +25,7 @@ function setAuto(on, quiet) {
   state.auto = on;
   vps.forEach(v => v.controls.autoRotate = on);
   const b = document.getElementById('btnAuto');
-  if (b) { b.classList.toggle('on', on); b.textContent = on ? '▶ Giro: ligado' : '⏸ Giro: parado'; }
+  if (b) { b.classList.toggle('on', on); b.textContent = on ? '▶' : '⏸'; }
   if (!quiet) syncUrl();
 }
 
@@ -35,7 +35,7 @@ function makeViewport(index) {
   vp.className = 'vp';
   vp.innerHTML = `
     <div class="tag" data-role="tag">—</div>
-    <div class="modes" data-role="modes" style="position:absolute;top:34px;left:8px;right:8px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;z-index:3"></div>
+    <div class="modes" data-role="modes"></div>
     <div class="spin" data-role="spin">carregando…</div>
     <div class="info" data-role="info"></div>`;
   stage.appendChild(vp);
@@ -84,7 +84,7 @@ function makeViewport(index) {
   // botões de modo dentro do viewport
   MODES.forEach(m => {
     const b = document.createElement('button');
-    b.className = 'chip'; b.style.cssText = 'padding:5px 10px;font-size:11px;flex:0 0 auto';
+    b.className = 'chip';
     b.textContent = MODE_LABEL[m];
     b.onclick = () => selectMode(index, m);
     v.modesEl.appendChild(b);
@@ -214,7 +214,7 @@ document.getElementById('btnAuto').onclick = () => setAuto(!state.auto);
 document.getElementById('btnVs').onclick = e => {
   state.vs = !state.vs;
   e.target.classList.toggle('on', state.vs);
-  e.target.textContent = `Comparar: ${state.vs ? 'on' : 'off'}`;
+  e.target.textContent = 'VS';
   rebuildViewports();
   syncUrl();
 };
@@ -223,11 +223,11 @@ document.getElementById('btnShare').onclick = async e => {
   const url = location.href;
   try {
     await navigator.clipboard.writeText(url);
-    e.target.textContent = '✓ Link copiado';
+    e.target.textContent = '✓';
   } catch {
     prompt('Copie o link da view atual:', url);
   }
-  setTimeout(() => { e.target.textContent = '🔗 Copiar link'; }, 2500);
+  setTimeout(() => { e.target.textContent = '🔗'; }, 2500);
 };
 document.getElementById('btnReset').onclick = () => {
   vps.forEach(v => {

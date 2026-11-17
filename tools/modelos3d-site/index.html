@@ -9,35 +9,44 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);
   font-family:system-ui,-apple-system,"Segoe UI",sans-serif;overflow:hidden}
-header{padding:10px 14px 8px;border-bottom:1px solid var(--line);background:var(--bg)}
-h1{font-size:16px;margin:0;font-weight:650}
-.sub{color:var(--mut);font-size:11px;margin-top:3px}
-#cases{display:flex;gap:6px;overflow-x:auto;padding:8px 14px;scrollbar-width:none}
+body{display:flex;flex-direction:column}
+header{padding:8px 12px 6px;border-bottom:1px solid var(--line);background:var(--bg);flex:0 0 auto}
+h1{font-size:15px;margin:0;font-weight:650}
+.sub{color:var(--mut);font-size:11px;margin-top:2px}
+#cases{display:flex;gap:6px;overflow-x:auto;padding:7px 10px;scrollbar-width:none;flex:0 0 auto}
 #cases::-webkit-scrollbar{display:none}
-.chip{flex:0 0 auto;padding:7px 13px;border-radius:999px;border:1px solid var(--line);
-  background:var(--card);color:var(--mut);font-size:12.5px;cursor:pointer;white-space:nowrap}
+.chip{flex:0 0 auto;padding:6px 11px;border-radius:999px;border:1px solid var(--line);
+  background:var(--card);color:var(--mut);font-size:12px;cursor:pointer;white-space:nowrap}
 .chip.on{background:var(--acc);border-color:var(--acc);color:#06222b;font-weight:650}
-#modes{display:flex;gap:6px;padding:0 14px 8px;flex-wrap:wrap}
-.mode{flex:1;min-width:70px;padding:8px 6px;border-radius:9px;border:1px solid var(--line);
-  background:var(--card);color:var(--mut);font-size:11.5px;cursor:pointer;text-align:center}
-.mode.on{border-color:var(--acc);color:var(--acc)}
-.mode small{display:block;font-size:9.5px;opacity:.7;margin-top:2px}
-#stage{position:relative;height:calc(100% - 118px);min-height:0}
+#stage{position:relative;flex:1 1 auto;min-height:0}
 #stage.vs{display:grid;grid-template-columns:1fr 1fr;gap:2px}
-.vp{position:relative;background:radial-gradient(ellipse at 50% 35%,#1a1e26 0%,#0b0d10 75%);overflow:hidden}
+.vp{position:relative;background:radial-gradient(ellipse at 50% 35%,#1a1e26 0%,#0b0d10 75%);overflow:hidden;min-height:0}
 .vp canvas{display:block;width:100%;height:100%;touch-action:none}
-.vp .tag{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.55);color:#cfd4db;
-  font-size:10.5px;padding:3px 8px;border-radius:6px;pointer-events:none;z-index:2}
-.vp .info{position:absolute;bottom:8px;left:8px;right:8px;background:rgba(0,0,0,.55);
-  color:#9aa3ad;font-size:10px;padding:5px 8px;border-radius:6px;pointer-events:none;z-index:2;
+.vp .tag{position:absolute;top:6px;left:6px;background:rgba(0,0,0,.55);color:#cfd4db;
+  font-size:10px;padding:2px 6px;border-radius:5px;pointer-events:none;z-index:2;max-width:70%;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vp .modes{position:absolute;left:6px;right:6px;bottom:26px;display:flex;gap:4px;
+  overflow-x:auto;scrollbar-width:none;z-index:3;padding:2px}
+.vp .modes::-webkit-scrollbar{display:none}
+.vp .modes .chip{padding:4px 8px;font-size:10px;background:rgba(23,26,32,.75)}
+.vp .info{position:absolute;bottom:6px;left:6px;right:6px;background:rgba(0,0,0,.55);
+  color:#9aa3ad;font-size:9px;padding:3px 6px;border-radius:5px;pointer-events:none;z-index:2;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .vp .spin{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
   color:var(--mut);font-size:12px;pointer-events:none}
-#controls{display:flex;gap:8px;justify-content:center;padding:8px 14px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--line)}
-button.ctl{padding:8px 14px;border-radius:9px;border:1px solid var(--line);background:var(--card);
-  color:var(--fg);font-size:12.5px;cursor:pointer}
+#controls{display:flex;gap:6px;justify-content:center;align-items:center;
+  padding:7px 10px calc(8px + env(safe-area-inset-bottom));border-top:1px solid var(--line);flex:0 0 auto}
+button.ctl{padding:7px 12px;border-radius:9px;border:1px solid var(--line);background:var(--card);
+  color:var(--fg);font-size:12px;cursor:pointer}
 button.ctl.on{border-color:var(--acc);color:var(--acc)}
-@media (max-width:640px){#stage{height:calc(100% - 122px)}.vp .info{font-size:9px}}
+@media (max-width:640px){
+  .sub{display:none}
+  h1{font-size:13px}
+  #stage.vs{grid-template-columns:1fr;grid-template-rows:1fr 1fr}
+  .vp .info{display:none}
+  .vp .modes{bottom:22px}
+  button.ctl{padding:7px 10px;font-size:11.5px}
+}
 </style>
 <script type="importmap">
 {"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/jsm/"}}
@@ -54,13 +63,12 @@ window.addEventListener('unhandledrejection',e=>{const b=document.getElementById
   <div class="sub">mesma imagem de entrada · seed 42 · RTX 3060 · arraste p/ girar, pinça/scroll p/ zoom</div>
 </header>
 <div id="cases"></div>
-<div id="modes"></div>
 <div id="stage"></div>
 <div id="controls">
-  <button class="ctl" id="btnAuto">▶ Giro: ligado</button>
-  <button class="ctl" id="btnVs">Comparar: off</button>
-  <button class="ctl" id="btnReset">Resetar câmera</button>
-  <button class="ctl" id="btnShare">🔗 Copiar link</button>
+  <button class="ctl" id="btnAuto">▶ Giro</button>
+  <button class="ctl" id="btnVs">VS: off</button>
+  <button class="ctl" id="btnReset">⟲</button>
+  <button class="ctl" id="btnShare">🔗</button>
 </div>
 <script type="module" src="./app.js"></script>
 </body>
