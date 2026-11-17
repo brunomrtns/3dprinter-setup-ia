@@ -39,6 +39,13 @@
 - **Benchmark anubis 4/4 OK**: 256 → pico 5,6/5,7 GB, ~24s, ~157k faces, watertight ✅ (8–18 componentes-ilha); 512 → pico 7,2/7,5 GB, ~29s, ~616–631k faces, **não-watertight** (+winding inconsistente no a_512). Referência TripoSG: 55,9s/vista, 537/549k faces, watertight, 1 componente.
 - **Renders canônicos + comparativos lado a lado** (câmera/luz do C3): `gallery_render/comparativo/gate_anubis_{a,b}_{a,b}.png` — **gate humano do dono pendente** (a IA não decide o vencedor).
 
+### Registro C5 — pós-veredito (2026-11-17, tarde)
+
+- **Veredito do dono no gate (viewer modelos3d)**: *"o triposf512 ganhou, melhor até agora"*. Decisão visual do dono, registrada sem maquiagem — nota: o trellis2 não pôde ser avaliado visualmente (bug do viewer, abaixo).
+- **PIPELINE OFICIAL DECIDIDO PELO DONO**: `imagem → preproc C2 → TripoSG → refino TripoSF 512`. Ferramenta one-command: `tools/generator/pipeline_imagem3d.sh <imagem> <dir> [seed]` + runner versionado `tools/generator/triposf/{triposf_runner.py,TripoSFVAE_o512.yaml,TripoSFVAE_o256.yaml}` (venv `~/venvs/triposf`; TRIPOSF_PY/TRIPOSF_HOME sobrescrevem — ADR-006). **Smoke ponta-a-ponta OK** (anubis_a.jpg: TripoSG 536.792 faces [reproduziu a evidência, seed 42] → TripoSF 616.348 faces, pico 7.523 MiB, guard ok, ~100s totais; saída em `~/printer3d-work/pipeline-smoke/anubis_a/`). Para imprimir: Forja antes (512 não é watertight).
+- **Viewer — 3 melhorias do dono**: (1) pausa de giro: **arrastar a peça PARA o giro automático** + botão `⏸/▶` claro; (2) **link compartilhável** — URL reflete o estado (`?case=anubis_a&mode=triposf512&vs=1&mode2=triposg&auto=0`) + botão `🔗 Copiar link`; (3) **DoubleSide** no material (abaixo).
+- **Trellis2 "picotado" — mitigado, NÃO curado**: receita `fix_winding+fix_normals` testada e **falhou honestamente** (winding False→False — malha FlexiCubes aberta/non-manifold; reparo pesado segue sendo da Forja). Mitigação aplicada no viewer: material `side: DoubleSide` → elimina o efeito transparente por faces invertidas em TODOS os modelos. Furos reais de geometria do 512³ sparse permanecem visíveis. **Avaliação visual do trellis2 pelo dono segue pendente** — a escolha "TripoSG > trellis2" do dono foi feita sem ver o trellis2 direito.
+
 ### Registro C3 (2026-11-17, continuação — benchmark em execução)
 
 - **Smoke TRELLIS.2 RESOLVIDO** (7 bugs reais, todos documentados em `install-notes.md` §Atualização): BiRefNet_config/handler baixados do HF oficial; `pipeline.cuda()` adicionado; patch `needs_grad` no flex_gemm (fork desatualizado vs FlexGEMM upstream); **causa raiz do OOM = autograd ligado** (`torch.set_grad_enabled(False)` — oficial roda sob `@torch.no_grad()`); setup low_vram do decoder replicado de `decode_latent`.

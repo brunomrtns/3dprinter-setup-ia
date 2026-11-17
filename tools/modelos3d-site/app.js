@@ -12,6 +12,23 @@ const loader = new GLTFLoader();
 let manifest = null;
 let state = { caseId: null, vs: false, auto: true, sel: [{}, {}] }; // sel[i] = mode por viewport
 
+// ---------- URL compartilhável (?case=&mode=&vs=&mode2=&auto=) ----------
+function syncUrl() {
+  const q = new URLSearchParams();
+  if (state.caseId) q.set('case', state.caseId);
+  if (state.sel[0]) q.set('mode', state.sel[0]);
+  if (state.vs) { q.set('vs', '1'); if (state.sel[1]) q.set('mode2', state.sel[1]); }
+  if (!state.auto) q.set('auto', '0');
+  history.replaceState(null, '', location.pathname + (q.toString() ? '?' + q : ''));
+}
+function setAuto(on, quiet) {
+  state.auto = on;
+  vps.forEach(v => v.controls.autoRotate = on);
+  const b = document.getElementById('btnAuto');
+  if (b) { b.classList.toggle('on', on); b.textContent = on ? '▶ Giro: ligado' : '⏸ Giro: parado'; }
+  if (!quiet) syncUrl();
+}
+
 // ---------- viewport ----------
 function makeViewport(index) {
   const vp = document.createElement('div');
@@ -43,6 +60,8 @@ function makeViewport(index) {
   controls.autoRotateSpeed = 1.6;
   controls.minDistance = 0.5;
   controls.maxDistance = 15;
+  // interagir com a peça (arrastar/pinçar) pausa o giro automático — pedido do dono
+  controls.addEventListener('start', () => { if (state.auto) setAuto(false); });
 
   const hemi = new THREE.HemisphereLight(0xdfe8ff, 0x1a1d22, 0.5);
   scene.add(hemi);
@@ -111,6 +130,7 @@ function selectMode(i, mode) {
   if (!c || !c.modes[mode]) return;
   state.sel[i] = mode;
   refreshViewport(i);
+  syncUrl();
 }
 
 function refreshViewport(i) {
@@ -140,7 +160,7 @@ function refreshViewport(i) {
     const grp = new THREE.Group();
     g.scene.traverse(o => {
       if (o.isMesh) {
-        o.material = new THREE.MeshStandardMaterial({ color: 0xbfc4cc, roughness: 0.55, metalness: 0.05 });
+        o.material = new THREE.MeshStandardMaterial({ color: 0xbfc4cc, roughness: 0.55, metalness: 0.05, side: THREE.DoubleSide });
         o.castShadow = o.receiveShadow = false;
       }
     });
@@ -184,22 +204,30 @@ function renderCaseChips() {
       if (!avail.includes(state.sel[1])) state.sel[1] = avail[1] || avail[0] || null;
       renderCaseChips();
       refreshAll();
+      syncUrl();
     };
     casesEl.appendChild(b);
   });
 }
 
-document.getElementById('btnAuto').onclick = e => {
-  state.auto = !state.auto;
-  vps.forEach(v => v.controls.autoRotate = state.auto);
-  e.target.classList.toggle('on', state.auto);
-  e.target.textContent = `Girar: ${state.auto ? 'auto' : 'off'}`;
-};
+document.getElementById('btnAuto').onclick = () => setAuto(!state.auto);
 document.getElementById('btnVs').onclick = e => {
   state.vs = !state.vs;
   e.target.classList.toggle('on', state.vs);
   e.target.textContent = `Comparar: ${state.vs ? 'on' : 'off'}`;
   rebuildViewports();
+  syncUrl();
+};
+document.getElementById('btnShare').onclick = async e => {
+  syncUrl();
+  const url = location.href;
+  try {
+    await navigator.clipboard.writeText(url);
+    e.target.textContent = '✓ Link copiado';
+  } catch {
+    prompt('Copie o link da view atual:', url);
+  }
+  setTimeout(() => { e.target.textContent = '🔗 Copiar link'; }, 2500);
 };
 document.getElementById('btnReset').onclick = () => {
   vps.forEach(v => {
@@ -211,11 +239,17 @@ document.getElementById('btnReset').onclick = () => {
 
 // ---------- boot ----------
 manifest = await fetch('manifest.json').then(r => r.json());
-state.caseId = manifest.cases[0].id;
+const qs = new URLSearchParams(location.search);
+const wantCase = manifest.cases.find(c => c.id === qs.get('case')) || manifest.cases[0];
+state.caseId = wantCase.id;
 {
-  const avail = MODES.filter(m => manifest.cases[0].modes[m]);
-  state.sel = [avail[0] || null, avail[1] || avail[0] || null];
+  const avail = MODES.filter(m => wantCase.modes[m]);
+  const m1 = avail.includes(qs.get('mode')) ? qs.get('mode') : (avail[0] || null);
+  const m2 = avail.includes(qs.get('mode2')) ? qs.get('mode2') : (avail[1] || avail[0] || null);
+  state.sel = [m1, m2];
+  state.vs = qs.get('vs') === '1';
 }
 renderCaseChips();
 rebuildViewports();
-document.getElementById('btnAuto').classList.add('on');
+setAuto(qs.get('auto') !== '0', true);
+syncUrl();
