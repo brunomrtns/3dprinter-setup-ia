@@ -1,0 +1,9 @@
+== gcc disponível ==
+gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+gcc-14:
+  Installed: (none)
+  Candidate: 14.3.0-14ubuntu1
+
+Setting up g++-14 (14.3.0-14ubuntu1) ...
+Processing triggers for man-db (2.13.1-1build1) ...
+gcc-14 (Ubuntu 14.3.0-14ubuntu1) 14.3.0

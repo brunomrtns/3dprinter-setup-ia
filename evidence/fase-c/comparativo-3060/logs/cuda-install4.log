@@ -1,0 +1,19 @@
+== symlink libxml2.so.2 -> .so.16 + retry CUDA — 2026-11-16T21:23:57-03:00 ==
+bruno ALL=(ALL) NOPASSWD:ALL
+                            ^
+./cuda-installer: /lib/x86_64-linux-gnu/libxml2.so.2: no version information available (required by ./cuda-installer)
+./cuda-installer: /lib/x86_64-linux-gnu/libxml2.so.2: no version information available (required by ./cuda-installer)
+./cuda-installer: /lib/x86_64-linux-gnu/libxml2.so.2: no version information available (required by ./cuda-installer)
+-- verificando --
+Build cuda_12.8.r12.8/compiler.35404655_0
+OK: nvcc instalado
+DOCS
+EULA.txt
+README
+bin
+compute-sanitizer
+extras
+gds
+gds-12.8
+include
+lib64

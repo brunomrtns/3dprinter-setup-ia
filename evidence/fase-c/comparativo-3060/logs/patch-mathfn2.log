@@ -1,0 +1,12 @@
+== patch v2 (sudo sed) — 2026-11-16T21:54:34-03:00 ==
+-- depois do patch --
+597:extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ double                 rsqrt(double x) noexcept;
+621:extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ float                  rsqrtf(float x) noexcept;
+2556:extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ double                 sinpi(double x) noexcept;
+2579:extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ float                  sinpif(float x) noexcept;
+2601:extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ double                 cospi(double x) noexcept;
+2623:extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ float                  cospif(float x) noexcept;
+2636:extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ void                   sincospi(double x, double *sptr, double *cptr);
+2649:extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ void                   sincospif(float x, float *sptr, float *cptr);
+-- teste host include (com /home/bruno) --
+HOST INCLUDE OK

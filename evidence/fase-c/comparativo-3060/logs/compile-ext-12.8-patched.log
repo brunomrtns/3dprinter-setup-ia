@@ -1,0 +1,25 @@
+== compilação CUDA 12.8 (headers patcheados) + gcc-14 — 2026-11-16T21:54:57-03:00 ==
+Build cuda_12.8.r12.8/compiler.35404655_0
+
+=== [1/3] FlexGEMM ===
+pip exit=0
+Successfully built flex_gemm
+Successfully installed flex_gemm-1.0.0
+flex_gemm import OK
+
+=== [2/3] CuMesh ===
+pip exit=0
+Successfully built cumesh
+Successfully installed cumesh-0.0.1
+cumesh import OK
+
+=== [3/3] o-voxel ===
+pip exit=0
+Successfully built o_voxel
+Successfully installed o_voxel-0.0.1
+ModuleNotFoundError: No module named 'nvdiffrast'
+
+== resumo ==
+flex_gemm: OK
+cumesh: OK
+o_voxel: FALHOU — ModuleNotFoundError: No module named 'nvdiffrast'

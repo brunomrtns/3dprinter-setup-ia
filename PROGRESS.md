@@ -27,8 +27,19 @@
 |---|---|---|
 | C2 | `tools/generator/preprocess_input.py` (fundo removido via rembg, pad quadrado sem corte, 1024px, sidecar ADR-003, upscale opcional OFF) + 10 casos do testset → `~/printer3d-work/testset_preproc/` + evidência `evidence/fase-c/preproc/` | [x] 10/10 OK |
 | C1 | TRELLIS.2 (fork IgorAherne, VRAM reduzida) na máquina `rtx5060ti-8gb` — tarefa do colega | [ ] aguardando |
-| C3 | Comparativo formal na 3060: TRELLIS.2 + TripoSG + TRELLIS 1 + TripoSR na mesma entrada pré-processada, galeria lado a lado | [~] iniciada (2026-11-16) |
+| C3 | Comparativo formal na 3060: TRELLIS.2 + TripoSG + TRELLIS 1 + TripoSR na mesma entrada pré-processada, galeria lado a lado | `[!]` **INTERROMPIDO no limite de quota — handoff em `evidence/fase-c/comparativo-3060/install-notes.md`** (ver registro abaixo) |
 | C4 | Fila de jobs entre máquinas | [ ] FUTURO (fora da fase) |
+
+### Registro C3 (2026-11-16, sessão interrompida no limite de quota)
+
+- **Infra 100% montada e validada por partes** (detalhes e armadilhas: `evidence/fase-c/comparativo-3060/install-notes.md` — LEIA PRIMEIRO):
+  - venvs próprios: `~/.venvs/trellis2` (torch 2.8.0+cu128 + xformers + lock do fork) e `~/.venvs/triposg` (torch 2.8.0+cu128, **diffusers 0.33.1 + transformers 4.57.3** — pins obrigatórios);
+  - extensões CUDA compiladas com gcc-14 + toolkit 12.8 (`~/cuda-12.8`, com **patch de header p/ glibc 2.42**): flex_gemm ✓ cumesh ✓ o_voxel ✓ nvdiffrast ✓ (nvdiffrec falhou no link — não é necessário p/ shape-only);
+  - pesos: TRELLIS.2-4B ✓ TripoSG ✓ DINOv3 (mirror camenduru, oficial é gated) ✓ BiRefNet público no lugar do RMBG-2.0 gated ✓;
+  - código novo no repo: `trellis2_runner.py`, `triposg_runner.py`, `trellis2_plugin.py`, `triposg_plugin.py`, `run_comparativo_c3.py`, `base_plugin.py` (attr `venv_py`, backward compat);
+- **Smoke TripoSG: OK** — caneca preproc: 959.744 verts / 1,9M faces / 76,6s / 0 erros (13× mais vértices que TripoSR);
+- **Smoke TRELLIS.2: INCONCLUSIVO** (sessão acabou no meio; bloqueios anteriores — DINOv3 e RMBG gated — já resolvidos; **re-rodar é o passo 1**);
+- **Benchmark 10×4, render, publish: NÃO RODADOS** — comandos prontos no install-notes §Próximos passos.
 
 ### Registro C2 (2026-11-16)
 

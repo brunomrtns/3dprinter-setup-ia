@@ -1,0 +1,7 @@
+== CUDA 13.0: download + install — 2026-11-16T21:36:55-03:00 ==
+download: 4300799649 bytes @ 6311998 B/s
+./cuda-installer: /lib/x86_64-linux-gnu/libxml2.so.2: no version information available (required by ./cuda-installer)
+./cuda-installer: /lib/x86_64-linux-gnu/libxml2.so.2: no version information available (required by ./cuda-installer)
+./cuda-installer: /lib/x86_64-linux-gnu/libxml2.so.2: no version information available (required by ./cuda-installer)
+Build cuda_13.0.r13.0/compiler.36260728_0
+OK: nvcc 13 instalado

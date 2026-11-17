@@ -69,6 +69,8 @@ class BaseGenerator(ABC):
     model: str = "?"
     vram_min_free_mib: int = 10_000
     runner_script: str = ""
+    # python que executa o runner — geradores com venv próprio (ADR-004) sobrescrevem
+    venv_py: str = VENVPY
 
     @abstractmethod
     def _build_env(self) -> dict:
@@ -91,7 +93,7 @@ class BaseGenerator(ABC):
             env = dict(os.environ)
             env.update(self._build_env())
             cmd = [
-                VENVPY,
+                self.venv_py,
                 runner,
                 "--image",
                 image_path,
