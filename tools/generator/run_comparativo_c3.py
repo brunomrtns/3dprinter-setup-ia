@@ -47,8 +47,12 @@ def input_path(caso_id: str) -> str:
 
 
 def stage_gerar(modes: list[str]) -> None:
+    # Repo primeiro: gen/ tem cópias antigas da Fase 1 (base_plugin sem venv_py)
+    # — se viesse primeiro, trellis2/triposg rodariam no venv errado.
     gen_dir = os.path.join(WORKDIR, "gen")
-    sys.path.insert(0, gen_dir if os.path.isdir(gen_dir) else _REPO_GENERATOR)
+    sys.path.insert(0, _REPO_GENERATOR)
+    if os.path.isdir(gen_dir):
+        sys.path.append(gen_dir)
     from trellis2_plugin import Trellis2Generator
     from triposg_plugin import TripoSGGenerator
     from trellis_plugin import TrellisGenerator
