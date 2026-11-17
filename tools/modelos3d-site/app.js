@@ -190,22 +190,56 @@ function refreshAll() {
 }
 
 // ---------- UI ----------
+function pickCase(id) {
+  state.caseId = id;
+  const c = currentCase();
+  const avail = MODES.filter(m => c.modes[m]);
+  if (!avail.includes(state.sel[0])) state.sel[0] = avail[0] || null;
+  if (!avail.includes(state.sel[1])) state.sel[1] = avail[1] || avail[0] || null;
+  renderCaseChips();
+  renderMBar();
+  refreshAll();
+  syncUrl();
+}
+
+const selCase = document.getElementById('selCase');
+const selModeA = document.getElementById('selModeA');
+const selModeB = document.getElementById('selModeB');
+function renderMBar() {
+  const c = currentCase();
+  if (!c) return;
+  if (selCase.options.length !== manifest.cases.length) {
+    selCase.innerHTML = '';
+    manifest.cases.forEach(cs => {
+      const o = document.createElement('option');
+      o.value = cs.id; o.textContent = cs.id;
+      selCase.appendChild(o);
+    });
+  }
+  selCase.value = state.caseId;
+  const fill = (sel, i) => {
+    sel.innerHTML = '';
+    MODES.filter(m => c.modes[m]).forEach(m => {
+      const o = document.createElement('option');
+      o.value = m; o.textContent = MODE_LABEL[m];
+      sel.appendChild(o);
+    });
+    sel.value = state.sel[i] || '';
+  };
+  fill(selModeA, 0); fill(selModeB, 1);
+  selModeB.hidden = !state.vs;
+}
+selCase.onchange = e => pickCase(e.target.value);
+selModeA.onchange = e => selectMode(0, e.target.value);
+selModeB.onchange = e => selectMode(1, e.target.value);
+
 function renderCaseChips() {
   casesEl.innerHTML = '';
   manifest.cases.forEach(c => {
     const b = document.createElement('button');
     b.className = 'chip' + (c.id === state.caseId ? ' on' : '');
     b.textContent = c.id;
-    b.onclick = () => {
-      state.caseId = c.id;
-      // preserva seleções válidas; defaults: trellis2 / triposg
-      const avail = MODES.filter(m => c.modes[m]);
-      if (!avail.includes(state.sel[0])) state.sel[0] = avail[0] || null;
-      if (!avail.includes(state.sel[1])) state.sel[1] = avail[1] || avail[0] || null;
-      renderCaseChips();
-      refreshAll();
-      syncUrl();
-    };
+    b.onclick = () => pickCase(c.id);
     casesEl.appendChild(b);
   });
 }
@@ -216,6 +250,7 @@ document.getElementById('btnVs').onclick = e => {
   e.target.classList.toggle('on', state.vs);
   e.target.textContent = 'VS';
   rebuildViewports();
+  renderMBar();
   syncUrl();
 };
 document.getElementById('btnShare').onclick = async e => {
@@ -250,6 +285,7 @@ state.caseId = wantCase.id;
   state.vs = qs.get('vs') === '1';
 }
 renderCaseChips();
+renderMBar();
 rebuildViewports();
 setAuto(qs.get('auto') !== '0', true);
 syncUrl();

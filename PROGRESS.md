@@ -49,10 +49,10 @@
 ### Registro viewer mobile-friendly (2026-11-17, noite) — `[x]` CONCLUÍDO
 
 - **Motivo**: dono compartilhou o link com um amigo; no celular "mal deu pra ver o modelo 3d na tela pq ficou um monte de coisa em cima do boneco".
-- **Fix em `tools/modelos3d-site/`** (`index.html` + `app.js`): layout `body` flex-column com `#stage` `flex:1` (canvas domina a tela); header compacto (`.sub` oculto, h1 13px); fileira de casos vira scroll horizontal de chips finos; **chips de modo saem do topo do viewport e vão para o rodapé** (antes `top:34px` inline — cobriam o modelo); `.vp .info` (stats faces/verts/VRAM) **oculto em ≤640px**; modo VS empilha **verticalmente** no mobile (`grid-template-rows:1fr 1fr`); controles inferiores reduzidos a `▶`/`⏸`, `VS`, `⟲`, `🔗`.
+- **Fix em `tools/modelos3d-site/`** (`index.html` + `app.js`): layout `body` flex-column com `#stage` `flex:1` (canvas domina a tela); header mínimo (`.sub` oculto, h1 13px); **no mobile (≤640px) TODA a UI de seleção vira 3 `<select>` dropdowns compactos** (`#mbar`: caso + modelo A + modelo B quando VS) — fileiras de chips (`#cases`, `.vp .modes`, `.vp .tag`, `.vp .info`) ficam `display:none`, ou seja **zero overlay sobre o modelo**; VS empilha vertical (`grid-template-rows:1fr 1fr`); controles = ícones `⏸/▶`, `VS`, `⟲`, `🔗`. Desktop inalterado (chips continuam).
 - **Bug corrigido no caminho**: `index.html` tinha lixo de ferramenta colado após `</html>` — truncado; arquivo volta a terminar limpo em `</html>`.
 - **Deploy**: `tools/modelos3d-site/deploy.sh` — nginx -t OK, reload sem downtime, smoke 200.
-- **Validação real (Chrome/Edge headless, viewport 390×844, URL pública)**: DOM com `TRELLIS.2 — trex_figurine`, spinner oculto, errbox vazio; screenshot com análise de pixels: 2092 px claros na viewport single, 6652 px no VS empilhado; desktop 1280×800 OK. Sem erros de console.
+- **Validação real (Chrome/Edge headless, viewport 390×844, URL pública)**: DOM com `TRELLIS.2 — trex_figurine`, spinner oculto, errbox vazio, 18 `<option>` nos selects; screenshot: modelo ocupa linhas 213–701 de 844 (~58% da altura da tela vs. fração mínima antes). Sem erros de console. Troca de caso/modelo no celular = tocar no dropdown correspondente.
 
 ### Registro C3 (2026-11-17, continuação — benchmark em execução)
 
