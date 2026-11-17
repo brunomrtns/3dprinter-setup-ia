@@ -3,8 +3,8 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
-const MODES = ['trellis2', 'triposg', 'trellis', 'triposr'];
-const MODE_LABEL = { trellis2: 'TRELLIS.2', triposg: 'TripoSG', trellis: 'TRELLIS 1', triposr: 'TripoSR' };
+const MODES = ['trellis2', 'triposg', 'triposf256', 'triposf512', 'trellis', 'triposr'];
+const MODE_LABEL = { trellis2: 'TRELLIS.2', triposg: 'TripoSG', triposf256: 'TripoSF 256', triposf512: 'TripoSF 512', trellis: 'TRELLIS 1', triposr: 'TripoSR' };
 const stage = document.getElementById('stage');
 const casesEl = document.getElementById('cases');
 const loader = new GLTFLoader();
