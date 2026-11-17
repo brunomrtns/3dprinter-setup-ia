@@ -1,0 +1,16 @@
+{
+ "label": "exemplo_jacket_256",
+ "mesh_path": "/home/bruno/tools/TripoSF/assets/examples/jacket.obj",
+ "config": "/home/bruno/printer3d-work/triposf-bench/configs/TripoSFVAE_o256.yaml",
+ "erros": [
+  "GUARD_VRAM_EXCEDIDO: pico 11073 MiB > 10000 MiB \u2014 job morto"
+ ],
+ "vram_wait_s": 0.1,
+ "vram_baseline_mib": 1275,
+ "tempo_total_s": 22.01,
+ "exit_code": -9,
+ "vram_pico_mib": 11073,
+ "guard_tripped": true,
+ "tempo_normalize_s": 0.86,
+ "tempo_load_s": 2.71
+}

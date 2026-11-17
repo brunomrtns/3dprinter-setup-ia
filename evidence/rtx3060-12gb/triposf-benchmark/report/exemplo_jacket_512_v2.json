@@ -1,0 +1,24 @@
+{
+ "label": "exemplo_jacket_512_v2",
+ "mesh_path": "/home/bruno/tools/TripoSF/assets/examples/jacket.obj",
+ "config": "/home/bruno/printer3d-work/triposf-bench/configs/TripoSFVAE_o512.yaml",
+ "erros": [],
+ "vram_wait_s": 0.1,
+ "vram_baseline_mib": 2706,
+ "tempo_total_s": 24.01,
+ "exit_code": 0,
+ "vram_pico_mib": 8328,
+ "guard_tripped": false,
+ "tempo_normalize_s": 0.79,
+ "tempo_load_s": 1.49,
+ "tempo_recon_s": 6.42,
+ "mesh_recon": "/home/bruno/printer3d-work/triposf-bench/out/exemplo_jacket_512/jacket_reconstruction.obj",
+ "vertices": 294786,
+ "faces": 586902,
+ "bbox": [
+  0.7324,
+  0.2289,
+  1.0
+ ],
+ "watertight": false
+}

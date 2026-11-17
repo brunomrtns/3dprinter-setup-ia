@@ -1,0 +1,14 @@
+{
+ "label": "exemplo_jacket_512",
+ "mesh_path": "/home/bruno/tools/TripoSF/assets/examples/jacket.obj",
+ "config": "/home/bruno/printer3d-work/triposf-bench/configs/TripoSFVAE_o512.yaml",
+ "erros": [
+  "GUARD_VRAM_EXCEDIDO: pico 11680 MiB > 10000 MiB \u2014 job morto"
+ ],
+ "vram_wait_s": 0.1,
+ "vram_baseline_mib": 1199,
+ "tempo_total_s": 19.01,
+ "exit_code": -9,
+ "vram_pico_mib": 11680,
+ "guard_tripped": true
+}

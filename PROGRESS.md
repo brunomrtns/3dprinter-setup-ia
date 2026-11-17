@@ -29,6 +29,15 @@
 | C1 | TRELLIS.2 (fork IgorAherne, VRAM reduzida) na máquina `rtx5060ti-8gb` — tarefa do colega | [ ] aguardando |
 | C3 | Comparativo formal na 3060: TRELLIS.2 + TripoSG + TRELLIS 1 + TripoSR na mesma entrada pré-processada, galeria lado a lado | `[~]` **GERAÇÃO+EVIDÊNCIA PUBLICADAS** — trellis2 10/10 OK, triposr 10/10, trellis 1/10 (9 OOM), triposg 7/10 (3 casos pulados por decisão do dono); gallery.md + scores.md + results.json em `evidence/fase-c/comparativo-3060/` — **aguarda veredito visual do dono → ADR-007** |
 | C4 | Fila de jobs entre máquinas | [ ] FUTURO (fora da fase) |
+| C5 | Benchmark TripoSF na 3060 (ordem direta do dono, 2026-11-17): caso anubis apenas, TripoSG × TripoSF | `[~]` **GERAÇÃO+EVIDÊNCIA PRONTAS** — 4/4 runs OK (256/512 × vistas a/b), picos 5,6–7,5 GB, guard 10 GB intacto; 1024³ **BLOQUEADO pelo guard**; evidência em `evidence/rtx3060-12gb/triposf-benchmark/` — **aguarda veredito visual do dono** |
+
+### Registro C5 (2026-11-17 — TripoSF × TripoSG, caso anubis)
+
+- **Achado crítico de escopo**: TripoSF oficial (`~/tools/TripoSF`) é **VAE de malhas 3D** (entrada `--mesh-path`, point cloud) — NÃO existe modo imagem→3D no repo. Comparativo feito pela linhagem da imagem do teste TripoSG: `anubis_{a,b}_preproc.png` → TripoSG (evidência existente, intocada) → malha bruta → TripoSF 256/512. Detalhe e limitações em `evidence/rtx3060-12gb/triposf-benchmark/notes.md` §0.
+- **Ambiente**: venv dedicado `~/venvs/triposf` (py3.11.16, torch 2.8.0+cu128, xformers 0.0.32.post2 no lugar de flash-attn via backend nativo do código, spconv-cu120, open3d 0.18, numpy 1.26.4 — desvios documentados; `pip check` OK). Pesos HF oficial `VAST-AI/TripoSF` (sha256 em notes.md §1).
+- **Guard 10.000 MiB (pico, nvidia-smi 1Hz)**: exemplo oficial jacket.obj com config oficial BLOQUEADO (pico 11.615 MiB — README pede ≥12 GB p/ 1024³; sonda por fases localizou o gargalo no `LocalPoolPointnet` fp32 com 819.200 pts, independe da resolução de saída). Remédio pelo knob oficial do README (`sample_points_num: 409.600`): exemplo OK a 256 (7.962) e 512 (8.328); 1024 segue BLOQUEADO (10.057).
+- **Benchmark anubis 4/4 OK**: 256 → pico 5,6/5,7 GB, ~24s, ~157k faces, watertight ✅ (8–18 componentes-ilha); 512 → pico 7,2/7,5 GB, ~29s, ~616–631k faces, **não-watertight** (+winding inconsistente no a_512). Referência TripoSG: 55,9s/vista, 537/549k faces, watertight, 1 componente.
+- **Renders canônicos + comparativos lado a lado** (câmera/luz do C3): `gallery_render/comparativo/gate_anubis_{a,b}_{a,b}.png` — **gate humano do dono pendente** (a IA não decide o vencedor).
 
 ### Registro C3 (2026-11-17, continuação — benchmark em execução)
 

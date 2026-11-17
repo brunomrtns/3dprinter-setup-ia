@@ -1,0 +1,28 @@
+[SPARSE] Backend: spconv, Attention: xformers
+[SPARSE][CONV] spconv algo: auto
+[ATTENTION] Using backend: xformers
+/home/bruno/venvs/triposf/lib/python3.11/site-packages/spconv/pytorch/functional.py:47: FutureWarning: `torch.cuda.amp.custom_fwd(args...)` is deprecated. Please use `torch.amp.custom_fwd(args..., device_type='cuda')` instead.
+  _TORCH_CUSTOM_FWD = amp.custom_fwd(cast_inputs=torch.float16)
+/home/bruno/venvs/triposf/lib/python3.11/site-packages/spconv/pytorch/functional.py:96: FutureWarning: `torch.cuda.amp.custom_bwd(args...)` is deprecated. Please use `torch.amp.custom_bwd(args..., device_type='cuda')` instead.
+  @_TORCH_CUSTOM_BWD
+/home/bruno/venvs/triposf/lib/python3.11/site-packages/spconv/pytorch/functional.py:162: FutureWarning: `torch.cuda.amp.custom_bwd(args...)` is deprecated. Please use `torch.amp.custom_bwd(args..., device_type='cuda')` instead.
+  @_TORCH_CUSTOM_BWD
+/home/bruno/venvs/triposf/lib/python3.11/site-packages/spconv/pytorch/functional.py:242: FutureWarning: `torch.cuda.amp.custom_bwd(args...)` is deprecated. Please use `torch.amp.custom_bwd(args..., device_type='cuda')` instead.
+  @_TORCH_CUSTOM_BWD
+/home/bruno/venvs/triposf/lib/python3.11/site-packages/spconv/pytorch/functional.py:331: FutureWarning: `torch.cuda.amp.custom_bwd(args...)` is deprecated. Please use `torch.amp.custom_bwd(args..., device_type='cuda')` instead.
+  @_TORCH_CUSTOM_BWD
+/home/bruno/venvs/triposf/lib/python3.11/site-packages/spconv/pytorch/functional.py:368: FutureWarning: `torch.cuda.amp.custom_bwd(args...)` is deprecated. Please use `torch.amp.custom_bwd(args..., device_type='cuda')` instead.
+  @_TORCH_CUSTOM_BWD
+/home/bruno/venvs/triposf/lib/python3.11/site-packages/spconv/pytorch/functional.py:388: FutureWarning: `torch.cuda.amp.custom_bwd(args...)` is deprecated. Please use `torch.amp.custom_bwd(args..., device_type='cuda')` instead.
+  @_TORCH_CUSTOM_BWD
+/home/bruno/venvs/triposf/lib/python3.11/site-packages/spconv/pytorch/functional.py:411: FutureWarning: `torch.cuda.amp.custom_bwd(args...)` is deprecated. Please use `torch.amp.custom_bwd(args..., device_type='cuda')` instead.
+  @_TORCH_CUSTOM_BWD
+Pretrained VAE Loading...
+Mesh Normalizing...
+Mesh Normalizing Time: 0.79
+Mesh Loading...
+Mesh Loading Time: 1.38
+Mesh Reconstructing...
+/home/bruno/tools/TripoSF/inference.py:239: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(dtype=torch.float16):
+Mesh Reconstructing Time: 4.42

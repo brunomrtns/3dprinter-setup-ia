@@ -1,0 +1,24 @@
+{
+ "label": "anubis_b_512",
+ "mesh_path": "/home/bruno/printer3d-work/anubis/out/triposg_b/mesh.obj",
+ "config": "/home/bruno/printer3d-work/triposf-bench/configs/TripoSFVAE_o512.yaml",
+ "erros": [],
+ "vram_wait_s": 0.1,
+ "vram_baseline_mib": 1731,
+ "tempo_total_s": 28.51,
+ "exit_code": 0,
+ "vram_pico_mib": 7198,
+ "guard_tripped": false,
+ "tempo_normalize_s": 3.25,
+ "tempo_load_s": 2.89,
+ "tempo_recon_s": 6.11,
+ "mesh_recon": "/home/bruno/printer3d-work/triposf-bench/out/anubis_b_512/mesh_reconstruction.obj",
+ "vertices": 315441,
+ "faces": 630756,
+ "bbox": [
+  0.4524,
+  1.0001,
+  0.3223
+ ],
+ "watertight": false
+}
