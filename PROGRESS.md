@@ -47,6 +47,7 @@
   - **triposg: 7/10** — dono ordenou pular os 3 casos restantes (2026-11-17); parcial documentado
 - Render (Blender headless, câmera/luz idênticas, 2 ângulos × malhas existentes) + `publish` executados → `evidence/fase-c/comparativo-3060/{gallery.md,scores.md,results.json,gallery_render/}` (58 renders commitados).
 - **Próximo gatilho: veredito visual do dono na galeria → decisão → ADR-007** (nenhum gerador é promovido automaticamente — ADR-005 segue valendo).
+- **Viewer 3D web deployado (2026-11-17, pedido do dono)**: `tools/modelos3d-site/` (three.js, orbit/pinch, modo VS lado a lado, mobile) → container `modelos3d` (nginx estático) na VPS + rota `/modelos3d/` no trivestia-nginx. Live: **https://brunointegrations.com/modelos3d/**. 28 GLBs (~200k faces, decimate+shade-smooth — sem smooth o export infla verts 6×) em `~/printer3d-work/modelos3d-site/models/` (não commitados, ~171MB). Deploy: `tools/modelos3d-site/deploy.sh` (mesmo padrão do printflow3d: rsync + nginx idempotente + backup + smoke). Manifest regenerável: `gen_manifest.py <results.json> <models_dir> <out>`.
 
 ### Registro C3 anterior (2026-11-16, sessão interrompida no limite de quota)
 
