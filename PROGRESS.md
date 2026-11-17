@@ -29,7 +29,7 @@
 | C1 | TRELLIS.2 (fork IgorAherne, VRAM reduzida) na máquina `rtx5060ti-8gb` — tarefa do colega | [ ] aguardando |
 | C3 | Comparativo formal na 3060: TRELLIS.2 + TripoSG + TRELLIS 1 + TripoSR na mesma entrada pré-processada, galeria lado a lado | `[~]` **GERAÇÃO+EVIDÊNCIA PUBLICADAS** — trellis2 10/10 OK, triposr 10/10, trellis 1/10 (9 OOM), triposg 7/10 (3 casos pulados por decisão do dono); gallery.md + scores.md + results.json em `evidence/fase-c/comparativo-3060/` — **aguarda veredito visual do dono → ADR-007** |
 | C4 | Fila de jobs entre máquinas | [ ] FUTURO (fora da fase) |
-| C5 | Benchmark TripoSF na 3060 (ordem direta do dono, 2026-11-17): caso anubis apenas, TripoSG × TripoSF | `[~]` **GERAÇÃO+EVIDÊNCIA PRONTAS** — 4/4 runs OK (256/512 × vistas a/b), picos 5,6–7,5 GB, guard 10 GB intacto; 1024³ **BLOQUEADO pelo guard**; evidência em `evidence/rtx3060-12gb/triposf-benchmark/` — **aguarda veredito visual do dono** |
+| C5 | Benchmark TripoSF na 3060 (ordem direta do dono, 2026-11-17): caso anubis apenas, TripoSG × TripoSF | `[x]` **CONCLUÍDO COM VEREDITO DO DONO (2026-11-17)**: *"o triposf512 ganhou, melhor até agora"* — gate visual feito no viewer (modelos3d) com `triposg` × `triposf512`; 4/4 runs OK (256/512 × vistas a/b), picos 5,6–7,5 GB, guard 10 GB intacto; 1024³ **BLOQUEADO pelo guard**; evidência em `evidence/rtx3060-12gb/triposf-benchmark/`. **Pendência de decisão do dono**: promover o pipeline gerador→TripoSF512 como etapa oficial (exige Forja antes de imprimir — 512 não é watertight) |
 
 ### Registro C5 (2026-11-17 — TripoSF × TripoSG, caso anubis)
 
