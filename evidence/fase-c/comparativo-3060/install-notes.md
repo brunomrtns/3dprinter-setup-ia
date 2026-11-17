@@ -18,9 +18,24 @@
 | CUDA toolkit 12.8 | ✅ `~/cuda-12.8` (runfile, sem driver) + **PATCH OBRIGATÓRIO**: `include/crt/math_functions.h` — 6 declarações (rsqrt/sinpi/cospi float+double) ganharam ` noexcept` p/ glibc 2.42 do Ubuntu 26.04 (backup em `logs-c3/math_functions.h.bak`; sem o patch, TODA compilação de extensão falha) |
 | gcc | ⚠️ sistema traz gcc 15 (quebra pybind11 do torch 2.8) — **usar `CC=gcc-14 CXX=g++-14`** (pacote instalado) |
 | Smoke TripoSR→TripoSG | ✅ **OK**: caneca preproc → 959.744 verts / 1.919.528 faces / 76,6s / load 10s / 0 erros (`logs-c3/smoke-triposg*.log`) |
-| Smoke TRELLIS.2 | ⚠️ **INCONCLUSIVO** — última execução saiu sem output no limite da sessão; **re-rodar** (o bloqueio anterior era DINOv3/RMBG gated, já resolvido) |
+| Smoke TRELLIS.2 | ✅ **OK em 512³** (2026-11-16 ~23:59): caneca preproc → 925.437 verts / 1.996.815 faces (raw 2.566.098, simplificado p/ teto 2M) / run 82,4s / load 206,6s / 0 erros (`logs-c3/smoke-trellis2-512d.log`, mesh em `~/printer3d-work/c3-bench/smoke/trellis2/`). **1024_cascade: OOM mesmo após fixes** — ver §Atualização abaixo |
 | Benchmark completo (10×4) | ❌ não rodado |
 | Renders/galeria/publish | ❌ não rodados |
+
+## Atualização 2026-11-16 ~meia-noite (agente Devin) — bugs reais corrigidos no smoke TRELLIS.2
+
+Sequência de falhas reais encontradas e resolvidas (todas MEDIDAS, logs em `logs-c3/`):
+
+1. **`BiRefNet_config.py`/`handler.py` ausentes** no mirror local `~/tools/TRELLIS.2/MODELS/RMBG-2.0` → `OSError ... does not appear to have a file named BiRefNet_config.py`. O repo ZhengPeng7/BiRefNet no HF tem esses arquivos (trust_remote_code); baixados para a pasta local.
+2. **`pipeline.preprocess_image(True)`** — chamada inválida (o método recebe `Image`, não bool); linha removida do runner. O `preprocess_image` oficial já faz rembg+crop — mantido (comportamento padrão do gerador).
+3. **Faltava `pipeline.cuda()`** após `from_pretrained` — em low_vram isso só define `_device='cuda'`; sem isso rembg/cond rodavam em CPU e `BiRefNet.__call__` (que hardcoda `.to("cuda")`) estourava mismatch de device.
+4. **`flex_gemm` vs fork**: `SubMConv3dFunction._compute_neighbor_cache()` do FlexGEMM instalado exige arg `needs_grad` (commit upstream "implement sparse conv fwd path"); fork não passava. **Patch em `~/tools/TRELLIS.2/trellis2/modules/sparse/conv/conv_flex_gemm.py`** (2 call sites → `x.feats.requires_grad`). Fora do repo — se o clone for refeito, refazer o patch.
+5. **OOM no decode/upsample — causa raiz: AUTOGRAD LIGADO.** O pipeline oficial executa tudo sob `@torch.no_grad()` (`run()`); nosso runner chamava `decode_shape_slat`/`sample_shape_slat_cascade` direto → cada conv (~450MB/conv medido via SPARSE_DEBUG) retinha ativações → 10GB alloc aos ~19 convs → OOM com tensores de só 13-32MB. Fix: `torch.set_grad_enabled(False)` após preprocess no runner. Com isso o decode 512³ passou.
+6. **`decode_shape_slat` é helper de baixo nível** — quem chama `decode_latent` faz antes: `decoder.low_vram=True` + `from_latent.to(device)` + `output_layer.to(device)`. Replicado no runner (sem isso `from_latent` fica em CPU → mismatch de device).
+7. **`PYTORCH_CUDA_ALLOC_CONF`** do runner agora espelha o fork: `expandable_segments:True,garbage_collection_threshold:0.65,max_split_size_mb:128` (pipeline_worker.py + app.py).
+8. **512³ funciona; 1024_cascade ainda OOM** — após no_grad, o gargalo migrou para o estágio HR do cascade (`sample_shape_slat_cascade` → attention do flow 1.3B com até 49152 tokens). Testando `--max-tokens 24576` como mitigação; se OOM persistir, **benchmark TRELLIS.2 roda em 512³** (decisão honesta documentada — oficial exige 24GB).
+
+Runner ganhou args: `--res {512,1024}` (default 512) e `--max-tokens` (default 49152). Relatório inclui `res_mode`/`resolucao`/`max_tokens`.
 
 ## Código novo (NA BRANCH/MAIN — commit pendente no momento do handoff)
 

@@ -1,0 +1,115 @@
+[ATTENTION] Using backend: xformers
+Please wait...
+[SPARSE] Conv backend: flex_gemm; Attention backend: xformers
+[INFO] Local DINOv3 found. Loading from: /home/bruno/tools/TRELLIS.2/MODELS/dinov3
+[INFO] Local RMBG-2.0 found. Loading from: /home/bruno/tools/TRELLIS.2/MODELS/RMBG-2.0
+[TIMING] sparse_structure_flow_model.to(device): 1.18s
+Sampling sparse structure:   0%|          | 0/12 [00:00<?, ?it/s]Sampling sparse structure:   8%|▊         | 1/12 [00:02<00:30,  2.81s/it]Sampling sparse structure:  17%|█▋        | 2/12 [00:04<00:20,  2.02s/it]Sampling sparse structure:  25%|██▌       | 3/12 [00:05<00:16,  1.78s/it]Sampling sparse structure:  33%|███▎      | 4/12 [00:07<00:13,  1.67s/it]Sampling sparse structure:  42%|████▏     | 5/12 [00:08<00:11,  1.60s/it]Sampling sparse structure:  50%|█████     | 6/12 [00:10<00:09,  1.56s/it]Sampling sparse structure:  58%|█████▊    | 7/12 [00:11<00:07,  1.55s/it]Sampling sparse structure:  67%|██████▋   | 8/12 [00:13<00:06,  1.53s/it]Sampling sparse structure:  75%|███████▌  | 9/12 [00:14<00:04,  1.52s/it]Sampling sparse structure:  83%|████████▎ | 10/12 [00:16<00:03,  1.53s/it]Sampling sparse structure:  92%|█████████▏| 11/12 [00:17<00:01,  1.30s/it]Sampling sparse structure: 100%|██████████| 12/12 [00:17<00:00,  1.12s/it]Sampling sparse structure: 100%|██████████| 12/12 [00:17<00:00,  1.48s/it]
+[TIMING] Sampling sparse structure step 0: 2.81s
+[TIMING] Sampling sparse structure step 1: 1.47s
+[TIMING] Sampling sparse structure step 2: 1.49s
+[TIMING] Sampling sparse structure step 3: 1.49s
+[TIMING] Sampling sparse structure step 4: 1.49s
+[TIMING] Sampling sparse structure step 5: 1.48s
+[TIMING] Sampling sparse structure step 6: 1.51s
+[TIMING] Sampling sparse structure step 7: 1.50s
+[TIMING] Sampling sparse structure step 8: 1.50s
+[TIMING] Sampling sparse structure step 9: 1.55s
+[TIMING] Sampling sparse structure step 10: 0.76s
+[TIMING] Sampling sparse structure step 11: 0.71s
+[TIMING] sparse_structure sampling (all steps): 17.78s
+[TIMING] sparse_structure_flow_model.cpu(): 4.44s
+Sampling shape SLat (LR):   0%|          | 0/12 [00:00<?, ?it/s]Sampling shape SLat (LR):   8%|▊         | 1/12 [00:01<00:13,  1.24s/it]Sampling shape SLat (LR):  17%|█▋        | 2/12 [00:02<00:11,  1.12s/it]Sampling shape SLat (LR):  25%|██▌       | 3/12 [00:03<00:09,  1.06s/it]Sampling shape SLat (LR):  33%|███▎      | 4/12 [00:04<00:08,  1.02s/it]Sampling shape SLat (LR):  42%|████▏     | 5/12 [00:05<00:07,  1.00s/it]Sampling shape SLat (LR):  50%|█████     | 6/12 [00:06<00:05,  1.01it/s]Sampling shape SLat (LR):  58%|█████▊    | 7/12 [00:07<00:04,  1.02it/s]Sampling shape SLat (LR):  67%|██████▋   | 8/12 [00:08<00:03,  1.03it/s]Sampling shape SLat (LR):  75%|███████▌  | 9/12 [00:09<00:02,  1.03it/s]Sampling shape SLat (LR):  83%|████████▎ | 10/12 [00:09<00:01,  1.33it/s]Sampling shape SLat (LR):  92%|█████████▏| 11/12 [00:09<00:00,  1.49it/s]Sampling shape SLat (LR): 100%|██████████| 12/12 [00:10<00:00,  1.64it/s]Sampling shape SLat (LR): 100%|██████████| 12/12 [00:10<00:00,  1.17it/s]
+[TIMING] Sampling shape SLat (LR) step 0: 1.24s
+[TIMING] Sampling shape SLat (LR) step 1: 1.03s
+[TIMING] Sampling shape SLat (LR) step 2: 0.98s
+[TIMING] Sampling shape SLat (LR) step 3: 0.97s
+[TIMING] Sampling shape SLat (LR) step 4: 0.97s
+[TIMING] Sampling shape SLat (LR) step 5: 0.96s
+[TIMING] Sampling shape SLat (LR) step 6: 0.96s
+[TIMING] Sampling shape SLat (LR) step 7: 0.96s
+[TIMING] Sampling shape SLat (LR) step 8: 0.96s
+[TIMING] Sampling shape SLat (LR) step 9: 0.28s
+[TIMING] Sampling shape SLat (LR) step 10: 0.48s
+[TIMING] Sampling shape SLat (LR) step 11: 0.48s
+Sampling shape SLat (HR):   0%|          | 0/12 [00:00<?, ?it/s]Sampling shape SLat (HR):   0%|          | 0/12 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/tools/generator/trellis2_runner.py", line 135, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/tools/generator/trellis2_runner.py", line 80, in main
+    shape_slat, res = pipeline.sample_shape_slat_cascade(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/pipelines/trellis2_image_to_3d.py", line 443, in sample_shape_slat_cascade
+    slat = self.shape_slat_sampler.sample(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/.venvs/trellis2/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/pipelines/samplers/flow_euler.py", line 211, in sample
+    return super().sample(model, noise, cond, steps, rescale_t, verbose, neg_cond=neg_cond, guidance_strength=guidance_strength, guidance_interval=guidance_interval, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/.venvs/trellis2/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/pipelines/samplers/flow_euler.py", line 125, in sample
+    sample = self.sample_once(model, sample, t, t_prev, cond, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/.venvs/trellis2/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/pipelines/samplers/flow_euler.py", line 79, in sample_once
+    pred_v = self._inference_model(model, x_t, t, cond, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/pipelines/samplers/guidance_interval_mixin.py", line 13, in _inference_model
+    return super()._inference_model(model, x_t, t, cond, guidance_strength=guidance_strength, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/pipelines/samplers/classifier_free_guidance_mixin.py", line 17, in _inference_model
+    pred_pos = super()._inference_model(model, x_t, t, cond, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/pipelines/samplers/flow_euler.py", line 48, in _inference_model
+    return model(x_t, t, cond, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/.venvs/trellis2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/.venvs/trellis2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/models/structured_latent_flow.py", line 196, in forward
+    h = block(h, t_emb, cond)
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/.venvs/trellis2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/.venvs/trellis2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/modules/sparse/transformer/modulated.py", line 168, in forward
+    return self._forward(x, mod, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/modules/sparse/transformer/modulated.py", line 151, in _forward
+    h = self.self_attn(h)
+        ^^^^^^^^^^^^^^^^^
+  File "/home/bruno/.venvs/trellis2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/.venvs/trellis2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/modules/sparse/attention/modules.py", line 103, in forward
+    qkv = self._linear(self.to_qkv, x)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/modules/sparse/attention/modules.py", line 82, in _linear
+    return x.replace(module(x.feats))
+                     ^^^^^^^^^^^^^^^
+  File "/home/bruno/.venvs/trellis2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/.venvs/trellis2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/.venvs/trellis2/lib/python3.11/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: CUDA driver error: out of memory

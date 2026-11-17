@@ -1,0 +1,99 @@
+'(ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')), '(Request ID: 661cb1fd-27a2-4999-a797-84bf2e4cf903)')' thrown while requesting HEAD https://huggingface.co/microsoft/TRELLIS.2-4B/resolve/main/ckpts/slat_flow_img2shape_dit_1_3B_1024_bf16.json
+Retrying in 1s [Retry 1/5].
+[ATTENTION] Using backend: xformers
+Please wait...
+[SPARSE] Conv backend: flex_gemm; Attention backend: xformers
+[INFO] Local DINOv3 found. Loading from: /home/bruno/tools/TRELLIS.2/MODELS/dinov3
+[INFO] Local RMBG-2.0 found. Loading from: /home/bruno/tools/TRELLIS.2/MODELS/RMBG-2.0
+[TIMING] sparse_structure_flow_model.to(device): 0.60s
+Sampling sparse structure:   0%|          | 0/12 [00:00<?, ?it/s]Sampling sparse structure:   8%|▊         | 1/12 [00:01<00:19,  1.78s/it]Sampling sparse structure:  17%|█▋        | 2/12 [00:03<00:16,  1.60s/it]Sampling sparse structure:  25%|██▌       | 3/12 [00:04<00:13,  1.55s/it]Sampling sparse structure:  33%|███▎      | 4/12 [00:06<00:12,  1.52s/it]Sampling sparse structure:  42%|████▏     | 5/12 [00:07<00:10,  1.51s/it]Sampling sparse structure:  50%|█████     | 6/12 [00:09<00:08,  1.50s/it]Sampling sparse structure:  58%|█████▊    | 7/12 [00:10<00:07,  1.50s/it]Sampling sparse structure:  67%|██████▋   | 8/12 [00:12<00:05,  1.49s/it]Sampling sparse structure:  75%|███████▌  | 9/12 [00:13<00:04,  1.49s/it]Sampling sparse structure:  83%|████████▎ | 10/12 [00:15<00:02,  1.49s/it]Sampling sparse structure:  92%|█████████▏| 11/12 [00:15<00:01,  1.26s/it]Sampling sparse structure: 100%|██████████| 12/12 [00:16<00:00,  1.10s/it]Sampling sparse structure: 100%|██████████| 12/12 [00:16<00:00,  1.38s/it]
+[TIMING] Sampling sparse structure step 0: 1.78s
+[TIMING] Sampling sparse structure step 1: 1.47s
+[TIMING] Sampling sparse structure step 2: 1.48s
+[TIMING] Sampling sparse structure step 3: 1.48s
+[TIMING] Sampling sparse structure step 4: 1.48s
+[TIMING] Sampling sparse structure step 5: 1.49s
+[TIMING] Sampling sparse structure step 6: 1.49s
+[TIMING] Sampling sparse structure step 7: 1.49s
+[TIMING] Sampling sparse structure step 8: 1.49s
+[TIMING] Sampling sparse structure step 9: 1.48s
+[TIMING] Sampling sparse structure step 10: 0.75s
+[TIMING] Sampling sparse structure step 11: 0.73s
+[TIMING] sparse_structure sampling (all steps): 16.62s
+[TIMING] sparse_structure_flow_model.cpu(): 3.17s
+Sampling shape SLat:   0%|          | 0/12 [00:00<?, ?it/s]Sampling shape SLat:   8%|▊         | 1/12 [00:11<02:11, 12.00s/it]Sampling shape SLat:  17%|█▋        | 2/12 [00:21<01:46, 10.61s/it]Sampling shape SLat:  25%|██▌       | 3/12 [00:34<01:43, 11.47s/it]Sampling shape SLat:  33%|███▎      | 4/12 [00:46<01:33, 11.73s/it]Sampling shape SLat:  42%|████▏     | 5/12 [00:57<01:20, 11.56s/it]Sampling shape SLat:  50%|█████     | 6/12 [01:08<01:07, 11.31s/it]Sampling shape SLat:  58%|█████▊    | 7/12 [01:18<00:54, 10.81s/it]Sampling shape SLat:  67%|██████▋   | 8/12 [01:28<00:43, 10.75s/it]Sampling shape SLat:  75%|███████▌  | 9/12 [01:39<00:31, 10.65s/it]Sampling shape SLat:  83%|████████▎ | 10/12 [01:44<00:18,  9.06s/it]Sampling shape SLat:  92%|█████████▏| 11/12 [01:50<00:07,  7.97s/it]Sampling shape SLat: 100%|██████████| 12/12 [01:55<00:00,  7.16s/it]Sampling shape SLat: 100%|██████████| 12/12 [01:55<00:00,  9.62s/it]
+[TIMING] Sampling shape SLat step 0: 12.00s
+[TIMING] Sampling shape SLat step 1: 9.63s
+[TIMING] Sampling shape SLat step 2: 12.49s
+[TIMING] Sampling shape SLat step 3: 12.11s
+[TIMING] Sampling shape SLat step 4: 11.27s
+[TIMING] Sampling shape SLat step 5: 10.83s
+[TIMING] Sampling shape SLat step 6: 9.78s
+[TIMING] Sampling shape SLat step 7: 10.62s
+[TIMING] Sampling shape SLat step 8: 10.43s
+[TIMING] Sampling shape SLat step 9: 5.48s
+[TIMING] Sampling shape SLat step 10: 5.51s
+[TIMING] Sampling shape SLat step 11: 5.30s
+[CONV] N=2684 Ci=1024 Co=1024 neighbor_map=0MB offload_out=False feats_bytes=5MB
+[CONV] N=2684 Ci=1024 Co=1024 neighbor_map=0MB offload_out=False feats_bytes=5MB
+[CONV] N=2684 Ci=1024 Co=1024 neighbor_map=0MB offload_out=False feats_bytes=5MB
+[CONV] N=2684 Ci=1024 Co=1024 neighbor_map=0MB offload_out=False feats_bytes=5MB
+[CONV] N=2684 Ci=1024 Co=4096 neighbor_map=0MB offload_out=False feats_bytes=5MB
+[CONV] N=13285 Ci=512 Co=512 neighbor_map=1MB offload_out=False feats_bytes=13MB
+[VRAM] decoder level 0 done: alloc=1885MB  reserved=1948MB  voxels=13285  channels=512
+[CONV] N=13285 Ci=512 Co=512 neighbor_map=1MB offload_out=False feats_bytes=13MB
+[CONV] N=13285 Ci=512 Co=512 neighbor_map=1MB offload_out=False feats_bytes=13MB
+[CONV] N=13285 Ci=512 Co=512 neighbor_map=1MB offload_out=False feats_bytes=13MB
+[CONV] N=13285 Ci=512 Co=512 neighbor_map=1MB offload_out=False feats_bytes=13MB
+[CONV] N=13285 Ci=512 Co=512 neighbor_map=1MB offload_out=False feats_bytes=13MB
+[CONV] N=13285 Ci=512 Co=512 neighbor_map=1MB offload_out=False feats_bytes=13MB
+[CONV] N=13285 Ci=512 Co=512 neighbor_map=1MB offload_out=False feats_bytes=13MB
+[CONV] N=13285 Ci=512 Co=512 neighbor_map=1MB offload_out=False feats_bytes=13MB
+[CONV] N=13285 Ci=512 Co=512 neighbor_map=1MB offload_out=False feats_bytes=13MB
+[CONV] N=13285 Ci=512 Co=512 neighbor_map=1MB offload_out=False feats_bytes=13MB
+[CONV] N=13285 Ci=512 Co=512 neighbor_map=1MB offload_out=False feats_bytes=13MB
+[CONV] N=13285 Ci=512 Co=512 neighbor_map=1MB offload_out=False feats_bytes=13MB
+[CONV] N=13285 Ci=512 Co=512 neighbor_map=1MB offload_out=False feats_bytes=13MB
+[CONV] N=13285 Ci=512 Co=512 neighbor_map=1MB offload_out=False feats_bytes=13MB
+[CONV] N=13285 Ci=512 Co=512 neighbor_map=1MB offload_out=False feats_bytes=13MB
+[CONV] N=13285 Ci=512 Co=512 neighbor_map=1MB offload_out=False feats_bytes=13MB
+[CONV] N=13285 Ci=512 Co=2048 neighbor_map=1MB offload_out=False feats_bytes=13MB
+[CONV] N=64746 Ci=256 Co=256 neighbor_map=7MB offload_out=False feats_bytes=32MB
+Traceback (most recent call last):
+  File "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/tools/generator/trellis2_runner.py", line 128, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/tools/generator/trellis2_runner.py", line 97, in main
+    meshes, _subs = pipeline.decode_shape_slat(shape_slat, res)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/pipelines/trellis2_image_to_3d.py", line 487, in decode_shape_slat
+    decoded = SparseUnetVaeDecoder.forward(decoder, slat, return_subs=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/models/sc_vaes/sparse_unet_vae.py", line 619, in forward
+    h, sub = block(h)
+             ^^^^^^^^
+  File "/home/bruno/.venvs/trellis2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/.venvs/trellis2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/models/sc_vaes/sparse_unet_vae.py", line 336, in forward
+    return self._forward(x, subdiv)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/models/sc_vaes/sparse_unet_vae.py", line 308, in _forward
+    h = self.conv2(h)
+        ^^^^^^^^^^^^^
+  File "/home/bruno/.venvs/trellis2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/.venvs/trellis2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/modules/sparse/conv/conv.py", line 21, in forward
+    return _backends[config.CONV].sparse_conv3d_forward(self, x)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/modules/sparse/conv/conv_flex_gemm.py", line 124, in sparse_conv3d_forward
+    chunk_im2col[mask] = feats[flat_map[mask].long()]
+                         ~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: CUDA driver error: out of memory

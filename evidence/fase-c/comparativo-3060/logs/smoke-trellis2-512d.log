@@ -1,0 +1,35 @@
+[ATTENTION] Using backend: xformers
+Please wait...
+[SPARSE] Conv backend: flex_gemm; Attention backend: xformers
+[INFO] Local DINOv3 found. Loading from: /home/bruno/tools/TRELLIS.2/MODELS/dinov3
+[INFO] Local RMBG-2.0 found. Loading from: /home/bruno/tools/TRELLIS.2/MODELS/RMBG-2.0
+[TIMING] sparse_structure_flow_model.to(device): 9.15s
+Sampling sparse structure:   0%|          | 0/12 [00:00<?, ?it/s]Sampling sparse structure:   8%|▊         | 1/12 [00:04<00:48,  4.37s/it]Sampling sparse structure:  17%|█▋        | 2/12 [00:05<00:26,  2.65s/it]Sampling sparse structure:  25%|██▌       | 3/12 [00:07<00:19,  2.12s/it]Sampling sparse structure:  33%|███▎      | 4/12 [00:08<00:14,  1.87s/it]Sampling sparse structure:  42%|████▏     | 5/12 [00:10<00:12,  1.73s/it]Sampling sparse structure:  50%|█████     | 6/12 [00:11<00:09,  1.65s/it]Sampling sparse structure:  58%|█████▊    | 7/12 [00:13<00:07,  1.59s/it]Sampling sparse structure:  67%|██████▋   | 8/12 [00:14<00:06,  1.56s/it]Sampling sparse structure:  75%|███████▌  | 9/12 [00:16<00:04,  1.54s/it]Sampling sparse structure:  83%|████████▎ | 10/12 [00:17<00:03,  1.52s/it]Sampling sparse structure:  92%|█████████▏| 11/12 [00:18<00:01,  1.28s/it]Sampling sparse structure: 100%|██████████| 12/12 [00:19<00:00,  1.12s/it]Sampling sparse structure: 100%|██████████| 12/12 [00:19<00:00,  1.60s/it]
+[TIMING] Sampling sparse structure step 0: 4.37s
+[TIMING] Sampling sparse structure step 1: 1.45s
+[TIMING] Sampling sparse structure step 2: 1.48s
+[TIMING] Sampling sparse structure step 3: 1.50s
+[TIMING] Sampling sparse structure step 4: 1.48s
+[TIMING] Sampling sparse structure step 5: 1.49s
+[TIMING] Sampling sparse structure step 6: 1.48s
+[TIMING] Sampling sparse structure step 7: 1.50s
+[TIMING] Sampling sparse structure step 8: 1.49s
+[TIMING] Sampling sparse structure step 9: 1.48s
+[TIMING] Sampling sparse structure step 10: 0.74s
+[TIMING] Sampling sparse structure step 11: 0.74s
+[TIMING] sparse_structure sampling (all steps): 19.20s
+[TIMING] sparse_structure_flow_model.cpu(): 4.84s
+Sampling shape SLat:   0%|          | 0/12 [00:00<?, ?it/s]Sampling shape SLat:   8%|▊         | 1/12 [00:02<00:23,  2.13s/it]Sampling shape SLat:  17%|█▋        | 2/12 [00:03<00:15,  1.55s/it]Sampling shape SLat:  25%|██▌       | 3/12 [00:04<00:11,  1.29s/it]Sampling shape SLat:  33%|███▎      | 4/12 [00:05<00:10,  1.30s/it]Sampling shape SLat:  42%|████▏     | 5/12 [00:07<00:10,  1.46s/it]Sampling shape SLat:  50%|█████     | 6/12 [00:09<00:09,  1.55s/it]Sampling shape SLat:  58%|█████▊    | 7/12 [00:10<00:08,  1.62s/it]Sampling shape SLat:  67%|██████▋   | 8/12 [00:12<00:06,  1.67s/it]Sampling shape SLat:  75%|███████▌  | 9/12 [00:14<00:05,  1.72s/it]Sampling shape SLat:  83%|████████▎ | 10/12 [00:15<00:02,  1.44s/it]Sampling shape SLat:  92%|█████████▏| 11/12 [00:16<00:01,  1.27s/it]Sampling shape SLat: 100%|██████████| 12/12 [00:16<00:00,  1.14s/it]Sampling shape SLat: 100%|██████████| 12/12 [00:16<00:00,  1.41s/it]
+[TIMING] Sampling shape SLat step 0: 2.13s
+[TIMING] Sampling shape SLat step 1: 1.15s
+[TIMING] Sampling shape SLat step 2: 0.97s
+[TIMING] Sampling shape SLat step 3: 1.32s
+[TIMING] Sampling shape SLat step 4: 1.73s
+[TIMING] Sampling shape SLat step 5: 1.73s
+[TIMING] Sampling shape SLat step 6: 1.75s
+[TIMING] Sampling shape SLat step 7: 1.77s
+[TIMING] Sampling shape SLat step 8: 1.84s
+[TIMING] Sampling shape SLat step 9: 0.81s
+[TIMING] Sampling shape SLat step 10: 0.89s
+[TIMING] Sampling shape SLat step 11: 0.85s
+REPORT_JSON={"tempo_load_s": 206.59, "tempo_run_s": 82.39, "resolucao": 512, "vertices": 925437, "faces": 1996815, "faces_raw_antes_simplify": 2566098, "bbox": [0.9999, 0.5155, 0.6753], "obj": "/home/bruno/printer3d-work/c3-bench/smoke/trellis2/mesh.obj", "erros": []}

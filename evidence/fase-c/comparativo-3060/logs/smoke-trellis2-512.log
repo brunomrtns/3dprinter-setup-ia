@@ -1,0 +1,72 @@
+[ATTENTION] Using backend: xformers
+Please wait...
+[SPARSE] Conv backend: flex_gemm; Attention backend: xformers
+[INFO] Local DINOv3 found. Loading from: /home/bruno/tools/TRELLIS.2/MODELS/dinov3
+[INFO] Local RMBG-2.0 found. Loading from: /home/bruno/tools/TRELLIS.2/MODELS/RMBG-2.0
+[TIMING] sparse_structure_flow_model.to(device): 0.72s
+Sampling sparse structure:   0%|          | 0/12 [00:00<?, ?it/s]Sampling sparse structure:   8%|▊         | 1/12 [00:02<00:22,  2.01s/it]Sampling sparse structure:  17%|█▋        | 2/12 [00:03<00:17,  1.72s/it]Sampling sparse structure:  25%|██▌       | 3/12 [00:05<00:14,  1.63s/it]Sampling sparse structure:  33%|███▎      | 4/12 [00:06<00:12,  1.59s/it]Sampling sparse structure:  42%|████▏     | 5/12 [00:08<00:10,  1.57s/it]Sampling sparse structure:  50%|█████     | 6/12 [00:09<00:09,  1.55s/it]Sampling sparse structure:  58%|█████▊    | 7/12 [00:11<00:07,  1.54s/it]Sampling sparse structure:  67%|██████▋   | 8/12 [00:12<00:06,  1.54s/it]Sampling sparse structure:  75%|███████▌  | 9/12 [00:14<00:04,  1.54s/it]Sampling sparse structure:  83%|████████▎ | 10/12 [00:15<00:03,  1.54s/it]Sampling sparse structure:  92%|█████████▏| 11/12 [00:16<00:01,  1.30s/it]Sampling sparse structure: 100%|██████████| 12/12 [00:17<00:00,  1.14s/it]Sampling sparse structure: 100%|██████████| 12/12 [00:17<00:00,  1.44s/it]
+[TIMING] Sampling sparse structure step 0: 2.01s
+[TIMING] Sampling sparse structure step 1: 1.52s
+[TIMING] Sampling sparse structure step 2: 1.52s
+[TIMING] Sampling sparse structure step 3: 1.53s
+[TIMING] Sampling sparse structure step 4: 1.53s
+[TIMING] Sampling sparse structure step 5: 1.53s
+[TIMING] Sampling sparse structure step 6: 1.53s
+[TIMING] Sampling sparse structure step 7: 1.53s
+[TIMING] Sampling sparse structure step 8: 1.53s
+[TIMING] Sampling sparse structure step 9: 1.53s
+[TIMING] Sampling sparse structure step 10: 0.76s
+[TIMING] Sampling sparse structure step 11: 0.77s
+[TIMING] sparse_structure sampling (all steps): 17.29s
+[TIMING] sparse_structure_flow_model.cpu(): 1.54s
+Sampling shape SLat:   0%|          | 0/12 [00:00<?, ?it/s]Sampling shape SLat:   8%|▊         | 1/12 [00:01<00:12,  1.10s/it]Sampling shape SLat:  17%|█▋        | 2/12 [00:02<00:10,  1.04s/it]Sampling shape SLat:  25%|██▌       | 3/12 [00:03<00:09,  1.02s/it]Sampling shape SLat:  33%|███▎      | 4/12 [00:04<00:08,  1.01s/it]Sampling shape SLat:  42%|████▏     | 5/12 [00:05<00:07,  1.00s/it]Sampling shape SLat:  50%|█████     | 6/12 [00:06<00:06,  1.00s/it]Sampling shape SLat:  58%|█████▊    | 7/12 [00:07<00:04,  1.00it/s]Sampling shape SLat:  67%|██████▋   | 8/12 [00:08<00:03,  1.00it/s]Sampling shape SLat:  75%|███████▌  | 9/12 [00:09<00:02,  1.00it/s]Sampling shape SLat:  83%|████████▎ | 10/12 [00:09<00:01,  1.28it/s]Sampling shape SLat:  92%|█████████▏| 11/12 [00:09<00:00,  1.45it/s]Sampling shape SLat: 100%|██████████| 12/12 [00:10<00:00,  1.58it/s]Sampling shape SLat: 100%|██████████| 12/12 [00:10<00:00,  1.16it/s]
+[TIMING] Sampling shape SLat step 0: 1.10s
+[TIMING] Sampling shape SLat step 1: 1.00s
+[TIMING] Sampling shape SLat step 2: 0.99s
+[TIMING] Sampling shape SLat step 3: 0.99s
+[TIMING] Sampling shape SLat step 4: 0.99s
+[TIMING] Sampling shape SLat step 5: 1.00s
+[TIMING] Sampling shape SLat step 6: 0.99s
+[TIMING] Sampling shape SLat step 7: 0.99s
+[TIMING] Sampling shape SLat step 8: 1.00s
+[TIMING] Sampling shape SLat step 9: 0.29s
+[TIMING] Sampling shape SLat step 10: 0.49s
+[TIMING] Sampling shape SLat step 11: 0.49s
+Traceback (most recent call last):
+  File "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/tools/generator/trellis2_runner.py", line 126, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/tools/generator/trellis2_runner.py", line 95, in main
+    meshes, _subs = pipeline.decode_shape_slat(shape_slat, res)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/pipelines/trellis2_image_to_3d.py", line 487, in decode_shape_slat
+    decoded = SparseUnetVaeDecoder.forward(decoder, slat, return_subs=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/models/sc_vaes/sparse_unet_vae.py", line 619, in forward
+    h, sub = block(h)
+             ^^^^^^^^
+  File "/home/bruno/.venvs/trellis2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/.venvs/trellis2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/models/sc_vaes/sparse_unet_vae.py", line 336, in forward
+    return self._forward(x, subdiv)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/models/sc_vaes/sparse_unet_vae.py", line 308, in _forward
+    h = self.conv2(h)
+        ^^^^^^^^^^^^^
+  File "/home/bruno/.venvs/trellis2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/.venvs/trellis2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/modules/sparse/conv/conv.py", line 21, in forward
+    return _backends[config.CONV].sparse_conv3d_forward(self, x)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bruno/tools/TRELLIS.2/trellis2/modules/sparse/conv/conv_flex_gemm.py", line 124, in sparse_conv3d_forward
+    chunk_im2col[mask] = feats[flat_map[mask].long()]
+                         ~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: CUDA driver error: out of memory
