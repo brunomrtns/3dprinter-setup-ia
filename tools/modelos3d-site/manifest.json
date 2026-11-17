@@ -311,6 +311,54 @@
      "manifold_depois": false
     }
    }
+  },
+  {
+   "id": "anubis_a",
+   "category": "anubis (avulso do dono)",
+   "modes": {
+    "trellis2": {
+     "glb": "models/anubis_a__trellis2.glb",
+     "verts": 299328,
+     "faces": 604404,
+     "tempo_s": 142.0,
+     "vram": null,
+     "manifold_antes": null,
+     "manifold_depois": null
+    },
+    "triposg": {
+     "glb": "models/anubis_a__triposg.glb",
+     "verts": 268396,
+     "faces": 536792,
+     "tempo_s": 65.6,
+     "vram": null,
+     "manifold_antes": null,
+     "manifold_depois": null
+    }
+   }
+  },
+  {
+   "id": "anubis_b",
+   "category": "anubis (avulso do dono)",
+   "modes": {
+    "trellis2": {
+     "glb": "models/anubis_b__trellis2.glb",
+     "verts": 304568,
+     "faces": 684682,
+     "tempo_s": 134.0,
+     "vram": null,
+     "manifold_antes": null,
+     "manifold_depois": null
+    },
+    "triposg": {
+     "glb": "models/anubis_b__triposg.glb",
+     "verts": 274424,
+     "faces": 548852,
+     "tempo_s": 59.4,
+     "vram": null,
+     "manifold_antes": null,
+     "manifold_depois": null
+    }
+   }
   }
  ]
 }
