@@ -333,6 +333,24 @@
      "vram": null,
      "manifold_antes": null,
      "manifold_depois": null
+    },
+    "triposf256": {
+     "glb": "models/anubis_a__triposf256.glb",
+     "verts": 78282,
+     "faces": 156536,
+     "tempo_s": 24.51,
+     "vram": 5601,
+     "manifold_antes": true,
+     "manifold_depois": true
+    },
+    "triposf512": {
+     "glb": "models/anubis_a__triposf512.glb",
+     "verts": 308054,
+     "faces": 615998,
+     "tempo_s": 29.51,
+     "vram": 7509,
+     "manifold_antes": false,
+     "manifold_depois": false
     }
    }
   },
@@ -357,6 +375,24 @@
      "vram": null,
      "manifold_antes": null,
      "manifold_depois": null
+    },
+    "triposf256": {
+     "glb": "models/anubis_b__triposf256.glb",
+     "verts": 79798,
+     "faces": 159532,
+     "tempo_s": 23.51,
+     "vram": 5703,
+     "manifold_antes": true,
+     "manifold_depois": true
+    },
+    "triposf512": {
+     "glb": "models/anubis_b__triposf512.glb",
+     "verts": 315441,
+     "faces": 630756,
+     "tempo_s": 28.51,
+     "vram": 7198,
+     "manifold_antes": false,
+     "manifold_depois": false
     }
    }
   }
