@@ -1,7 +1,7 @@
 """Plugin TRELLIS.2 (Fase C) — venv próprio ~.venvs/trellis2 (ADR-004).
 
-Runner shape-only (1024_cascade sem textura); ATTN_BACKEND=xformers (fallback
-documentado do fork — flash-attn não compilado nesta máquina).
+Runner shape-only (512³ single-stage — 1024_cascade OOM em 12GB mesmo com
+no_grad; ver evidence/fase-c/comparativo-3060/install-notes.md); ATTN_BACKEND=xformers.
 """
 from __future__ import annotations
 

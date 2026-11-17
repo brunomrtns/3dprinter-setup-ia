@@ -146,7 +146,7 @@ def coletar_resultados() -> dict:
         },
         "python_runner": platform.python_version(),
         "repos": {
-            "trellis2": "microsoft/TRELLIS.2-4B via fork IgorAherne/TRELLIS.2-stableprojectorz (shape-only 1024_cascade, ATTN=xformers)",
+            "trellis2": "microsoft/TRELLIS.2-4B via fork IgorAherne/TRELLIS.2-stableprojectorz (shape-only 512³ — 1024_cascade OOM em 12GB; ATTN=xformers)",
             "triposg": "VAST-AI/TripoSG (diffusers TripoSGPipeline, fp16, 50 steps, cfg 7.0)",
             "trellis": "microsoft/TRELLIS @ main 2026-10-27 (baseline Fase 1)",
             "triposr": "VAST-AI-Research/TripoSR @ 107cefd (baseline Fase 1)",
