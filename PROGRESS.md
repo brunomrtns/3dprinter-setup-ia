@@ -27,10 +27,22 @@
 |---|---|---|
 | C2 | `tools/generator/preprocess_input.py` (fundo removido via rembg, pad quadrado sem corte, 1024px, sidecar ADR-003, upscale opcional OFF) + 10 casos do testset → `~/printer3d-work/testset_preproc/` + evidência `evidence/fase-c/preproc/` | [x] 10/10 OK |
 | C1 | TRELLIS.2 (fork IgorAherne, VRAM reduzida) na máquina `rtx5060ti-8gb` — tarefa do colega | [ ] aguardando |
-| C3 | Comparativo formal na 3060: TRELLIS.2 + TripoSG + TRELLIS 1 + TripoSR na mesma entrada pré-processada, galeria lado a lado | `[!]` **INTERROMPIDO no limite de quota — handoff em `evidence/fase-c/comparativo-3060/install-notes.md`** (ver registro abaixo) |
+| C3 | Comparativo formal na 3060: TRELLIS.2 + TripoSG + TRELLIS 1 + TripoSR na mesma entrada pré-processada, galeria lado a lado | `[~]` **EM ANDAMENTO** — infra validada, bugs do TRELLIS.2 resolvidos (smoke OK 512³); benchmark parcial: triposr 10/10, trellis 10/10 (9 OOM), triposg 3/10, trellis2 0/10 — re-run em curso (ver registros) |
 | C4 | Fila de jobs entre máquinas | [ ] FUTURO (fora da fase) |
 
-### Registro C3 (2026-11-16, sessão interrompida no limite de quota)
+### Registro C3 (2026-11-17, continuação — benchmark em execução)
+
+- **Smoke TRELLIS.2 RESOLVIDO** (7 bugs reais, todos documentados em `install-notes.md` §Atualização): BiRefNet_config/handler baixados do HF oficial; `pipeline.cuda()` adicionado; patch `needs_grad` no flex_gemm (fork desatualizado vs FlexGEMM upstream); **causa raiz do OOM = autograd ligado** (`torch.set_grad_enabled(False)` — oficial roda sob `@torch.no_grad()`); setup low_vram do decoder replicado de `decode_latent`.
+- **Decisão medida**: TRELLIS.2 roda em **512³ single-stage** — 1024_cascade OOM confirmado 2× (até `--max-tokens 24576`); oficial exige 24GB. Registrado honestamente.
+- **Smoke OK**: caneca preproc → 925.437 verts / ~2M faces / 82s run / 0 erros. Renders de preview na mesa do dono (`preview_a/b.png`).
+- **Benchmark parcial** (`~/printer3d-work/c3-bench/<caso>/<modo>/report.json`, retomável):
+  - triposr: **10/10 OK** (~43-80s, VRAM pico até 10,6GB — inputs densos)
+  - trellis: **10/10 rodados, 9 OOM** (só local_gancho OK) — entradas pré-processadas densas estouram VRAM consistentemente (Fase 1 era 3/10)
+  - triposg: 3/10 · trellis2: 0/10 — **re-run em curso desde 2026-11-17 ~manhã**
+- Fixes no orquestrador: sys.path prefere repo sobre `~/printer3d-work/gen` (base_plugin antigo sombreava `venv_py`); triposr não recebe `--seed` (determinístico).
+- Pendente: resto do benchmark → `render` → `publish` → veredito do dono → ADR-007.
+
+### Registro C3 anterior (2026-11-16, sessão interrompida no limite de quota)
 
 - **Infra 100% montada e validada por partes** (detalhes e armadilhas: `evidence/fase-c/comparativo-3060/install-notes.md` — LEIA PRIMEIRO):
   - venvs próprios: `~/.venvs/trellis2` (torch 2.8.0+cu128 + xformers + lock do fork) e `~/.venvs/triposg` (torch 2.8.0+cu128, **diffusers 0.33.1 + transformers 4.57.3** — pins obrigatórios);
