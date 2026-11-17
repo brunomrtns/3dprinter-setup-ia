@@ -27,7 +27,7 @@
 |---|---|---|
 | C2 | `tools/generator/preprocess_input.py` (fundo removido via rembg, pad quadrado sem corte, 1024px, sidecar ADR-003, upscale opcional OFF) + 10 casos do testset → `~/printer3d-work/testset_preproc/` + evidência `evidence/fase-c/preproc/` | [x] 10/10 OK |
 | C1 | TRELLIS.2 (fork IgorAherne, VRAM reduzida) na máquina `rtx5060ti-8gb` — tarefa do colega | [ ] aguardando |
-| C3 | Comparativo formal na 3060: TRELLIS.2 + TripoSG + TRELLIS 1 + TripoSR na mesma entrada pré-processada, galeria lado a lado | `[~]` **EM ANDAMENTO** — infra validada, bugs do TRELLIS.2 resolvidos (smoke OK 512³); benchmark parcial: triposr 10/10, trellis 10/10 (9 OOM), triposg 3/10, trellis2 0/10 — re-run em curso (ver registros) |
+| C3 | Comparativo formal na 3060: TRELLIS.2 + TripoSG + TRELLIS 1 + TripoSR na mesma entrada pré-processada, galeria lado a lado | `[~]` **GERAÇÃO+EVIDÊNCIA PUBLICADAS** — trellis2 10/10 OK, triposr 10/10, trellis 1/10 (9 OOM), triposg 7/10 (3 casos pulados por decisão do dono); gallery.md + scores.md + results.json em `evidence/fase-c/comparativo-3060/` — **aguarda veredito visual do dono → ADR-007** |
 | C4 | Fila de jobs entre máquinas | [ ] FUTURO (fora da fase) |
 
 ### Registro C3 (2026-11-17, continuação — benchmark em execução)
@@ -40,7 +40,13 @@
   - trellis: **10/10 rodados, 9 OOM** (só local_gancho OK) — entradas pré-processadas densas estouram VRAM consistentemente (Fase 1 era 3/10)
   - triposg: 3/10 · trellis2: 0/10 — **re-run em curso desde 2026-11-17 ~manhã**
 - Fixes no orquestrador: sys.path prefere repo sobre `~/printer3d-work/gen` (base_plugin antigo sombreava `venv_py`); triposr não recebe `--seed` (determinístico).
-- Pendente: resto do benchmark → `render` → `publish` → veredito do dono → ADR-007.
+- **Benchmark concluído (2026-11-17 ~12:25)** — resultados reais (`scores.md`/`results.json` na evidência):
+  - **trellis2: 10/10 OK** — mediana 156s, VRAM pico máx **5.451 MiB** (low_vram funciona; ~9GB de folga na 3060)
+  - **triposr: 10/10 OK** — mediana 45,5s, VRAM máx 10.642 MiB
+  - **trellis: 1/10 OK** (9 OOM — entradas densas; Fase 1 era 3/10)
+  - **triposg: 7/10** — dono ordenou pular os 3 casos restantes (2026-11-17); parcial documentado
+- Render (Blender headless, câmera/luz idênticas, 2 ângulos × malhas existentes) + `publish` executados → `evidence/fase-c/comparativo-3060/{gallery.md,scores.md,results.json,gallery_render/}` (58 renders commitados).
+- **Próximo gatilho: veredito visual do dono na galeria → decisão → ADR-007** (nenhum gerador é promovido automaticamente — ADR-005 segue valendo).
 
 ### Registro C3 anterior (2026-11-16, sessão interrompida no limite de quota)
 
