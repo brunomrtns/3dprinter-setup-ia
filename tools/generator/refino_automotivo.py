@@ -84,10 +84,11 @@ def symmetrize_bilateral(
     m: trimesh.Trimesh,
     best_side: str = "pos_x",
     preserve_driver_wheel_only: bool = False,
+    preserve_wipers: bool = True,
 ) -> trimesh.Trimesh:
-    """Aplica simetria bilateral matemática X = -X via manifold3d.
-    Se preserve_driver_wheel_only=True, remove a cópia espelhada do volante no lado do passageiro (X < 0)."""
-    man = to_man(m)
+    """Aplica simetria bilateral matemática X = -X via manifold3d, preservando zonas naturalmente
+    assimétricas do veículo (limpador traseiro, limpadores dianteiros e volante do motorista)."""
+    man_orig = to_man(m)
     ext = m.bounding_box.extents
     big = float(max(ext)) * 4.0
     cutter = trimesh.creation.box(extents=[big, big, big])
@@ -97,7 +98,7 @@ def symmetrize_bilateral(
     else:
         T[0, 3] = big / 2.0 + 0.001
     cutter.apply_transform(T)
-    half_man = man - to_man(cutter)
+    half_man = man_orig - to_man(cutter)
 
     half_tm = from_man(half_man)
     mir_v = half_tm.vertices.copy()
@@ -107,7 +108,7 @@ def symmetrize_bilateral(
     mir_man = to_man(mir_tm)
 
     if preserve_driver_wheel_only:
-        # Caixa do aro superior do volante no lado do passageiro (X < 0) para não ter 2 volantes
+        # Remove a cópia espelhada do volante no lado do passageiro (X < 0)
         wheel_box = trimesh.creation.box(extents=[0.24, 0.16, 0.18])
         Tw = np.eye(4)
         Tw[:3, 3] = [-0.17, 0.07, 0.24]
@@ -115,6 +116,23 @@ def symmetrize_bilateral(
         mir_man = mir_man - to_man(wheel_box)
 
     sym_man = half_man + mir_man
+
+    if preserve_wipers:
+        # Preserva a geometria original (não-espelhada) no miolo do vidro traseiro (limpador traseiro único)
+        # e na base do para-brisa dianteiro (limpadores dianteiros unidirecionais + contorno do volante)
+        rear_wiper_box = trimesh.creation.box(extents=[0.46, 0.26, 0.28])
+        Tr = np.eye(4)
+        Tr[:3, 3] = [0.0, 0.11, -0.88]
+        rear_wiper_box.apply_transform(Tr)
+
+        front_wiper_box = trimesh.creation.box(extents=[0.52, 0.22, 0.34])
+        Tf = np.eye(4)
+        Tf[:3, 3] = [0.0, 0.08, 0.34]
+        front_wiper_box.apply_transform(Tf)
+
+        asym_zones = to_man(rear_wiper_box) + to_man(front_wiper_box)
+        sym_man = (sym_man - asym_zones) + (man_orig ^ asym_zones)
+
     return from_man(sym_man)
 
 
@@ -165,36 +183,26 @@ def main():
     m_sgsf = trimesh.load(sg_sf_path, force="mesh")
     m_sgsf = deskew_longitudinal(m_sgsf)
     m_sgsf = apply_fox_blueprint(m_sgsf, target_length_norm=2.0)
-    m_sgsf = symmetrize_bilateral(m_sgsf, best_side="pos_x", preserve_driver_wheel_only=True)
+    m_sgsf = symmetrize_bilateral(
+        m_sgsf, best_side="pos_x", preserve_driver_wheel_only=True, preserve_wipers=False
+    )
     m_sgsf = smooth_and_finalize(m_sgsf, target_faces=280000)
-    export_glb_and_stl(m_sgsf, "carro_nowin__triposf512.glb", "fox_triposf512_simetrico_interna_200mm.stl")
+    export_glb_and_stl(
+        m_sgsf, "carro_nowin__simetrico_interna.glb", "fox_triposf512_simetrico_interna_200mm.stl"
+    )
 
-    # 2. TripoSG 505³ (Sem Vidros + Interna Completa + 4 Rodas + Simetria Bilateral + Blueprint Fox)
-    print("=== [2] Refinando TripoSG 505³ (Simetria Bilateral + Blueprint Fox + 1 Volante) ===", flush=True)
-    m_sg = trimesh.load(sg_raw_path, force="mesh")
-    m_sg = deskew_longitudinal(m_sg)
-    m_sg = apply_fox_blueprint(m_sg, target_length_norm=2.0)
-    m_sg = symmetrize_bilateral(m_sg, best_side="pos_x", preserve_driver_wheel_only=True)
-    m_sg = smooth_and_finalize(m_sg, target_faces=250000)
-    export_glb_and_stl(m_sg, "carro_nowin__triposg.glb")
-
-    # 3. Hunyuan3D-2mv (4 vistas) + TripoSF 512 (Simetria Bilateral + Blueprint Fox)
-    print("=== [3] Refinando Hunyuan3D-2mv + TripoSF 512 (Simetria Bilateral + Blueprint Fox) ===", flush=True)
+    # 2. Hunyuan3D-2mv (4 vistas) + TripoSF 512 (Simetria Bilateral + Blueprint Fox + Limpadores Originais Únicos)
+    print("=== [2] Refinando Hunyuan3D-2mv + TripoSF 512 (Simetria Bilateral + Blueprint Fox + Limpador Único) ===", flush=True)
     m_hmvsf = trimesh.load(hmv_sf_path, force="mesh")
     m_hmvsf = deskew_longitudinal(m_hmvsf)
     m_hmvsf = apply_fox_blueprint(m_hmvsf, target_length_norm=2.0)
-    m_hmvsf = symmetrize_bilateral(m_hmvsf, best_side="neg_x", preserve_driver_wheel_only=False)
+    m_hmvsf = symmetrize_bilateral(
+        m_hmvsf, best_side="neg_x", preserve_driver_wheel_only=False, preserve_wipers=True
+    )
     m_hmvsf = smooth_and_finalize(m_hmvsf, target_faces=280000)
-    export_glb_and_stl(m_hmvsf, "carro_nowin__hunyuan_mv_sf512.glb", "fox_hunyuan_mv_simetrico_4vistas_200mm.stl")
-
-    # 4. Hunyuan3D-2mv (4 vistas) base (Simetria Bilateral + Blueprint Fox)
-    print("=== [4] Refinando Hunyuan3D-2mv (Simetria Bilateral + Blueprint Fox) ===", flush=True)
-    m_hmv = trimesh.load(hmv_raw_path, force="mesh")
-    m_hmv = deskew_longitudinal(m_hmv)
-    m_hmv = apply_fox_blueprint(m_hmv, target_length_norm=2.0)
-    m_hmv = symmetrize_bilateral(m_hmv, best_side="neg_x", preserve_driver_wheel_only=False)
-    m_hmv = smooth_and_finalize(m_hmv, target_faces=250000)
-    export_glb_and_stl(m_hmv, "carro_nowin__hunyuan_mv.glb")
+    export_glb_and_stl(
+        m_hmvsf, "carro_nowin__simetrico_4vistas.glb", "fox_hunyuan_mv_simetrico_4vistas_200mm.stl"
+    )
 
 
 if __name__ == "__main__":
