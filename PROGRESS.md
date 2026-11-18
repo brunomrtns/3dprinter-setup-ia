@@ -60,6 +60,14 @@
 - **Validação real (Chrome headless via CDP, `390×844` @ 2x na URL pública + `320×568` e `1280×800` local)**: `0` erros console, `errbox` vazio, `spin` oculto, `0` overflow; `anubis_a` passou de **28.238 px (19,7% h)** na v2 para **234.791 px (65,0% h / 67,2% w — 8,3×)** na v3; `trex_figurine` inteiro (71,0% w); VS empilhado com ambos os modelos inteiros. Evidência: `evidence/fase-c/viewer-mobile-v3/validacao.md`.
 - **Update pós-processamento Anubis no viewer (2026-11-18)**: adicionados 3 modos em `anubis_a` (`posproc` sólido 200k watertight/Taubin 5it, `posproc_oco` parede 3mm + dreno 4,5mm via `manifold3d`, `posproc_corte` corte transversal do oco), `computeVertexNormals()` de fallback no `app.js` (GLBs sem `NORMAL` ficavam pretos) e `flatShading` automático no `trellis2` (elimina granulado das normais corrompidas por winding invertido). Deployado via `deploy.sh` (40 GLBs) e validado ao vivo em `390×844`.
 
+### Registro — carro fox do dono (2026-11-18, avulso) `[~] aguardando veredito visual`
+
+- **Pedido**: carro com máx. fidelidade ("força total": triposg, triposf, pós-processamento) a partir de 3 imagens do dono (`Downloads/fox/{front,back,all}.webp` — `all` = 3 vistas numa imagem só).
+- **Geração 9/9 OK** (GPU serial, guard OK): pipeline oficial (`preproc → TripoSG → TripoSF512`) nas 3 vistas + trellis2 512³ nas 3 vistas. Telemetria: front 80s/75s(vram 9.035)/42s · back 82s/66s(8.727)/44s · all 68s/38s(6.103)/30s. Malhas em `~/printer3d-work/carro/<vista>/{1_triposg,2_triposf512,trellis2}/`.
+- **Viewer**: 9 GLBs (decimados ~600k faces p/ peso) + manifest → deployado e validado ao vivo (200): `https://brunointegrations.com/modelos3d/` — casos `carro_front`/`carro_back`/`carro_all` × modos `trellis2`/`triposg`/`triposf512` (VS disponível).
+- **Pós-processamento PAUSADO por decisão do dono** ("não insistir antes de ver"): script versionado `tools/generator/posproc_impressao.py` (receita anubis: fragmentos→pymeshfix→manifold→200mm→Taubin→200k→oco 3mm+dreno 4,5→corte). Status real: reparo watertight FUNCIONOU (`01_reparado.obj` front/back gerados); Taubin/decimação falhavam por `libOpenGL` ausente — **corrigido** (`apt libopengl0`); dono escolhe o vencedor visual e o posproc termina em minutos.
+- Nota técnica: a malha do carro (2,9M faces) veio "non-manifold" de verdade — o roundtrip manifold3d direto falha; o caminho correto é pymeshfix antes (já no script).
+
 ### Registro C3 (2026-11-17, continuação — benchmark em execução)
 
 - **Smoke TRELLIS.2 RESOLVIDO** (7 bugs reais, todos documentados em `install-notes.md` §Atualização): BiRefNet_config/handler baixados do HF oficial; `pipeline.cuda()` adicionado; patch `needs_grad` no flex_gemm (fork desatualizado vs FlexGEMM upstream); **causa raiz do OOM = autograd ligado** (`torch.set_grad_enabled(False)` — oficial roda sob `@torch.no_grad()`); setup low_vram do decoder replicado de `decode_latent`.

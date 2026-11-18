@@ -422,6 +422,105 @@
      "manifold_depois": false
     }
    }
+  },
+  {
+   "id": "carro_front",
+   "category": "carro fox (avulso do dono, 2026-11-18)",
+   "modes": {
+    "trellis2": {
+     "glb": "models/carro_front__trellis2.glb",
+     "verts": 266241,
+     "faces": 600000,
+     "tempo_s": 42.37,
+     "vram": null,
+     "manifold_antes": null,
+     "manifold_depois": null
+    },
+    "triposg": {
+     "glb": "models/carro_front__triposg.glb",
+     "verts": 299566,
+     "faces": 599993,
+     "tempo_s": 79.62,
+     "vram": null,
+     "manifold_antes": null,
+     "manifold_depois": null
+    },
+    "triposf512": {
+     "glb": "models/carro_front__triposf512.glb",
+     "verts": 300211,
+     "faces": 599999,
+     "tempo_s": 74.52,
+     "vram": 9035,
+     "manifold_antes": null,
+     "manifold_depois": null
+    }
+   }
+  },
+  {
+   "id": "carro_back",
+   "category": "carro fox (avulso do dono, 2026-11-18)",
+   "modes": {
+    "trellis2": {
+     "glb": "models/carro_back__trellis2.glb",
+     "verts": 258056,
+     "faces": 600000,
+     "tempo_s": 44.21,
+     "vram": null,
+     "manifold_antes": null,
+     "manifold_depois": null
+    },
+    "triposg": {
+     "glb": "models/carro_back__triposg.glb",
+     "verts": 299640,
+     "faces": 599992,
+     "tempo_s": 81.85,
+     "vram": null,
+     "manifold_antes": null,
+     "manifold_depois": null
+    },
+    "triposf512": {
+     "glb": "models/carro_back__triposf512.glb",
+     "verts": 300385,
+     "faces": 599999,
+     "tempo_s": 65.52,
+     "vram": 8727,
+     "manifold_antes": null,
+     "manifold_depois": null
+    }
+   }
+  },
+  {
+   "id": "carro_all",
+   "category": "carro fox (avulso do dono, 2026-11-18)",
+   "modes": {
+    "trellis2": {
+     "glb": "models/carro_all__trellis2.glb",
+     "verts": 276117,
+     "faces": 600000,
+     "tempo_s": 29.72,
+     "vram": null,
+     "manifold_antes": null,
+     "manifold_depois": null
+    },
+    "triposg": {
+     "glb": "models/carro_all__triposg.glb",
+     "verts": 300060,
+     "faces": 600000,
+     "tempo_s": 68.16,
+     "vram": null,
+     "manifold_antes": null,
+     "manifold_depois": null
+    },
+    "triposf512": {
+     "glb": "models/carro_all__triposf512.glb",
+     "verts": 300219,
+     "faces": 599999,
+     "tempo_s": 38.01,
+     "vram": 6103,
+     "manifold_antes": null,
+     "manifold_depois": null
+    }
+   }
   }
  ]
 }
