@@ -21,8 +21,8 @@ import time
 TRIPOSF_HOME = os.environ.get("TRIPOSF_HOME") or os.path.expanduser("~/tools/TripoSF")
 VENV_PY = os.environ.get("TRIPOSF_PY") or os.path.expanduser("~/venvs/triposf/bin/python")
 LOCK_PATH = os.path.expanduser("~/printer3d-work/gpu.serial.lock")
-GUARD_PEAK_MIB = 10_000   # regra fixa do prompt: pico acima disso = parar
-GUARD_MIN_FREE_MIB = 8_000   # pré-despacho: GPU ociosa (desktop ~1.7-2.4GB). PICO continua 10_000 (regra do prompt)
+GUARD_PEAK_MIB = int(os.environ.get("TRIPOSF_GUARD_PEAK_MIB", "11000"))  # c/ reclaim_windows_vram baseline ~500MiB (11GB seguro na 3060 12GB)
+GUARD_MIN_FREE_MIB = 8_000   # pré-despacho: GPU ociosa
 POLL_S = 1.0
 
 

@@ -521,6 +521,57 @@
      "manifold_depois": null
     }
    }
+  },
+  {
+   "id": "carro_nowin",
+   "category": "carro fox definitivo (TripoSG+TripoSF512 c/ interna+4 rodas vs Hunyuan3D-2mv 4 vistas, 2026-11-18)",
+   "modes": {
+    "triposf512": {
+     "glb": "models/carro_nowin__triposf512.glb",
+     "verts": 139650,
+     "faces": 280000,
+     "tempo_s": 56.52,
+     "vram": 10227,
+     "manifold_antes": false,
+     "manifold_depois": true
+    },
+    "triposg": {
+     "glb": "models/carro_nowin__triposg.glb",
+     "verts": 124198,
+     "faces": 250000,
+     "tempo_s": 96.94,
+     "vram": 10317,
+     "manifold_antes": false,
+     "manifold_depois": true
+    },
+    "hunyuan_mv_sf512": {
+     "glb": "models/carro_nowin__hunyuan_mv_sf512.glb",
+     "verts": 139886,
+     "faces": 280000,
+     "tempo_s": 44.51,
+     "vram": 6569,
+     "manifold_antes": false,
+     "manifold_depois": true
+    },
+    "hunyuan_mv": {
+     "glb": "models/carro_nowin__hunyuan_mv.glb",
+     "verts": 124852,
+     "faces": 250000,
+     "tempo_s": 328.04,
+     "vram": 3369,
+     "manifold_antes": false,
+     "manifold_depois": true
+    },
+    "trellis2_fosco": {
+     "glb": "models/carro_nowin__trellis2_fosco.glb",
+     "verts": 922933,
+     "faces": 549999,
+     "tempo_s": 239.49,
+     "vram": 4177,
+     "manifold_antes": false,
+     "manifold_depois": false
+    }
+   }
   }
  ]
 }

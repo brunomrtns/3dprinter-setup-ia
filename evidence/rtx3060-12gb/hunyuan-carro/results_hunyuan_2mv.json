@@ -1,0 +1,50 @@
+{
+  "mv_tinted": {
+    "mode": "hunyuan_mv_tinted",
+    "model": "tencent/Hunyuan3D-2mv+2.1",
+    "image": "/home/bruno/printer3d-work/carro/no_windows_rgba/frente_tinted.png",
+    "mesh_path": null,
+    "mesh_reparada_path": null,
+    "texturas": [],
+    "seed": 42,
+    "tempo_s": 42.44,
+    "tempo_load_s": null,
+    "tempo_run_s": null,
+    "vram_pico_mib": 12054,
+    "vram_baseline_mib": 1372,
+    "vertices": null,
+    "faces": null,
+    "bbox": null,
+    "manifold_antes": null,
+    "manifold_depois_reparo": null,
+    "reparo_ok": null,
+    "erros": [
+      "runner_exit_1: ome/bruno/.venvs/hunyuan/lib/python3.11/site-packages/torch/nn/modules/module.py\", line 1773, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/bruno/.venvs/hunyuan/lib/python3.11/site-packages/torch/nn/modules/module.py\", line 1784, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/bruno/tools/Hunyuan3D-2/hy3dgen/shapegen/models/denoisers/hunyuan3ddit.py\", line 261, in forward\n    q, k = self.norm(q, k, v)\n           ^^^^^^^^^^^^^^^^^^\n  File \"/home/bruno/.venvs/hunyuan/lib/python3.11/site-packages/torch/nn/modules/module.py\", line 1773, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/bruno/.venvs/hunyuan/lib/python3.11/site-packages/torch/nn/modules/module.py\", line 1784, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/bruno/tools/Hunyuan3D-2/hy3dgen/shapegen/models/denoisers/hunyuan3ddit.py\", line 102, in forward\n    q = self.query_norm(q)\n        ^^^^^^^^^^^^^^^^^^\n  File \"/home/bruno/.venvs/hunyuan/lib/python3.11/site-packages/torch/nn/modules/module.py\", line 1773, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/bruno/.venvs/hunyuan/lib/python3.11/site-packages/torch/nn/modules/module.py\", line 1784, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/bruno/tools/Hunyuan3D-2/hy3dgen/shapegen/models/denoisers/hunyuan3ddit.py\", line 91, in forward\n    rrms = torch.rsqrt(torch.mean(x ** 2, dim=-1, keepdim=True) + 1e-6)\n                                  ~~^^~~\n  File \"/home/bruno/.venvs/hunyuan/lib/python3.11/site-packages/torch/_tensor.py\", line 39, in wrapped\n    return f(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^\nRuntimeError: CUDA driver error: out of memory"
+    ],
+    "saida_raw": null
+  },
+  "mv_open": {
+    "mode": "hunyuan_mv_open",
+    "model": "tencent/Hunyuan3D-2mv+2.1",
+    "image": "/home/bruno/printer3d-work/carro/no_windows_rgba/frente_open.png",
+    "mesh_path": null,
+    "mesh_reparada_path": null,
+    "texturas": [],
+    "seed": 42,
+    "tempo_s": 41.96,
+    "tempo_load_s": null,
+    "tempo_run_s": null,
+    "vram_pico_mib": 12050,
+    "vram_baseline_mib": 387,
+    "vertices": null,
+    "faces": null,
+    "bbox": null,
+    "manifold_antes": null,
+    "manifold_depois_reparo": null,
+    "reparo_ok": null,
+    "erros": [
+      "runner_exit_1: ome/bruno/.venvs/hunyuan/lib/python3.11/site-packages/torch/nn/modules/module.py\", line 1773, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/bruno/.venvs/hunyuan/lib/python3.11/site-packages/torch/nn/modules/module.py\", line 1784, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/bruno/tools/Hunyuan3D-2/hy3dgen/shapegen/models/denoisers/hunyuan3ddit.py\", line 261, in forward\n    q, k = self.norm(q, k, v)\n           ^^^^^^^^^^^^^^^^^^\n  File \"/home/bruno/.venvs/hunyuan/lib/python3.11/site-packages/torch/nn/modules/module.py\", line 1773, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/bruno/.venvs/hunyuan/lib/python3.11/site-packages/torch/nn/modules/module.py\", line 1784, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/bruno/tools/Hunyuan3D-2/hy3dgen/shapegen/models/denoisers/hunyuan3ddit.py\", line 102, in forward\n    q = self.query_norm(q)\n        ^^^^^^^^^^^^^^^^^^\n  File \"/home/bruno/.venvs/hunyuan/lib/python3.11/site-packages/torch/nn/modules/module.py\", line 1773, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/bruno/.venvs/hunyuan/lib/python3.11/site-packages/torch/nn/modules/module.py\", line 1784, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/bruno/tools/Hunyuan3D-2/hy3dgen/shapegen/models/denoisers/hunyuan3ddit.py\", line 91, in forward\n    rrms = torch.rsqrt(torch.mean(x ** 2, dim=-1, keepdim=True) + 1e-6)\n                                  ~~^^~~\n  File \"/home/bruno/.venvs/hunyuan/lib/python3.11/site-packages/torch/_tensor.py\", line 39, in wrapped\n    return f(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^\nRuntimeError: CUDA driver error: out of memory"
+    ],
+    "saida_raw": null
+  }
+}

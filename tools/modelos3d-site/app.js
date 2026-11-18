@@ -3,15 +3,31 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
-const MODES = ['trellis2', 'triposg', 'triposf256', 'triposf512', 'posproc', 'posproc_oco', 'posproc_corte', 'trellis', 'triposr'];
+const MODES = [
+  'triposf512',
+  'triposg',
+  'hunyuan_mv_sf512',
+  'hunyuan_mv',
+  'posproc',
+  'posproc_oco',
+  'posproc_corte',
+  'triposf256',
+  'trellis2_fosco',
+  'trellis2',
+  'trellis',
+  'triposr',
+];
 const MODE_LABEL = {
-  trellis2: 'TRELLIS.2',
-  triposg: 'TripoSG',
-  triposf256: 'TripoSF 256',
   triposf512: 'TripoSF 512',
+  triposg: 'TripoSG',
+  hunyuan_mv_sf512: 'Hunyuan 2mv + TripoSF 512',
+  hunyuan_mv: 'Hunyuan 2mv (4 vistas)',
   posproc: 'Pós-proc (Sólido)',
   posproc_oco: 'Pós-proc (Oco)',
   posproc_corte: 'Corte Oco',
+  triposf256: 'TripoSF 256',
+  trellis2_fosco: 'TRELLIS.2 (Vidro Fosco)',
+  trellis2: 'TRELLIS.2',
   trellis: 'TRELLIS 1',
   triposr: 'TripoSR',
 };
@@ -306,8 +322,9 @@ function refreshViewport(i) {
   const info = mode && c && c.modes[mode];
 
   v.modesEl.querySelectorAll('.chip').forEach((b, j) => {
+    const hasMode = Boolean(c && c.modes[MODES[j]]);
     b.classList.toggle('on', MODES[j] === mode);
-    b.style.opacity = (c && c.modes[MODES[j]]) ? '1' : '.3';
+    b.style.display = hasMode ? '' : 'none';
   });
   if (c) fillModeSelect(v.vpSel, c, mode);
 
@@ -340,7 +357,7 @@ function refreshViewport(i) {
           roughness: 0.55,
           metalness: 0.05,
           side: THREE.DoubleSide,
-          flatShading: mode === 'trellis2',
+          flatShading: mode.startsWith('trellis2'),
         });
         o.castShadow = o.receiveShadow = false;
       }

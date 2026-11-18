@@ -57,6 +57,21 @@ def load_rgba(path: str) -> Image.Image:
     return Image.fromarray(np.dstack([rgb, alpha]), mode="RGBA")
 
 
+def _split_cond(cond):
+    """Divide o dicionário/tensor de condicionamento (batch=2: [cond, uncond]) em dois de batch=1."""
+    if isinstance(cond, torch.Tensor):
+        c_pos, c_unc = cond.chunk(2, dim=0)
+        return c_pos.contiguous(), c_unc.contiguous()
+    if isinstance(cond, dict):
+        pos_dict, unc_dict = {}, {}
+        for k, v in cond.items():
+            c_pos, c_unc = _split_cond(v)
+            pos_dict[k] = c_pos
+            unc_dict[k] = c_unc
+        return pos_dict, unc_dict
+    return cond, cond
+
+
 def run_with_stage_offload(
     pipeline,
     image_input,
@@ -64,10 +79,17 @@ def run_with_stage_offload(
     guidance_scale: float,
     octree_res: int,
     seed: int,
-    num_chunks: int = 8000,
+    num_chunks: int = 4000,
 ):
-    """Executa o pipeline FlowMatching com offload conditioner -> model -> vae na 3060 12GB."""
+    """Executa o pipeline FlowMatching com offload conditioner -> model -> vae e CFG sequencial (batch=1) na 3060 12GB."""
+    import gc
+
     torch.set_grad_enabled(False)
+    pipeline.model.to("cpu")
+    pipeline.vae.to("cpu")
+    gc.collect()
+    torch.cuda.empty_cache()
+
     gen = torch.Generator(device="cuda").manual_seed(seed)
 
     # 1. Conditioner na GPU
@@ -77,19 +99,29 @@ def run_with_stage_offload(
     do_cfg = guidance_scale >= 0 and not (
         hasattr(pipeline.model, "guidance_embed") and pipeline.model.guidance_embed is True
     )
-    cond = pipeline.encode_cond(
-        image=image_tensor,
-        additional_cond_inputs=cond_inputs,
-        do_classifier_free_guidance=do_cfg,
-        dual_guidance=False,
-    )
+    with torch.inference_mode(), torch.amp.autocast("cuda", dtype=torch.float16):
+        cond = pipeline.encode_cond(
+            image=image_tensor,
+            additional_cond_inputs=cond_inputs,
+            do_classifier_free_guidance=do_cfg,
+            dual_guidance=False,
+        )
+    batch_size = image_tensor.shape[0]
+    del image_tensor, cond_inputs
     # Libera conditioner da VRAM antes do DiT
     pipeline.conditioner.to("cpu")
+    gc.collect()
+    torch.cuda.synchronize()
     torch.cuda.empty_cache()
 
-    # 2. DiT Flow Matching na GPU
+    if do_cfg:
+        cond_pos, cond_uncond = _split_cond(cond)
+        del cond
+    else:
+        cond_pos, cond_uncond = cond, None
+
+    # 2. DiT Flow Matching na GPU (CFG sequencial batch=1 reduz 50% de VRAM nas atenções 4-vistas)
     pipeline.model.to("cuda", dtype=pipeline.dtype)
-    batch_size = image_tensor.shape[0]
     sigmas = np.linspace(0, 1, steps)
     pipeline.scheduler.set_timesteps(sigmas=sigmas, device="cuda")
     timesteps = pipeline.scheduler.timesteps
@@ -99,34 +131,55 @@ def run_with_stage_offload(
     if hasattr(pipeline.model, "guidance_embed") and pipeline.model.guidance_embed is True:
         guidance = torch.tensor([guidance_scale] * batch_size, device="cuda", dtype=pipeline.dtype)
 
-    for t in timesteps:
-        latent_model_input = torch.cat([latents] * 2) if do_cfg else latents
-        timestep = t.expand(latent_model_input.shape[0]).to(latents.dtype)
-        timestep = timestep / pipeline.scheduler.config.num_train_timesteps
-        noise_pred = pipeline.model(latent_model_input, timestep, cond, guidance=guidance)
-        if do_cfg:
-            noise_pred_cond, noise_pred_uncond = noise_pred.chunk(2)
-            noise_pred = noise_pred_uncond + guidance_scale * (noise_pred_cond - noise_pred_uncond)
-        latents = pipeline.scheduler.step(noise_pred, t, latents).prev_sample
+    with torch.inference_mode(), torch.amp.autocast("cuda", dtype=torch.float16):
+        for t in timesteps:
+            timestep_1 = t.expand(latents.shape[0]).to(latents.dtype)
+            timestep_1 = timestep_1 / pipeline.scheduler.config.num_train_timesteps
+            if do_cfg:
+                noise_pred_cond = pipeline.model(latents, timestep_1, cond_pos, guidance=guidance)
+                noise_pred_uncond = pipeline.model(latents, timestep_1, cond_uncond, guidance=guidance)
+                noise_pred = noise_pred_uncond + guidance_scale * (noise_pred_cond - noise_pred_uncond)
+                del noise_pred_cond, noise_pred_uncond
+            else:
+                noise_pred = pipeline.model(latents, timestep_1, cond_pos, guidance=guidance)
+            latents = pipeline.scheduler.step(noise_pred, t, latents).prev_sample
+            del noise_pred
 
     # Libera DiT da VRAM antes do Marching Cubes 384³ no VAE
     pipeline.model.to("cpu")
-    del cond, image_tensor
+    del cond_pos, cond_uncond
+    gc.collect()
+    torch.cuda.synchronize()
     torch.cuda.empty_cache()
 
     # 3. ShapeVAE decode -> malha trimesh
     pipeline.vae.to("cuda", dtype=pipeline.dtype)
-    meshes = pipeline._export(
-        latents,
-        output_type="trimesh",
-        box_v=1.01,
-        mc_level=0.0,
-        num_chunks=num_chunks,
-        octree_resolution=octree_res,
-        mc_algo="mc",
-        enable_pbar=False,
-    )
+    with torch.inference_mode(), torch.amp.autocast("cuda", dtype=torch.float16):
+        try:
+            meshes = pipeline._export(
+                latents,
+                output_type="trimesh",
+                box_v=1.01,
+                mc_level=0.0,
+                num_chunks=num_chunks,
+                octree_resolution=octree_res,
+                mc_algo="mc",
+                enable_pbar=False,
+            )
+        except torch.cuda.OutOfMemoryError:
+            torch.cuda.empty_cache()
+            meshes = pipeline._export(
+                latents,
+                output_type="trimesh",
+                box_v=1.01,
+                mc_level=0.0,
+                num_chunks=2000,
+                octree_resolution=256,
+                mc_algo="mc",
+                enable_pbar=False,
+            )
     pipeline.vae.to("cpu")
+    gc.collect()
     torch.cuda.empty_cache()
     return meshes[0]
 

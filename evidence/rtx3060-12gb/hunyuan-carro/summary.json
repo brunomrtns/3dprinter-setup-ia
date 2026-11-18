@@ -1,0 +1,133 @@
+{
+  "hunyuan_mv": {
+    "mode": "hunyuan_mv",
+    "model": "tencent/Hunyuan3D-2mv+2.1",
+    "image": "/home/bruno/printer3d-work/carro/no_windows_rgba/frente_tinted.png",
+    "mesh_path": "/home/bruno/printer3d-work/carro/hunyuan_mv_tinted/mesh.obj",
+    "mesh_reparada_path": "/home/bruno/printer3d-work/carro/hunyuan_mv_tinted/mesh_reparada.obj",
+    "seed": 42,
+    "tempo_s": 328.04,
+    "tempo_load_s": 36.41,
+    "tempo_run_s": 284.96,
+    "vram_pico_mib": 3369,
+    "vram_baseline_mib": 517,
+    "vertices": 400532,
+    "faces": 801352,
+    "bbox": [
+      1.1529,
+      1.0382,
+      1.9948
+    ],
+    "views_used": [
+      "front",
+      "left",
+      "back",
+      "right"
+    ],
+    "octree_resolution": 384,
+    "steps": 50,
+    "erros": []
+  },
+  "hunyuan_mv_posproc": {
+    "in_vertices": 400532,
+    "in_faces": 801352,
+    "out_vertices": 124852,
+    "out_faces": 250000,
+    "is_watertight": true,
+    "tempo_s": 27.22,
+    "out_mesh": "/home/bruno/printer3d-work/carro/hunyuan_mv_posproc/mesh_posproc.obj"
+  },
+  "hunyuan_mv_triposf512": {
+    "label": "hunyuan_mv_triposf512",
+    "mesh_path": "/home/bruno/printer3d-work/carro/hunyuan_mv_tinted/mesh.obj",
+    "config": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/tools/generator/triposf/TripoSFVAE_o512.yaml",
+    "erros": [],
+    "vram_wait_s": 0.1,
+    "vram_baseline_mib": 509,
+    "tempo_total_s": 44.51,
+    "exit_code": 0,
+    "vram_pico_mib": 6569,
+    "guard_tripped": false,
+    "tempo_normalize_s": 4.83,
+    "tempo_load_s": 3.9,
+    "tempo_recon_s": 11.24,
+    "mesh_recon": "/home/bruno/printer3d-work/carro/hunyuan_mv_triposf512/mesh_reconstruction.obj",
+    "vertices": 732447,
+    "faces": 1465074,
+    "bbox": [
+      0.5779,
+      0.5199,
+      0.9998
+    ],
+    "watertight": false
+  },
+  "hunyuan_mv_triposf512_posproc": {
+    "in_vertices": 732447,
+    "in_faces": 1465074,
+    "out_vertices": 139886,
+    "out_faces": 280000,
+    "is_watertight": true,
+    "tempo_s": 57.16,
+    "out_mesh": "/home/bruno/printer3d-work/carro/hunyuan_mv_triposf512_posproc/mesh_posproc.obj"
+  },
+  "nowin_triposg": {
+    "tempo_total_s": 116.96,
+    "vram_pico_mib": 10250,
+    "vram_baseline_mib": 509,
+    "tempo_load_s": 9.26,
+    "tempo_run_s": 87.68,
+    "vertices": 1557463,
+    "faces": 3116268,
+    "bbox": [
+      1.0949,
+      0.8987,
+      1.8694
+    ],
+    "obj": "/home/bruno/printer3d-work/carro/nowin_triposg/mesh.obj",
+    "erros": []
+  },
+  "nowin_triposg_posproc": {
+    "in_vertices": 1557463,
+    "in_faces": 3116268,
+    "kept_components": 7,
+    "out_vertices": 124198,
+    "out_faces": 250000,
+    "is_watertight": true,
+    "tempo_s": 166.16,
+    "out_mesh": "/home/bruno/printer3d-work/carro/nowin_triposg_posproc/mesh_posproc.obj"
+  },
+  "nowin_triposf512": {
+    "label": "nowin_triposg_triposf512",
+    "mesh_path": "/home/bruno/printer3d-work/carro/nowin_triposg_posproc/mesh_posproc.obj",
+    "config": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/tools/generator/triposf/TripoSFVAE_o512.yaml",
+    "erros": [],
+    "vram_wait_s": 0.1,
+    "vram_baseline_mib": 585,
+    "tempo_total_s": 56.52,
+    "exit_code": 0,
+    "vram_pico_mib": 10227,
+    "guard_tripped": false,
+    "tempo_normalize_s": 1.6,
+    "tempo_load_s": 3.66,
+    "tempo_recon_s": 16.42,
+    "mesh_recon": "/home/bruno/printer3d-work/carro/nowin_triposf512/mesh_posproc_reconstruction.obj",
+    "vertices": 1748816,
+    "faces": 3497404,
+    "bbox": [
+      0.5854,
+      0.4801,
+      0.9997
+    ],
+    "watertight": false
+  },
+  "nowin_triposf512_posproc": {
+    "in_vertices": 1748816,
+    "in_faces": 3497404,
+    "kept_components": 6,
+    "out_vertices": 139650,
+    "out_faces": 280000,
+    "is_watertight": true,
+    "tempo_s": 266.59,
+    "out_mesh": "/home/bruno/printer3d-work/carro/nowin_triposf512_posproc/mesh_posproc.obj"
+  }
+}

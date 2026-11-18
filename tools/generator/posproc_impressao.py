@@ -126,6 +126,12 @@ def main() -> int:
     ap.add_argument("--target-faces", type=int, default=200_000)
     ap.add_argument("--wall-mm", type=float, default=3.0)
     ap.add_argument("--drain-mm", type=float, default=4.5)
+    ap.add_argument(
+        "--min-comp-faces",
+        type=int,
+        default=1000,
+        help="Mantém e repara individualmente todo componente conexo com >= N faces (preserva rodas/sub-partes e descarta ilhas de ruído)",
+    )
     args = ap.parse_args()
 
     import trimesh
@@ -143,30 +149,43 @@ def main() -> int:
     raw = trimesh.load(args.input, force="mesh", process=False)
     report["stages"]["0_raw"] = stats(raw)
 
-    # 1. maior componente (descarta ilhas)
-    comps = raw.split(only_watertight=False)
-    top = max(comps, key=lambda c: len(c.faces))
-    report["stages"]["1_maior_componente"] = {
+    # 1. filtra componentes significativos (>= min_comp_faces), preservando rodas/antenas/sub-peças e descartando ilhas de ruído
+    comps = sorted(raw.split(only_watertight=False), key=lambda c: len(c.faces), reverse=True)
+    kept_comps = [c for c in comps if len(c.faces) >= args.min_comp_faces]
+    if not kept_comps and comps:
+        kept_comps = [comps[0]]
+    top = trimesh.util.concatenate(kept_comps)
+    report["stages"]["1_componentes_mantidos"] = {
         **stats(top),
-        "dropped_fragments": len(comps) - 1,
+        "kept_components": len(kept_comps),
+        "kept_faces_per_comp": [int(len(c.faces)) for c in kept_comps],
+        "dropped_fragments": len(comps) - len(kept_comps),
     }
 
-    # 2. reparo watertight: PyMeshFix (caminho canônico da Forja) + roundtrip manifold3d
+    # 2. reparo watertight por componente: PyMeshFix + roundtrip manifold3d em cada sub-parte
     t_fix = time.time()
     import pymeshfix
 
-    fixer = pymeshfix.MeshFix(np.asarray(top.vertices), np.asarray(top.faces))
-    fixer.repair()
-    fixed = trimesh.Trimesh(
-        vertices=np.asarray(fixer.points, dtype=np.float64),
-        faces=np.asarray(fixer.faces, dtype=np.int64),
-        process=False,
-    )
-    fixed.fix_normals()
-    man = to_manifold(fixed)
-    if str(man.status()) != "Error.NoError":
-        raise RuntimeError(f"manifold3d rejeitou pós-pymeshfix: {man.status()}")
-    rep = from_manifold(man)
+    repaired_parts = []
+    for c in kept_comps:
+        fixer = pymeshfix.MeshFix(np.asarray(c.vertices, dtype=np.float64), np.asarray(c.faces, dtype=np.int32))
+        fixer.repair()
+        if len(fixer.faces) < 12:
+            continue
+        fixed_c = trimesh.Trimesh(
+            vertices=np.asarray(fixer.points, dtype=np.float64),
+            faces=np.asarray(fixer.faces, dtype=np.int64),
+            process=False,
+        )
+        fixed_c.fix_normals()
+        man_c = to_manifold(fixed_c)
+        if str(man_c.status()) == "Error.NoError":
+            repaired_parts.append(from_manifold(man_c))
+        else:
+            repaired_parts.append(fixed_c)
+    if not repaired_parts:
+        raise RuntimeError("Nenhum componente válido restou após PyMeshFix + manifold3d")
+    rep = trimesh.util.concatenate(repaired_parts)
     # 3. escala p/ maior dimensão = target_mm
     scale = args.target_mm / max(rep.bounding_box.extents)
     rep.apply_scale(scale)

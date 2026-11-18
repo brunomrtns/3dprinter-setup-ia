@@ -37,31 +37,54 @@ def main() -> int:
     device = "cuda"
     dtype = torch.float16
 
-    # RMBG-1.4 (remoção de fundo do próprio TripoSG) via cache HF; fallback:
-    # entrada já pré-processada (fundo branco) → seguir sem rmbg, documentado.
-    rmbg_net = None
-    try:
-        from briarmbg import BriaRMBG
-        from huggingface_hub import snapshot_download
+    raw_im = Image.open(args.image)
+    has_explicit_alpha = raw_im.mode == "RGBA" and np.asarray(raw_im)[..., 3].min() < 250
 
-        rmbg_dir = snapshot_download("briaai/RMBG-1.4")
-        rmbg_net = BriaRMBG.from_pretrained(rmbg_dir).to(device)
-        rmbg_net.eval()
-    except Exception as e:  # noqa: BLE001
-        erros.append(f"rmbg_indisponivel_seguiu_sem: {type(e).__name__}: {str(e)[:200]}")
+    # RMBG-1.4 (remoção de fundo do próprio TripoSG) via cache HF; se a imagem RGBA já traz
+    # máscara alfa explícita (ex.: máscara de carroceria com vidros grafite), usa a máscara direto.
+    rmbg_net = None
+    if not has_explicit_alpha:
+        try:
+            from briarmbg import BriaRMBG
+            from huggingface_hub import snapshot_download
+
+            rmbg_dir = snapshot_download("briaai/RMBG-1.4")
+            rmbg_net = BriaRMBG.from_pretrained(rmbg_dir).to(device)
+            rmbg_net.eval()
+        except Exception as e:  # noqa: BLE001
+            erros.append(f"rmbg_indisponivel_seguiu_sem: {type(e).__name__}: {str(e)[:200]}")
+
+    if has_explicit_alpha:
+        arr = np.asarray(raw_im).astype(np.float32)
+        alpha = arr[..., 3:4] / 255.0
+        ys, xs = np.where(arr[..., 3] > 16)
+        rgb = (arr[..., :3] * alpha + 255.0 * (1.0 - alpha)).astype(np.uint8)
+        if len(xs) > 0 and len(ys) > 0:
+            x0, x1 = int(xs.min()), int(xs.max())
+            y0, y1 = int(ys.min()), int(ys.max())
+            crop = rgb[y0 : y1 + 1, x0 : x1 + 1]
+            h, w = crop.shape[:2]
+            side = int(max(h, w) * 1.15)
+            canvas = np.full((side, side, 3), 255, dtype=np.uint8)
+            oy, ox = (side - h) // 2, (side - w) // 2
+            canvas[oy : oy + h, ox : ox + w] = crop
+            img_pil = Image.fromarray(canvas, mode="RGB").resize((518, 518), Image.LANCZOS)
+        else:
+            img_pil = Image.fromarray(rgb, mode="RGB").resize((518, 518), Image.LANCZOS)
+    elif rmbg_net is not None:
+        img_pil = prepare_image(args.image, bg_color=np.array([1.0, 1.0, 1.0]), rmbg_net=rmbg_net)
+        rmbg_net.to("cpu")
+        del rmbg_net
+        torch.cuda.empty_cache()
+    else:
+        # fallback documentado: entrada já padronizada pelo preprocess_input.py (C2)
+        img_pil = raw_im.convert("RGB").resize((518, 518), Image.LANCZOS)
 
     from huggingface_hub import snapshot_download
 
     local = snapshot_download("VAST-AI/TripoSG")
     pipe = TripoSGPipeline.from_pretrained(local, trust_remote_code=True).to(device, dtype)
     report["tempo_load_s"] = round(time.time() - t0, 2)
-
-    image = Image.open(args.image).convert("RGB")
-    if rmbg_net is not None:
-        img_pil = prepare_image(args.image, bg_color=np.array([1.0, 1.0, 1.0]), rmbg_net=rmbg_net)
-    else:
-        # fallback documentado: entrada já padronizada pelo preprocess_input.py (C2)
-        img_pil = image.resize((518, 518), Image.LANCZOS)
 
     t1 = time.time()
     with torch.no_grad():
