@@ -15,7 +15,7 @@
 | 2 — Forja (parcial: pacote entregue na Fase 1) | `[~]` pipeline/reparo funcionais; catálogo completo é Fase 2 propriamente dita — depois da Fase C |
 | 3 — Pose / 4 — Operador IA | `[ ]` não abertas |
 
-**Gatilho atual:** C1 na máquina do colega (TRELLIS.2 fork na 5060 Ti) + C3 no PC do Bruno (comparativo 4 geradores na entrada pré-processada).
+**Gatilho atual:** veredito do dono na galeria C3 → ADR-007 · C1 na máquina do colega (TRELLIS.2 fork na 5060 Ti) · decisão do dono sobre o ADR-008 (esteira de pós-processamento) antes de abrir a Fase 2.
 
 ---
 
@@ -95,6 +95,24 @@
 - 10/10 casos pré-processados (log real em `evidence/fase-c/preproc/execucao-c2.log`); par antes/depois commitado (trex_figurine).
 - **Achado honesto:** o caso `trex_figurine` contém a imagem do **pergolado (trellis) do repo oficial da Microsoft** (`T.png` — manifest provava a origem desde a Fase 1) — caso MAL NOMEADO desde a criação do testset, não é bug do pré-processamento. Testset é imutável; comparação segue válida (mesma entrada para todos); renomeação fica registrada como pendência cosmética de fase futura.
 - Upscale (Real-ESRGAN): OFF por default, deps ausentes — pendência registrada, nada pesado instalado (decisão C2).
+
+---
+
+## Registro — Pesquisa de pós-processamento + ADR-008 proposto (2026-11-18) — branch `feat/z-agent/esteira-pos-processamento` `[~] aguardando decisão do dono`
+
+> Pedida pelo dono após o C5 ("pesquisar em fóruns/GitHub coisas que a gente possa usar no pós para melhorar a peça"). Nenhum código escrito — AGENTS.md §1.8 (Fase 2 só abre após fechamento da Fase C + aprovação do dono).
+
+| # | Entrega | Status |
+|---|---|---|
+| 1 | Pesquisa de ferramentas (GitHub + docs oficiais + fóruns) com auditoria real de licença/CLI/atividade — log completo em `evidence/pesquisa-pos-processamento/fontes-verificadas.md` | [x] |
+| 2 | `docs/knowledge/pos-processamento-ferramentas.md` — base técnica: detalhe milimétrico × MSLA; ferramentas por etapa com licença verificada; esteira v1 de 9 etapas com gates | [x] |
+| 3 | `docs/decisions/ADR-008-esteira-pos-processamento.md` — **Status: PROPOSTO** (booleana via manifold3d/engine trimesh; fallback fTetWild MPL-2.0; ManifoldPlus vedado p/ comercial; UVtoolsCmd como gate pós-slice; watchlist IA) — entra em vigor só na abertura da Fase 2 | [x] proposta registrada · [ ] decisão do dono |
+| 4 | Implementação da esteira (etapas 2–4, 7, 9) | [ ] propositalmente não iniciada — escopo da Fase 2 |
+
+- **Respostas à dúvida do dono sobre detalhe milimétrico**: o que quebra a impressão não é a densidade de faces — são ilhas, pontas finas, espessura < 0,5 mm e armadilhas de resina; e a malha 512³ tem teto físico de detalhe (~0,2–0,4 mm, passo do grid) — microdetalhe sub-0,4 mm não existe na saída atual (degrau de silhueta já registrado no C5). Mais resolução = 1024³ bloqueado pelo guard (10.057 MiB medido).
+- **Achado de pesquisa mais acionável**: `trimesh` 5.2.1 (já no venv) expõe engine **manifold3d** (Apache-2.0) em `trimesh.boolean` — desbloqueia as booleanas da Fase 2 com dependência de 1 linha; e **UVtoolsCmd** (AGPL-3.0, binário externo) vira gate objetivo pós-slice (0 ilhas/armadilhas/sucção = exit 0), complementando os gates de malha.
+- **[!] Exceção documentada ao §1.7**: sessão executada em sandbox externo sem credenciais de push — branch entregue como patch ao dono para aplicar/pushar; após o merge o `git log origin/main..HEAD` deve estar vazio na máquina do dono.
+- Watchlist IA de refinamento (MeshAnythingV2 ≤1.600 faces · EdgeRunner licença a abrir · BPT ~12 GB → guard bloqueia · Hunyuan3D-Paint 16 GB textura): avaliar só com ADR próprio, se o gate visual da esteira tradicional falhar (mesmo espírito do ADR-005).
 
 ---
 
