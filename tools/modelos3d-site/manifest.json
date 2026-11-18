@@ -351,6 +351,33 @@
      "vram": 7509,
      "manifold_antes": false,
      "manifold_depois": false
+    },
+    "posproc": {
+     "glb": "models/anubis_a__posproc.glb",
+     "verts": 100000,
+     "faces": 200000,
+     "tempo_s": 74.85,
+     "vram": 0,
+     "manifold_antes": false,
+     "manifold_depois": true
+    },
+    "posproc_oco": {
+     "glb": "models/anubis_a__posproc_oco.glb",
+     "verts": 117233,
+     "faces": 234466,
+     "tempo_s": 4.07,
+     "vram": 0,
+     "manifold_antes": false,
+     "manifold_depois": true
+    },
+    "posproc_corte": {
+     "glb": "models/anubis_a__posproc_corte.glb",
+     "verts": 92304,
+     "faces": 184640,
+     "tempo_s": 4.07,
+     "vram": 0,
+     "manifold_antes": false,
+     "manifold_depois": true
     }
    }
   },

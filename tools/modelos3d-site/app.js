@@ -3,12 +3,15 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
-const MODES = ['trellis2', 'triposg', 'triposf256', 'triposf512', 'trellis', 'triposr'];
+const MODES = ['trellis2', 'triposg', 'triposf256', 'triposf512', 'posproc', 'posproc_oco', 'posproc_corte', 'trellis', 'triposr'];
 const MODE_LABEL = {
   trellis2: 'TRELLIS.2',
   triposg: 'TripoSG',
   triposf256: 'TripoSF 256',
   triposf512: 'TripoSF 512',
+  posproc: 'Pós-proc (Sólido)',
+  posproc_oco: 'Pós-proc (Oco)',
+  posproc_corte: 'Corte Oco',
   trellis: 'TRELLIS 1',
   triposr: 'TripoSR',
 };
@@ -331,11 +334,13 @@ function refreshViewport(i) {
     const grp = new THREE.Group();
     g.scene.traverse(o => {
       if (o.isMesh) {
+        if (!o.geometry.attributes.normal) o.geometry.computeVertexNormals();
         o.material = new THREE.MeshStandardMaterial({
           color: 0xbfc4cc,
           roughness: 0.55,
           metalness: 0.05,
           side: THREE.DoubleSide,
+          flatShading: mode === 'trellis2',
         });
         o.castShadow = o.receiveShadow = false;
       }

@@ -58,6 +58,7 @@
   - **Limpeza & cache**: `disposeViewport()` cancela rAF/ResizeObserver/renderer; `btnVs` sincronizado no boot; toast no copiar link (`🔗`); `deploy.sh` trocado de `expires 1h` para `Cache-Control: no-cache` + `./app.js?v=3`.
 - **Deploy**: `tools/modelos3d-site/deploy.sh` — rsync OK, `nginx -t` OK, reload sem downtime, smoke 200, `Cache-Control: no-cache` confirmado.
 - **Validação real (Chrome headless via CDP, `390×844` @ 2x na URL pública + `320×568` e `1280×800` local)**: `0` erros console, `errbox` vazio, `spin` oculto, `0` overflow; `anubis_a` passou de **28.238 px (19,7% h)** na v2 para **234.791 px (65,0% h / 67,2% w — 8,3×)** na v3; `trex_figurine` inteiro (71,0% w); VS empilhado com ambos os modelos inteiros. Evidência: `evidence/fase-c/viewer-mobile-v3/validacao.md`.
+- **Update pós-processamento Anubis no viewer (2026-11-18)**: adicionados 3 modos em `anubis_a` (`posproc` sólido 200k watertight/Taubin 5it, `posproc_oco` parede 3mm + dreno 4,5mm via `manifold3d`, `posproc_corte` corte transversal do oco), `computeVertexNormals()` de fallback no `app.js` (GLBs sem `NORMAL` ficavam pretos) e `flatShading` automático no `trellis2` (elimina granulado das normais corrompidas por winding invertido). Deployado via `deploy.sh` (40 GLBs) e validado ao vivo em `390×844`.
 
 ### Registro C3 (2026-11-17, continuação — benchmark em execução)
 
