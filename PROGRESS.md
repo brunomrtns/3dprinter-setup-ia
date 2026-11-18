@@ -87,6 +87,12 @@
   - Refinado com **`TripoSF 512`** (`3.497.404` faces em `56,52s`, pico **`10.227 MiB`**) e pós-processado (`280.000` faces, `139.650` vértices, `watertight = True`), preservando **as 4 rodas, a antena, a placa, o teto sólido e toda a cabine interna**.
 - **Fotogrametria feed-forward (Tarefa B)**: `tools/generator/vggt_recon.py` + `docs/onboarding/captura-fotogrametria.md` commitados e prontos para uso com vídeo/fotos 360°.
 - **Deploy e Validação Live**: 5 GLBs (`carro_nowin__{triposf512,triposg,hunyuan_mv_sf512,hunyuan_mv,trellis2_fosco}.glb`) publicados e verificados com `HTTP 200` em **https://brunointegrations.com/modelos3d/?case=carro_nowin** + STLs em escala `200mm` exportados para `C:\Users\Bruno\Downloads\fox-posproc\` (prontos para o ChituBox). Evidência: `evidence/rtx3060-12gb/hunyuan-carro/{report.md,summary.json}`.
+- **Refinador Automotivo — Simetria Bilateral (`X = -X`) + Gabarito Dimensional (Blueprint VW Fox `3.868 × 1.780 × 1.552 mm`)**:
+  - Criado `tools/generator/refino_automotivo.py` para corrigir os dois defeitos visuais apontados pelo dono nas malhas brutas de carros ("aspecto assimétrico / traseira desalinhada / proporção gorda de cubo `[-1,1]³`"):
+    1. `deskew_longitudinal`: alinha a linha de centro `X(Z)` da dianteira até o para-choque traseiro;
+    2. `symmetrize_bilateral`: corta no plano sagital `X = 0` e espelha o lado visível de alta definição via CSG booleano (`manifold3d`), com subtração seletiva da cópia do aro do volante no lado do passageiro (`preserve_driver_wheel_only=True`) no `TripoSG + TripoSF 512`;
+    3. `apply_fox_blueprint`: trava a proporção real de fábrica do Volkswagen Fox (`200,0 mm C × 92,0 mm L c/ retrovisores × 80,2 mm A`, `watertight = True`).
+  - GLBs atualizados e re-deployados no viewer (`carro_nowin__{triposf512,triposg,hunyuan_mv_sf512,hunyuan_mv}.glb`) + STLs simétricos `200mm` em `C:\Users\Bruno\Downloads\fox-posproc\`.
 
 ### Registro C3 (2026-11-17, continuação — benchmark em execução)
 
