@@ -83,6 +83,34 @@ def resolve_min_free_mib(min_free_mib: int | None = None) -> int:
     return DEFAULT_MIN_FREE_MIB
 
 
+def reclaim_windows_vram(log=print) -> None:
+    """Encerra processos Windows conhecidos por reter VRAM em background (ex.: NVIDIA Broadcast).
+
+    Autorizado pelo dono (2026-11-18). Pode ser desativado com PRINTER3D_RECLAIM_BROADCAST=0.
+    """
+    if os.environ.get("PRINTER3D_RECLAIM_BROADCAST", "1") == "0":
+        return
+    taskkill = "/mnt/c/Windows/System32/taskkill.exe"
+    if not os.path.isfile(taskkill):
+        return
+    killed = []
+    for exe in ("NVIDIA Broadcast.exe", "NVIDIA Broadcast UI.exe", "RTXVoice.exe"):
+        try:
+            r = subprocess.run(
+                [taskkill, "/F", "/IM", exe],
+                capture_output=True,
+                text=True,
+                timeout=10,
+            )
+            if r.returncode == 0:
+                killed.append(exe)
+        except Exception:  # noqa: BLE001
+            pass
+    if killed:
+        time.sleep(1.0)
+        log(f"[gpu_guard] VRAM reclaim: encerrado(s) {', '.join(killed)}")
+
+
 def query_vram_mib() -> tuple[int, int]:
     """(used_mib, free_mib) via nvidia-smi. Falha → levanta (não inventar número)."""
     out = subprocess.run(
@@ -110,6 +138,7 @@ def wait_for_vram(
 
     min_free_mib=None → resolve pelo perfil de máquina (ADR-006)."""
     min_free_mib = resolve_min_free_mib(min_free_mib)
+    reclaim_windows_vram(log=log)
     t0 = time.time()
     waited = False
     while True:
