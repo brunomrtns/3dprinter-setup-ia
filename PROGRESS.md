@@ -92,7 +92,9 @@
     1. `deskew_longitudinal`: alinha a linha de centro `X(Z)` da dianteira até o para-choque traseiro;
     2. `symmetrize_bilateral`: corta no plano sagital `X = 0` e espelha o lado visível de alta definição via CSG booleano (`manifold3d`), com subtração seletiva da cópia do aro do volante no lado do passageiro (`preserve_driver_wheel_only=True`) no `TripoSG + TripoSF 512`;
     3. `apply_fox_blueprint`: trava a proporção real de fábrica do Volkswagen Fox (`200,0 mm C × 92,0 mm L c/ retrovisores × 80,2 mm A`, `watertight = True`).
-  - GLBs atualizados e re-deployados no viewer (`carro_nowin__{triposf512,triposg,hunyuan_mv_sf512,hunyuan_mv}.glb`) + STLs simétricos `200mm` em `C:\Users\Bruno\Downloads\fox-posproc\`.
+  - GLBs atualizados e re-deployados no viewer (`carro_nowin__{simetrico_interna,simetrico_4vistas,triposf512,triposg,hunyuan_mv_sf512,hunyuan_mv}.glb`, cache-bust `?v=9`) + STLs simétricos `200mm` em `C:\Users\Bruno\Downloads\fox-posproc\`.
+- **Estudo Técnico e Arquitetura da Feature "Kit de Montagem Hard-Surface / Veículos (IA + CSG Modular)"**:
+  - Documentado em `docs/knowledge/modelagem-hard-surface-e-veiculos.md`: diagnóstico matemático do orçamento de voxels `512³` e do efeito *Out-of-Distribution* de apagar vidros na foto 2D; especificação da esteira modular (Carroceria Sólida + Corte Booleano 2D→3D cirúrgico dos vidros + Banheira Interna separada + 1 Roda Mestre gerada em close `100%` dedicada e instanciada 4× em cilindro matemático); levantamento comparativo de 6 projetos do GitHub (`bytedance/Hi3DGen`, `DreamTechAI/Direct3D-S2 1024³`, `Tencent-Hunyuan/Hunyuan3D-2.1`, `Seed3D/Dora`, `huanngzh/MV-Adapter`, `VAST-AI-Research/HoloPart`) e matriz de 3 opções de execução para decisão do dono.
 
 ### Registro C3 (2026-11-17, continuação — benchmark em execução)
 
