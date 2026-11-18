@@ -2,7 +2,10 @@
 
 > Leia isto DEPOIS de `PROGRESS.md` (fonte da verdade) e ANTES de executar qualquer coisa. Contexto mínimo para um agente frio continuar o projeto sem conversa anterior.
 
-## Estado atual (2026-11-17)
+## Estado atual (2026-11-18)
+
+- **⚠️ GATILHO ATUAL: rodar o PROMPT-C6** — `docs/onboarding/PROMPT-C6-hunyuan-multivista.md` (handoff completo: Hunyuan3D-2.1 multi-vista no carro fox + fotogrametria VGGT). Escrito porque os créditos do dono acabaram; ele pediu execução por outra IA com **PROGRESS.md atualizado a cada marco + commit/push frequente**.
+- **Carro fox (2026-11-18): veredito do dono = AINDA NÃO PRESTA** (frente ou trás boas, nunca ambas — limite do single-view). **No carro, trellis2 > triposg** (dado real; inverte o gate C5 do anubis). 9 GLBs no viewer (`carro_front/back/all` × `trellis2/triposg/triposf512`); malhas full-res em `~/printer3d-work/carro/`; vistas do all.webp recortadas em `~/printer3d-work/carro/vistas/` (confirmar qual terço é qual com o dono). Posproc pausado (dono: "não insistir antes de ver") — script pronto, reparo watertight OK, `libopengl0` já instalado.
 
 - **PIPELINE OFICIAL IMAGE→3D (decisão do dono, gate C5 2026-11-17): `imagem → preproc C2 → TripoSG → refino TripoSF 512`** — one-command: `tools/generator/pipeline_imagem3d.sh <img> <dir> [seed]` (smoke ponta-a-ponta OK, seed 42 reproduz a evidência). Para imprimir, Forja antes (512 não-watertight). TripoSF 512 venceu o gate visual; 1024³ BLOQUEADO pelo guard nesta GPU; `sample_points_num` 409.600 obrigatório (gargalo: LocalPoolPointnet fp32). Benchmark C5: `evidence/rtx3060-12gb/triposf-benchmark/`.
 - **Viewer 3D com UX nova (2026-11-17)**: arrastar a peça **para** o giro automático (ou botão ⏸/▶); **link compartilhável** — a URL reflete o estado (`?case=anubis_a&mode=triposf512&vs=1&mode2=triposg&auto=0`), botão `🔗 Copiar link`; material `DoubleSide`. Trellis2 "picotado": `fix_winding` falhou (malha aberta — registrado no PROGRESS C5); DoubleSide mitiga a transparência, furos reais do 512³ sparse permanecem — **dono ainda não avaliou trellis2 visualmente com folga**.
