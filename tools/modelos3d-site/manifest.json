@@ -524,8 +524,26 @@
   },
   {
    "id": "carro_nowin",
-   "category": "carro fox definitivo (TripoSG+TripoSF512 c/ interna+4 rodas vs Hunyuan3D-2mv 4 vistas, 2026-11-18)",
+   "category": "carro fox definitivo (Simetria Bilateral + Blueprint 3868x1780x1552mm vs Original, 2026-11-18)",
    "modes": {
+    "simetrico_interna": {
+     "glb": "models/carro_nowin__simetrico_interna.glb",
+     "verts": 139443,
+     "faces": 279526,
+     "tempo_s": 56.52,
+     "vram": 10227,
+     "manifold_antes": false,
+     "manifold_depois": true
+    },
+    "simetrico_4vistas": {
+     "glb": "models/carro_nowin__simetrico_4vistas.glb",
+     "verts": 139755,
+     "faces": 279746,
+     "tempo_s": 44.51,
+     "vram": 6569,
+     "manifold_antes": false,
+     "manifold_depois": true
+    },
     "triposf512": {
      "glb": "models/carro_nowin__triposf512.glb",
      "verts": 139650,

@@ -4,6 +4,8 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const MODES = [
+  'simetrico_interna',
+  'simetrico_4vistas',
   'triposf512',
   'triposg',
   'hunyuan_mv_sf512',
@@ -18,6 +20,8 @@ const MODES = [
   'triposr',
 ];
 const MODE_LABEL = {
+  simetrico_interna: '★ Simétrico + Blueprint (Interna s/ Vidro)',
+  simetrico_4vistas: '★ Simétrico + Blueprint (4 Vistas)',
   triposf512: 'TripoSF 512',
   triposg: 'TripoSG',
   hunyuan_mv_sf512: 'Hunyuan 2mv + TripoSF 512',
@@ -343,7 +347,7 @@ function refreshViewport(i) {
   v.spin.style.display = 'flex';
 
   const req = (v._req = (v._req || 0) + 1);
-  loader.load(`models/${c.id}__${mode}.glb`, g => {
+  loader.load(`models/${c.id}__${mode}.glb?v=8`, g => {
     if (v._req !== req) return;
     v.spin.style.display = 'none';
     if (v.group) v.scene.remove(v.group);
