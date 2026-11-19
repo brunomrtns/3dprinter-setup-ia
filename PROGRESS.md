@@ -155,7 +155,9 @@
 - **Viewer**: caso `carro_foxh` com 9 modos (linha **a** = painéis da grade, linha **b** = fotos reais) como cards GLB texturizados — **9/9 + viewer `HTTP 200` ao vivo**. Evidência: `evidence/rtx3060-12gb/carro-foxh/report.json`.
 - **PARADO no gate visual** (passo 6 do prompt): dono confere (1) recortes P1=frente/P2=lado esq/P3=trás/P4=3/4 dianteira estão certos, (2) tint dos vidros aceitável, (3) linha A × linha B. Aprovado → FASE 1 (2mv seed 42, runs A e B, guard).
 
-### Registro Anubis `Hunyuan3D-2.1` + `TripoSF 512` + Pós-proc (2026-11-19) — `[x]` CONCLUÍDO E PUBLICADO NO VIEWER
+### Registro Anubis `Hunyuan3D-2.1` + `TripoSF 512` + Pós-proc (2026-11-19) — `[x]` CONCLUÍDO — VEREDITO: `TripoSG → TripoSF 512` SEGUE CAMPEÃO
+
+- **VEREDITO DO DONO (2026-11-19)**: *"ficou bom, mas o modelo de antes ficou melhor"* — confirma a esteira oficial do C5 (`TripoSG → TripoSF 512 → posproc_impressao.py`) como melhor opção open-source local para esculturas/orgânicos, vencendo inclusive o `Hunyuan3D-2.1` (4096 latents MoE).
 
 - **Esteira completa em `anubis_a_preproc.png` (`seed 42`)**:
   1. `Hunyuan3D-2.1` (`hunyuan3d-dit-v2-1`, 4096 latents MoE): `183.704` verts / `367.428` faces · load `51,8s` + run `371,93s` · 0 erros, 0 OOM.
