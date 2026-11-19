@@ -129,6 +129,13 @@
 - **Evidências**: `evidence/rtx3060-12gb/hi3dgen-carro/{report.json,scores.md,normal.png}`.
 - **Próximos passos da sessão (PROMPT-C7)**: **GATE B do dono (Veredito Hi3DGen)** → **C7-C (Hunyuan-2.1 ckpt A/B)** → rascunho ADR-007.
 
+### Registro ROTA H — Input canônico: contact sheet do dono × fotos reais no Hunyuan3D-2mv (2026-11-19, PROMPT-H) — `[~]` TAREFA 1 (contact sheet) com o DONO
+
+- **Diagnóstico acumulado aceito** (C3/C5/C6/C7): TODOS os geradores falham no carro quando a forma inteira depende de interpretar fotos com ângulo/luz/escala inconsistentes; o C7-A provou que remendo CSG sobre base ruim não resolve. **A rota H ataca o INPUT, não o gerador**: base nasce padronizada (vistas canônicas ortográficas, fundo branco, mesma luz/escala, rodas retas) — regime exato de treino do Hunyuan3D-2mv. Simula o fluxo de cliente real (características+cor → imagens padronizadas → 3D).
+- **Plano**: (T1, dono) contact sheet grade 2×2 do Fox 2015 branco Xtreme no serviço de imagem do dono, salvo em `Downloads/fox-h/` — caminho CONFIRMADO pelo dono antes de copiar; (T2, IA/CPU) cortar 4 painéis → preproc C2 + tinted → `c7-h-prep/{front,left,back,diag}.png`, `right`=espelho de `left` (limitação assimétrica registrada), **validação visual obrigatória do dono nos recortes antes de qualquer GPU**; (T3, GPU) A/B no Hunyuan3D-2mv: run A = REUSAR `carro_nowin` do C6 como controle (mesma seed 42/octree 384), run B = vistas canônicas → TripoSF 512 + posproc + refino_automotivo → caso `carro_canon` no viewer em VS contra `carro_nowin` → **GATE H1 (dono)**; (T4, só se H1 reprovar por PROPORÇÃO) Hunyuan3D-Omni com âncora geométrica (point cloud da casca C7-A OU blockout blueprint 3868×1780×1552+r_target medido) em venv próprio + sonda VRAM + **GATE H2**; (T5, opcional) MV-Adapter como alternativa local ao contact sheet.
+- **Licenças/procedência**: sidecar ADR-003 com licença+URL+hash ANTES do primeiro uso de qualquer peso novo; non-commercial NÃO entra em fluxo de cliente. Pesos da rota: 2mv (community license — confirmar texto vigente), TripoSG/SF (MIT/Apache — confirmar), Omni (confirmar). Rota H desenhada p/ 100% uso aberto/comercial.
+- Estado T1: aguardando o dono gerar e avisar o caminho (`Downloads/fox-h/` ainda não existia em 2026-11-19).
+
 ### Registro C3 (2026-11-17, continuação — benchmark em execução)
 
 
