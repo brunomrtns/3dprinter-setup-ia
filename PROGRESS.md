@@ -113,7 +113,21 @@
     - O Kit de Montagem CSG voltará a ser testado **exclusivamente** sobre a base nova vencedora das Tarefas B/C (Hi3DGen / Hunyuan-2.1).
 - **Fotos do kit = as MESMAS do C6** (`Downloads/fox/no-windows/` = `~/printer3d-work/carro/fotos-c7/` + `c7-prep/`): 5 fotos de 2400x1792 px (frente, frente-e-lado-diagonal, lado, traseira, de-fora-pegando-interna). Prep `*_tinted.png` reutilizado. C7-E (fotogrametria densa VGGT) retirado da fila (só reabrir se B/C falharem e houver sessão de 20-40 fotos completas).
 - **Publicação**: caso `carro_csg` (modos `kit`, `casca`, `interna`, `kit_corte`) mantido no viewer para histórico/comparação. Evidência: `evidence/rtx3060-12gb/carro-csg/report.json`.
-- **Próximos passos da sessão (PROMPT-C7)**: **C7-B (Hi3DGen A/B)** → **C7-C (Hunyuan-2.1 ckpt A/B)** → rascunho ADR-007.
+
+### Registro C7-B — Hi3DGen A/B (2026-11-19) — `[x]` CONCLUÍDO E PUBLICADO NO VIEWER (Aguardando Veredito do Dono)
+
+- **Setup do venv dedicado `~/.venvs/hi3dgen` (ADR-004)**: Python 3.11 + PyTorch `2.8.0+cu128` + `spconv-cu120 2.3.6` + `xformers 0.0.32.post2` + `diffusers 0.33.1` + `transformers 4.46.3` + `scikit-image` + `kornia` + `NiRNE` submodule.
+- **Pesos e Modelos**: `Stable-X/trellis-normal-v0-1` + `Stable-X/yoso-normal-v1-8-1` + `ZhengPeng7/BiRefNet` cacheados em `~/tools/Hi3DGen/weights/`.
+- **Sonda e Telemetria Real de VRAM (RTX 3060 12GB)**:
+  - Fase A (Predição de Normais NiRNE): 6,10 s, pico 2.527 MiB → mapa salvo em `evidence/rtx3060-12gb/hi3dgen-carro/normal.png`.
+  - Offload sequencial: NiRNE descarregado da GPU após a previsão, reduzindo VRAM residual para 8,12 MiB.
+  - Fase B (Carga Hi3DGenPipeline): 23,02 s, alocação 5.131 MiB.
+  - Fase C (Inferência 3D com seed 42): Stage 1 (50 steps) 27 s + Stage 2 (6 steps) 3 s + decode 3 s = 33,68 s.
+  - **Pico global medido**: **7.803,07 MiB** (folga de ~4,4 GB livres no desktop). Tempo total de execução: **65,78 s** (1,8× mais rápido que TripoSG e 3,6× mais rápido que TRELLIS.2).
+- **Qualidade e Malha Gerada**: 296.548 vértices e **593.226 faces** (~600k faces sem necessidade de decimação forçada). O mapa de normais elimina distorções causadas por reflexos de tinta na lataria.
+- **Publicação**: GLB de 14 MB exportado e deployado no ar no caso `carro_nowin` (modo `hi3dgen`): https://brunointegrations.com/modelos3d/?case=carro_nowin&mode=hi3dgen (validado com HTTP 200).
+- **Evidências**: `evidence/rtx3060-12gb/hi3dgen-carro/{report.json,scores.md,normal.png}`.
+- **Próximos passos da sessão (PROMPT-C7)**: **GATE B do dono (Veredito Hi3DGen)** → **C7-C (Hunyuan-2.1 ckpt A/B)** → rascunho ADR-007.
 
 ### Registro C3 (2026-11-17, continuação — benchmark em execução)
 

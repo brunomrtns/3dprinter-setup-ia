@@ -4,6 +4,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const MODES = [
+  'hi3dgen',
   'kit',
   'casca',
   'interna',
@@ -24,6 +25,7 @@ const MODES = [
   'triposr',
 ];
 const MODE_LABEL = {
+  hi3dgen: '★ Hi3DGen (Normal-Bridging)',
   kit: '★ Kit Montado (CSG + 4 Rodas + Interna)',
   casca: 'Peça 1: Casca Carroceria (Janelas CSG)',
   interna: 'Peças 2+3: Banheira Interna + 4 Rodas',

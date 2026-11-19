@@ -35,7 +35,7 @@
   },
   {
    "id": "humanoide_dragonborn",
-   "category": "miniatura humanoide (caso de uso do Estúdio de Pose — Fase 3)",
+   "category": "miniatura humanoide (caso de uso do Est\u00fadio de Pose \u2014 Fase 3)",
    "modes": {
     "trellis2": {
      "glb": "models/humanoide_dragonborn__trellis2.glb",
@@ -134,7 +134,7 @@
   },
   {
    "id": "estrutura_piramide",
-   "category": "estrutura geométrica simples",
+   "category": "estrutura geom\u00e9trica simples",
    "modes": {
     "trellis2": {
      "glb": "models/estrutura_piramide__trellis2.glb",
@@ -233,7 +233,7 @@
   },
   {
    "id": "local_caneca",
-   "category": "peça funcional (uso real do dono)",
+   "category": "pe\u00e7a funcional (uso real do dono)",
    "modes": {
     "trellis2": {
      "glb": "models/local_caneca__trellis2.glb",
@@ -257,7 +257,7 @@
   },
   {
    "id": "local_engrenagem",
-   "category": "peça funcional mecânica",
+   "category": "pe\u00e7a funcional mec\u00e2nica",
    "modes": {
     "trellis2": {
      "glb": "models/local_engrenagem__trellis2.glb",
@@ -281,7 +281,7 @@
   },
   {
    "id": "local_gancho",
-   "category": "peça funcional (impressão prática)",
+   "category": "pe\u00e7a funcional (impress\u00e3o pr\u00e1tica)",
    "modes": {
     "trellis2": {
      "glb": "models/local_gancho__trellis2.glb",
@@ -526,6 +526,15 @@
    "id": "carro_nowin",
    "category": "carro fox definitivo (Simetria Bilateral + Blueprint 3868x1780x1552mm vs Original, 2026-11-18)",
    "modes": {
+    "hi3dgen": {
+     "glb": "models/carro_nowin__hi3dgen.glb",
+     "verts": 296548,
+     "faces": 593226,
+     "tempo_s": 65.78,
+     "vram": 7803,
+     "manifold_antes": false,
+     "manifold_depois": false
+    },
     "simetrico_interna": {
      "glb": "models/carro_nowin__simetrico_interna.glb",
      "verts": 139443,
@@ -593,7 +602,7 @@
   },
   {
    "id": "carro_csg",
-   "category": "carro fox kit de montagem CSG (C7-A, 2026-11-18): casca + janelas booleanas 2D→3D + banheira + roda mestre 4x",
+   "category": "carro fox kit de montagem CSG (C7-A, 2026-11-18): casca + janelas booleanas 2D\u21923D + banheira + roda mestre 4x",
    "modes": {
     "kit": {
      "glb": "models/carro_csg__kit.glb",

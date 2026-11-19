@@ -1,0 +1,45 @@
+{
+  "caso": "carro_fox_diagonal",
+  "entrada": "frente-e-lado-diagonal_tinted.png",
+  "seed": 42,
+  "data": "2026-11-19",
+  "gpu": "NVIDIA GeForce RTX 3060 12GB",
+  "hi3dgen": {
+    "modelo": "bytedance/Hi3DGen + Stable-X/trellis-normal-v0-1 + NiRNE (YOSO Normal)",
+    "seed": 42,
+    "resolucao_normal": 768,
+    "resolucao_hi3dgen": 1024,
+    "tempo_normais_s": 6.1,
+    "tempo_load_pipeline_s": 23.02,
+    "tempo_run_3d_s": 33.68,
+    "tempo_total_s": 65.78,
+    "vram_peak_mib": 7803.07,
+    "vertices_raw": 296582,
+    "faces_raw": 593294,
+    "vertices_glb": 296548,
+    "faces_glb": 593226,
+    "bbox": [0.5058, 0.4255, 1.0016],
+    "normal_image": "evidence/rtx3060-12gb/hi3dgen-carro/normal.png",
+    "glb_path": "models/carro_nowin__hi3dgen.glb"
+  },
+  "comparativo_a_b": {
+    "triposg": {
+      "tempo_total_s": 116.96,
+      "vram_peak_mib": 10250.0,
+      "faces": 3116268,
+      "vertices": 1557463
+    },
+    "trellis2_512": {
+      "tempo_total_s": 239.49,
+      "vram_peak_mib": 4177.0,
+      "faces": 1961412,
+      "vertices": 922933
+    },
+    "hi3dgen": {
+      "tempo_total_s": 65.78,
+      "vram_peak_mib": 7803.07,
+      "faces": 593226,
+      "vertices": 296548
+    }
+  }
+}
