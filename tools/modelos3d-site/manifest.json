@@ -316,6 +316,24 @@
    "id": "anubis_a",
    "category": "anubis (avulso do dono)",
    "modes": {
+    "hunyuan_21_posproc": {
+     "glb": "models/anubis_a__hunyuan_21_posproc.glb",
+     "verts": 124994,
+     "faces": 250000,
+     "tempo_s": 469.83,
+     "vram": 8211,
+     "manifold_antes": false,
+     "manifold_depois": true
+    },
+    "hunyuan_21": {
+     "glb": "models/anubis_a__hunyuan_21.glb",
+     "verts": 183675,
+     "faces": 367370,
+     "tempo_s": 423.73,
+     "vram": null,
+     "manifold_antes": false,
+     "manifold_depois": false
+    },
     "trellis2": {
      "glb": "models/anubis_a__trellis2.glb",
      "verts": 299328,

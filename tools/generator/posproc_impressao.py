@@ -72,7 +72,10 @@ def taubin_decimate(mesh, taubin_iters: int, target_faces: int):
     ms = pymeshlab.MeshSet()
     ms.add_mesh(pymeshlab.Mesh(mesh.vertices, mesh.faces))
     if taubin_iters > 0:
-        ms.apply_filter("taubin_smoothing", stepsmoothnum=taubin_iters)
+        try:
+            ms.apply_filter("apply_coord_taubin_smoothing", stepsmoothnum=taubin_iters)
+        except Exception:
+            ms.apply_filter("taubin_smoothing", stepsmoothnum=taubin_iters)
     if len(mesh.faces) > target_faces:
         ms.apply_filter(
             "meshing_decimation_quadric_edge_collapse", targetfacenum=target_faces

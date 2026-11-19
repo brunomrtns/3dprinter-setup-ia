@@ -155,6 +155,14 @@
 - **Viewer**: caso `carro_foxh` com 9 modos (linha **a** = painéis da grade, linha **b** = fotos reais) como cards GLB texturizados — **9/9 + viewer `HTTP 200` ao vivo**. Evidência: `evidence/rtx3060-12gb/carro-foxh/report.json`.
 - **PARADO no gate visual** (passo 6 do prompt): dono confere (1) recortes P1=frente/P2=lado esq/P3=trás/P4=3/4 dianteira estão certos, (2) tint dos vidros aceitável, (3) linha A × linha B. Aprovado → FASE 1 (2mv seed 42, runs A e B, guard).
 
+### Registro Anubis `Hunyuan3D-2.1` + `TripoSF 512` + Pós-proc (2026-11-19) — `[x]` CONCLUÍDO E PUBLICADO NO VIEWER
+
+- **Esteira completa em `anubis_a_preproc.png` (`seed 42`)**:
+  1. `Hunyuan3D-2.1` (`hunyuan3d-dit-v2-1`, 4096 latents MoE): `183.704` verts / `367.428` faces · load `51,8s` + run `371,93s` · 0 erros, 0 OOM.
+  2. `TripoSF 512`: `334.702` verts / `669.392` faces · `34,51s` · VRAM pico `8.211 MiB`.
+  3. `posproc_impressao.py` (fix compatibilidade `pymeshlab`: `apply_coord_taubin_smoothing` com fallback `taubin_smoothing`): `watertight=True`, `winding=True`, `is_volume=True`, `1` componente, `200 mm` altura (`89,27 × 200,00 × 86,15 mm`, volume `133,05 cm³`), `250.000` faces · `11,59s`.
+- **Publicação**: modos `hunyuan_21_posproc` (`5,72 MB`) e `hunyuan_21` (`8,41 MB`) no case `anubis_a` (viewer v17): https://brunointegrations.com/modelos3d/?case=anubis_a&mode=hunyuan_21_posproc&vs=0 · Evidência: `evidence/rtx3060-12gb/anubis-hunyuan21/report.json`.
+
 ### Registro C7-C — Hunyuan3D-2.1 Checkpoint A/B (`hunyuan3d-dit-v2-1`, 4096 latents MoE, 2026-11-19) — `[x]` CONCLUÍDO E PUBLICADO NO VIEWER (Aguardando Veredito do Dono)
 
 - **Execução**: `tencent/Hunyuan3D-2.1` (`subfolder=hunyuan3d-dit-v2-1`, DiT MoE 4096 latents) no venv existente `~/.venvs/hunyuan` via `tools/generator/hunyuan_runner.py --variant 2.1`, entrada `frente-e-lado-diagonal_tinted.png`, `seed 42`, `octree_resolution=384`, `steps=50`, guard de VRAM (`10.299 MiB` livres) + offload por estágio + CFG sequencial `batch=1`.

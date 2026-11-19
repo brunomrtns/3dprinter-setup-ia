@@ -1,0 +1,44 @@
+{
+  "caso": "anubis_a",
+  "entrada": "/home/bruno/printer3d-work/anubis/anubis_a_preproc.png",
+  "seed": 42,
+  "data": "2026-11-19",
+  "hunyuan_21": {
+    "tempo_load_s": 51.8,
+    "tempo_run_s": 371.93,
+    "vertices": 183704,
+    "faces": 367428,
+    "bbox": [
+      0.8904,
+      1.9947,
+      0.8591
+    ]
+  },
+  "triposf_512": {
+    "tempo_total_s": 34.51,
+    "vram_pico_mib": 8211,
+    "vertices": 334702,
+    "faces": 669392,
+    "bbox": [
+      0.4463,
+      1.0,
+      0.4308
+    ]
+  },
+  "posproc": {
+    "tempo_s": 30.61,
+    "obj": "/home/bruno/printer3d-work/anubis/hunyuan21_full/3_posproc/01_reparado.obj",
+    "stl": "/home/bruno/printer3d-work/anubis/hunyuan21_full/3_posproc/solido.stl",
+    "stl_downloads": "/mnt/c/Users/Bruno/Downloads/anubis-posproc/anubis_a_hunyuan21_posproc.stl"
+  },
+  "glbs": {
+    "anubis_a__hunyuan_21.glb": {
+      "path": "models/anubis_a__hunyuan_21.glb",
+      "size_mb": 8.41
+    },
+    "anubis_a__hunyuan_21_posproc.glb": {
+      "path": "models/anubis_a__hunyuan_21_posproc.glb",
+      "size_mb": 5.72
+    }
+  }
+}
