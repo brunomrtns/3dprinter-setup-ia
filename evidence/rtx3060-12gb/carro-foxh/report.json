@@ -1,0 +1,498 @@
+{
+ "ts": "2026-11-19T16:36:55",
+ "fase": 0,
+ "grade": {
+  "arquivo": "/mnt/c/Users/Bruno/Downloads/fox-h/Gemini_Generated_Image_cq5yvcq5yvcq5yvc.jpg",
+  "hash": "sha256:b9043dc1c1e013af0298f16ffbeb77a8bc3585e8f4cef84c6cf72f6bc4fca1ee"
+ },
+ "validacao_grade": {
+  "ok": true,
+  "img_dims": [
+   2048,
+   2048
+  ],
+  "cantos_brilho_medio": [
+   254.88,
+   254.94,
+   254.63,
+   254.49
+  ],
+  "variacao_cantos_pct": 0.18,
+  "limite_variacao_pct": 5.0,
+  "quadrantes": {
+   "P1_front": {
+    "pct_nao_branco": 40.2,
+    "dims": [
+     1024,
+     1024
+    ]
+   },
+   "P2_side": {
+    "pct_nao_branco": 28.0,
+    "dims": [
+     1024,
+     1024
+    ]
+   },
+   "P3_back": {
+    "pct_nao_branco": 54.4,
+    "dims": [
+     1024,
+     1024
+    ]
+   },
+   "P4_diag": {
+    "pct_nao_branco": 40.0,
+    "dims": [
+     1024,
+     1024
+    ]
+   }
+  }
+ },
+ "prep": [
+  {
+   "tag": "P1_front",
+   "src": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/P1_front.png",
+   "size_original": [
+    1024,
+    1024
+   ],
+   "out": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P1_front.png",
+   "size_final": [
+    518,
+    518
+   ],
+   "tint": {
+    "janela_px": 9302,
+    "pct_da_silhueta": 7.87,
+    "cor_dominante_carro": [
+     222,
+     221,
+     225
+    ],
+    "tint_aplicado": true,
+    "cor_tint": [
+     62,
+     64,
+     68
+    ]
+   },
+   "hash_original": "sha256:f62017d580f2836d136ef472c85c99738b603839913bf2d78ee56b09c3899341",
+   "fonte": "grade"
+  },
+  {
+   "tag": "P2_side",
+   "src": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/P2_side.png",
+   "size_original": [
+    1024,
+    1024
+   ],
+   "out": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P2_side.png",
+   "size_final": [
+    518,
+    518
+   ],
+   "tint": {
+    "janela_px": 4136,
+    "pct_da_silhueta": 6.66,
+    "cor_dominante_carro": [
+     207,
+     203,
+     201
+    ],
+    "tint_aplicado": true,
+    "cor_tint": [
+     62,
+     64,
+     68
+    ]
+   },
+   "hash_original": "sha256:1ae83288d56ee913076f3765a79d3081baf1812531577b661ca228fc37323c0b",
+   "fonte": "grade"
+  },
+  {
+   "tag": "P3_back",
+   "src": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/P3_back.png",
+   "size_original": [
+    1024,
+    1024
+   ],
+   "out": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P3_back.png",
+   "size_final": [
+    518,
+    518
+   ],
+   "tint": {
+    "janela_px": 17276,
+    "pct_da_silhueta": 13.35,
+    "cor_dominante_carro": [
+     201,
+     197,
+     198
+    ],
+    "tint_aplicado": true,
+    "cor_tint": [
+     62,
+     64,
+     68
+    ]
+   },
+   "hash_original": "sha256:f8e09c29ee58fde0f2d6afce0b522e2b8b505f7c7e7b9eb8c2dafbd5ee059adb",
+   "fonte": "grade"
+  },
+  {
+   "tag": "P4_diag",
+   "src": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/P4_diag.png",
+   "size_original": [
+    1024,
+    1024
+   ],
+   "out": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P4_diag.png",
+   "size_final": [
+    518,
+    518
+   ],
+   "tint": {
+    "janela_px": 18012,
+    "pct_da_silhueta": 19.6,
+    "cor_dominante_carro": [
+     207,
+     203,
+     204
+    ],
+    "tint_aplicado": true,
+    "cor_tint": [
+     62,
+     64,
+     68
+    ]
+   },
+   "hash_original": "sha256:d1fdb9bf393c0cde27690ffa78925874b367af142db95fdc23b40f51bd6f3cab",
+   "fonte": "grade"
+  },
+  {
+   "tag": "R1_front",
+   "src": "/mnt/c/Users/Bruno/Downloads/fox/no-windows/frente.jpg",
+   "size_original": [
+    2400,
+    1792
+   ],
+   "out": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R1_front.png",
+   "size_final": [
+    518,
+    518
+   ],
+   "tint": {
+    "janela_px": 7652,
+    "pct_da_silhueta": 6.44,
+    "cor_dominante_carro": [
+     226,
+     227,
+     232
+    ],
+    "tint_aplicado": true,
+    "cor_tint": [
+     62,
+     64,
+     68
+    ]
+   },
+   "hash_original": "sha256:fbde1885905144fbe09eda14c3aace033775107b668c1f5d60b9650c99d71e49",
+   "fonte": "real"
+  },
+  {
+   "tag": "R2_side",
+   "src": "/mnt/c/Users/Bruno/Downloads/fox/no-windows/lado.jpg",
+   "size_original": [
+    2400,
+    1792
+   ],
+   "out": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R2_side.png",
+   "size_final": [
+    518,
+    518
+   ],
+   "tint": {
+    "janela_px": 8308,
+    "pct_da_silhueta": 13.34,
+    "cor_dominante_carro": [
+     210,
+     208,
+     208
+    ],
+    "tint_aplicado": true,
+    "cor_tint": [
+     62,
+     64,
+     68
+    ]
+   },
+   "hash_original": "sha256:416b02f941cd1e4d2c3bf09b85bbc48ef98992a8c439de74569e1001d7579284",
+   "fonte": "real"
+  },
+  {
+   "tag": "R3_back",
+   "src": "/mnt/c/Users/Bruno/Downloads/fox/no-windows/traseira.jpg",
+   "size_original": [
+    2400,
+    1792
+   ],
+   "out": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R3_back.png",
+   "size_final": [
+    518,
+    518
+   ],
+   "tint": {
+    "janela_px": 20728,
+    "pct_da_silhueta": 15.91,
+    "cor_dominante_carro": [
+     208,
+     207,
+     207
+    ],
+    "tint_aplicado": true,
+    "cor_tint": [
+     62,
+     64,
+     68
+    ]
+   },
+   "hash_original": "sha256:51eef57438e929d17789509047f836fa2e76c94cdf5610bd66aa628e469c86fb",
+   "fonte": "real"
+  },
+  {
+   "tag": "R4_diag",
+   "src": "/mnt/c/Users/Bruno/Downloads/fox/no-windows/frente-e-lado-diagonal.jpg",
+   "size_original": [
+    2400,
+    1792
+   ],
+   "out": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R4_diag.png",
+   "size_final": [
+    518,
+    518
+   ],
+   "tint": {
+    "janela_px": 20564,
+    "pct_da_silhueta": 23.17,
+    "cor_dominante_carro": [
+     215,
+     213,
+     214
+    ],
+    "tint_aplicado": true,
+    "cor_tint": [
+     62,
+     64,
+     68
+    ]
+   },
+   "hash_original": "sha256:199fac852e2f22ed09f5d647ca84e35a4736a1e394c132a1946573c822a7cce8",
+   "fonte": "real"
+  },
+  {
+   "tag": "R5_extra",
+   "src": "/mnt/c/Users/Bruno/Downloads/fox/no-windows/de-fora-pegando-interna.jpg",
+   "size_original": [
+    2400,
+    1792
+   ],
+   "out": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R5_extra.png",
+   "size_final": [
+    518,
+    518
+   ],
+   "tint": {
+    "janela_px": 1022,
+    "pct_da_silhueta": 3.03,
+    "cor_dominante_carro": [
+     252,
+     252,
+     252
+    ],
+    "tint_aplicado": true,
+    "cor_tint": [
+     62,
+     64,
+     68
+    ]
+   },
+   "hash_original": "sha256:6bef731e167fb8c1d6d18931bb220b12085c9cbdf904f7b4264d2a1ba3515f59",
+   "fonte": "real"
+  }
+ ],
+ "cards": {
+  "a1_front": {
+   "glb": "models/carro_foxh__a1_front.glb",
+   "img": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P1_front.png",
+   "tint": {
+    "janela_px": 9302,
+    "pct_da_silhueta": 7.87,
+    "cor_dominante_carro": [
+     222,
+     221,
+     225
+    ],
+    "tint_aplicado": true,
+    "cor_tint": [
+     62,
+     64,
+     68
+    ]
+   }
+  },
+  "a2_side": {
+   "glb": "models/carro_foxh__a2_side.glb",
+   "img": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P2_side.png",
+   "tint": {
+    "janela_px": 4136,
+    "pct_da_silhueta": 6.66,
+    "cor_dominante_carro": [
+     207,
+     203,
+     201
+    ],
+    "tint_aplicado": true,
+    "cor_tint": [
+     62,
+     64,
+     68
+    ]
+   }
+  },
+  "a3_back": {
+   "glb": "models/carro_foxh__a3_back.glb",
+   "img": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P3_back.png",
+   "tint": {
+    "janela_px": 17276,
+    "pct_da_silhueta": 13.35,
+    "cor_dominante_carro": [
+     201,
+     197,
+     198
+    ],
+    "tint_aplicado": true,
+    "cor_tint": [
+     62,
+     64,
+     68
+    ]
+   }
+  },
+  "a4_diag": {
+   "glb": "models/carro_foxh__a4_diag.glb",
+   "img": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P4_diag.png",
+   "tint": {
+    "janela_px": 18012,
+    "pct_da_silhueta": 19.6,
+    "cor_dominante_carro": [
+     207,
+     203,
+     204
+    ],
+    "tint_aplicado": true,
+    "cor_tint": [
+     62,
+     64,
+     68
+    ]
+   }
+  },
+  "b1_front": {
+   "glb": "models/carro_foxh__b1_front.glb",
+   "img": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R1_front.png",
+   "tint": {
+    "janela_px": 7652,
+    "pct_da_silhueta": 6.44,
+    "cor_dominante_carro": [
+     226,
+     227,
+     232
+    ],
+    "tint_aplicado": true,
+    "cor_tint": [
+     62,
+     64,
+     68
+    ]
+   }
+  },
+  "b2_side": {
+   "glb": "models/carro_foxh__b2_side.glb",
+   "img": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R2_side.png",
+   "tint": {
+    "janela_px": 8308,
+    "pct_da_silhueta": 13.34,
+    "cor_dominante_carro": [
+     210,
+     208,
+     208
+    ],
+    "tint_aplicado": true,
+    "cor_tint": [
+     62,
+     64,
+     68
+    ]
+   }
+  },
+  "b3_back": {
+   "glb": "models/carro_foxh__b3_back.glb",
+   "img": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R3_back.png",
+   "tint": {
+    "janela_px": 20728,
+    "pct_da_silhueta": 15.91,
+    "cor_dominante_carro": [
+     208,
+     207,
+     207
+    ],
+    "tint_aplicado": true,
+    "cor_tint": [
+     62,
+     64,
+     68
+    ]
+   }
+  },
+  "b4_diag": {
+   "glb": "models/carro_foxh__b4_diag.glb",
+   "img": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R4_diag.png",
+   "tint": {
+    "janela_px": 20564,
+    "pct_da_silhueta": 23.17,
+    "cor_dominante_carro": [
+     215,
+     213,
+     214
+    ],
+    "tint_aplicado": true,
+    "cor_tint": [
+     62,
+     64,
+     68
+    ]
+   }
+  },
+  "b5_extra": {
+   "glb": "models/carro_foxh__b5_extra.glb",
+   "img": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R5_extra.png",
+   "tint": {
+    "janela_px": 1022,
+    "pct_da_silhueta": 3.03,
+    "cor_dominante_carro": [
+     252,
+     252,
+     252
+    ],
+    "tint_aplicado": true,
+    "cor_tint": [
+     62,
+     64,
+     68
+    ]
+   }
+  }
+ }
+}

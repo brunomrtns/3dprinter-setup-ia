@@ -641,6 +641,21 @@
      "manifold_depois": true
     }
    }
+  },
+  {
+   "id": "carro_foxh",
+   "category": "esteira Tripo-local FASE 0 — prep A/B (linha A = painéis da grade Nano Banana, linha B = fotos reais), aguardando gate visual",
+   "modes": {
+    "a1_front": {"glb": "models/carro_foxh__a1_front.glb"},
+    "a2_side": {"glb": "models/carro_foxh__a2_side.glb"},
+    "a3_back": {"glb": "models/carro_foxh__a3_back.glb"},
+    "a4_diag": {"glb": "models/carro_foxh__a4_diag.glb"},
+    "b1_front": {"glb": "models/carro_foxh__b1_front.glb"},
+    "b2_side": {"glb": "models/carro_foxh__b2_side.glb"},
+    "b3_back": {"glb": "models/carro_foxh__b3_back.glb"},
+    "b4_diag": {"glb": "models/carro_foxh__b4_diag.glb"},
+    "b5_extra": {"glb": "models/carro_foxh__b5_extra.glb"}
+   }
   }
  ]
 }

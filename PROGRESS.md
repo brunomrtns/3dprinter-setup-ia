@@ -114,6 +114,15 @@
 - **Fotos do kit = as MESMAS do C6** (`Downloads/fox/no-windows/` = `~/printer3d-work/carro/fotos-c7/` + `c7-prep/`): 5 fotos de 2400x1792 px (frente, frente-e-lado-diagonal, lado, traseira, de-fora-pegando-interna). Prep `*_tinted.png` reutilizado. C7-E (fotogrametria densa VGGT) retirado da fila (só reabrir se B/C falharem e houver sessão de 20-40 fotos completas).
 - **Publicação**: caso `carro_csg` (modos `kit`, `casca`, `interna`, `kit_corte`) mantido no viewer para histórico/comparação. Evidência: `evidence/rtx3060-12gb/carro-csg/report.json`.
 
+### Registro Esteira Tripo-local — FASE 0 (prep A/B `carro_foxh`, 2026-11-19) — `[~]` aguardando gate visual do dono
+
+- **Novo prompt da esteira "Tripo local"** (4 fases: prep → geometria 2mv → UV → textura → upscale; regra: NADA de GPU antes de gate visual aprovado). Ferramenta: `tools/generator/prep_foxh.py` (CPU).
+- **Grade validada por métrica** (`Gemini_Generated_Image_cq5yvcq5yvcq5yvc.jpg`, 2048×2048, Nano Banana Pro do dono): cantos 254,5–254,9 (variação **0,18%** < 5%); não-branco por quadrante: P1 40,2% · P2 28,0% · P3 54,4% · P4 40,0% — todos na faixa 15–60%. **APROVADA de primeira, sem regeneração.**
+- **Corte no ponto médio** → `Downloads/fox-h/panels/P{1..4}_{front,side,back,diag}.png` (1024×1024 cada) + prep padrão (rembg u2net → fundo branco → margem 8% → canvas **518×518**) → `panels/prep/`. Mesmo prep nas 5 fotos reais → `Downloads/fox/prep_real/R{1..5}_*.png`. Sidecars ADR-003 com hash por imagem.
+- **Tint de vidros** (script do C6 era efêmero — detector novo versionado): banda da cabine + desvio >45 da cor dominante da pintura (mediana dos pixels claros — necessário porque o carro é BRANCO; 1ª versão do detector pintava a lataria, corrigida antes do gate). Aplicado nas 9 imagens: 3,0–23,2% da silhueta (por imagem no report).
+- **Viewer**: caso `carro_foxh` com 9 modos (linha **a** = painéis da grade, linha **b** = fotos reais) como cards GLB texturizados — **9/9 + viewer `HTTP 200` ao vivo**. Evidência: `evidence/rtx3060-12gb/carro-foxh/report.json`.
+- **PARADO no gate visual** (passo 6 do prompt): dono confere (1) recortes P1=frente/P2=lado esq/P3=trás/P4=3/4 dianteira estão certos, (2) tint dos vidros aceitável, (3) linha A × linha B. Aprovado → FASE 1 (2mv seed 42, runs A e B, guard).
+
 ### Registro C7-B — Hi3DGen A/B (2026-11-19) — `[x]` CONCLUÍDO E PUBLICADO NO VIEWER (Aguardando Veredito do Dono)
 
 - **Setup do venv dedicado `~/.venvs/hi3dgen` (ADR-004)**: Python 3.11 + PyTorch `2.8.0+cu128` + `spconv-cu120 2.3.6` + `xformers 0.0.32.post2` + `diffusers 0.33.1` + `transformers 4.46.3` + `scikit-image` + `kornia` + `NiRNE` submodule.
