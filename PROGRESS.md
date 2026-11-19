@@ -155,7 +155,15 @@
 - **Viewer**: caso `carro_foxh` com 9 modos (linha **a** = painéis da grade, linha **b** = fotos reais) como cards GLB texturizados — **9/9 + viewer `HTTP 200` ao vivo**. Evidência: `evidence/rtx3060-12gb/carro-foxh/report.json`.
 - **PARADO no gate visual** (passo 6 do prompt): dono confere (1) recortes P1=frente/P2=lado esq/P3=trás/P4=3/4 dianteira estão certos, (2) tint dos vidros aceitável, (3) linha A × linha B. Aprovado → FASE 1 (2mv seed 42, runs A e B, guard).
 
-### Registro C7-B — Hi3DGen A/B (2026-11-19) — `[x]` CONCLUÍDO E PUBLICADO NO VIEWER (Aguardando Veredito do Dono)
+### Registro C7-C — Hunyuan3D-2.1 Checkpoint A/B (`hunyuan3d-dit-v2-1`, 4096 latents MoE, 2026-11-19) — `[x]` CONCLUÍDO E PUBLICADO NO VIEWER (Aguardando Veredito do Dono)
+
+- **Execução**: `tencent/Hunyuan3D-2.1` (`subfolder=hunyuan3d-dit-v2-1`, DiT MoE 4096 latents) no venv existente `~/.venvs/hunyuan` via `tools/generator/hunyuan_runner.py --variant 2.1`, entrada `frente-e-lado-diagonal_tinted.png`, `seed 42`, `octree_resolution=384`, `steps=50`, guard de VRAM (`10.299 MiB` livres) + offload por estágio + CFG sequencial `batch=1`.
+- **Telemetria real**: load `126,71s` (inclui download inicial) · inferência `354,4s` · `341.813` verts / `683.810` faces raw → GLB `299.908` verts / `600.000` faces (`14 MB`) · bbox `[1.0389, 0.9482, 1.9946]` · 0 erros, 0 OOM na RTX 3060 12 GB. Evidência: `evidence/rtx3060-12gb/hunyuan21-carro/report.json`.
+- **Publicação**: modo `hunyuan_21` adicionado ao case `carro_nowin` (viewer v16): https://brunointegrations.com/modelos3d/?case=carro_nowin&mode=hunyuan_21 · VS com `hunyuan_mv`: https://brunointegrations.com/modelos3d/?case=carro_nowin&mode=hunyuan_21&vs=1&mode2=hunyuan_mv.
+
+### Registro C7-B — Hi3DGen A/B (2026-11-19) — `[x]` REPROVADO NO GATE VISUAL PELO DONO
+
+- **VEREDITO C7-B (2026-11-19) — REPROVADO**: dono avaliou `carro_nowin&mode=hi3dgen` no viewer e reprovou ("ficou horrível"). Segue para C7-C (`Hunyuan3D-2.1` 4096 latents) + `Direct3D-S2` (`1024³` Sparse SDF).
 
 - **Setup do venv dedicado `~/.venvs/hi3dgen` (ADR-004)**: Python 3.11 + PyTorch `2.8.0+cu128` + `spconv-cu120 2.3.6` + `xformers 0.0.32.post2` + `diffusers 0.33.1` + `transformers 4.46.3` + `scikit-image` + `kornia` + `NiRNE` submodule.
 - **Pesos e Modelos**: `Stable-X/trellis-normal-v0-1` + `Stable-X/yoso-normal-v1-8-1` + `ZhengPeng7/BiRefNet` cacheados em `~/tools/Hi3DGen/weights/`.

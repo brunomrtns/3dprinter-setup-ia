@@ -526,6 +526,15 @@
    "id": "carro_nowin",
    "category": "carro fox definitivo (Simetria Bilateral + Blueprint 3868x1780x1552mm vs Original, 2026-11-18)",
    "modes": {
+    "hunyuan_21": {
+     "glb": "models/carro_nowin__hunyuan_21.glb",
+     "verts": 299908,
+     "faces": 600000,
+     "tempo_s": 481.11,
+     "vram": null,
+     "manifold_antes": false,
+     "manifold_depois": false
+    },
     "hi3dgen": {
      "glb": "models/carro_nowin__hi3dgen.glb",
      "verts": 296548,
