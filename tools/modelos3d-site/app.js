@@ -4,6 +4,10 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const MODES = [
+  'kit',
+  'casca',
+  'interna',
+  'kit_corte',
   'simetrico_interna',
   'simetrico_4vistas',
   'triposf512',
@@ -20,6 +24,10 @@ const MODES = [
   'triposr',
 ];
 const MODE_LABEL = {
+  kit: '★ Kit Montado (CSG + 4 Rodas + Interna)',
+  casca: 'Peça 1: Casca Carroceria (Janelas CSG)',
+  interna: 'Peças 2+3: Banheira Interna + 4 Rodas',
+  kit_corte: 'Corte Transversal do Kit',
   simetrico_interna: '★ Simétrico + Blueprint (Interna s/ Vidro)',
   simetrico_4vistas: '★ Simétrico + Blueprint (4 Vistas)',
   triposf512: 'TripoSF 512',
@@ -347,7 +355,7 @@ function refreshViewport(i) {
   v.spin.style.display = 'flex';
 
   const req = (v._req = (v._req || 0) + 1);
-  loader.load(`models/${c.id}__${mode}.glb?v=9`, g => {
+  loader.load(`models/${c.id}__${mode}.glb?v=11`, g => {
     if (v._req !== req) return;
     v.spin.style.display = 'none';
     if (v.group) v.scene.remove(v.group);

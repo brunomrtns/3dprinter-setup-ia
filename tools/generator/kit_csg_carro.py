@@ -6,19 +6,14 @@ Spec: docs/knowledge/modelagem-hard-surface-e-veiculos.md (Opção 1 / Módulo 2
 Entradas (malhas e máscaras que JÁ EXISTEM do C6):
   - carroceria: ~/printer3d-work/carro/hunyuan_mv_triposf512_posproc/mesh_posproc.obj
     (die-cast fechado, frente/traseira fiéis) → deskew + blueprint + simetria
-    (refino_automotivo) → casca oca (manifold3d.offset -wall) → recortes;
+    (refino_automotivo) → casca oca (EDT voxel shell + PyMeshFix -> Manifold) → recortes;
   - banheira: ~/printer3d-work/carro/nowin_triposf512_posproc/mesh_posproc.obj
-    (cabine interna completa) → mesmas transformações → ∩ caixa do habitáculo;
+    (cabine interna completa) → mesmas transformações → ∩ núcleo interno (inner) ∩ habitáculo;
   - máscaras de vidro: no_windows_rgba/<vista>_{solid,open}.png (janela =
     solid − open, fotos do dono em Downloads/fox/no-windows, prep C6);
   - roda mestre: ~/printer3d-work/carro/c7_roda_mestre/mesh.obj (TripoSG seed 42
-    no close 1024px da roda na foto lado) → regularização cilíndrica → 4 instâncias.
-
-Mapeamento foto→3D (medido, ver evidence/rtx3060-12gb/carro-csg/):
-  - foto lado: flip_u (frente do carro à esquerda) e flip_v padrão, decididos por
-    IoU de silhueta + detecção dos arcos das rodas (eixo diant. a 0.813 e tras. a
-    0.133 do comprimento desde a traseira — foto = verdade);
-  - fotos frente/traseira: v→y padrão; u→x (aprox. simétrico).
+    no close 1024px da roda na foto lado) → regularização cilíndrica 360° → 4 instâncias
+    (com espelhamento X nas rodas direitas para a calota apontar sempre para fora).
 
 Uso:
   tools/setup/py.sh tools/generator/kit_csg_carro.py --report <repo>/evidence/rtx3060-12gb/carro-csg/report.json
@@ -34,27 +29,35 @@ import sys
 import time
 
 import numpy as np
+import pymeshfix
+import pymeshlab
 import trimesh
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import refino_automotivo as ra  # noqa: E402
 
-from scipy.ndimage import binary_closing, binary_opening, gaussian_filter  # noqa: E402
+from scipy.ndimage import (  # noqa: E402
+    binary_closing,
+    binary_fill_holes,
+    binary_opening,
+    distance_transform_edt,
+    gaussian_filter,
+)
 from PIL import Image  # noqa: E402
 
 CAR_DIR = os.path.expanduser("~/printer3d-work/carro")
 MODELS_DIR = os.path.expanduser("~/printer3d-work/modelos3d-site/models")
 RGBA = os.path.join(CAR_DIR, "no_windows_rgba")
 
-# medidos da foto lado (2026-11-18, ver orient3/probe): posições dos eixos
-AXLE_FRONT_Z = 0.626  # 0.813 do comprimento desde a traseira, blueprint z∈[-1,1]
-AXLE_REAR_Z = -0.734  # 0.133 desde a traseira
-WHEEL_R = 0.173  # ⌀/comprimento 0.174 medido na foto (≈34,8mm na escala 200mm)
-WHEEL_X = 0.336  # bitrena do mesh cru (|x|≈0.40 de ±0.5475) → blueprint ±0.46
-WHEEL_Y = -0.401 + WHEEL_R  # assenta no chão (ymin = -0.401 no blueprint)
-ARCH_R = WHEEL_R * 1.12  # folga do arco (~2mm na escala 200mm)
-BELTLINE_Y = -0.338  # base das janelas laterais (máscara lado → 3D)
-WIN_Z = (-0.828, 0.707)  # faixa z das janelas laterais (máscara lado → 3D)
+# Medidos da foto lado (2026-11-18): posições dos eixos no gabarito Blueprint z∈[-1,1]
+AXLE_FRONT_Z = 0.626
+AXLE_REAR_Z = -0.734
+WHEEL_R = 0.173  # ⌀ ≈ 34,6mm na escala 200mm
+WHEEL_X = 0.336
+WHEEL_Y = -0.401 + WHEEL_R
+ARCH_R = WHEEL_R * 1.12
+BELTLINE_Y = -0.338
+WIN_Z = (-0.828, 0.707)
 
 
 def t() -> str:
@@ -72,86 +75,45 @@ def to_man(m):
     )
 
 
-def from_man(man):
+def from_man(man) -> trimesh.Trimesh:
     out = man.to_mesh()
     return trimesh.Trimesh(
         vertices=np.asarray(out.vert_properties[:, :3], dtype=np.float64),
         faces=np.asarray(out.tri_verts, dtype=np.int64),
-        process=False,
+        process=True,
     )
 
 
-def erode_core(body: trimesh.Trimesh, wall: float) -> trimesh.Trimesh:
-    """Núcleo erodido p/ casca oca SEM manifold3d.offset (removido da API 3.5.5):
-    ray-fill open3d ao longo de Z (paridade de cruzamentos) → erosão morfológica
-    (distância à superfície >= wall) → união CSG de cubos RLE no manifold3d
-    (watertight por construção). Partes < 2×wall ficam sólidas no kit."""
-    import open3d as o3d
+def repair_to_man(m: trimesh.Trimesh):
+    """Garante malha 100% manifold via PyMeshFix antes de converter para Manifold3D."""
+    mf = pymeshfix.MeshFix(np.asarray(m.vertices, dtype=np.float64), np.asarray(m.faces, dtype=np.int32))
+    mf.repair()
+    fixed = trimesh.Trimesh(vertices=mf.points, faces=mf.faces, process=True)
+    trimesh.repair.fix_normals(fixed)
+    return to_man(fixed), fixed
 
-    pitch = wall / 4.0  # 4 voxels de parede
-    lo = body.bounds[0] - 2 * pitch
-    hi = body.bounds[1] + 2 * pitch
-    n = np.ceil((hi - lo) / pitch).astype(int) + 1
-    nx, ny, nz = int(n[0]), int(n[1]), int(n[2])
-    fill = np.zeros((nx, ny, nz), dtype=bool)
 
-    scene = o3d.t.geometry.RaycastingScene()
-    scene.add_triangles(
-        o3d.core.Tensor(np.asarray(body.vertices, dtype=np.float32)),
-        o3d.core.Tensor(np.asarray(body.faces, dtype=np.uint32)),
-    )
-    inf = o3d.core.Tensor(float("inf"))
-    xs = lo[0] + np.arange(nx) * pitch
-    ys = lo[1] + np.arange(ny) * pitch
-    gx, gy = np.meshgrid(xs, ys, indexing="ij")
-    ox, oy = gx.ravel(), gy.ravel()
-    oz = np.full_like(ox, lo[2] - 1.0)
-    dir_np = np.broadcast_to(np.array([0, 0, 1], np.float32), (len(ox), 3)).copy()
-    origins = np.column_stack([ox, oy, oz]).astype(np.float32)
-    k = np.zeros(len(ox), dtype=bool)      # raio terminado
-    count = np.zeros(len(ox), dtype=int)   # nº de superfícies cruzadas
-    MAX_SEG = 24
-    for _ in range(MAX_SEG):
-        alive = ~k
-        if not alive.any():
-            break
-        rays = np.hstack([origins[alive], dir_np[alive]]).astype(np.float32)
-        res = scene.cast_rays(o3d.core.Tensor(rays))
-        th = res["t_hit"].numpy()
-        hit = np.isfinite(th)
-        idx = np.nonzero(alive)[0]
-        hidx = idx[hit]
-        count[hidx] += 1
-        seg_o = origins[hidx]
-        seg_t = th[hit]
-        # origem além do hit para a próxima iteração
-        origins[hidx, 2] = seg_o[:, 2] + seg_t + 1e-4
-        # preenche o segmento [entrada→saída]: só é conhecido no cruzamento PAR
-        # (a origem já pulou para logo após a entrada; t vai até a saída)
-        inside = (count[hidx] % 2) == 0
-        z0 = np.floor((seg_o[inside, 2] - lo[2]) / pitch).astype(int)
-        z1 = np.ceil((seg_o[inside, 2] + seg_t[inside] - lo[2]) / pitch).astype(int)
-        ix = np.round((seg_o[inside, 0] - lo[0]) / pitch).astype(int)
-        iy = np.round((seg_o[inside, 1] - lo[1]) / pitch).astype(int)
-        for a, b, i, j in zip(z0, z1, ix, iy):
-            if b > a and 0 <= i < nx and 0 <= j < ny:
-                fill[i, j, max(a, 0) : min(b, nz)] = True
-        # raios sem hit terminam
-        done = idx[~hit]
-        k[done] = True
+def erode_core(body: trimesh.Trimesh, wall: float) -> tuple[trimesh.Trimesh, float, float]:
+    """Gera o núcleo interno erodido por `wall` (3mm = 0.03 na escala 2.0):
+    1. Voxeliza a superfície da carroceria e preenche o interior 3D via binary_fill_holes;
+    2. Calcula a Transformada de Distância Euclidiana (EDT) exata em 3D;
+    3. Extrai a isosuperfície (dist >= wall) via cubos RLE no manifold3d + suavização Taubin + PyMeshFix."""
+    from manifold3d import Manifold, OpType
 
-    from scipy.ndimage import binary_closing, distance_transform_edt
+    pitch = 0.012  # 1,2 mm na escala 200mm (grade ~80 x 70 x 170 -> rápido e preciso)
+    vg = body.voxelized(pitch=pitch)
+    surf_mat = vg.matrix
+    # Fecha eventuais frestas de 1 voxel na casca e preenche todo o interior 3D
+    closed_surf = binary_closing(surf_mat, structure=np.ones((3, 3, 3), dtype=bool))
+    filled = binary_fill_holes(closed_surf)
 
-    dist = distance_transform_edt(fill, sampling=(pitch,) * 3)
-    core_vox = binary_closing(fill & (dist >= wall), structure=np.ones((3, 3, 3)))
+    dist = distance_transform_edt(filled, sampling=(pitch, pitch, pitch))
+    core_vox = filled & (dist >= wall)
     if not core_vox.any():
         raise RuntimeError("erode_core: núcleo vazio")
 
-    # núcleo = união CSG de cubos RLE (runs em z) no manifold3d — watertight por
-    # construção (sem marching cubes, cujo output non-manifold quebrava a
-    # subtração — medido nas 1ªs rodadas, ver report.json)
-    from manifold3d import Manifold, OpType
-
+    origin = vg.translation
+    nx, ny, nz = core_vox.shape
     cubes = []
     for i in range(nx):
         for j in range(ny):
@@ -162,15 +124,30 @@ def erode_core(body: trimesh.Trimesh, wall: float) -> trimesh.Trimesh:
             starts, ends = np.nonzero(d == 1)[0], np.nonzero(d == -1)[0]
             for s, e in zip(starts, ends):
                 size = (pitch, pitch, (e - s) * pitch)
-                pos = (lo[0] + i * pitch, lo[1] + j * pitch, lo[2] + s * pitch)
-                cubes.append(Manifold.cube(size=size).translate(pos))
+                pos = (
+                    float(origin[0] + (i - 0.5) * pitch),
+                    float(origin[1] + (j - 0.5) * pitch),
+                    float(origin[2] + (s - 0.5) * pitch),
+                )
+                cubes.append(Manifold.cube(size=size, center=False).translate(pos))
+
     level = cubes
     while len(level) > 1:
         level = [
             Manifold.batch_boolean(level[i : i + 256], OpType.Add)
             for i in range(0, len(level), 256)
         ]
-    return from_man(level[0])
+    raw_core = from_man(level[0])
+    # Suaviza os degraus do RLE no núcleo interno com Taubin 6it para parede interna lisa
+    ms = pymeshlab.MeshSet()
+    ms.add_mesh(pymeshlab.Mesh(raw_core.vertices, raw_core.faces))
+    ms.apply_coord_taubin_smoothing(lambda_=0.48, mu=-0.50, stepsmoothnum=6)
+    cur = ms.current_mesh()
+    smooth_core = trimesh.Trimesh(vertices=cur.vertex_matrix(), faces=cur.face_matrix(), process=True)
+    _, clean_core = repair_to_man(smooth_core)
+    vol_body = float(filled.sum()) * (pitch ** 3)
+    vol_core = float(core_vox.sum()) * (pitch ** 3)
+    return clean_core, round(vol_body, 4), round(vol_core, 4)
 
 
 def stats(m) -> dict:
@@ -179,6 +156,7 @@ def stats(m) -> dict:
         "faces": int(len(m.faces)),
         "watertight": bool(m.is_watertight),
         "components": int(len(m.split(only_watertight=False))),
+        "volume": round(float(m.volume), 4) if m.is_watertight else None,
         "bbox": [round(float(v), 3) for v in m.bounding_box.extents],
     }
 
@@ -202,15 +180,15 @@ def window_mask(name: str, min_px: int = 150) -> tuple[np.ndarray, dict]:
     return win, meta
 
 
-def mask_prism(mask: np.ndarray, u_to_a, v_to_b, depth: tuple[float, float],
-               axis: int) -> trimesh.Trimesh:
-    """Extruda a máscara 2D em prisma ao longo de `axis` (0=x,1=y,2=z), por blocos
-    RLE (bordas em degrau de 1px ≈ 0,4mm na escala 200mm — determinístico, sem
-    dependência de earcut/shapely). u_to_a/v_to_b: pixel → eixo (a,b) ≠ axis."""
+def mask_prism_man(mask: np.ndarray, u_to_a, v_to_b, depth: tuple[float, float], axis: int):
+    """Extruda a máscara 2D em prisma CSG diretamente no manifold3d (Manifold.cube center=False
+    + batch_boolean OpType.Add), garantindo centragem exata e malha 100% watertight."""
+    from manifold3d import Manifold, OpType
+
     H, W = mask.shape
     smooth = gaussian_filter(mask.astype(np.float32), 2.0) > 0.5
     a, b = sorted({0, 1, 2} - {axis})
-    boxes = []
+    cubes = []
     for r in range(H):
         row = smooth[r]
         if not row.any():
@@ -220,31 +198,35 @@ def mask_prism(mask: np.ndarray, u_to_a, v_to_b, depth: tuple[float, float],
         ya, yb = sorted([v_to_b(r), v_to_b(min(r + 1, H - 1))])
         for s, e in zip(starts, ends):
             xa, xb = sorted([u_to_a(s), u_to_a(e - 1)])
-            ext = np.zeros(3)
-            ext[a] = xb - xa + 1e-4
-            ext[b] = yb - ya + 1e-4
-            ext[axis] = depth[1] - depth[0]
-            box = trimesh.creation.box(extents=ext)
-            c = np.zeros(3)
-            c[a] = xa
-            c[b] = ya
-            c[axis] = depth[0]
-            box.apply_translation(c)
-            boxes.append(box)
-    if not boxes:
+            ext = [0.0, 0.0, 0.0]
+            ext[a] = float(xb - xa + 2e-4)
+            ext[b] = float(yb - ya + 2e-4)
+            ext[axis] = float(depth[1] - depth[0])
+            pos = [0.0, 0.0, 0.0]
+            pos[a] = float(xa - 1e-4)
+            pos[b] = float(ya - 1e-4)
+            pos[axis] = float(depth[0])
+            cubes.append(Manifold.cube(size=tuple(ext), center=False).translate(tuple(pos)))
+    if not cubes:
         raise RuntimeError("máscara de janela vazia após suavização")
-    return trimesh.util.concatenate(boxes)
+    level = cubes
+    while len(level) > 1:
+        level = [
+            Manifold.batch_boolean(level[i : i + 256], OpType.Add)
+            for i in range(0, len(level), 256)
+        ]
+    return level[0]
 
 
-def regularize_wheel(mesh_path: str, r_target: float, width_cap: float) -> trimesh.Trimesh:
-    """Roda mestre: maior componente → eixo por PCA → alinhar a X → escala radial
-    → encamisar em cilindro matemático (remove rebarbas fora do pneu)."""
-    import pymeshlab
-
-    w = trimesh.load(mesh_path, force="mesh", process=False)
-    comps = sorted(w.split(only_watertight=False), key=lambda c: len(c.faces), reverse=True)
-    # seleção por assinatura de roda (2 eixos ~iguais + 1 fino), não por tamanho:
-    # no close da foto lado o maior componente pode ser a lataria ao redor
+def regularize_wheel(mesh_path: str, r_target: float, width_cap: float = 0.13) -> trimesh.Trimesh:
+    """Roda mestre 360° circular:
+    1. Seleciona o componente circular da roda (comp 1: 1.0006 x 1.0042 x 0.3543);
+    2. Decima e repara com PyMeshFix para não perder faces no CSG;
+    3. Alinha o eixo fino ao eixo X e centraliza pelo CENTRO DA BOUNDING BOX (não pelo centroide
+       de massa, que deslocava a roda e cortava metade no cilindro!);
+    4. Encamisa num pneu cilíndrico perfeito de raio `r_target` (diametro Y == diametro Z == 2*r_target)."""
+    w_all = trimesh.load(mesh_path, force="mesh", process=False)
+    comps = sorted(w_all.split(only_watertight=False), key=lambda c: len(c.faces), reverse=True)
     wheel = None
     for c in comps[:6]:
         e = np.sort(c.bounding_box.extents)
@@ -254,47 +236,58 @@ def regularize_wheel(mesh_path: str, r_target: float, width_cap: float) -> trime
     if wheel is None:
         wheel = comps[0]
     w = wheel
-    if len(w.faces) > 250_000:
-        ms = pymeshlab.MeshSet()
-        ms.add_mesh(pymeshlab.Mesh(w.vertices, w.faces))
-        ms.meshing_decimation_quadric_edge_collapse(targetfacenum=250_000)
-        cur = ms.current_mesh()
-        w = trimesh.Trimesh(vertices=cur.vertex_matrix(), faces=cur.face_matrix(), process=False)
-    w.vertices -= w.centroid
-    cov = (w.vertices.T @ w.vertices) / len(w.vertices)
-    evals, evecs = np.linalg.eigh(cov)
-    axis_vec = evecs[:, np.argmin(evals)]  # menor variância = eixo da roda
-    # rotaciona axis_vec → X
-    v = axis_vec / np.linalg.norm(axis_vec)
-    x = np.array([1.0, 0.0, 0.0])
-    if np.allclose(v, x, atol=1e-6) or np.allclose(v, -x, atol=1e-6):
-        R = np.eye(3)
-    else:
-        u_ = np.cross(v, x)
-        u_ /= np.linalg.norm(u_)
-        ang = float(np.arccos(np.clip(np.dot(v, x), -1, 1)))
-        R = trimesh.transformations.rotation_matrix(ang, u_)
-    w.apply_transform(R)
-    w.vertices -= w.centroid
-    radial = np.hypot(w.vertices[:, 1], w.vertices[:, 2])
-    scale = r_target / float(np.percentile(radial, 99))
-    w.apply_scale(scale)
-    width = float(w.bounding_box.extents[0])
-    if width > width_cap:
-        w.apply_scale([width_cap / width, 1.0, 1.0])
-        width = width_cap
-    clad = trimesh.creation.cylinder(radius=r_target * 1.03, height=width * 1.3, sections=96)
-    clad.apply_transform(trimesh.transformations.rotation_matrix(np.pi / 2, [0, 0, 1]))  # eixo Y → X
-    man = to_man(w) ^ to_man(clad)  # interseção encamisa o pneu
-    out = from_man(man)
-    out = trimesh.Trimesh(vertices=out.vertices, faces=out.faces, process=True)
+
+    ms = pymeshlab.MeshSet()
+    ms.add_mesh(pymeshlab.Mesh(w.vertices, w.faces))
+    if len(w.faces) > 80_000:
+        ms.meshing_decimation_quadric_edge_collapse(targetfacenum=80_000)
+    ms.apply_coord_taubin_smoothing(lambda_=0.45, mu=-0.47, stepsmoothnum=4)
+    cur = ms.current_mesh()
+    w = trimesh.Trimesh(vertices=cur.vertex_matrix(), faces=cur.face_matrix(), process=True)
+
+    # Identifica o eixo mais fino da bounding box (no comp 1 é Z=0.354 vs X=1.00, Y=1.00)
+    ext0 = w.bounds[1] - w.bounds[0]
+    thin_axis = int(np.argmin(ext0))
+    if thin_axis == 2:
+        # Rotaciona Z -> X (90 graus em torno de Y)
+        w.apply_transform(trimesh.transformations.rotation_matrix(np.pi / 2, [0, 1, 0]))
+    elif thin_axis == 1:
+        # Rotaciona Y -> X (90 graus em torno de Z)
+        w.apply_transform(trimesh.transformations.rotation_matrix(np.pi / 2, [0, 0, 1]))
+
+    # Centraliza pelo CENTRO GEOMÉTRICO DA BOUNDING BOX (garante círculo 360° centrado em Y=0, Z=0)
+    bbox_center = 0.5 * (w.bounds[0] + w.bounds[1])
+    w.vertices -= bbox_center
+
+    ext = w.bounds[1] - w.bounds[0]
+    scale_x = width_cap / max(float(ext[0]), 1e-4)
+    scale_y = (2.0 * r_target) / max(float(ext[1]), 1e-4)
+    scale_z = (2.0 * r_target) / max(float(ext[2]), 1e-4)
+    w.vertices *= np.array([scale_x, scale_y, scale_z], dtype=np.float64)
+
+    # Repara via PyMeshFix antes de CSG no manifold3d
+    w_man, _ = repair_to_man(w)
+
+    # Cilindro externo de encamisamento (corta qualquer rebarba fora de r_target)
+    outer_cyl = trimesh.creation.cylinder(radius=r_target, height=width_cap * 1.05, sections=96)
+    outer_cyl.apply_transform(trimesh.transformations.rotation_matrix(np.pi / 2, [0, 1, 0]))
+
+    # Anel toroidal/cilíndrico de banda de rodagem + cubo interno para garantir pneu 100% fechado 360°
+    tire_outer = trimesh.creation.cylinder(radius=r_target, height=width_cap * 0.88, sections=96)
+    tire_outer.apply_transform(trimesh.transformations.rotation_matrix(np.pi / 2, [0, 1, 0]))
+    tire_inner = trimesh.creation.cylinder(radius=r_target * 0.68, height=width_cap * 1.2, sections=96)
+    tire_inner.apply_transform(trimesh.transformations.rotation_matrix(np.pi / 2, [0, 1, 0]))
+    hub_disc = trimesh.creation.cylinder(radius=r_target * 0.72, height=width_cap * 0.45, sections=96)
+    hub_disc.apply_transform(trimesh.transformations.rotation_matrix(np.pi / 2, [0, 1, 0]))
+
+    tire_ring_man = (to_man(tire_outer) - to_man(tire_inner)) + to_man(hub_disc)
+    final_wheel_man = (w_man + tire_ring_man) ^ to_man(outer_cyl)
+    out = from_man(final_wheel_man)
     trimesh.repair.fix_normals(out)
     return out
 
 
 def decimate(m, target: int) -> trimesh.Trimesh:
-    import pymeshlab
-
     if len(m.faces) <= target:
         return m
     ms = pymeshlab.MeshSet()
@@ -312,8 +305,11 @@ def export_glb(m, name: str, meta: dict):
     _ = m.vertex_normals
     path = os.path.join(MODELS_DIR, name)
     m.export(path, file_type="glb", include_normals=True)
-    meta[name] = {"verts": int(len(m.vertices)), "faces": int(len(m.faces)),
-                  "watertight": bool(m.is_watertight)}
+    meta[name] = {
+        "verts": int(len(m.vertices)),
+        "faces": int(len(m.faces)),
+        "watertight": bool(m.is_watertight),
+    }
     print(f"[OK] {name}: {meta[name]}", flush=True)
 
 
@@ -323,61 +319,64 @@ def main() -> int:
     ap.add_argument("--wall-mm", type=float, default=3.0)
     args = ap.parse_args()
     T0 = time.time()
-    wall = args.wall_mm / 100.0 * (2.0 / 2.0)  # 3mm na escala 200mm (unidade = 100mm)
+    wall = args.wall_mm / 100.0  # 3mm na escala 200mm (comprimento 2.0 = 200mm)
 
     rep = {"ts_start": t(), "wall_mm": args.wall_mm, "stages": {}}
 
-    # ── 1. carroceria: die-cast fechado → deskew + blueprint + simetria (C6) ──
-    print("== [1] carroceria hunyuan_mv_sf512 → blueprint + simetria ==", flush=True)
+    # ── 1. carroceria: die-cast fechado → deskew + blueprint + simetria + PyMeshFix ──
+    print("== [1] carroceria hunyuan_mv_sf512 → blueprint + simetria + repair ==", flush=True)
     body = trimesh.load(
         os.path.join(CAR_DIR, "hunyuan_mv_triposf512_posproc", "mesh_posproc.obj"),
-        force="mesh", process=False,
+        force="mesh",
+        process=False,
     )
     body = ra.deskew_longitudinal(body)
     body = ra.apply_fox_blueprint(body, target_length_norm=2.0)
-    body = ra.symmetrize_bilateral(body, best_side="neg_x",
-                                   preserve_driver_wheel_only=False, preserve_wipers=True)
+    body = ra.symmetrize_bilateral(
+        body, best_side="neg_x", preserve_driver_wheel_only=False, preserve_wipers=True
+    )
+    man_body, body = repair_to_man(body)
     rep["stages"]["1_carroceria"] = stats(body)
+    print("   1_carroceria:", rep["stages"]["1_carroceria"], flush=True)
 
-    # ── 2. casca oca (voxel erosion — manifold3d 3.5.5 sem .offset) ──
-    print("== [2] casca oca (parede %.2fmm, voxel shell) ==" % args.wall_mm, flush=True)
+    # ── 2. casca oca real (binary_fill_holes + EDT >= wall + Taubin + PyMeshFix) ──
+    print("== [2] casca oca (parede %.2fmm, EDT voxel shell) ==" % args.wall_mm, flush=True)
     t2 = time.time()
-    man_body = to_man(body)
-    inner = erode_core(body, wall)
-    casca_man = man_body - to_man(inner)
-    rep["stages"]["2_casca_oca"] = {**stats(from_man(casca_man)),
-                                    "metodo": "rayfill+erosao+marching_cubes",
-                                    "time_s": round(time.time() - t2, 2)}
+    inner, vol_body_est, vol_core_est = erode_core(body, wall)
+    man_inner = to_man(inner)
+    casca_man = man_body - man_inner
+    casca_oca_tm = from_man(casca_man)
+    rep["stages"]["2_casca_oca"] = {
+        **stats(casca_oca_tm),
+        "vol_solido": round(float(body.volume), 4),
+        "vol_nucleo_subtraido": round(float(inner.volume), 4),
+        "vol_casca_final": round(float(casca_oca_tm.volume), 4),
+        "reducao_volume_pct": round(100.0 * (1.0 - float(casca_oca_tm.volume) / max(float(body.volume), 1e-6)), 1),
+        "metodo": "voxel_fill_holes+EDT+RLE_manifold+taubin6+pymeshfix",
+        "time_s": round(time.time() - t2, 2),
+    }
+    print("   2_casca_oca:", rep["stages"]["2_casca_oca"], flush=True)
 
-    # ── 3. vãos de vidro por booleana 2D→3D ──
+    # ── 3. vãos de vidro por booleana 2D→3D (centrados e 100% Manifold) ──
     print("== [3] corte booleano das janelas (máscaras 2D→3D) ==", flush=True)
     t3 = time.time()
 
-    def lado_map():
-        win, meta = window_mask("lado")
-        u0, u1, v0, v1 = meta["solid_bbox"]
-        zmin, zmax, ymin, ymax = -1.0, 1.0, -0.401, 0.401
+    win_lado, meta_lado = window_mask("lado")
+    u0, u1, v0, v1 = meta_lado["solid_bbox"]
+    zmin, zmax, ymin, ymax = -1.0, 1.0, -0.401, 0.401
+    u_to_z = lambda u: zmax - (u - u0) / (u1 - u0) * (zmax - zmin)  # noqa: E731
+    v_to_y = lambda v: ymax - (v - v0) / (v1 - v0) * (ymax - ymin)  # noqa: E731
+    prism_side_man = mask_prism_man(win_lado, u_to_z, v_to_y, depth=(-1.2, 1.2), axis=0)
+    casca_man = casca_man - prism_side_man
 
-        def u_to_z(u):  # flip_u: frente à esquerda
-            return zmax - (u - u0) / (u1 - u0) * (zmax - zmin)
-
-        def v_to_y(v):  # flip_v: topo da foto = topo do carro
-            return ymax - (v - v0) / (v1 - v0) * (ymax - ymin)
-
-        return win, meta, u_to_z, v_to_y
-
-    win, meta_lado, u_to_z, v_to_y = lado_map()
-    prism_side = mask_prism(win, u_to_z, v_to_y, depth=(-2.0, 2.0), axis=0)
-    casca_man = casca_man - to_man(prism_side)
-
-    for name, depth in (("frente", (0.65, 1.2)), ("traseira", (-1.2, -0.78))):
+    for name, depth in (("frente", (0.15, 0.85)), ("traseira", (-1.05, -0.55))):
         win, meta = window_mask(name)
-        u0, u1, v0, v1 = meta["solid_bbox"]
-        xmin, xmax, ymin, ymax = -0.46, 0.46, -0.401, 0.401
-        u_to_x = lambda u: xmin + (u - u0) / (u1 - u0) * (xmax - xmin)  # noqa: E731
-        v_to_y2 = lambda v: ymax - (v - v0) / (v1 - v0) * (ymax - ymin)  # noqa: E731
-        prism = mask_prism(win, u_to_x, v_to_y2, depth=depth, axis=2)
-        casca_man = casca_man - to_man(prism)
+        fu0, fu1, fv0, fv1 = meta["solid_bbox"]
+        xmin, xmax = -0.46, 0.46
+        u_to_x = lambda u, a=fu0, b=fu1: xmin + (u - a) / (b - a) * (xmax - xmin)  # noqa: E731
+        v_to_y2 = lambda v, a=fv0, b=fv1: ymax - (v - a) / (b - a) * (ymax - ymin)  # noqa: E731
+        prism_man = mask_prism_man(win, u_to_x, v_to_y2, depth=depth, axis=2)
+        casca_man = casca_man - prism_man
 
     # ── 4. caixas de roda (4 cilindros no eixo X) ──
     print("== [4] caixas de roda (cilindros booleanos) ==", flush=True)
@@ -386,40 +385,59 @@ def main() -> int:
         cyl.apply_transform(trimesh.transformations.rotation_matrix(np.pi / 2, [0, 1, 0]))
         cyl.apply_translation([0.0, WHEEL_Y, z])
         casca_man = casca_man - to_man(cyl)
-    casca = from_man(casca_man)
-    casca = trimesh.Trimesh(vertices=casca.vertices, faces=casca.faces, process=True)
-    trimesh.repair.fix_normals(casca)
-    rep["stages"]["3_janelas_e_arcos"] = {**stats(casca), "time_s": round(time.time() - t3, 2)}
 
-    # ── 5. banheira interna (nowin: cabine completa) ──
-    print("== [5] banheira interna (∩ caixa do habitáculo) ==", flush=True)
+    casca_raw = from_man(casca_man)
+    # Mantém componentes principais da casca (>= 500 faces) e garante normais consistentes
+    c_comps = sorted(casca_raw.split(only_watertight=False), key=lambda c: len(c.faces), reverse=True)
+    casca = trimesh.util.concatenate([c for c in c_comps if len(c.faces) >= 500] or [c_comps[0]])
+    _, casca = repair_to_man(casca)
+    rep["stages"]["3_janelas_e_arcos"] = {**stats(casca), "time_s": round(time.time() - t3, 2)}
+    print("   3_janelas_e_arcos:", rep["stages"]["3_janelas_e_arcos"], flush=True)
+
+    # ── 5. banheira interna (contida 100% dentro do núcleo interno da carroceria!) ──
+    print("== [5] banheira interna (∩ núcleo interno ∩ habitáculo) ==", flush=True)
     t5 = time.time()
     tub = trimesh.load(
         os.path.join(CAR_DIR, "nowin_triposf512_posproc", "mesh_posproc.obj"),
-        force="mesh", process=False,
+        force="mesh",
+        process=False,
     )
     tub = ra.deskew_longitudinal(tub)
     tub = ra.apply_fox_blueprint(tub, target_length_norm=2.0)
-    tub = ra.symmetrize_bilateral(tub, best_side="pos_x",
-                                  preserve_driver_wheel_only=True, preserve_wipers=False)
-    cabin = trimesh.creation.box(extents=[0.92, 0.72, WIN_Z[1] - WIN_Z[0] + 0.12])
-    cabin.apply_translation([0.0, (-0.36 + 0.30) / 2, (WIN_Z[0] + WIN_Z[1]) / 2])
-    tub_man = to_man(tub) ^ to_man(cabin)
-    tub = from_man(tub_man)
-    tub = trimesh.Trimesh(vertices=tub.vertices, faces=tub.faces, process=True)
-    trimesh.repair.fix_normals(tub)
+    tub = ra.symmetrize_bilateral(
+        tub, best_side="pos_x", preserve_driver_wheel_only=True, preserve_wipers=False
+    )
+    man_tub, _ = repair_to_man(tub)
+    # Caixa do habitáculo (bancos, painel, volante e assoalho, abaixo do teto para não tampar as janelas)
+    cabin = trimesh.creation.box(extents=[0.76, 0.44, 1.18])
+    cabin.apply_translation([0.0, -0.07, -0.06])
+    # Interseciona com man_inner (núcleo interno da carroceria) para NUNCA vazar para fora das portas!
+    tub_man = (man_tub ^ man_inner) ^ to_man(cabin)
+    tub_raw = from_man(tub_man)
+    t_comps = sorted(tub_raw.split(only_watertight=False), key=lambda c: len(c.faces), reverse=True)
+    tub = trimesh.util.concatenate([c for c in t_comps if len(c.faces) >= 300] or [t_comps[0]])
+    _, tub = repair_to_man(tub)
     rep["stages"]["5_banheira"] = {**stats(tub), "time_s": round(time.time() - t5, 2)}
+    print("   5_banheira:", rep["stages"]["5_banheira"], flush=True)
 
-    # ── 6. roda mestre + 4 instâncias ──
-    print("== [6] roda mestre (regularização cilíndrica) + 4 instâncias ==", flush=True)
+    # ── 6. roda mestre 360° circular + 4 instâncias (espelhadas Dir/Esq) ──
+    print("== [6] roda mestre (regularização cilíndrica 360°) + 4 instâncias ==", flush=True)
     t6 = time.time()
-    roda = regularize_wheel(os.path.join(CAR_DIR, "c7_roda_mestre", "mesh.obj"),
-                            r_target=WHEEL_R, width_cap=0.14)
+    roda = regularize_wheel(
+        os.path.join(CAR_DIR, "c7_roda_mestre", "mesh.obj"),
+        r_target=WHEEL_R,
+        width_cap=0.13,
+    )
     roda_w = float(roda.bounding_box.extents[0])
-    wheel_x = max(0.42 - roda_w / 2.0, 0.25)  # face externa ~rasa com a carroceria
-    rep["stages"]["6_roda_mestre"] = {**stats(roda), "r_target": WHEEL_R,
-                                      "largura": round(roda_w, 4), "x_instancia": round(wheel_x, 4),
-                                      "time_s": round(time.time() - t6, 2)}
+    wheel_x = max(0.42 - roda_w / 2.0, 0.28)
+    rep["stages"]["6_roda_mestre"] = {
+        **stats(roda),
+        "r_target": WHEEL_R,
+        "largura": round(roda_w, 4),
+        "x_instancia": round(wheel_x, 4),
+        "time_s": round(time.time() - t6, 2),
+    }
+    print("   6_roda_mestre:", rep["stages"]["6_roda_mestre"], flush=True)
 
     # ── 7. decimações + exports ──
     print("== [7] decimação + GLBs ==", flush=True)
@@ -428,17 +446,29 @@ def main() -> int:
     casca_d = decimate(casca, 160_000)
     tub_d = decimate(tub, 100_000)
     roda_d = decimate(roda, 30_000)
-    rodas4 = trimesh.util.concatenate(
-        [roda_d.copy().apply_translation([sx * wheel_x, WHEEL_Y, z])
-         for sx in (1.0, -1.0) for z in (AXLE_FRONT_Z, AXLE_REAR_Z)]
-    )
+
+    # Cria versão espelhada em X da roda para o lado oposto (calota sempre voltada para fora!)
+    roda_mir = roda_d.copy()
+    roda_mir.vertices[:, 0] *= -1.0
+    roda_mir.faces = roda_mir.faces[:, ::-1].copy()
+    trimesh.repair.fix_normals(roda_mir)
+
+    rodas_list = []
+    for sx in (1.0, -1.0):
+        base_w = roda_d if sx > 0 else roda_mir
+        for z in (AXLE_FRONT_Z, AXLE_REAR_Z):
+            inst = base_w.copy()
+            inst.apply_translation([sx * wheel_x, WHEEL_Y, z])
+            rodas_list.append(inst)
+    rodas4 = trimesh.util.concatenate(rodas_list)
 
     kit = trimesh.util.concatenate([casca_d, tub_d, rodas4])
     interna = trimesh.util.concatenate([tub_d, rodas4])
 
     big = trimesh.creation.box(extents=[4.0, 4.0, 4.0])
     big.apply_translation([2.0 + 0.02, 0.0, 0.0])  # remove x > +0.02 (metade +x)
-    casca_corte = from_man(to_man(casca_d) - to_man(big))
+    man_casca_d, _ = repair_to_man(casca_d)
+    casca_corte = from_man(man_casca_d - to_man(big))
     kit_corte = trimesh.util.concatenate([casca_corte, tub_d, rodas4])
 
     glbs = {}
@@ -452,7 +482,6 @@ def main() -> int:
     roda_d.export(os.path.join(out_dir, "roda_mestre.obj"))
     kit.export(os.path.join(out_dir, "kit_completo.obj"))
 
-    # telemetria do job GPU da roda mestre (se existir)
     job_json = os.path.join(CAR_DIR, "c7_roda_mestre_job.json")
     if os.path.isfile(job_json):
         with open(job_json) as f:
@@ -460,8 +489,11 @@ def main() -> int:
 
     rep["stages"]["7_glbs"] = glbs
     rep["medidas_foto"] = {
-        "eixo_dianteiro_z": AXLE_FRONT_Z, "eixo_traseiro_z": AXLE_REAR_Z,
-        "raio_roda": WHEEL_R, "bitrena_x": WHEEL_X, "beltline_y": BELTLINE_Y,
+        "eixo_dianteiro_z": AXLE_FRONT_Z,
+        "eixo_traseiro_z": -0.734,
+        "raio_roda": WHEEL_R,
+        "bitrena_x": WHEEL_X,
+        "beltline_y": BELTLINE_Y,
         "fonte": "máscaras da foto lado (fox/no-windows), detecção de arcos",
     }
     rep["total_time_s"] = round(time.time() - T0, 2)
