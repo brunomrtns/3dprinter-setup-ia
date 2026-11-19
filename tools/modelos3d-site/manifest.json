@@ -641,6 +641,56 @@
      "manifold_depois": true
     }
    }
+  },
+  {
+   "id": "carro_foxh",
+   "category": "carro fox fullrun 8K/4K (Hunyuan3D-2mv 4 vistas + limpeza + xatlas UV + bake 2048 + Real-ESRGAN 4x -> 8192/4096, 2026-11-19)",
+   "modes": {
+    "mv_a_8k": {
+     "glb": "models/carro_foxh__mv_a_8k.glb",
+     "verts": 162982,
+     "faces": 279836,
+     "tempo_s": 324.1,
+     "vram": 4226,
+     "manifold_antes": false,
+     "manifold_depois": true,
+     "tex_px": 8192,
+     "size_mb": 39.55
+    },
+    "mv_b_8k": {
+     "glb": "models/carro_foxh__mv_b_8k.glb",
+     "verts": 168786,
+     "faces": 279624,
+     "tempo_s": 315.8,
+     "vram": 4189,
+     "manifold_antes": false,
+     "manifold_depois": true,
+     "tex_px": 8192,
+     "size_mb": 41.45
+    },
+    "mv_a_4k": {
+     "glb": "models/carro_foxh__mv_a_4k.glb",
+     "verts": 162982,
+     "faces": 279836,
+     "tempo_s": 324.1,
+     "vram": 4226,
+     "manifold_antes": false,
+     "manifold_depois": true,
+     "tex_px": 4096,
+     "size_mb": 17.67
+    },
+    "mv_b_4k": {
+     "glb": "models/carro_foxh__mv_b_4k.glb",
+     "verts": 168786,
+     "faces": 279624,
+     "tempo_s": 315.8,
+     "vram": 4189,
+     "manifold_antes": false,
+     "manifold_depois": true,
+     "tex_px": 4096,
+     "size_mb": 18.48
+    }
+   }
   }
  ]
 }

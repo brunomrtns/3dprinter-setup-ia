@@ -1,0 +1,611 @@
+{
+ "ts_start": "2026-11-19T18:21:00",
+ "seed": 42,
+ "bloco_b": {
+  "decisao_vistas": "runner aceita 4 vistas canônicas ortogonais (front/left/back/right); 4º slot = ESPELHO do lateral (receita C6 lado_dir, carro simétrico — limitação: tampa de combustível aproximada). P4_diag/R4_diag são vistas 3/4, NÃO ortogonais — mantidas como referência, não entram no 2mv. R5_extra = interior, backup (não entra).",
+  "grade": "não usada como imagem única — painéis separados (P1..P3 + espelho de P2)"
+ },
+ "bloco_c_runs": [
+  {
+   "tag": "mv_a",
+   "seed": 42,
+   "cmd_views": {
+    "front": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P1_front.png",
+    "left": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P2_side.png",
+    "back": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P3_back.png",
+    "right": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P2r_right.png"
+   },
+   "exit_code": 0,
+   "tempo_total_s": 324.1,
+   "vram_samples_10s": [
+    [
+     0.1,
+     1461
+    ],
+    [
+     11.1,
+     1436
+    ],
+    [
+     22.2,
+     1436
+    ],
+    [
+     33.2,
+     1436
+    ],
+    [
+     44.1,
+     3839
+    ],
+    [
+     54.6,
+     4221
+    ],
+    [
+     65.0,
+     4221
+    ],
+    [
+     75.5,
+     4226
+    ],
+    [
+     85.9,
+     4221
+    ],
+    [
+     96.3,
+     4221
+    ],
+    [
+     106.8,
+     4221
+    ],
+    [
+     117.2,
+     4221
+    ],
+    [
+     127.7,
+     4221
+    ],
+    [
+     138.1,
+     4221
+    ],
+    [
+     148.5,
+     4221
+    ],
+    [
+     159.0,
+     4221
+    ],
+    [
+     169.4,
+     4221
+    ],
+    [
+     179.8,
+     4219
+    ],
+    [
+     190.4,
+     2678
+    ],
+    [
+     200.8,
+     2686
+    ],
+    [
+     211.2,
+     2689
+    ],
+    [
+     221.6,
+     2697
+    ],
+    [
+     232.1,
+     2685
+    ],
+    [
+     242.5,
+     2691
+    ],
+    [
+     252.9,
+     2701
+    ],
+    [
+     263.4,
+     2709
+    ],
+    [
+     273.8,
+     2717
+    ],
+    [
+     284.3,
+     2725
+    ],
+    [
+     294.7,
+     2735
+    ],
+    [
+     305.1,
+     2743
+    ],
+    [
+     315.6,
+     2751
+    ]
+   ],
+   "vram_pico_mib": 4226,
+   "vram_baseline_mib": 1461,
+   "runner": {
+    "variant": "mv",
+    "erros": [],
+    "views_used": [
+     "front",
+     "left",
+     "back",
+     "right"
+    ],
+    "tempo_load_s": 37.17,
+    "tempo_run_s": 279.29,
+    "vertices": 391254,
+    "faces": 782652,
+    "bbox": [
+     1.1648,
+     1.0091,
+     1.9948
+    ],
+    "octree_resolution": 384,
+    "steps": 50,
+    "obj": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/mesh.obj"
+   }
+  },
+  {
+   "tag": "mv_b",
+   "seed": 42,
+   "cmd_views": {
+    "front": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R1_front.png",
+    "left": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R2_side.png",
+    "back": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R3_back.png",
+    "right": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R2r_right.png"
+   },
+   "exit_code": 0,
+   "tempo_total_s": 315.8,
+   "vram_samples_10s": [
+    [
+     0.1,
+     1398
+    ],
+    [
+     11.1,
+     1398
+    ],
+    [
+     22.1,
+     1398
+    ],
+    [
+     33.1,
+     1413
+    ],
+    [
+     43.6,
+     4183
+    ],
+    [
+     54.1,
+     4179
+    ],
+    [
+     64.5,
+     4183
+    ],
+    [
+     74.9,
+     4183
+    ],
+    [
+     85.4,
+     4183
+    ],
+    [
+     95.8,
+     4183
+    ],
+    [
+     106.2,
+     4183
+    ],
+    [
+     116.7,
+     4183
+    ],
+    [
+     127.1,
+     4183
+    ],
+    [
+     137.5,
+     4183
+    ],
+    [
+     148.0,
+     4183
+    ],
+    [
+     158.4,
+     4183
+    ],
+    [
+     168.8,
+     4183
+    ],
+    [
+     179.4,
+     2647
+    ],
+    [
+     189.8,
+     2655
+    ],
+    [
+     200.2,
+     2663
+    ],
+    [
+     210.7,
+     2671
+    ],
+    [
+     221.1,
+     2681
+    ],
+    [
+     231.6,
+     2689
+    ],
+    [
+     242.0,
+     2697
+    ],
+    [
+     252.4,
+     2707
+    ],
+    [
+     262.9,
+     2715
+    ],
+    [
+     273.3,
+     2723
+    ],
+    [
+     283.8,
+     2731
+    ],
+    [
+     294.2,
+     2741
+    ],
+    [
+     304.7,
+     2749
+    ],
+    [
+     315.1,
+     1555
+    ]
+   ],
+   "vram_pico_mib": 4189,
+   "vram_baseline_mib": 1398,
+   "runner": {
+    "variant": "mv",
+    "erros": [],
+    "views_used": [
+     "front",
+     "left",
+     "back",
+     "right"
+    ],
+    "tempo_load_s": 31.24,
+    "tempo_run_s": 279.17,
+    "vertices": 392258,
+    "faces": 784808,
+    "bbox": [
+     1.1322,
+     1.018,
+     1.9946
+    ],
+    "octree_resolution": 384,
+    "steps": 50,
+    "obj": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/mesh.obj"
+   }
+  }
+ ],
+ "bloco_c_sanity": {
+  "mv_a": {
+   "bbox": [
+    1.1648,
+    1.0091,
+    1.9948
+   ],
+   "razoes_lado/maior": [
+    0.506,
+    0.584,
+    1.0
+   ],
+   "componentes": 7,
+   "comp_dominante_vol_pct": 98.3,
+   "simetria_dist_media_pct_bbox": 0.27,
+   "valido": true
+  },
+  "mv_b": {
+   "bbox": [
+    1.1322,
+    1.018,
+    1.9946
+   ],
+   "razoes_lado/maior": [
+    0.51,
+    0.568,
+    1.0
+   ],
+   "componentes": 8,
+   "comp_dominante_vol_pct": 100.0,
+   "simetria_dist_media_pct_bbox": 0.249,
+   "valido": true
+  }
+ },
+ "bloco_d_limpeza": {
+  "mv_a": {
+   "antes": {
+    "faces": 782652,
+    "comps": 7
+   },
+   "depois": {
+    "faces": 279836,
+    "verts": 139868,
+    "watertight": true,
+    "comps_mantidos": 1,
+    "bbox": [
+     1.166,
+     1.009,
+     1.995
+    ]
+   },
+   "obj": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/limpa.obj"
+  },
+  "mv_b": {
+   "antes": {
+    "faces": 784808,
+    "comps": 8
+   },
+   "depois": {
+    "faces": 279624,
+    "verts": 139670,
+    "watertight": true,
+    "comps_mantidos": 1,
+    "bbox": [
+     1.133,
+     1.018,
+     1.995
+    ]
+   },
+   "obj": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/limpa.obj"
+  }
+ },
+ "bloco_e_uv": {
+  "mv_a": {
+   "ilhas": 1811,
+   "utilizacao_atlas": 0.791,
+   "overlap": "0 por construção (xatlas empacota sem overlap)",
+   "verts_uv": 162982,
+   "obj": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/uv.obj"
+  },
+  "mv_b": {
+   "ilhas": 2086,
+   "utilizacao_atlas": 0.792,
+   "overlap": "0 por construção (xatlas empacota sem overlap)",
+   "verts_uv": 168786,
+   "obj": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/uv.obj"
+  }
+ },
+ "bloco_f_decisao": {
+  "paint_hunyuan": "NÃO usado: pesos de pintura fora do cache local e estágio de pintura do Hunyuan3D-2 exige ~21GB VRAM (registrado no C6) — acima da 3060 12GB",
+  "fallback": "bake determinístico 2048 por PROJEÇÃO das 4 vistas canônicas (raycast de oclusão + seleção de vista pela normal) — as fotos REAIS/do gerador são a própria textura"
+ },
+ "bloco_f_bake": {
+  "mv_a": {
+   "bake_px": 2048,
+   "texels_nao_brancos_pct": 38.6,
+   "cor_media": [
+    203.7,
+    202.8,
+    203.5
+   ],
+   "verts_oclos_pct": 27.1,
+   "png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/bake2048.png"
+  },
+  "mv_b": {
+   "bake_px": 2048,
+   "texels_nao_brancos_pct": 37.8,
+   "cor_media": [
+    205.5,
+    205.0,
+    205.5
+   ],
+   "verts_oclos_pct": 39.2,
+   "png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/bake2048.png"
+  }
+ },
+ "bloco_g_8k": {
+  "seed": 42,
+  "modelo_upscale": "RealESRGAN_x4plus (RRDBNet 23b FP16 tile=512)",
+  "variants": {
+   "mv_a": {
+    "tempo_upscale_s": 22.13,
+    "tempo_total_tag_s": 45.76,
+    "tex8192_png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/tex8192.png",
+    "tex4096_png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/tex4096.png",
+    "glb_8k": {
+     "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/carro_foxh__mv_a_8k.glb",
+     "size_mb": 39.55,
+     "verts": 162982,
+     "faces": 279836,
+     "tex_px": [
+      8192,
+      8192
+     ]
+    },
+    "glb_4k": {
+     "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/carro_foxh__mv_a_4k.glb",
+     "size_mb": 17.67,
+     "verts": 162982,
+     "faces": 279836,
+     "tex_px": [
+      4096,
+      4096
+     ]
+    },
+    "site_glb_8k": "/home/bruno/printer3d-work/modelos3d-site/models/carro_foxh__mv_a_8k.glb",
+    "site_glb_4k": "/home/bruno/printer3d-work/modelos3d-site/models/carro_foxh__mv_a_4k.glb"
+   },
+   "mv_b": {
+    "tempo_upscale_s": 21.55,
+    "tempo_total_tag_s": 44.36,
+    "tex8192_png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/tex8192.png",
+    "tex4096_png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/tex4096.png",
+    "glb_8k": {
+     "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/carro_foxh__mv_b_8k.glb",
+     "size_mb": 41.45,
+     "verts": 168786,
+     "faces": 279624,
+     "tex_px": [
+      8192,
+      8192
+     ]
+    },
+    "glb_4k": {
+     "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/carro_foxh__mv_b_4k.glb",
+     "size_mb": 18.48,
+     "verts": 168786,
+     "faces": 279624,
+     "tex_px": [
+      4096,
+      4096
+     ]
+    },
+    "site_glb_8k": "/home/bruno/printer3d-work/modelos3d-site/models/carro_foxh__mv_b_8k.glb",
+    "site_glb_4k": "/home/bruno/printer3d-work/modelos3d-site/models/carro_foxh__mv_b_4k.glb"
+   }
+  },
+  "tempo_total_s": 90.87,
+  "vram_samples_10s": [
+   [
+    0.1,
+    1295
+   ],
+   [
+    10.1,
+    7415
+   ],
+   [
+    20.2,
+    7428
+   ],
+   [
+    30.2,
+    7414
+   ],
+   [
+    40.2,
+    7414
+   ],
+   [
+    50.3,
+    7414
+   ],
+   [
+    60.3,
+    7414
+   ],
+   [
+    70.4,
+    7421
+   ],
+   [
+    80.4,
+    7420
+   ],
+   [
+    90.4,
+    7415
+   ],
+   [
+    91.0,
+    1426
+   ]
+  ],
+  "vram_pico_mib": 7428,
+  "vram_baseline_mib": 1295
+ },
+ "bloco_h_publicacao": {
+  "case": "carro_foxh",
+  "decisao_seletor_8k_4k": "Implementado como 4 modos diretos no viewer (mv_a_8k, mv_b_8k, mv_a_4k, mv_b_4k) com 8K como padrão e botão VS comparando mv_a_8k x mv_b_8k; material atualizado para MeshStandardMaterial PBR para iluminação 3D real.",
+  "cache_buster": "v15",
+  "modos_publicados": [
+   "mv_a_8k",
+   "mv_b_8k",
+   "mv_a_4k",
+   "mv_b_4k"
+  ]
+ },
+ "bloco_i_verificacao": {
+  "manifest_http": 200,
+  "modes_live": [
+   "mv_a_8k",
+   "mv_b_8k",
+   "mv_a_4k",
+   "mv_b_4k"
+  ],
+  "glbs": {
+   "mv_a_8k": {
+    "url": "https://brunointegrations.com/modelos3d/models/carro_foxh__mv_a_8k.glb",
+    "http": 200,
+    "bytes": 41473112
+   },
+   "mv_b_8k": {
+    "url": "https://brunointegrations.com/modelos3d/models/carro_foxh__mv_b_8k.glb",
+    "http": 200,
+    "bytes": 43465344
+   },
+   "mv_a_4k": {
+    "url": "https://brunointegrations.com/modelos3d/models/carro_foxh__mv_a_4k.glb",
+    "http": 200,
+    "bytes": 18524068
+   },
+   "mv_b_4k": {
+    "url": "https://brunointegrations.com/modelos3d/models/carro_foxh__mv_b_4k.glb",
+    "http": 200,
+    "bytes": 19372548
+   }
+  },
+  "old_square_a1_front_http": 404,
+  "urls_finais": {
+   "viewer_default_8k": "https://brunointegrations.com/modelos3d/?case=carro_foxh&mode=mv_a_8k",
+   "viewer_vs_8k": "https://brunointegrations.com/modelos3d/?case=carro_foxh&mode=mv_a_8k&vs=1&mode2=mv_b_8k",
+   "viewer_mv_b_8k": "https://brunointegrations.com/modelos3d/?case=carro_foxh&mode=mv_b_8k",
+   "viewer_vs_4k": "https://brunointegrations.com/modelos3d/?case=carro_foxh&mode=mv_a_4k&vs=1&mode2=mv_b_4k"
+  }
+ },
+ "ts_end": "2026-11-19T19:32:45"
+}

@@ -114,6 +114,23 @@
 - **Fotos do kit = as MESMAS do C6** (`Downloads/fox/no-windows/` = `~/printer3d-work/carro/fotos-c7/` + `c7-prep/`): 5 fotos de 2400x1792 px (frente, frente-e-lado-diagonal, lado, traseira, de-fora-pegando-interna). Prep `*_tinted.png` reutilizado. C7-E (fotogrametria densa VGGT) retirado da fila (só reabrir se B/C falharem e houver sessão de 20-40 fotos completas).
 - **Publicação**: caso `carro_csg` (modos `kit`, `casca`, `interna`, `kit_corte`) mantido no viewer para histórico/comparação. Evidência: `evidence/rtx3060-12gb/carro-csg/report.json`.
 
+### Registro Run Único Fox (`carro_foxh` 8K/4K, 2026-11-19) — `[x]` CONCLUÍDO E PUBLICADO NO VIEWER
+
+- **Bloco A (Demolição)**: removidas todas as entradas e os 9 GLBs quadrados antigos do case `carro_foxh` (commit `23ecb66`, deploy + verificado `HTTP 404` no `carro_foxh__a1_front.glb`).
+- **Bloco B (Inputs e decisão de vistas)**: `Hunyuan3D-2mv` aceita 4 vistas ortogonais (`front`, `left`, `back`, `right`); 4º slot = espelho da lateral (`P2r_right.png` / `R2r_right.png`, limitação conhecida: tampa de combustível aproximada). `P4_diag` / `R4_diag` (3/4, não-ortogonais) e `R5_extra` (interior) não entraram no `2mv`. Grade 2×2 **não** usada como imagem única — painéis individuais separados (`fox-h/panels/prep/` e `fox/prep_real/`).
+- **Bloco C (Geração 3D `Hunyuan3D-2mv`, seed 42, octree 384, 50 steps)**:
+  - `mv_a` (grade): 391.254 verts / 782.652 faces · 324,1s · VRAM pico **4.226 MiB** · Sanity check PASS: razões bbox `[0.506, 0.584, 1.0]`, componente dominante 98,3%, simetria 0,270% da bbox.
+  - `mv_b` (fotos reais): 392.258 verts / 784.808 faces · 315,8s · VRAM pico **4.189 MiB** · Sanity check PASS: razões bbox `[0.510, 0.568, 1.0]`, componente dominante 100,0%, simetria 0,249% da bbox.
+- **Bloco D (Limpeza determinística)**: remesh uniforme + simetrização + remoção de flutuantes → `mv_a` 279.836 faces / `watertight=True` / 1 comp; `mv_b` 279.624 faces / `watertight=True` / 1 comp.
+- **Bloco E (UV `xatlas` CPU)**: `mv_a` 1.811 ilhas, utilização **79,1%**, 0 overlap (162.982 verts UV); `mv_b` 2.086 ilhas, utilização **79,2%**, 0 overlap (168.786 verts UV).
+- **Bloco F (Pintura / Bake 2048)**: estágio de pintura AI do `Hunyuan3D-2` exige ~21 GB VRAM (inviável na 3060 12 GB, pesos fora do cache) → fallback determinístico 2048 por projeção das 4 vistas canônicas com raycast de oclusão (`mv_a`: 38,6% texels não-brancos, cor média `[203.7, 202.8, 203.5]`; `mv_b`: 37,8% não-brancos, cor média `[205.5, 205.0, 205.5]`).
+- **Bloco G (Upscale 8K/4K — `tools/generator/upscale_and_pack_fox.py`)**: `RealESRGAN_x4plus` (RRDBNet 23b FP16, tiles 512px pad 16, seed 42) 2048 → 8192 + variante 4096 em **90,87s** totais, VRAM pico **7.428 MiB** (pico global do run).
+  - `mv_a`: `carro_foxh__mv_a_8k.glb` (39,55 MB, 8192×8192) + `carro_foxh__mv_a_4k.glb` (17,67 MB, 4096×4096).
+  - `mv_b`: `carro_foxh__mv_b_8k.glb` (41,45 MB, 8192×8192) + `carro_foxh__mv_b_4k.glb` (18,48 MB, 4096×4096).
+- **Bloco H & I (Publicação + Verificação HTTP)**: viewer atualizado (`app.js` v15, `MeshStandardMaterial` PBR com iluminação 3D real, 4 modos `mv_a_8k`, `mv_b_8k`, `mv_a_4k`, `mv_b_4k` permitindo alternância direta 8K/4K e comparativo VS). Todos os 4 GLBs + `manifest.json` validados `HTTP 200` e card quadrado antigo `HTTP 404`.
+  - URLs finais: https://brunointegrations.com/modelos3d/?case=carro_foxh&mode=mv_a_8k · VS 8K: https://brunointegrations.com/modelos3d/?case=carro_foxh&mode=mv_a_8k&vs=1&mode2=mv_b_8k
+  - Evidência completa (com samples de VRAM a cada 10s): `evidence/rtx3060-12gb/fox_fullrun/report.json`.
+
 ### Registro Esteira Tripo-local — FASE 0 r3 (bug TEXCOORD_0 + textura ausente nos cards, 2026-11-19) — `[~]` aguardando gate visual
 
 - **Dono dissecou os GLBs e achou o bug real**: os cards tinham foto no material mas o primitive só tinha `POSITION` (sem `TEXCOORD_0`) → viewer amostrava o texel (0,0) = quadrado branco. **Dissecação local confirmou e achou mais 2 defeitos**: (1) meu quad tinha 4 vértices mas 8 UVs (vstack) → trimesh derrubava o atributo; (2) o `TextureVisuals(image=…, material=…)` com imagem solta **não embute a textura** (`images: 0` no JSON) e o `baseColorFactor=[1,1,1,1]` int virava `[1/255]≈preto`. Nota honesta: minha "validação" v13 por % de pixels brancos era falso-positivo (fundo branco da página ≠ foto renderizada) — critério trocado por diff entre modos distintos.

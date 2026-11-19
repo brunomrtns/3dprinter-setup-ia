@@ -4,15 +4,10 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const MODES = [
-  'a1_front',
-  'a2_side',
-  'a3_back',
-  'a4_diag',
-  'b1_front',
-  'b2_side',
-  'b3_back',
-  'b4_diag',
-  'b5_extra',
+  'mv_a_8k',
+  'mv_b_8k',
+  'mv_a_4k',
+  'mv_b_4k',
   'hi3dgen',
   'kit',
   'casca',
@@ -34,15 +29,10 @@ const MODES = [
   'triposr',
 ];
 const MODE_LABEL = {
-  a1_front: 'A1 Grade: frente',
-  a2_side: 'A2 Grade: lateral',
-  a3_back: 'A3 Grade: traseira',
-  a4_diag: 'A4 Grade: 3/4',
-  b1_front: 'B1 Real: frente',
-  b2_side: 'B2 Real: lateral',
-  b3_back: 'B3 Real: traseira',
-  b4_diag: 'B4 Real: 3/4',
-  b5_extra: 'B5 Real: extra (descartado p/ mv — interior)',
+  mv_a_8k: '★ Grade 2x2 (8K)',
+  mv_b_8k: '★ Fotos Reais (8K)',
+  mv_a_4k: 'Grade 2x2 (4K Game-Ready)',
+  mv_b_4k: 'Fotos Reais (4K Game-Ready)',
   hi3dgen: '★ Hi3DGen (Normal-Bridging)',
   kit: '★ Kit Montado (CSG + 4 Rodas + Interna)',
   casca: 'Peça 1: Casca Carroceria (Janelas CSG)',
@@ -386,9 +376,13 @@ function refreshViewport(i) {
         if (!o.geometry.attributes.normal) o.geometry.computeVertexNormals();
         const tex = o.material && o.material.map ? o.material.map : null;
         if (tex) {
-          // GLB com foto embutida (cards da esteira foxh): mostra a TEXTURA,
-          // sem substituir por clay — MeshBasicMaterial não precisa de luz
-          o.material = new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide });
+          // GLB 3D texturizado: preserva mapa de cor com iluminação PBR real
+          o.material = new THREE.MeshStandardMaterial({
+            map: tex,
+            roughness: 0.48,
+            metalness: 0.08,
+            side: THREE.DoubleSide,
+          });
         } else {
           o.material = new THREE.MeshStandardMaterial({
             color: 0xbfc4cc,

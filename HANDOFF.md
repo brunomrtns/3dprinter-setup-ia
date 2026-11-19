@@ -2,8 +2,9 @@
 
 > Leia isto DEPOIS de `PROGRESS.md` (fonte da verdade) e ANTES de executar qualquer coisa. Contexto mínimo para um agente frio continuar o projeto sem conversa anterior.
 
-## Estado atual (2026-11-18)
+## Estado atual (2026-11-19)
 
+- **✅ RUN ÚNICO FOX (`carro_foxh` 8K/4K) CONCLUÍDO E NO AR (2026-11-19)**: cards quadrados antigos demolidos (`23ecb66`, `HTTP 404` confirmado); 2 carros 3D completos gerados com `Hunyuan3D-2mv` (seed 42, 4 vistas ortogonais separadas — `mv_a` da grade 2×2 e `mv_b` das fotos reais), limpos (`watertight=True`, ~280k faces), UV `xatlas` (79,1–79,2% uso), bake 2048 por projeção 4-vistas e upscale `RealESRGAN_x4plus` 4× (8192×8192 + variante 4096×4096 via `tools/generator/upscale_and_pack_fox.py`, pico VRAM global 7.428 MiB). Publicados e verificados `HTTP 200` no viewer v15 (`MeshStandardMaterial` PBR + comparativo VS): **https://brunointegrations.com/modelos3d/?case=carro_foxh&mode=mv_a_8k&vs=1&mode2=mv_b_8k**. Evidência consolidada: `evidence/rtx3060-12gb/fox_fullrun/report.json`.
 - **⏳ C7 EM ANDAMENTO (PROMPT-C7, sessão 2026-11-19)**:
   1. **C7-A (Kit CSG `carro_csg`)**: REPROVADO no gate visual pelo dono (falha de base no gerador, derretimento de hard-surface na casca e desalinhamento). Causa raiz aceita: o problema é a qualidade da malha base. Assets preservados (roda mestre dedicada, banheira interna e lógica CSG) para teste exclusivo sobre a base vencedora de B/C.
   2. **C7-B (Hi3DGen A/B) CONCLUÍDO E PUBLICADO NO VIEWER**: venv `~/.venvs/hi3dgen` operacional (torch 2.8.0+cu128, spconv-cu120, xformers, NiRNE YOSO 768px). Sonda e telemetria: NiRNE 6,10s (pico 2.527 MiB) com offload sequencial de GPU liberando para 8 MiB; Hi3DGenPipeline 33,68s (pico global 7.803 MiB). Total run 65,78s (quase 2x mais rápido que TripoSG e 3,6x mais rápido que TRELLIS.2). Malha gerada com 296.548 vértices e 593.226 faces. GLB de 14 MB deployado ao vivo em **https://brunointegrations.com/modelos3d/?case=carro_nowin&mode=hi3dgen**. Evidência em `evidence/rtx3060-12gb/hi3dgen-carro/`. **Aguardando veredito do dono (GATE B)**.
