@@ -96,15 +96,24 @@
 - **Estudo Técnico e Arquitetura da Feature "Kit de Montagem Hard-Surface / Veículos (IA + CSG Modular)"**:
   - Documentado em `docs/knowledge/modelagem-hard-surface-e-veiculos.md`: diagnóstico matemático do orçamento de voxels `512³` e do efeito *Out-of-Distribution* de apagar vidros na foto 2D; especificação da esteira modular (Carroceria Sólida + Corte Booleano 2D→3D cirúrgico dos vidros + Banheira Interna separada + 1 Roda Mestre gerada em close `100%` dedicada e instanciada 4× em cilindro matemático); levantamento comparativo de 6 projetos do GitHub (`bytedance/Hi3DGen`, `DreamTechAI/Direct3D-S2 1024³`, `Tencent-Hunyuan/Hunyuan3D-2.1`, `Seed3D/Dora`, `huanngzh/MV-Adapter`, `VAST-AI-Research/HoloPart`) e matriz de 3 opções de execução para decisão do dono.
 
-### Registro C7-A — Kit de Montagem CSG `carro_csg` (2026-11-18, PROMPT-C7) — `[~]` GATE: veredito visual do dono pendente
+### Registro C7-A — Kit de Montagem CSG `carro_csg` (2026-11-18 / 2026-11-19) — `[x]` REPROVADO NO GATE VISUAL PELO DONO
 
-- **Fotos do kit = as MESMAS do C6** (dono corrigiu o caminho: `Downloads/fox/no-windows/`, não `fox-c7`): hashes sha256 das 5 fotos batem com os sidecars `no_windows_preproc/` do C6 → prep `*_tinted.png` REUTILIZADO (receita idêndica), fotos copiadas para `~/printer3d-work/carro/fotos-c7/` + `c7-prep/`. C7-E (fotogrametria) fora da fila, conforme prompt.
-- **`tools/generator/kit_csg_carro.py`** (novo, determinístico CPU): carroceria die-cast do C6 (`hunyuan_mv_sf512`) → deskew+blueprint+simetria (refino_automotivo) → vãos de janelas por booleana 2D→3D com as máscaras `solid−open` das fotos reais (lado: extrusão no eixo X; para-brisa/vigia: extrusão em Z com profundidade limitada) → 4 caixas de roda cilíndricas → banheira interna (∩ caixa do habitáculo do mesh `nowin` com cabine completa) → roda mestre TripoSG seed 42 no close 1024px da roda na foto lado (`c7-prep/roda_close.png`, 3.258.234 faces, 138,8s, pico 11.688 MiB, guard 8.000 OK) regularizada em cilindro matemático (r=0,173 do blueprint, seleção por assinatura de roda — o comp maior era o para-lama) e instanciada 4× nos eixos medidos NA FOTO (diant. 0.813, tras. 0.133 do comprimento).
-- **Orientação foto↔3D decidida por dado**: IoU de silhueta + detecção dos arcos das rodas (frente do carro à esquerda na foto lado); u/eixos mapeados por bbox da máscara solid.
-- **Publicação**: caso `carro_csg` (modos `kit`, `casca`, `interna`, `kit_corte`) no viewer — deploy OK, 4 GLBs + viewer validados `HTTP 200` ao vivo: https://brunointegrations.com/modelos3d/?case=carro_csg · Evidência: `evidence/rtx3060-12gb/carro-csg/report.json`.
-- **[!] Pendência 1 — oco parcial**: `manifold3d 3.5.5` NÃO tem `Manifold.offset()` (o estágio "oco" do `posproc_impressao.py` roda em try/except — pode ter falhado silenciosamente no C6/anubis; verificar). Alternativa implementada (`erode_core`: ray-fill open3d por paridade + erosão EDT + união CSG de cubos RLE no manifold3d — testada em esfera ⌀1.83/2.00 OK) produz o núcleo correto (vol 0,478), MAS a subtração na carroceria aplicou só parcialmente (casca vol 0,496 vs 0,14 esperado) — causa ainda não isolada; NÃO bloqueia o gate visual (janelas/rodas/geometria), bloqueia STL do kit até resolver.
-- **[!] Pendência 2**: mapeamento foto→3D das máscaras frente/traseira assume u→x identidade (vidros ~simétricos); diagonal não usada no corte. Detalhes assimétricos (tampa de combustível espelhada) aproximados, como previsto no prompt.
-- Próximos passos da sessão (PROMPT-C7): **GATE A do dono** → C7-B (Hi3DGen A/B) → C7-C (Hunyuan-2.1 ckpt A/B) → rascunho ADR-007.
+- **VEREDITO C7-A (2026-11-19) — REPROVADO PELO DONO NO GATE VISUAL**:
+  - O dono avaliou o caso `carro_csg` no viewer e reprovou ("o resultado ficou muito ruim"). Revisão independente concorda integralmente.
+  - **Falhas observadas**:
+    1. A casca oca (EDT voxel + marching cubes) derrete o hard-surface (linhas de caráter somem, frente vira cera);
+    2. As máscaras 2D das fotos cortam uma geometria que NÃO casa mais com a foto (pilares rasgados, arcos de roda colapsados);
+    3. A carroceria base do C6 tinha 124 componentes desconexos e não era watertight;
+    4. Pendência 1 do report (oco parcial: volume 0,496 vs 0,14 esperado) segue sem causa isolada.
+  - **CAUSA RAIZ ACEITA**: O problema central é a **QUALIDADE DA BASE** do gerador 3D (malha bruta), e não a lógica de montagem. Não iterar mais o CSG sobre a mesma base deficiente — remendo cosmético não recupera forma que o gerador nunca produziu.
+  - **ASSETS REAPROVEITÁVEIS (preservados)**:
+    - Roda mestre: close 1024px + TripoSG seed 42 + regularização em cilindro matemático (raios nítidos no viewer);
+    - Banheira interna: habitáculo/bancos/painel visíveis e funcionais;
+    - `kit_csg_carro.py` (código determinístico em CPU) e mapeamento foto↔3D por IoU.
+    - O Kit de Montagem CSG voltará a ser testado **exclusivamente** sobre a base nova vencedora das Tarefas B/C (Hi3DGen / Hunyuan-2.1).
+- **Fotos do kit = as MESMAS do C6** (`Downloads/fox/no-windows/` = `~/printer3d-work/carro/fotos-c7/` + `c7-prep/`): 5 fotos de 2400x1792 px (frente, frente-e-lado-diagonal, lado, traseira, de-fora-pegando-interna). Prep `*_tinted.png` reutilizado. C7-E (fotogrametria densa VGGT) retirado da fila (só reabrir se B/C falharem e houver sessão de 20-40 fotos completas).
+- **Publicação**: caso `carro_csg` (modos `kit`, `casca`, `interna`, `kit_corte`) mantido no viewer para histórico/comparação. Evidência: `evidence/rtx3060-12gb/carro-csg/report.json`.
+- **Próximos passos da sessão (PROMPT-C7)**: **C7-B (Hi3DGen A/B)** → **C7-C (Hunyuan-2.1 ckpt A/B)** → rascunho ADR-007.
 
 ### Registro C3 (2026-11-17, continuação — benchmark em execução)
 
