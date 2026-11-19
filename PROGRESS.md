@@ -114,6 +114,14 @@
 - **Fotos do kit = as MESMAS do C6** (`Downloads/fox/no-windows/` = `~/printer3d-work/carro/fotos-c7/` + `c7-prep/`): 5 fotos de 2400x1792 px (frente, frente-e-lado-diagonal, lado, traseira, de-fora-pegando-interna). Prep `*_tinted.png` reutilizado. C7-E (fotogrametria densa VGGT) retirado da fila (só reabrir se B/C falharem e houver sessão de 20-40 fotos completas).
 - **Publicação**: caso `carro_csg` (modos `kit`, `casca`, `interna`, `kit_corte`) mantido no viewer para histórico/comparação. Evidência: `evidence/rtx3060-12gb/carro-csg/report.json`.
 
+### Registro Esteira Tripo-local — FASE 0 r3 (bug TEXCOORD_0 + textura ausente nos cards, 2026-11-19) — `[~]` aguardando gate visual
+
+- **Dono dissecou os GLBs e achou o bug real**: os cards tinham foto no material mas o primitive só tinha `POSITION` (sem `TEXCOORD_0`) → viewer amostrava o texel (0,0) = quadrado branco. **Dissecação local confirmou e achou mais 2 defeitos**: (1) meu quad tinha 4 vértices mas 8 UVs (vstack) → trimesh derrubava o atributo; (2) o `TextureVisuals(image=…, material=…)` com imagem solta **não embute a textura** (`images: 0` no JSON) e o `baseColorFactor=[1,1,1,1]` int virava `[1/255]≈preto`. Nota honesta: minha "validação" v13 por % de pixels brancos era falso-positivo (fundo branco da página ≠ foto renderizada) — critério trocado por diff entre modos distintos.
+- **Fix no `glb_card` do `prep_foxh.py`**: quad 4 verts + UV 4×2 com V invertido (convenção glTF), `PBRMaterial(baseColorTexture=img, metallicFactor=0, roughnessFactor=1, doubleSided)` sem colorFactor, faces 2 tris (DoubleSide do material cobre o verso), **autodiagnóstico no export**: GLB binário precisa conter `TEXCOORD_0` e `"images"` + roundtrip com `material.baseColorTexture` não-nulo.
+- **Cache-buster v14** (app.js loader + manifest + index.html). Re-deploy dos 9 cards.
+- **Validação com browser real (screenshots em `evidence/rtx3060-12gb/carro-foxh/validacao_v14_{a1_front,b2_side}.png`)**: `a1_front` × `b2_side` **diferem de verdade** (diff médio 7,74; antes do fix: 0,74), conteúdo rico (501/598 clusters de cor vs ~306 do quadrado liso; 117KB/87KB vs 30KB) → **as fotos renderizam**. Card orientação V conferida pela convenção glTF.
+- **GATE de novo**: https://brunointegrations.com/modelos3d/?case=carro_foxh — dono re-inspeciona a1–a4 (sem tint) e b1–b5 (tint ≤15%, capô branco, sem placa). Aprovado → FASE 1 (2mv seed 42, runs A/B, b5 descartado). Nenhuma GPU usada até aqui.
+
 ### Registro Esteira Tripo-local — FASE 0 r2 (correções do 1º gate, 2026-11-19) — `[~]` aguardando novo gate visual
 
 - **1º gate REPROVADO em 3 itens** (dono): viewer vazio no case novo + tint danoso (speckles a1, capô a4) + placa "RLA9E43" visível nos reais.

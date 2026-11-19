@@ -375,7 +375,7 @@ function refreshViewport(i) {
   v.spin.style.display = 'flex';
 
   const req = (v._req = (v._req || 0) + 1);
-  loader.load(`models/${c.id}__${mode}.glb?v=13`, g => {
+  loader.load(`models/${c.id}__${mode}.glb?v=14`, g => {
     if (v._req !== req) return;
     v.spin.style.display = 'none';
     if (v.group) v.scene.remove(v.group);
@@ -561,7 +561,7 @@ btnShare.onclick = async () => {
 };
 
 // ---------- boot ----------
-manifest = await fetch('manifest.json?v=13').then(r => r.json());
+manifest = await fetch('manifest.json?v=14').then(r => r.json());
 const qs = new URLSearchParams(location.search);
 const wantCase = manifest.cases.find(c => c.id === qs.get('case')) || manifest.cases[0];
 state.caseId = wantCase.id;

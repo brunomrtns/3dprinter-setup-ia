@@ -259,17 +259,36 @@ def prep_one(src: str, dst: str, tag: str, src_label: str) -> dict:
 
 
 def glb_card(png_path: str, glb_path: str):
+    """Card GLB: quad 4 vértices + TEXCOORD_0 (convenção glTF: (0,0) = canto
+    SUPERIOR esquerdo → V invertido em relação ao y-up do mundo) + textura
+    embutida com baseColorFactor [1,1,1,1] (não escurecer a foto).
+    Autodiagnóstico: o binário exportado TEM que conter 'TEXCOORD_0'."""
     import trimesh
 
     img = Image.open(png_path).convert("RGB")
     w, h = img.size
     quad_v = np.array([[-0.5, -0.5, 0], [0.5, -0.5, 0], [0.5, 0.5, 0], [-0.5, 0.5, 0]], dtype=np.float64)
     quad_v[:, 1] *= h / w
-    faces = np.array([[0, 2, 1], [0, 3, 2], [0, 1, 2], [0, 2, 3]], dtype=np.int64)
-    uv = np.array([[0, 0], [1, 0], [1, 1], [0, 1]], dtype=np.float64)
+    faces = np.array([[0, 2, 1], [0, 3, 2]], dtype=np.int64)  # DoubleSide no viewer cuida do verso
+    # v0=(-.5,-.5) fundo-esq no mundo → canto INFERIOR esq da imagem → uv (0,1)
+    uv = np.array([[0.0, 1.0], [1.0, 1.0], [1.0, 0.0], [0.0, 0.0]], dtype=np.float64)
     m = trimesh.Trimesh(vertices=quad_v, faces=faces, process=False)
-    m.visual = trimesh.visual.TextureVisuals(uv=np.vstack([uv, uv]), image=img)
+    # textura precisa estar DENTRO do material (baseColorTexture) — image= solto no
+    # TextureVisuals não é exportado (medido: images:0 no JSON do GLB). Sem
+    # baseColorFactor (trimesh normaliza int 1 → 1/255 ≈ preto — medido).
+    mat = trimesh.visual.material.PBRMaterial(
+        baseColorTexture=img, metallicFactor=0.0, roughnessFactor=1.0, doubleSided=True
+    )
+    m.visual = trimesh.visual.TextureVisuals(uv=uv, material=mat)
     m.export(glb_path, file_type="glb")
+    with open(glb_path, "rb") as f:
+        blob = f.read()
+    if b"TEXCOORD_0" not in blob or b'"images"' not in blob:
+        raise RuntimeError(f"GLB sem TEXCOORD_0 ou sem images embutida: {glb_path}")
+    back = trimesh.load(glb_path, force="mesh", process=False)
+    back_img = getattr(getattr(back.visual, "material", None), "baseColorTexture", None)
+    if back_img is None:
+        raise RuntimeError(f"Textura não sobreviveu ao roundtrip: {glb_path}")
 
 
 def main() -> int:
