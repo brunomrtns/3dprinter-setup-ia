@@ -1,0 +1,123 @@
+{
+ "ts_start": "2026-11-18T22:02:36",
+ "wall_mm": 3.0,
+ "stages": {
+  "1_carroceria": {
+   "verts": 147372,
+   "faces": 295214,
+   "watertight": false,
+   "components": 124,
+   "bbox": [
+    0.92,
+    0.802,
+    2.0
+   ]
+  },
+  "2_casca_oca": {
+   "verts": 151593,
+   "faces": 303446,
+   "watertight": true,
+   "components": 5,
+   "bbox": [
+    0.92,
+    0.802,
+    2.0
+   ],
+   "metodo": "rayfill+erosao+marching_cubes",
+   "time_s": 22.97
+  },
+  "3_janelas_e_arcos": {
+   "verts": 113205,
+   "faces": 227020,
+   "watertight": false,
+   "components": 52,
+   "bbox": [
+    0.92,
+    0.799,
+    2.0
+   ],
+   "time_s": 1.37
+  },
+  "5_banheira": {
+   "verts": 118266,
+   "faces": 236996,
+   "watertight": true,
+   "components": 9,
+   "bbox": [
+    0.92,
+    0.72,
+    1.655
+   ],
+   "time_s": 1.95
+  },
+  "6_roda_mestre": {
+   "verts": 88789,
+   "faces": 177726,
+   "watertight": true,
+   "components": 1,
+   "bbox": [
+    0.13,
+    0.34,
+    0.17
+   ],
+   "r_target": 0.173,
+   "largura": 0.1305,
+   "x_instancia": 0.3548,
+   "time_s": 20.04,
+   "gpu_job": {
+    "job": "roda_mestre_triposg",
+    "seed": 42,
+    "image": "/home/bruno/printer3d-work/carro/c7-prep/roda_close.png",
+    "exit_code": 0,
+    "tempo_total_s": 138.77,
+    "vram_pico_mib": 11688,
+    "vram_baseline_mib": 2874,
+    "runner": {
+     "tempo_load_s": 12.77,
+     "tempo_run_s": 102.42,
+     "vertices": 1628872,
+     "faces": 3258234,
+     "bbox": [
+      1.5002,
+      1.6534,
+      1.8811
+     ],
+     "obj": "/home/bruno/printer3d-work/carro/c7_roda_mestre/mesh.obj",
+     "erros": []
+    }
+   }
+  },
+  "7_glbs": {
+   "carro_csg__kit.glb": {
+    "verts": 189167,
+    "faces": 379992,
+    "watertight": false
+   },
+   "carro_csg__casca.glb": {
+    "verts": 79695,
+    "faces": 159992,
+    "watertight": false
+   },
+   "carro_csg__interna.glb": {
+    "verts": 109472,
+    "faces": 220000,
+    "watertight": true
+   },
+   "carro_csg__kit_corte.glb": {
+    "verts": 163878,
+    "faces": 328936,
+    "watertight": true
+   }
+  }
+ },
+ "medidas_foto": {
+  "eixo_dianteiro_z": 0.626,
+  "eixo_traseiro_z": -0.734,
+  "raio_roda": 0.173,
+  "bitrena_x": 0.336,
+  "beltline_y": -0.338,
+  "fonte": "máscaras da foto lado (fox/no-windows), detecção de arcos"
+ },
+ "total_time_s": 58.44,
+ "ts_end": "2026-11-18T22:03:34"
+}

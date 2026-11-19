@@ -590,6 +590,48 @@
      "manifold_depois": false
     }
    }
+  },
+  {
+   "id": "carro_csg",
+   "category": "carro fox kit de montagem CSG (C7-A, 2026-11-18): casca + janelas booleanas 2D→3D + banheira + roda mestre 4x",
+   "modes": {
+    "kit": {
+     "glb": "models/carro_csg__kit.glb",
+     "verts": 189167,
+     "faces": 379992,
+     "tempo_s": 58.44,
+     "vram": 11688,
+     "manifold_antes": false,
+     "manifold_depois": false
+    },
+    "casca": {
+     "glb": "models/carro_csg__casca.glb",
+     "verts": 79695,
+     "faces": 159992,
+     "tempo_s": null,
+     "vram": null,
+     "manifold_antes": false,
+     "manifold_depois": false
+    },
+    "interna": {
+     "glb": "models/carro_csg__interna.glb",
+     "verts": 109472,
+     "faces": 220000,
+     "tempo_s": null,
+     "vram": null,
+     "manifold_antes": false,
+     "manifold_depois": true
+    },
+    "kit_corte": {
+     "glb": "models/carro_csg__kit_corte.glb",
+     "verts": 163878,
+     "faces": 328936,
+     "tempo_s": null,
+     "vram": null,
+     "manifold_antes": false,
+     "manifold_depois": true
+    }
+   }
   }
  ]
 }
