@@ -1,6 +1,7 @@
 {
- "ts": "2026-11-19T16:36:55",
+ "ts": "2026-11-19T16:53:56",
  "fase": 0,
+ "rev": "r2-gate1",
  "grade": {
   "arquivo": "/mnt/c/Users/Bruno/Downloads/fox-h/Gemini_Generated_Image_cq5yvcq5yvcq5yvc.jpg",
   "hash": "sha256:b9043dc1c1e013af0298f16ffbeb77a8bc3585e8f4cef84c6cf72f6bc4fca1ee"
@@ -58,28 +59,22 @@
     1024,
     1024
    ],
+   "fonte": "grade",
    "out": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P1_front.png",
    "size_final": [
     518,
     518
    ],
    "tint": {
-    "janela_px": 9302,
-    "pct_da_silhueta": 7.87,
-    "cor_dominante_carro": [
-     222,
-     221,
-     225
-    ],
-    "tint_aplicado": true,
-    "cor_tint": [
-     62,
-     64,
-     68
-    ]
+    "tint_aplicado": false,
+    "motivo": "G1: linha A sem tint (vidros fumê do Nano Banana)"
    },
-   "hash_original": "sha256:f62017d580f2836d136ef472c85c99738b603839913bf2d78ee56b09c3899341",
-   "fonte": "grade"
+   "placa": {
+    "n_placas": 0,
+    "placas_inpaint": [],
+    "motivo": "grade pede 'sem placa' no template"
+   },
+   "hash_original": "sha256:f62017d580f2836d136ef472c85c99738b603839913bf2d78ee56b09c3899341"
   },
   {
    "tag": "P2_side",
@@ -88,28 +83,22 @@
     1024,
     1024
    ],
+   "fonte": "grade",
    "out": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P2_side.png",
    "size_final": [
     518,
     518
    ],
    "tint": {
-    "janela_px": 4136,
-    "pct_da_silhueta": 6.66,
-    "cor_dominante_carro": [
-     207,
-     203,
-     201
-    ],
-    "tint_aplicado": true,
-    "cor_tint": [
-     62,
-     64,
-     68
-    ]
+    "tint_aplicado": false,
+    "motivo": "G1: linha A sem tint (vidros fumê do Nano Banana)"
    },
-   "hash_original": "sha256:1ae83288d56ee913076f3765a79d3081baf1812531577b661ca228fc37323c0b",
-   "fonte": "grade"
+   "placa": {
+    "n_placas": 0,
+    "placas_inpaint": [],
+    "motivo": "grade pede 'sem placa' no template"
+   },
+   "hash_original": "sha256:1ae83288d56ee913076f3765a79d3081baf1812531577b661ca228fc37323c0b"
   },
   {
    "tag": "P3_back",
@@ -118,28 +107,22 @@
     1024,
     1024
    ],
+   "fonte": "grade",
    "out": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P3_back.png",
    "size_final": [
     518,
     518
    ],
    "tint": {
-    "janela_px": 17276,
-    "pct_da_silhueta": 13.35,
-    "cor_dominante_carro": [
-     201,
-     197,
-     198
-    ],
-    "tint_aplicado": true,
-    "cor_tint": [
-     62,
-     64,
-     68
-    ]
+    "tint_aplicado": false,
+    "motivo": "G1: linha A sem tint (vidros fumê do Nano Banana)"
    },
-   "hash_original": "sha256:f8e09c29ee58fde0f2d6afce0b522e2b8b505f7c7e7b9eb8c2dafbd5ee059adb",
-   "fonte": "grade"
+   "placa": {
+    "n_placas": 0,
+    "placas_inpaint": [],
+    "motivo": "grade pede 'sem placa' no template"
+   },
+   "hash_original": "sha256:f8e09c29ee58fde0f2d6afce0b522e2b8b505f7c7e7b9eb8c2dafbd5ee059adb"
   },
   {
    "tag": "P4_diag",
@@ -148,28 +131,22 @@
     1024,
     1024
    ],
+   "fonte": "grade",
    "out": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P4_diag.png",
    "size_final": [
     518,
     518
    ],
    "tint": {
-    "janela_px": 18012,
-    "pct_da_silhueta": 19.6,
-    "cor_dominante_carro": [
-     207,
-     203,
-     204
-    ],
-    "tint_aplicado": true,
-    "cor_tint": [
-     62,
-     64,
-     68
-    ]
+    "tint_aplicado": false,
+    "motivo": "G1: linha A sem tint (vidros fumê do Nano Banana)"
    },
-   "hash_original": "sha256:d1fdb9bf393c0cde27690ffa78925874b367af142db95fdc23b40f51bd6f3cab",
-   "fonte": "grade"
+   "placa": {
+    "n_placas": 0,
+    "placas_inpaint": [],
+    "motivo": "grade pede 'sem placa' no template"
+   },
+   "hash_original": "sha256:d1fdb9bf393c0cde27690ffa78925874b367af142db95fdc23b40f51bd6f3cab"
   },
   {
    "tag": "R1_front",
@@ -178,19 +155,24 @@
     2400,
     1792
    ],
+   "fonte": "real",
    "out": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R1_front.png",
    "size_final": [
     518,
     518
    ],
    "tint": {
-    "janela_px": 7652,
-    "pct_da_silhueta": 6.44,
-    "cor_dominante_carro": [
-     226,
+    "cor_dominante_pintura": [
      227,
-     232
+     228,
+     233
     ],
+    "pintura_px_proibidos": 20692,
+    "cap_pct": 15.0,
+    "janela_px": 2096,
+    "pct_da_silhueta": 1.76,
+    "n_componentes": 61,
+    "cap_aplicado": false,
     "tint_aplicado": true,
     "cor_tint": [
      62,
@@ -198,8 +180,54 @@
      68
     ]
    },
-   "hash_original": "sha256:fbde1885905144fbe09eda14c3aace033775107b668c1f5d60b9650c99d71e49",
-   "fonte": "real"
+   "placa": {
+    "placas_inpaint": [
+     {
+      "px": 132,
+      "bbox": [
+       362,
+       286,
+       435,
+       298
+      ],
+      "cor_preenchimento": [
+       98,
+       95,
+       101
+      ]
+     },
+     {
+      "px": 110,
+      "bbox": [
+       81,
+       289,
+       145,
+       299
+      ],
+      "cor_preenchimento": [
+       92,
+       91,
+       98
+      ]
+     },
+     {
+      "px": 1290,
+      "bbox": [
+       205,
+       335,
+       303,
+       356
+      ],
+      "cor_preenchimento": [
+       35,
+       37,
+       42
+      ]
+     }
+    ],
+    "n_placas": 3
+   },
+   "hash_original": "sha256:fbde1885905144fbe09eda14c3aace033775107b668c1f5d60b9650c99d71e49"
   },
   {
    "tag": "R2_side",
@@ -208,19 +236,24 @@
     2400,
     1792
    ],
+   "fonte": "real",
    "out": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R2_side.png",
    "size_final": [
     518,
     518
    ],
    "tint": {
-    "janela_px": 8308,
-    "pct_da_silhueta": 13.34,
-    "cor_dominante_carro": [
+    "cor_dominante_pintura": [
      210,
      208,
      208
     ],
+    "pintura_px_proibidos": 14208,
+    "cap_pct": 15.0,
+    "janela_px": 2135,
+    "pct_da_silhueta": 3.43,
+    "n_componentes": 9,
+    "cap_aplicado": false,
     "tint_aplicado": true,
     "cor_tint": [
      62,
@@ -228,8 +261,26 @@
      68
     ]
    },
-   "hash_original": "sha256:416b02f941cd1e4d2c3bf09b85bbc48ef98992a8c439de74569e1001d7579284",
-   "fonte": "real"
+   "placa": {
+    "placas_inpaint": [
+     {
+      "px": 98,
+      "bbox": [
+       45,
+       318,
+       66,
+       325
+      ],
+      "cor_preenchimento": [
+       44,
+       43,
+       44
+      ]
+     }
+    ],
+    "n_placas": 1
+   },
+   "hash_original": "sha256:416b02f941cd1e4d2c3bf09b85bbc48ef98992a8c439de74569e1001d7579284"
   },
   {
    "tag": "R3_back",
@@ -238,19 +289,24 @@
     2400,
     1792
    ],
+   "fonte": "real",
    "out": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R3_back.png",
    "size_final": [
     518,
     518
    ],
    "tint": {
-    "janela_px": 20728,
-    "pct_da_silhueta": 15.91,
-    "cor_dominante_carro": [
+    "cor_dominante_pintura": [
      208,
-     207,
+     206,
      207
     ],
+    "pintura_px_proibidos": 25785,
+    "cap_pct": 15.0,
+    "janela_px": 9412,
+    "pct_da_silhueta": 7.23,
+    "n_componentes": 16,
+    "cap_aplicado": false,
     "tint_aplicado": true,
     "cor_tint": [
      62,
@@ -258,8 +314,26 @@
      68
     ]
    },
-   "hash_original": "sha256:51eef57438e929d17789509047f836fa2e76c94cdf5610bd66aa628e469c86fb",
-   "fonte": "real"
+   "placa": {
+    "placas_inpaint": [
+     {
+      "px": 1350,
+      "bbox": [
+       211,
+       333,
+       308,
+       353
+      ],
+      "cor_preenchimento": [
+       61,
+       61,
+       98
+      ]
+     }
+    ],
+    "n_placas": 1
+   },
+   "hash_original": "sha256:51eef57438e929d17789509047f836fa2e76c94cdf5610bd66aa628e469c86fb"
   },
   {
    "tag": "R4_diag",
@@ -268,19 +342,24 @@
     2400,
     1792
    ],
+   "fonte": "real",
    "out": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R4_diag.png",
    "size_final": [
     518,
     518
    ],
    "tint": {
-    "janela_px": 20564,
-    "pct_da_silhueta": 23.17,
-    "cor_dominante_carro": [
+    "cor_dominante_pintura": [
      215,
      213,
      214
     ],
+    "pintura_px_proibidos": 8456,
+    "cap_pct": 15.0,
+    "janela_px": 10102,
+    "pct_da_silhueta": 11.38,
+    "n_componentes": 21,
+    "cap_aplicado": true,
     "tint_aplicado": true,
     "cor_tint": [
      62,
@@ -288,8 +367,11 @@
      68
     ]
    },
-   "hash_original": "sha256:199fac852e2f22ed09f5d647ca84e35a4736a1e394c132a1946573c822a7cce8",
-   "fonte": "real"
+   "placa": {
+    "placas_inpaint": [],
+    "n_placas": 0
+   },
+   "hash_original": "sha256:199fac852e2f22ed09f5d647ca84e35a4736a1e394c132a1946573c822a7cce8"
   },
   {
    "tag": "R5_extra",
@@ -298,19 +380,24 @@
     2400,
     1792
    ],
+   "fonte": "real",
    "out": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R5_extra.png",
    "size_final": [
     518,
     518
    ],
    "tint": {
-    "janela_px": 1022,
-    "pct_da_silhueta": 3.03,
-    "cor_dominante_carro": [
+    "cor_dominante_pintura": [
      252,
      252,
      252
     ],
+    "pintura_px_proibidos": 5045,
+    "cap_pct": 15.0,
+    "janela_px": 754,
+    "pct_da_silhueta": 2.24,
+    "n_componentes": 24,
+    "cap_aplicado": false,
     "tint_aplicado": true,
     "cor_tint": [
      62,
@@ -318,181 +405,84 @@
      68
     ]
    },
-   "hash_original": "sha256:6bef731e167fb8c1d6d18931bb220b12085c9cbdf904f7b4264d2a1ba3515f59",
-   "fonte": "real"
+   "placa": {
+    "placas_inpaint": [],
+    "n_placas": 0
+   },
+   "hash_original": "sha256:6bef731e167fb8c1d6d18931bb220b12085c9cbdf904f7b4264d2a1ba3515f59"
   }
  ],
  "cards": {
   "a1_front": {
    "glb": "models/carro_foxh__a1_front.glb",
    "img": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P1_front.png",
-   "tint": {
-    "janela_px": 9302,
-    "pct_da_silhueta": 7.87,
-    "cor_dominante_carro": [
-     222,
-     221,
-     225
-    ],
-    "tint_aplicado": true,
-    "cor_tint": [
-     62,
-     64,
-     68
-    ]
-   }
+   "tint_pct": 0.0,
+   "placas_inpaintadas": 0
   },
   "a2_side": {
    "glb": "models/carro_foxh__a2_side.glb",
    "img": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P2_side.png",
-   "tint": {
-    "janela_px": 4136,
-    "pct_da_silhueta": 6.66,
-    "cor_dominante_carro": [
-     207,
-     203,
-     201
-    ],
-    "tint_aplicado": true,
-    "cor_tint": [
-     62,
-     64,
-     68
-    ]
-   }
+   "tint_pct": 0.0,
+   "placas_inpaintadas": 0
   },
   "a3_back": {
    "glb": "models/carro_foxh__a3_back.glb",
    "img": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P3_back.png",
-   "tint": {
-    "janela_px": 17276,
-    "pct_da_silhueta": 13.35,
-    "cor_dominante_carro": [
-     201,
-     197,
-     198
-    ],
-    "tint_aplicado": true,
-    "cor_tint": [
-     62,
-     64,
-     68
-    ]
-   }
+   "tint_pct": 0.0,
+   "placas_inpaintadas": 0
   },
   "a4_diag": {
    "glb": "models/carro_foxh__a4_diag.glb",
    "img": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P4_diag.png",
-   "tint": {
-    "janela_px": 18012,
-    "pct_da_silhueta": 19.6,
-    "cor_dominante_carro": [
-     207,
-     203,
-     204
-    ],
-    "tint_aplicado": true,
-    "cor_tint": [
-     62,
-     64,
-     68
-    ]
-   }
+   "tint_pct": 0.0,
+   "placas_inpaintadas": 0
   },
   "b1_front": {
    "glb": "models/carro_foxh__b1_front.glb",
    "img": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R1_front.png",
-   "tint": {
-    "janela_px": 7652,
-    "pct_da_silhueta": 6.44,
-    "cor_dominante_carro": [
-     226,
-     227,
-     232
-    ],
-    "tint_aplicado": true,
-    "cor_tint": [
-     62,
-     64,
-     68
-    ]
-   }
+   "tint_pct": 1.76,
+   "placas_inpaintadas": 3
   },
   "b2_side": {
    "glb": "models/carro_foxh__b2_side.glb",
    "img": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R2_side.png",
-   "tint": {
-    "janela_px": 8308,
-    "pct_da_silhueta": 13.34,
-    "cor_dominante_carro": [
-     210,
-     208,
-     208
-    ],
-    "tint_aplicado": true,
-    "cor_tint": [
-     62,
-     64,
-     68
-    ]
-   }
+   "tint_pct": 3.43,
+   "placas_inpaintadas": 1
   },
   "b3_back": {
    "glb": "models/carro_foxh__b3_back.glb",
    "img": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R3_back.png",
-   "tint": {
-    "janela_px": 20728,
-    "pct_da_silhueta": 15.91,
-    "cor_dominante_carro": [
-     208,
-     207,
-     207
-    ],
-    "tint_aplicado": true,
-    "cor_tint": [
-     62,
-     64,
-     68
-    ]
-   }
+   "tint_pct": 7.23,
+   "placas_inpaintadas": 1
   },
   "b4_diag": {
    "glb": "models/carro_foxh__b4_diag.glb",
    "img": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R4_diag.png",
-   "tint": {
-    "janela_px": 20564,
-    "pct_da_silhueta": 23.17,
-    "cor_dominante_carro": [
-     215,
-     213,
-     214
-    ],
-    "tint_aplicado": true,
-    "cor_tint": [
-     62,
-     64,
-     68
-    ]
-   }
+   "tint_pct": 11.38,
+   "placas_inpaintadas": 0
   },
   "b5_extra": {
    "glb": "models/carro_foxh__b5_extra.glb",
    "img": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R5_extra.png",
-   "tint": {
-    "janela_px": 1022,
-    "pct_da_silhueta": 3.03,
-    "cor_dominante_carro": [
-     252,
-     252,
-     252
-    ],
-    "tint_aplicado": true,
-    "cor_tint": [
-     62,
-     64,
-     68
-    ]
-   }
+   "tint_pct": 2.24,
+   "placas_inpaintadas": 0
+  }
+ },
+ "mv_runs": {
+  "A_grade": [
+   "a1_front",
+   "a2_side",
+   "a3_back",
+   "a4_diag"
+  ],
+  "B_reais": [
+   "b1_front",
+   "b2_side",
+   "b3_back",
+   "b4_diag"
+  ],
+  "descartados": {
+   "b5_extra": "interior — não é vista (G4)"
   }
  }
 }

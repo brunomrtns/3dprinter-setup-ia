@@ -4,6 +4,15 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const MODES = [
+  'a1_front',
+  'a2_side',
+  'a3_back',
+  'a4_diag',
+  'b1_front',
+  'b2_side',
+  'b3_back',
+  'b4_diag',
+  'b5_extra',
   'hi3dgen',
   'kit',
   'casca',
@@ -25,6 +34,15 @@ const MODES = [
   'triposr',
 ];
 const MODE_LABEL = {
+  a1_front: 'A1 Grade: frente',
+  a2_side: 'A2 Grade: lateral',
+  a3_back: 'A3 Grade: traseira',
+  a4_diag: 'A4 Grade: 3/4',
+  b1_front: 'B1 Real: frente',
+  b2_side: 'B2 Real: lateral',
+  b3_back: 'B3 Real: traseira',
+  b4_diag: 'B4 Real: 3/4',
+  b5_extra: 'B5 Real: extra (descartado p/ mv — interior)',
   hi3dgen: '★ Hi3DGen (Normal-Bridging)',
   kit: '★ Kit Montado (CSG + 4 Rodas + Interna)',
   casca: 'Peça 1: Casca Carroceria (Janelas CSG)',
@@ -357,7 +375,7 @@ function refreshViewport(i) {
   v.spin.style.display = 'flex';
 
   const req = (v._req = (v._req || 0) + 1);
-  loader.load(`models/${c.id}__${mode}.glb?v=11`, g => {
+  loader.load(`models/${c.id}__${mode}.glb?v=13`, g => {
     if (v._req !== req) return;
     v.spin.style.display = 'none';
     if (v.group) v.scene.remove(v.group);
@@ -366,13 +384,20 @@ function refreshViewport(i) {
     g.scene.traverse(o => {
       if (o.isMesh) {
         if (!o.geometry.attributes.normal) o.geometry.computeVertexNormals();
-        o.material = new THREE.MeshStandardMaterial({
-          color: 0xbfc4cc,
-          roughness: 0.55,
-          metalness: 0.05,
-          side: THREE.DoubleSide,
-          flatShading: mode.startsWith('trellis2'),
-        });
+        const tex = o.material && o.material.map ? o.material.map : null;
+        if (tex) {
+          // GLB com foto embutida (cards da esteira foxh): mostra a TEXTURA,
+          // sem substituir por clay — MeshBasicMaterial não precisa de luz
+          o.material = new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide });
+        } else {
+          o.material = new THREE.MeshStandardMaterial({
+            color: 0xbfc4cc,
+            roughness: 0.55,
+            metalness: 0.05,
+            side: THREE.DoubleSide,
+            flatShading: mode.startsWith('trellis2'),
+          });
+        }
         o.castShadow = o.receiveShadow = false;
       }
     });
@@ -536,7 +561,7 @@ btnShare.onclick = async () => {
 };
 
 // ---------- boot ----------
-manifest = await fetch('manifest.json').then(r => r.json());
+manifest = await fetch('manifest.json?v=13').then(r => r.json());
 const qs = new URLSearchParams(location.search);
 const wantCase = manifest.cases.find(c => c.id === qs.get('case')) || manifest.cases[0];
 state.caseId = wantCase.id;

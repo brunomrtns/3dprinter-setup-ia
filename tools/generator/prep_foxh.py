@@ -1,20 +1,19 @@
 #!/usr/bin/env python3
-"""FASE 0 da esteira Tripo-local (2026-11-19) — prep A/B do Fox no RTX 3060.
+"""FASE 0 da esteira Tripo-local (2026-11-19, r2 pós-1º gate) — prep A/B do Fox.
 
-Linha A: painéis canônicos da grade 2x2 do dono (Nano Banana Pro, Downloads/fox-h).
-Linha B: as 5 fotos reais (Downloads/fox/no-windows).
+Correções do gate reprovado (2026-11-19):
+  G1: linha A (painéis da grade) SEM tint — vidros já vêm fumê do Nano Banana;
+  G2: linha B tint CONSERVADOR: máscara da pintura (distância de cor à dominante
+      + dilatação morfológica) é zona PROIBIDA; tinta só em componentes
+      conectados à banda dos vidros (acima da linha de cintura); cap ≤15%;
+  G3: placa (RLA9E43) inpintada nos reais com a cor vizinha da lataria;
+  G4: b5_extra marcado DESCARTADO para o mv (interior, não é vista);
+  G5: report com % tint por painel e placa tratada.
 
-Passos (100% CPU, sem GPU — regra da esteira):
-  1. valida a grade por métrica (4 quadrantes; % não-branco 15-60% por quadrante;
-     brilho dos 4 cantos com variação < 5%); falha → PARA e reporta quadrante;
-  2. corta no ponto médio → panels/P1_front..P4_diag (resolução nativa do quadrante);
-  3. prep padrão: rembg u2net → fundo branco → bbox do objeto c/ margem 8% →
-     canvas 518x518; conferência de vidros claros → tint grafite quando detectado;
-  4. mesmo prep nas 5 fotos reais → prep_real/R1_front..R5_extra;
-  5. 9 "cards" GLB (plano texturizado) no viewer, case carro_foxh (A=painéis, B=reais);
-  6. report em evidence/rtx3060-12gb/carro-foxh/report.json.
+Validação da grade + corte + prep padrão: rembg u2net → fundo branco → margem
+8% → canvas 518×518. 100% CPU. Cards GLB para o viewer (case carro_foxh).
 
-Uso: ~/.venvs/printer3d-ia/bin/python tools/generator/prep_foxh.py
+Uso: ~/.venvs/printer3d-ia/bin/python tools/generator/prep_foxh.py <report.json>
 """
 from __future__ import annotations
 
@@ -26,6 +25,7 @@ import sys
 
 import numpy as np
 from PIL import Image
+from scipy.ndimage import binary_dilation, label as cclabel
 
 CAR_DIR = os.path.expanduser("~/printer3d-work")
 FOXH = "/mnt/c/Users/Bruno/Downloads/fox-h"
@@ -34,11 +34,11 @@ PANELS_PREP = os.path.join(PANELS, "prep")
 FOX_REAL = "/mnt/c/Users/Bruno/Downloads/fox/no-windows"
 PREP_REAL = "/mnt/c/Users/Bruno/Downloads/fox/prep_real"
 MODELS_DIR = os.path.join(CAR_DIR, "modelos3d-site/models")
-REPORT = None  # set via argv[1]
 
 CANVAS = 518
 MARGIN = 0.08
 GRAPHITE = (62, 64, 68)
+TINT_CAP_PCT = 15.0
 
 REAL_MAP = {
     "R1_front": "frente.jpg",
@@ -91,48 +91,124 @@ def validate_grade(img: Image.Image) -> dict:
     if var >= 0.05:
         ok = False
     return {
-        "ok": ok,
-        "img_dims": [W, H],
-        "cantos_brilho_medio": corners,
-        "variacao_cantos_pct": round(100 * var, 2),
-        "limite_variacao_pct": 5.0,
+        "ok": ok, "img_dims": [W, H], "cantos_brilho_medio": corners,
+        "variacao_cantos_pct": round(100 * var, 2), "limite_variacao_pct": 5.0,
         "quadrantes": quads,
     }
 
 
-def window_tint(rgb: np.ndarray, alpha: np.ndarray) -> tuple[np.ndarray, dict]:
-    """Detecta vidros na banda da cabine e aplica grafite. Carro BRANCO exige
-    excluir a cor da pintura: vidro = pixel da banda que se DESVIA >45 da cor
-    dominante clara do carro (mediana dos pixels claros da silhueta), claro o
-    suficiente e pouco saturado (grade/para-choque escuros ficam de fora)."""
-    ys, xs = np.nonzero(alpha > 128)
-    if len(ys) == 0:
-        return rgb, {"janela_px": 0, "tint_aplicado": False, "motivo": "silhueta vazia"}
+def dominant_paint(rgb: np.ndarray, alpha: np.ndarray) -> np.ndarray:
     car = rgb[alpha > 128].astype(int)
     bright = car[car.mean(axis=1) > 150]
-    dom = np.median(bright, axis=0) if len(bright) > 50 else np.array([255, 255, 255])
-    y0, y1 = ys.min(), ys.max()
-    x0, x1 = xs.min(), xs.max()
+    if len(bright) > 50:
+        return np.median(bright, axis=0)
+    return np.array([255.0, 255.0, 255.0])
+
+
+def cabin_bands(alpha: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """banda NÚCLEO dos vidros (cintura→teto) e banda AMPLA (p/ componentes)."""
+    ys, xs = np.nonzero(alpha > 128)
+    y0, y1, x0, x1 = ys.min(), ys.max(), xs.min(), xs.max()
     h = y1 - y0
-    band = np.zeros_like(alpha, dtype=bool)
-    band[int(y0 + 0.18 * h) : int(y0 + 0.62 * h), int(x0 + 0.12 * (x1 - x0)) : int(x0 + 0.88 * (x1 - x0))] = True
-    r, g, b = rgb[..., 0].astype(int), rgb[..., 1].astype(int), rgb[..., 2].astype(int)
-    lum = (r + g + b) / 3.0
+    core = np.zeros_like(alpha, dtype=bool)
+    wide = np.zeros_like(alpha, dtype=bool)
+    core[int(y0 + 0.18 * h) : int(y0 + 0.62 * h), int(x0 + 0.12 * (x1 - x0)) : int(x0 + 0.88 * (x1 - x0))] = True
+    wide[int(y0 + 0.10 * h) : int(y0 + 0.70 * h), int(x0 + 0.08 * (x1 - x0)) : int(x0 + 0.92 * (x1 - x0))] = True
+    return core, wide
+
+
+def tint_conservador(rgb: np.ndarray, alpha: np.ndarray) -> tuple[np.ndarray, dict]:
+    """G2: pintura (cor dominante ±30, dilatada 15×15) é zona PROIBIDA; candidatos
+    = banda ampla ∩ claro ∩ pouco saturado ∩ ∉ proibida; só entram componentes
+    conectados que tocam a banda núcleo dos vidros; cap de 15% da silhueta."""
+    sil = alpha > 128
+    n_sil = int(sil.sum())
+    dom = dominant_paint(rgb, alpha)
+    dist = np.abs(rgb.astype(int) - dom).sum(axis=-1)
+    paint = sil & (dist <= 30)
+    forbid = binary_dilation(paint, structure=np.ones((15, 15))) | paint
+    core, wide = cabin_bands(alpha)
+    lum = rgb.astype(int).mean(axis=-1)
     sat = np.max(rgb, axis=-1).astype(int) - np.min(rgb, axis=-1).astype(int)
-    dist_dom = np.abs(rgb.astype(int) - dom).sum(axis=-1)
-    glassy = band & (alpha > 128) & (dist_dom > 45) & (lum > 140) & (sat < 50)
-    n = int(glassy.sum())
-    meta = {"janela_px": n, "pct_da_silhueta": round(100 * n / max(len(ys), 1), 2),
-            "cor_dominante_carro": [int(v) for v in dom]}
-    if n < 0.004 * len(ys):  # < 0,4% da silhueta → não é vidro de verdade
-        meta["tint_aplicado"] = False
-        meta["motivo"] = "poucos pixels desviantes na banda da cabine"
+    cand = wide & sil & ~forbid & (lum > 140) & (sat < 50)
+    meta = {"cor_dominante_pintura": [int(v) for v in dom],
+            "pintura_px_proibidos": int((paint & sil).sum()), "cap_pct": TINT_CAP_PCT}
+    if cand.sum() == 0:
+        meta.update({"tint_aplicado": False, "janela_px": 0, "pct_da_silhueta": 0.0,
+                     "motivo": "nenhum candidato fora da máscara de pintura"})
+        return rgb, meta
+    lbl, n = cclabel(cand)
+    keep_mask = np.zeros_like(cand)
+    comps = []
+    for i in range(1, n + 1):
+        cm = lbl == i
+        if (cm & core).sum() > 0.15 * cm.sum():  # componente conectado à região dos vidros
+            comps.append((int(cm.sum()), cm))
+    if not comps:
+        meta.update({"tint_aplicado": False, "janela_px": 0, "pct_da_silhueta": 0.0,
+                     "motivo": "nenhum componente conectado à banda dos vidros"})
+        return rgb, meta
+    comps.sort(key=lambda t: -t[0])
+    total = 0
+    cap_px = int(TINT_CAP_PCT / 100.0 * n_sil)
+    capped = False
+    for size, cm in comps:
+        if total + size > cap_px:
+            capped = True
+            continue
+        keep_mask |= cm
+        total += size
+    n_tint = int(keep_mask.sum())
+    meta.update({"janela_px": n_tint, "pct_da_silhueta": round(100 * n_tint / n_sil, 2),
+                 "n_componentes": len(comps), "cap_aplicado": capped})
+    if n_tint < 0.004 * n_sil:
+        meta.update({"tint_aplicado": False, "motivo": "abaixo do piso de 0,4%"})
         return rgb, meta
     out = rgb.copy()
-    out[glassy] = GRAPHITE
+    out[keep_mask] = GRAPHITE
     meta["tint_aplicado"] = True
     meta["cor_tint"] = list(GRAPHITE)
     return out, meta
+
+
+def inpaint_placa(rgb: np.ndarray, alpha: np.ndarray) -> tuple[np.ndarray, dict]:
+    """G3: placa = componente claro/ pouco saturado na banda inferior do carro,
+    retangular (w/h 2..7), baixo (≤8% da altura) e COM texto (std de brilho alta
+    dentro do bbox). Preenche com a mediana do anel vizinho DENTRO da silhueta."""
+    sil = alpha > 128
+    ys, xs = np.nonzero(sil)
+    y0, y1 = ys.min(), ys.max()
+    Hc = y1 - y0
+    band = np.zeros_like(sil)
+    band[int(y0 + 0.55 * Hc) : int(y0 + 0.95 * Hc), :] = True
+    lum = rgb.astype(int).mean(axis=-1)
+    sat = np.max(rgb, axis=-1).astype(int) - np.min(rgb, axis=-1).astype(int)
+    cand = band & sil & (lum > 165) & (sat < 50)
+    lbl, n = cclabel(cand)
+    out = rgb.copy()
+    plates = []
+    for i in range(1, n + 1):
+        cm = lbl == i
+        cys, cxs = np.nonzero(cm)
+        ph, pw = cys.max() - cys.min() + 1, cxs.max() - cxs.min() + 1
+        if not (2.0 <= pw / max(ph, 1) <= 7.0) or ph > 0.08 * Hc or cm.sum() < 40:
+            continue
+        by0, by1, bx0, bx1 = cys.min(), cys.max(), cxs.min(), cxs.max()
+        inside = lum[by0 : by1 + 1, bx0 : bx1 + 1]
+        if inside.std() < 25:  # sem texto escuro → não é placa
+            continue
+        ring = np.zeros_like(sil)
+        ry0, ry1 = max(0, by0 - int(0.5 * ph)), by1 + int(0.5 * ph) + 1
+        rx0, rx1 = max(0, bx0 - int(0.5 * pw)), bx1 + int(0.5 * pw) + 1
+        ring[ry0:ry1, rx0:rx1] = True
+        ring_vals = rgb[ring & sil & ~cm]
+        if len(ring_vals) < 20:
+            continue
+        fill = np.median(ring_vals.astype(int), axis=0).astype(np.uint8)
+        out[cm] = fill
+        plates.append({"px": int(cm.sum()), "bbox": [int(bx0), int(by0), int(bx1), int(by1)],
+                       "cor_preenchimento": [int(v) for v in fill]})
+    return out, {"placas_inpaint": plates, "n_placas": len(plates)}
 
 
 def prep_one(src: str, dst: str, tag: str, src_label: str) -> dict:
@@ -144,37 +220,38 @@ def prep_one(src: str, dst: str, tag: str, src_label: str) -> dict:
     a = np.asarray(cut)
     alpha = a[..., 3]
     ys, xs = np.nonzero(alpha > 16)
-    entry = {"tag": tag, "src": src, "size_original": list(im.size)}
+    entry = {"tag": tag, "src": src, "size_original": list(im.size), "fonte": src_label}
     if len(ys) == 0:
         raise RuntimeError(f"rembg vazia em {src}")
     x0, x1, y0, y1 = xs.min(), xs.max(), ys.min(), ys.max()
     crop = a[y0 : y1 + 1, x0 : x1 + 1]
-    # margem 8% de cada lado: objeto ocupa 84% do canvas na maior dimensão
     side = int(max(crop.shape[0], crop.shape[1]) / (1.0 - 2 * MARGIN))
     canvas = Image.new("RGBA", (side, side), (255, 255, 255, 0))
-    oy, ox = (side - crop.shape[0]) // 2, (side - crop.shape[1]) // 2
-    canvas.paste(Image.fromarray(crop), (ox, oy))
+    canvas.paste(Image.fromarray(crop), ((side - crop.shape[1]) // 2, (side - crop.shape[0]) // 2))
     canvas = canvas.resize((CANVAS, CANVAS), Image.LANCZOS)
     arr = np.asarray(canvas)
     rgb, al = arr[..., :3].copy(), arr[..., 3]
-    rgb, tint_meta = window_tint(rgb, al)
+
+    if src_label == "grade":
+        tint_meta = {"tint_aplicado": False, "motivo": "G1: linha A sem tint (vidros fumê do Nano Banana)"}
+        placa_meta = {"n_placas": 0, "placas_inpaint": [], "motivo": "grade pede 'sem placa' no template"}
+    else:
+        rgb, placa_meta = inpaint_placa(rgb, al)
+        rgb, tint_meta = tint_conservador(rgb, al)
+
     final = np.dstack([rgb, al])
-    out = Image.fromarray(final, mode="RGBA")
-    base = Image.new("RGB", out.size, (255, 255, 255))
-    base.paste(out, mask=out.split()[3])
+    out_img = Image.fromarray(final, mode="RGBA")
+    base = Image.new("RGB", out_img.size, (255, 255, 255))
+    base.paste(out_img, mask=out_img.split()[3])
     os.makedirs(os.path.dirname(dst), exist_ok=True)
     base.save(dst, "PNG")
-    entry.update({
-        "out": dst, "size_final": [CANVAS, CANVAS],
-        "tint": tint_meta,
-        "hash_original": sha256_file(src),
-        "fonte": src_label,
-    })
+    entry.update({"out": dst, "size_final": [CANVAS, CANVAS], "tint": tint_meta,
+                  "placa": placa_meta, "hash_original": sha256_file(src)})
     sidecar = {
         "id": f"foxh-{tag}",
         "source": {"url": src, "author": "dono (grade Nano Banana Pro)" if src_label == "grade" else "dono (fotos reais)", "license": "uso pessoal", "triage": "amarelo", "retrieved_at": datetime.date.today().isoformat()},
         "hash_original": entry["hash_original"],
-        "transform_log": [{"op": "esteira_tripo.fase0", "tool": "prep_foxh.py (rembg u2net, PIL)", "params": {"canvas": CANVAS, "margem": MARGIN, "tint": tint_meta}, "ts": datetime.datetime.now().isoformat(timespec="seconds")}],
+        "transform_log": [{"op": "esteira_tripo.fase0_r2", "tool": "prep_foxh.py (rembg u2net, PIL, scipy)", "params": {"canvas": CANVAS, "margem": MARGIN, "tint": tint_meta, "placa": placa_meta}, "ts": datetime.datetime.now().isoformat(timespec="seconds")}],
     }
     with open(os.path.splitext(dst)[0] + ".json", "w", encoding="utf-8") as f:
         json.dump(sidecar, f, ensure_ascii=False, indent=1)
@@ -196,9 +273,8 @@ def glb_card(png_path: str, glb_path: str):
 
 
 def main() -> int:
-    global REPORT
-    REPORT = sys.argv[1] if len(sys.argv) > 1 else "report.json"
-    rep = {"ts": datetime.datetime.now().isoformat(timespec="seconds"), "fase": 0}
+    report_path = sys.argv[1] if len(sys.argv) > 1 else "report.json"
+    rep = {"ts": datetime.datetime.now().isoformat(timespec="seconds"), "fase": 0, "rev": "r2-gate1"}
 
     grade = find_grade()
     rep["grade"] = {"arquivo": grade, "hash": sha256_file(grade)}
@@ -207,7 +283,7 @@ def main() -> int:
     rep["validacao_grade"] = val
     if not val["ok"]:
         print("GRADE_REPROVADA=" + json.dumps(val, ensure_ascii=False))
-        with open(REPORT, "w", encoding="utf-8") as f:
+        with open(report_path, "w", encoding="utf-8") as f:
             json.dump(rep, f, ensure_ascii=False, indent=1)
         return 2
 
@@ -215,12 +291,11 @@ def main() -> int:
     H, W = a.shape[:2]
     os.makedirs(PANELS, exist_ok=True)
     os.makedirs(PANELS_PREP, exist_ok=True)
-    quadrants = [
+    prep_entries = []
+    for y0, x0, tag in [
         (0, 0, "P1_front"), (0, W // 2, "P2_side"),
         (H // 2, 0, "P3_back"), (H // 2, W // 2, "P4_diag"),
-    ]
-    prep_entries = []
-    for y0, x0, tag in quadrants:
+    ]:
         q = Image.fromarray(a[y0 : y0 + H // 2, x0 : x0 + W // 2])
         ppath = os.path.join(PANELS, f"{tag}.png")
         q.save(ppath)
@@ -234,13 +309,20 @@ def main() -> int:
         mode = e["tag"].replace("P", "a").replace("R", "b").lower()
         glb = os.path.join(MODELS_DIR, f"carro_foxh__{mode}.glb")
         glb_card(e["out"], glb)
-        cards[mode] = {"glb": "models/" + os.path.basename(glb), "img": e["out"], "tint": e["tint"]}
+        cards[mode] = {"glb": "models/" + os.path.basename(glb), "img": e["out"],
+                       "tint_pct": e["tint"].get("pct_da_silhueta", 0.0),
+                       "placas_inpaintadas": e["placa"].get("n_placas", 0)}
     rep["cards"] = cards
+    rep["mv_runs"] = {
+        "A_grade": ["a1_front", "a2_side", "a3_back", "a4_diag"],
+        "B_reais": ["b1_front", "b2_side", "b3_back", "b4_diag"],
+        "descartados": {"b5_extra": "interior — não é vista (G4)"},
+    }
 
-    os.makedirs(os.path.dirname(REPORT), exist_ok=True)
-    with open(REPORT, "w", encoding="utf-8") as f:
+    os.makedirs(os.path.dirname(report_path), exist_ok=True)
+    with open(report_path, "w", encoding="utf-8") as f:
         json.dump(rep, f, ensure_ascii=False, indent=1)
-    print("FASE0_OK cards=" + str(len(cards)))
+    print("FASE0_R2_OK cards=" + str(len(cards)))
     return 0
 
 
