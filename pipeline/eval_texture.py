@@ -82,12 +82,14 @@ scene.camera = cam
 # Canonical views: front (+Y or -Y matching eval_paint_4views), back, left, right, top, three_quarter
 dist = max_dim * 2.5
 views = {
-    "front":         (Vector((0, -dist, 0)), True,  max_dim * 1.18),
-    "back":          (Vector((0,  dist, 0)), True,  max_dim * 1.18),
-    "left":          (Vector((-dist, 0, 0)), True,  max_dim * 1.18),
-    "right":         (Vector(( dist, 0, 0)), True,  max_dim * 1.18),
-    "top":           (Vector((0, 0,  dist)), True,  max_dim * 1.18),
-    "three_quarter": (Vector((-dist * 0.65, -dist * 0.72, dist * 0.42)), False, 50.0),
+    "front":               (Vector((0, -dist, 0)), True,  max_dim * 1.18),
+    "back":                (Vector((0,  dist, 0)), True,  max_dim * 1.18),
+    "left":                (Vector((-dist, 0, 0)), True,  max_dim * 1.18),
+    "right":               (Vector(( dist, 0, 0)), True,  max_dim * 1.18),
+    "top":                 (Vector((0, 0,  dist)), True,  max_dim * 1.18),
+    "three_quarter":       (Vector((-dist * 0.65, -dist * 0.72, dist * 0.42)), False, 50.0),
+    "three_quarter_front": (Vector((-dist * 0.65, -dist * 0.72, dist * 0.42)), False, 50.0),
+    "three_quarter_back":  (Vector(( dist * 0.65,  dist * 0.72, dist * 0.40)), False, 50.0),
 }
 
 for vname, (offset, is_ortho, scale_or_lens) in views.items():
@@ -172,15 +174,63 @@ def make_crop_pair(before_p: Path, final_p: Path, box_norm: list[float], out_p: 
     canvas.save(out_p)
 
 
-def evaluate_texture_set(tex_path: Path, render_dir: Path, prefix: str, views: list[str], pr_cfg: dict) -> dict:
+def compute_photo_consistency(render_path: Path, gt_path: Path, view_name: str) -> dict:
+    """Computes MAE (0-255) and SSIM between Emission render and GT photo on interior frontal region."""
+    r_rgb, r_m = load_rgba(render_path)
+    rt, rm = crop_tight(r_rgb, r_m, 512)
+
+    g_raw = np.asarray(Image.open(gt_path).convert("RGB"), dtype=np.uint8)
+    g_fg = binary_fill_holes((g_raw < 247).any(axis=-1))
+    gt, gm = crop_tight(g_raw, g_fg, 512)
+
+    # For side views, pick horizontal orientation matching render
+    if view_name in ("left", "right"):
+        ov1 = rm & gm
+        ov2 = rm & gm[:, ::-1]
+        m1 = float(np.abs(rt[ov1].astype(np.float32) - gt[ov1].astype(np.float32)).mean()) if ov1.any() else 999.0
+        m2 = float(np.abs(rt[ov2].astype(np.float32) - gt[:, ::-1][ov2].astype(np.float32)).mean()) if ov2.any() else 999.0
+        if m2 < m1:
+            gt = gt[:, ::-1].copy()
+            gm = gm[:, ::-1].copy()
+
+    # Erode overlap by 14px to focus on frontal core (approx cos > 0.85)
+    ov = (rm & gm).astype(np.uint8)
+    k = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (29, 29))
+    core = cv2.erode(ov, k, iterations=1) > 0
+    if not core.any():
+        core = ov > 0
+    if not core.any():
+        return {"mae_255": 255.0, "ssim": 0.0}
+
+    mae = float(np.abs(rt[core].astype(np.float32) - gt[core].astype(np.float32)).mean())
+    rg = cv2.cvtColor(rt, cv2.COLOR_RGB2GRAY)[core].astype(np.float64)
+    gg = cv2.cvtColor(gt, cv2.COLOR_RGB2GRAY)[core].astype(np.float64)
+    c1, c2 = (0.01 * 255.0) ** 2, (0.03 * 255.0) ** 2
+    mx, my = rg.mean(), gg.mean()
+    vx, vy = rg.var(), gg.var()
+    cov = ((rg - mx) * (gg - my)).mean()
+    ssim = float(((2 * mx * my + c1) * (2 * cov + c2)) / ((mx**2 + my**2 + c1) * (vx + vy + c2)))
+    return {"mae_255": round(mae, 2), "ssim": round(ssim, 4)}
+
+
+def evaluate_texture_set(
+    tex_path: Path,
+    render_dir: Path,
+    prefix: str,
+    views: list[str],
+    pr_cfg: dict,
+    gt_views: dict[str, str] | None = None,
+) -> dict:
     tex_rgb = np.asarray(Image.open(tex_path).convert("RGB"), dtype=np.uint8)
     pmask, patches = detect_bright_patches_in_dark(tex_rgb, pr_cfg)
     tex_patch_pct = round(float((pmask > 0).sum()) / float(tex_rgb.shape[0] * tex_rgb.shape[1]) * 100.0, 4)
 
     view_stats = {}
     view_laps = []
+    photo_cons = {}
     for v in views:
-        rgb, m = load_rgba(render_dir / f"{prefix}_{v}.png")
+        rp = render_dir / f"{prefix}_{v}.png"
+        rgb, m = load_rgba(rp)
         lv = lap_var_masked(rgb, m)
         view_laps.append(lv)
         pix = rgb[m].astype(np.float32) if m.any() else rgb.reshape(-1, 3).astype(np.float32)
@@ -192,6 +242,8 @@ def evaluate_texture_set(tex_path: Path, render_dir: Path, prefix: str, views: l
             "dark_lt80_pct": round(float((lum < 80).mean() * 100.0), 1),
             "bright_gt180_pct": round(float((lum > 180).mean() * 100.0), 1),
         }
+        if gt_views and v in gt_views:
+            photo_cons[v] = compute_photo_consistency(rp, Path(gt_views[v]), v)
 
     return {
         "texture_size": list(tex_rgb.shape[:2]),
@@ -200,6 +252,7 @@ def evaluate_texture_set(tex_path: Path, render_dir: Path, prefix: str, views: l
         "patch_count": len(patches),
         "patch_texels_pct": tex_patch_pct,
         "views_laplacian_mean": round(float(np.mean(view_laps)), 2),
+        "photo_consistency": photo_cons,
         "views": view_stats,
     }
 
@@ -239,8 +292,9 @@ def main() -> int:
         render_6views(uv_obj, prev_tex, r_before, f"{vid}_before", res)
         render_6views(uv_obj, final_tex, r_final, f"{vid}_final", res)
 
-        before_m = evaluate_texture_set(prev_tex, r_before, f"{vid}_before", views, pr_cfg)
-        final_m = evaluate_texture_set(final_tex, r_final, f"{vid}_final", views, pr_cfg)
+        gt_views = var.get("gt_views", {})
+        before_m = evaluate_texture_set(prev_tex, r_before, f"{vid}_before", views, pr_cfg, gt_views)
+        final_m = evaluate_texture_set(final_tex, r_final, f"{vid}_final", views, pr_cfg, gt_views)
 
         # GT saturation average across all provided GT views
         gt_sats = []

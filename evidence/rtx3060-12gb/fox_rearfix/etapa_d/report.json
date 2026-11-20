@@ -1,0 +1,182 @@
+{
+  "stage": "D_eval_quality",
+  "asset_id": "carro_foxh",
+  "variants": {
+    "mv_b": {
+      "before": {
+        "texture_size": [
+          2048,
+          2048
+        ],
+        "texture_laplacian_var": 369.01,
+        "texture_sat_pct": 10.16,
+        "patch_count": 127,
+        "patch_texels_pct": 0.2937,
+        "views_laplacian_mean": 7964.3,
+        "photo_consistency": {
+          "front": {
+            "mae_255": 67.88,
+            "ssim": 0.4344
+          },
+          "back": {
+            "mae_255": 67.74,
+            "ssim": 0.3399
+          },
+          "left": {
+            "mae_255": 49.59,
+            "ssim": 0.5926
+          },
+          "right": {
+            "mae_255": 50.07,
+            "ssim": 0.5918
+          }
+        },
+        "views": {
+          "front": {
+            "laplacian_var": 7170.35,
+            "sat_pct": 5.4,
+            "lum_mean": 101.3,
+            "dark_lt80_pct": 54.7,
+            "bright_gt180_pct": 37.4
+          },
+          "back": {
+            "laplacian_var": 7553.32,
+            "sat_pct": 8.82,
+            "lum_mean": 114.6,
+            "dark_lt80_pct": 48.0,
+            "bright_gt180_pct": 43.8
+          },
+          "left": {
+            "laplacian_var": 6180.72,
+            "sat_pct": 7.44,
+            "lum_mean": 114.7,
+            "dark_lt80_pct": 48.3,
+            "bright_gt180_pct": 46.1
+          },
+          "right": {
+            "laplacian_var": 5834.71,
+            "sat_pct": 7.48,
+            "lum_mean": 115.7,
+            "dark_lt80_pct": 48.0,
+            "bright_gt180_pct": 46.7
+          },
+          "top": {
+            "laplacian_var": 5019.09,
+            "sat_pct": 2.38,
+            "lum_mean": 146.8,
+            "dark_lt80_pct": 34.4,
+            "bright_gt180_pct": 61.3
+          },
+          "three_quarter_front": {
+            "laplacian_var": 11789.31,
+            "sat_pct": 4.41,
+            "lum_mean": 124.6,
+            "dark_lt80_pct": 44.0,
+            "bright_gt180_pct": 50.2
+          },
+          "three_quarter_back": {
+            "laplacian_var": 12202.6,
+            "sat_pct": 5.91,
+            "lum_mean": 130.8,
+            "dark_lt80_pct": 40.9,
+            "bright_gt180_pct": 52.8
+          }
+        }
+      },
+      "final": {
+        "texture_size": [
+          2048,
+          2048
+        ],
+        "texture_laplacian_var": 404.13,
+        "texture_sat_pct": 9.86,
+        "patch_count": 68,
+        "patch_texels_pct": 0.2504,
+        "views_laplacian_mean": 6835.89,
+        "photo_consistency": {
+          "front": {
+            "mae_255": 69.11,
+            "ssim": 0.413
+          },
+          "back": {
+            "mae_255": 63.45,
+            "ssim": 0.3776
+          },
+          "left": {
+            "mae_255": 47.61,
+            "ssim": 0.5828
+          },
+          "right": {
+            "mae_255": 41.27,
+            "ssim": 0.6753
+          }
+        },
+        "views": {
+          "front": {
+            "laplacian_var": 5016.7,
+            "sat_pct": 5.02,
+            "lum_mean": 103.2,
+            "dark_lt80_pct": 49.6,
+            "bright_gt180_pct": 31.7
+          },
+          "back": {
+            "laplacian_var": 8129.26,
+            "sat_pct": 7.62,
+            "lum_mean": 106.6,
+            "dark_lt80_pct": 43.9,
+            "bright_gt180_pct": 28.6
+          },
+          "left": {
+            "laplacian_var": 5037.62,
+            "sat_pct": 5.01,
+            "lum_mean": 124.4,
+            "dark_lt80_pct": 36.7,
+            "bright_gt180_pct": 39.4
+          },
+          "right": {
+            "laplacian_var": 4696.14,
+            "sat_pct": 5.31,
+            "lum_mean": 120.6,
+            "dark_lt80_pct": 38.3,
+            "bright_gt180_pct": 39.0
+          },
+          "top": {
+            "laplacian_var": 4728.64,
+            "sat_pct": 2.51,
+            "lum_mean": 146.1,
+            "dark_lt80_pct": 32.1,
+            "bright_gt180_pct": 58.0
+          },
+          "three_quarter_front": {
+            "laplacian_var": 9312.02,
+            "sat_pct": 3.58,
+            "lum_mean": 129.5,
+            "dark_lt80_pct": 37.6,
+            "bright_gt180_pct": 46.1
+          },
+          "three_quarter_back": {
+            "laplacian_var": 10930.84,
+            "sat_pct": 4.56,
+            "lum_mean": 130.5,
+            "dark_lt80_pct": 34.3,
+            "bright_gt180_pct": 43.8
+          }
+        }
+      },
+      "gt_sat_mean_pct": 5.92,
+      "sharpness_tex_ratio": 1.1,
+      "sharpness_views_ratio": 0.86,
+      "wins_vs_prev": false,
+      "crops": {
+        "rear_lower_center": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_rearfix/renders/crops/mv_b_rear_lower_center.png",
+        "rear_mid_center": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_rearfix/renders/crops/mv_b_rear_mid_center.png",
+        "rear_lamp_left": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_rearfix/renders/crops/mv_b_rear_lamp_left.png",
+        "rear_panel_full": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_rearfix/renders/crops/mv_b_rear_panel_full.png",
+        "rear_bumper": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_rearfix/renders/crops/mv_b_rear_bumper.png",
+        "side_mid_details": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_rearfix/renders/crops/mv_b_side_mid_details.png",
+        "front_upper_glass": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_rearfix/renders/crops/mv_b_front_upper_glass.png",
+        "front_lower_plate": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_rearfix/renders/crops/mv_b_front_lower_plate.png"
+      }
+    }
+  }
+}

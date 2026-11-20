@@ -81,8 +81,18 @@ def detect_bright_patches_in_dark(rgb: np.ndarray, pr_cfg: dict) -> tuple[np.nda
     return repair_mask, patches
 
 
-def detect_dark_specks_in_bright(rgb: np.ndarray, pr_cfg: dict) -> tuple[np.ndarray, list[dict]]:
-    """Generic symmetric detector: small isolated dark specks inside coherent bright surfaces."""
+def detect_dark_specks_in_bright(
+    rgb: np.ndarray,
+    pr_cfg: dict,
+    photo_ref_lum: np.ndarray | None = None,
+    photo_cos: np.ndarray | None = None,
+) -> tuple[np.ndarray, list[dict], list[dict]]:
+    """Generic symmetric detector: small isolated dark specks inside coherent bright surfaces.
+
+    Photo-consistency guard: if a real reference photo sees the component head-on
+    (photo_cos >= photo_guard_cos_min) and its pixels are also dark there, BLOCK repair
+    so genuine small dark surface details are preserved.
+    """
     h, w, _ = rgb.shape
     lum = (0.299 * rgb[..., 0] + 0.587 * rgb[..., 1] + 0.114 * rgb[..., 2]).astype(np.float32)
 
@@ -93,6 +103,9 @@ def detect_dark_specks_in_bright(rgb: np.ndarray, pr_cfg: dict) -> tuple[np.ndar
     min_px = int(pr_cfg.get("dark_speck_min_px", 1))
     max_px = int(float(pr_cfg.get("dark_speck_max_area_ratio", 0.0006)) * h * w)
     ring_w = int(pr_cfg.get("dark_speck_ring_width_px", 5))
+    guard_cos = float(pr_cfg.get("photo_guard_cos_min", 0.80))
+    guard_tol = float(pr_cfg.get("photo_guard_lum_tol", 25.0))
+    guard_cons = float(pr_cfg.get("photo_guard_consistency_min", 0.50))
 
     dark_bin = (lum <= dark_max).astype(np.uint8)
     num_labels, labels, stats, centroids = cv2.connectedComponentsWithStats(dark_bin, connectivity=8)
@@ -100,6 +113,7 @@ def detect_dark_specks_in_bright(rgb: np.ndarray, pr_cfg: dict) -> tuple[np.ndar
     k_ring = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * ring_w + 1, 2 * ring_w + 1))
     repair_mask = np.zeros((h, w), dtype=np.uint8)
     specks: list[dict] = []
+    blocked: list[dict] = []
 
     for lbl in range(1, num_labels):
         area = int(stats[lbl, cv2.CC_STAT_AREA])
@@ -129,16 +143,29 @@ def detect_dark_specks_in_bright(rgb: np.ndarray, pr_cfg: dict) -> tuple[np.ndar
         delta_l = ring_med_lum - comp_lum
 
         if ring_bright_ratio >= peri_min and delta_l >= delta_min:
-            repair_mask[y0:y1, x0:x1][comp_roi > 0] = 255
             cx, cy = float(centroids[lbl][0]), float(centroids[lbl][1])
-            specks.append({
+            meta = {
                 "area_px": area,
                 "uv_center": [round(cx / w, 4), round(1.0 - cy / h, 4)],
                 "comp_lum": round(comp_lum, 1),
                 "ring_med_lum": round(ring_med_lum, 1),
-            })
+            }
+            # Photo-consistency guard
+            if photo_ref_lum is not None and photo_cos is not None:
+                c_mask = comp_roi > 0
+                cos_vals = photo_cos[y0:y1, x0:x1][c_mask]
+                if (cos_vals >= guard_cos).mean() >= 0.4:
+                    p_lums = photo_ref_lum[y0:y1, x0:x1][c_mask]
+                    photo_dark_ratio = float((p_lums <= (dark_max + guard_tol)).mean())
+                    if photo_dark_ratio >= guard_cons:
+                        meta["photo_dark_ratio"] = round(photo_dark_ratio, 3)
+                        blocked.append(meta)
+                        continue
 
-    return repair_mask, specks
+            repair_mask[y0:y1, x0:x1][comp_roi > 0] = 255
+            specks.append(meta)
+
+    return repair_mask, specks, blocked
 
 
 def _apply_telea_feather(rgb: np.ndarray, mask: np.ndarray, radius: int, sigma: float, dilate_px: int = 2) -> np.ndarray:
@@ -153,7 +180,12 @@ def _apply_telea_feather(rgb: np.ndarray, mask: np.ndarray, radius: int, sigma: 
     return np.clip(inpainted_rgb.astype(np.float32) * alpha + rgb.astype(np.float32) * (1.0 - alpha), 0, 255).astype(np.uint8)
 
 
-def repair_texture(rgb: np.ndarray, pr_cfg: dict) -> tuple[np.ndarray, dict]:
+def repair_texture(
+    rgb: np.ndarray,
+    pr_cfg: dict,
+    photo_ref_lum: np.ndarray | None = None,
+    photo_cos: np.ndarray | None = None,
+) -> tuple[np.ndarray, dict]:
     mask, patches = detect_bright_patches_in_dark(rgb, pr_cfg)
     h, w, _ = rgb.shape
     total_px = h * w
@@ -166,12 +198,13 @@ def repair_texture(rgb: np.ndarray, pr_cfg: dict) -> tuple[np.ndarray, dict]:
 
     dark_specks_before = 0
     dark_specks_after = 0
+    blocked_2d: list[dict] = []
     if pr_cfg.get("repair_dark_specks", False):
-        dmask, dspecks = detect_dark_specks_in_bright(out_rgb, pr_cfg)
+        dmask, dspecks, blocked_2d = detect_dark_specks_in_bright(out_rgb, pr_cfg, photo_ref_lum, photo_cos)
         dark_specks_before = len(dspecks)
         if dark_specks_before > 0:
             out_rgb = _apply_telea_feather(out_rgb, dmask, max(5, radius - 2), max(1.2, sigma - 0.5), dilate_px=2)
-            _, dspecks_after = detect_dark_specks_in_bright(out_rgb, pr_cfg)
+            _, dspecks_after, _ = detect_dark_specks_in_bright(out_rgb, pr_cfg, photo_ref_lum, photo_cos)
             dark_specks_after = len(dspecks_after)
 
     after_mask, after_patches = detect_bright_patches_in_dark(out_rgb, pr_cfg)
@@ -188,6 +221,8 @@ def repair_texture(rgb: np.ndarray, pr_cfg: dict) -> tuple[np.ndarray, dict]:
         "patch_texels_after_pct": after_pct,
         "dark_specks_detected": dark_specks_before,
         "dark_specks_residual": dark_specks_after,
+        "blocked_by_photo_guard_2d": len(blocked_2d),
+        "blocked_2d_samples": blocked_2d[:30],
         "patches": patches[:40],
     }
 
@@ -196,12 +231,14 @@ def repair_3d_uv_island_specks(
     uv_obj_path: Path,
     rgb: np.ndarray,
     pr_cfg: dict,
-) -> tuple[np.ndarray, int]:
-    """Generic 3D-topology coherence repair: fixes small dark UV islands surrounded by bright 3D neighbors."""
+    photo_ref_lum: np.ndarray | None = None,
+    photo_cos: np.ndarray | None = None,
+) -> tuple[np.ndarray, int, int]:
+    """Generic 3D-topology coherence repair with photo-consistency guard."""
     mesh = trimesh.load(str(uv_obj_path), force="mesh", process=False)
     uv = getattr(mesh.visual, "uv", None)
     if uv is None or len(uv) != len(mesh.vertices):
-        return rgb, 0
+        return rgb, 0, 0
 
     h, w, _ = rgb.shape
     faces = np.asarray(mesh.faces, dtype=np.int32)
@@ -209,7 +246,6 @@ def repair_3d_uv_island_specks(
     uv_px[:, 0] = np.clip(uv[:, 0], 0.0, 1.0) * (w - 1)
     uv_px[:, 1] = (1.0 - np.clip(uv[:, 1], 0.0, 1.0)) * (h - 1)
 
-    # Sample face color at UV centroid
     fc_uv = uv_px[faces].mean(axis=1)
     cx = np.clip(np.round(fc_uv[:, 0]).astype(np.int32), 0, w - 1)
     cy = np.clip(np.round(fc_uv[:, 1]).astype(np.int32), 0, h - 1)
@@ -218,13 +254,14 @@ def repair_3d_uv_island_specks(
 
     dark_max = float(pr_cfg.get("dark_speck_lum_max", 115))
     bright_min = float(pr_cfg.get("bright_ring_lum_min", 185))
+    guard_cos = float(pr_cfg.get("photo_guard_cos_min", 0.80))
+    guard_tol = float(pr_cfg.get("photo_guard_lum_tol", 25.0))
+    guard_cons = float(pr_cfg.get("photo_guard_consistency_min", 0.50))
     n_faces = len(faces)
 
-    # Build 3D face adjacency (spatial proximity by shared vertex positions, handles split UV seams!)
     v_round = np.round(np.asarray(mesh.vertices, dtype=np.float64), 5)
     _, inv = np.unique(v_round, axis=0, return_inverse=True)
     f_welded = inv[faces]
-    # Map each welded vertex -> incident faces
     from collections import defaultdict
     v2f: dict[int, list[int]] = defaultdict(list)
     for fi, (a, b, c) in enumerate(f_welded):
@@ -232,7 +269,6 @@ def repair_3d_uv_island_specks(
         v2f[int(b)].append(fi)
         v2f[int(c)].append(fi)
 
-    # Connected components of dark faces in 3D space
     is_dark = face_lum <= dark_max
     visited = np.zeros(n_faces, dtype=bool)
     max_comp_faces = int(pr_cfg.get("max_3d_speck_faces", 450))
@@ -241,6 +277,7 @@ def repair_3d_uv_island_specks(
     out_rgb = rgb.copy()
     bad_face_mask = np.zeros((h, w), dtype=np.uint8)
     fixed_comps = 0
+    blocked_3d = 0
 
     for start_f in np.where(is_dark)[0]:
         if visited[start_f]:
@@ -266,6 +303,16 @@ def repair_3d_uv_island_specks(
         nbr_arr = np.fromiter(border_nbrs, dtype=np.int32)
         bright_ratio = float((face_lum[nbr_arr] >= bright_min).mean())
         if bright_ratio >= peri_min:
+            # Photo-consistency guard on 3D component
+            if photo_ref_lum is not None and photo_cos is not None:
+                c_arr = np.asarray(comp, dtype=np.int32)
+                c_cos = photo_cos[cy[c_arr], cx[c_arr]]
+                if (c_cos >= guard_cos).mean() >= 0.4:
+                    p_lums = photo_ref_lum[cy[c_arr], cx[c_arr]]
+                    if (p_lums <= (dark_max + guard_tol)).mean() >= guard_cons:
+                        blocked_3d += 1
+                        continue
+
             fill_col = np.median(face_rgb[nbr_arr], axis=0).round().astype(np.uint8)
             for fi in comp:
                 tri = np.round(uv_px[faces[fi]]).astype(np.int32)
@@ -273,7 +320,6 @@ def repair_3d_uv_island_specks(
                 cv2.fillConvexPoly(bad_face_mask, tri, 255)
             fixed_comps += 1
 
-    # Dilate painted triangles slightly (2px) so UV seam bleed also gets the clean neighbor color
     if fixed_comps > 0:
         k = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
         dil = cv2.dilate(bad_face_mask, k, iterations=1)
@@ -283,7 +329,7 @@ def repair_3d_uv_island_specks(
             inpainted = cv2.cvtColor(cv2.inpaint(bgr, fringe.astype(np.uint8) * 255, 5, cv2.INPAINT_TELEA), cv2.COLOR_BGR2RGB)
             out_rgb[fringe] = inpainted[fringe]
 
-    return out_rgb, fixed_comps
+    return out_rgb, fixed_comps, blocked_3d
 
 
 def main() -> int:
@@ -291,6 +337,7 @@ def main() -> int:
     ap.add_argument("--config", required=True)
     ap.add_argument("--input-dir", required=True, help="Directory with <variant_id>_*.png textures")
     ap.add_argument("--output-dir", required=True, help="Directory to write repaired <variant_id>_repaired.png")
+    ap.add_argument("--photo-ref-dir", default="", help="Optional Stage B dir with <vid>_photo_ref_*.png and <vid>_photo_cos_*.npy")
     ap.add_argument("--report-out", required=True)
     args = ap.parse_args()
 
@@ -299,28 +346,41 @@ def main() -> int:
     in_dir = Path(args.input_dir)
     out_dir = Path(args.output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
+    pref_dir = Path(args.photo_ref_dir) if args.photo_ref_dir else None
 
     summary = {"stage": "C_patch_repair", "asset_id": cfg["asset_id"], "variants": {}}
     for var in cfg["variants"]:
         vid = var["id"]
-        cands = sorted(in_dir.glob(f"{vid}_*.png"))
+        cands = [p for p in sorted(in_dir.glob(f"{vid}_*.png")) if "overlay" not in p.name and "heatmap" not in p.name and "photo_ref" not in p.name]
         if not cands:
             raise FileNotFoundError(f"No input texture for {vid} in {in_dir}")
         src = cands[0]
         rgb = np.asarray(Image.open(src).convert("RGB"), dtype=np.uint8)
-        repaired, stats = repair_texture(rgb, pr_cfg)
+
+        photo_ref_lum = None
+        photo_cos = None
+        if pref_dir and pref_dir.exists():
+            ref_cands = sorted(pref_dir.glob(f"{vid}_photo_ref_*.png"))
+            cos_cands = sorted(pref_dir.glob(f"{vid}_photo_cos_*.npy"))
+            if ref_cands and cos_cands:
+                ref_rgb = np.asarray(Image.open(ref_cands[0]).convert("RGB"), dtype=np.float32)
+                photo_ref_lum = 0.299 * ref_rgb[..., 0] + 0.587 * ref_rgb[..., 1] + 0.114 * ref_rgb[..., 2]
+                photo_cos = np.load(cos_cands[0]).astype(np.float32)
+
+        repaired, stats = repair_texture(rgb, pr_cfg, photo_ref_lum, photo_cos)
         uv_obj = Path(var["uv_obj"])
         if uv_obj.exists() and pr_cfg.get("repair_dark_specks", False):
-            repaired, fixed_3d = repair_3d_uv_island_specks(uv_obj, repaired, pr_cfg)
+            repaired, fixed_3d, blocked_3d = repair_3d_uv_island_specks(uv_obj, repaired, pr_cfg, photo_ref_lum, photo_cos)
             stats["dark_3d_uv_islands_repaired"] = fixed_3d
+            stats["blocked_by_photo_guard_3d"] = blocked_3d
         dst = out_dir / f"{vid}_repaired.png"
         Image.fromarray(repaired, mode="RGB").save(dst)
         summary["variants"][vid] = {"src": str(src), "dst": str(dst), **stats}
         print(
             f"[stage_c] {vid}: bright_patches={stats['patches_detected']} "
             f"({stats['patch_texels_before_pct']}%->{stats['patch_texels_after_pct']}%) | "
-            f"dark_specks_2d={stats.get('dark_specks_detected', 0)} | "
-            f"dark_3d_islands={stats.get('dark_3d_uv_islands_repaired', 0)}",
+            f"dark_2d={stats.get('dark_specks_detected', 0)} (blocked={stats.get('blocked_by_photo_guard_2d', 0)}) | "
+            f"dark_3d={stats.get('dark_3d_uv_islands_repaired', 0)} (blocked={stats.get('blocked_by_photo_guard_3d', 0)})",
             flush=True,
         )
 

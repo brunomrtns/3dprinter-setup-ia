@@ -114,6 +114,14 @@
 - **Fotos do kit = as MESMAS do C6** (`Downloads/fox/no-windows/` = `~/printer3d-work/carro/fotos-c7/` + `c7-prep/`): 5 fotos de 2400x1792 px (frente, frente-e-lado-diagonal, lado, traseira, de-fora-pegando-interna). Prep `*_tinted.png` reutilizado. C7-E (fotogrametria densa VGGT) retirado da fila (só reabrir se B/C falharem e houver sessão de 20-40 fotos completas).
 - **Publicação**: caso `carro_csg` (modos `kit`, `casca`, `interna`, `kit_corte`) mantido no viewer para histórico/comparação. Evidência: `evidence/rtx3060-12gb/carro-csg/report.json`.
 
+### Registro Traseira + Blending Fotográfico (`fox_rearfix`, 2026-11-20) — `[x]` CONCLUÍDO (NÃO PUBLICADO — MANTIDO `bb821ff`)
+
+- **Escopo**: só `mv_b`, `seed 42`, `uv.obj` e `manifest.json` intactos, backup dos GLBs `bb821ff` salvo em `evidence/rtx3060-12gb/fox_rearfix/backup_prev/`.
+- **ETAPA A (Gutter bleed por ilha UV — `pipeline/paint_quality.py`)**: implementado flood intra-ilha + Voronoi EDT `gutter_px=24` antes do `uv_inpaint` (`1.609` ilhas em `1024`, `155,1s`, pico `11.632 MiB` com browser aberto → fallback automático p/ `1024`).
+- **ETAPA B (Blending fotográfico — `pipeline/photo_blend.py`)**: alinhamento silhueta-IoU coarse-to-fine + gate `IoU >= 0,90` passou nas 4 fotos (`front=0,9008`, `left=0,9425`, `back=0,9054`, `right=0,9428`, cobertura frontal traseira `36,49%`, pico `3.253 MiB`, `78,8s`). Overlays e heatmaps salvos em `evidence/rtx3060-12gb/fox_rearfix/etapa_b/`.
+- **ETAPA C (Guarda fotográfica — `pipeline/patch_repair.py`)**: preservou detalhes escuros apoiados por foto (`blocked_2d=29`, `blocked_3d=7`, `bright_patches=225` `3,82% → 0,0007%`).
+- **ETAPA D (Decisão honesta vs `bb821ff`)**: **`wins_vs_prev = False` — MANTIDO `bb821ff` NO AR**. `view_lap` regrediu `7.964,3 → 6.835,9` (`0,86×`); apesar de ganho numérico de consistência em `back` (`MAE 67,74→63,45`, `SSIM 0,3399→0,3776`) e `right` (`MAE 50,07→41,27`), a inspeção visual dos crops mostrou **parallax/ghosting** nos detalhes internos (emblema VW projetado sobre a placa dianteira, maçaneta lateral duplicada, emblema traseiro deslocado à esquerda) porque fotos reais têm câmera perspectiva e a malha IA diverge 3–5% nas posições internas mesmo com silhueta `IoU ≥ 0,90`. Evidência completa em `evidence/rtx3060-12gb/fox_rearfix/`.
+
 ### Registro Qualidade + PBR Universal (`fox_quality`, 2026-11-20) — `[x]` CONCLUÍDO E PUBLICADO NO VIEWER (v19 PBR)
 
 - **Escopo universal (`pipeline/` + `--config cars/fox.json`)**: criada a ferramenta genérica de pintura automática sem nomes de peças/carro em código (`pipeline/paint_quality.py`, `pipeline/retexture_trellis.py`, `pipeline/patch_repair.py`, `pipeline/eval_texture.py`, `pipeline/pack_glb.py`, `pipeline/consolidate_quality_report.py`). Zero débito de genericidade. Backup dos 4 GLBs `5f4945d` preservado em `evidence/rtx3060-12gb/fox_quality/backup_prev/`.

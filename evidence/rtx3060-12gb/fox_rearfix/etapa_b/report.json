@@ -1,0 +1,173 @@
+{
+  "stage": "B_photo_blend",
+  "asset_id": "carro_foxh",
+  "seed": 42,
+  "params": {
+    "min_iou": 0.9,
+    "cos_lo": 0.8,
+    "cos_hi": 0.92,
+    "w_max": 0.8,
+    "lowpass_sigma": 28.0,
+    "silhouette_feather_px": 6,
+    "min_local_var": 0.0,
+    "render_size": 1024,
+    "views": [
+      {
+        "name": "front",
+        "image": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R1_front.png",
+        "init_yaw_deg": 0.0,
+        "init_pitch_deg": 0.0
+      },
+      {
+        "name": "left",
+        "image": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R2_side.png",
+        "init_yaw_deg": -90.0,
+        "init_pitch_deg": 0.0
+      },
+      {
+        "name": "back",
+        "image": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R3_back.png",
+        "init_yaw_deg": 180.0,
+        "init_pitch_deg": 0.0
+      },
+      {
+        "name": "right",
+        "image": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R2r_right.png",
+        "init_yaw_deg": 90.0,
+        "init_pitch_deg": 0.0
+      }
+    ]
+  },
+  "variants": {
+    "mv_b": {
+      "src_texture": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_rearfix/etapa_a/mv_b_native_1024.png",
+      "blended_texture": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_rearfix/etapa_b/mv_b_blended_2048.png",
+      "photo_ref_png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_rearfix/etapa_b/mv_b_photo_ref_2048.png",
+      "photo_cos_npy": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_rearfix/etapa_b/mv_b_photo_cos_2048.npy",
+      "tempo_s": 78.84,
+      "views": {
+        "front": {
+          "iou": 0.9008,
+          "accepted": true,
+          "overlay_png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_rearfix/etapa_b/mv_b_overlay_front.png",
+          "heatmap_png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_rearfix/etapa_b/mv_b_heatmap_front.png",
+          "xform": {
+            "yaw_deg": -3.0,
+            "pitch_deg": -4.0,
+            "umin": -0.5531343221664429,
+            "umax": 0.5788800716400146,
+            "vmin": -0.4570944309234619,
+            "vmax": 0.5593622922897339,
+            "pcx_norm": 0.505859375,
+            "pcy_norm": 0.517578125,
+            "sw_norm": 0.8524414062499999,
+            "sh_norm": 0.7612500000000001
+          },
+          "facing_texels_covered_pct": 27.59,
+          "total_uv_touched_pct": 2.65
+        },
+        "left": {
+          "iou": 0.9425,
+          "accepted": true,
+          "overlay_png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_rearfix/etapa_b/mv_b_overlay_left.png",
+          "heatmap_png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_rearfix/etapa_b/mv_b_heatmap_left.png",
+          "xform": {
+            "yaw_deg": 83.0,
+            "pitch_deg": 4.0,
+            "umin": -1.0013840198516846,
+            "umax": 1.0131317377090454,
+            "vmin": -0.5114186406135559,
+            "vmax": 0.544511616230011,
+            "pcx_norm": 0.498046875,
+            "pcy_norm": 0.498046875,
+            "sw_norm": 0.83984375,
+            "sh_norm": 0.4282031250000001
+          },
+          "facing_texels_covered_pct": 66.0,
+          "total_uv_touched_pct": 12.74
+        },
+        "back": {
+          "iou": 0.9054,
+          "accepted": true,
+          "overlay_png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_rearfix/etapa_b/mv_b_overlay_back.png",
+          "heatmap_png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_rearfix/etapa_b/mv_b_heatmap_back.png",
+          "xform": {
+            "yaw_deg": 174.0,
+            "pitch_deg": 2.0,
+            "umin": -0.589838981628418,
+            "umax": 0.5541850328445435,
+            "vmin": -0.4823136627674103,
+            "vmax": 0.5363479852676392,
+            "pcx_norm": 0.4833984375,
+            "pcy_norm": 0.5,
+            "sw_norm": 0.8266699218750001,
+            "sh_norm": 0.823046875
+          },
+          "facing_texels_covered_pct": 36.49,
+          "total_uv_touched_pct": 4.85
+        },
+        "right": {
+          "iou": 0.9428,
+          "accepted": true,
+          "overlay_png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_rearfix/etapa_b/mv_b_overlay_right.png",
+          "heatmap_png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_rearfix/etapa_b/mv_b_heatmap_right.png",
+          "xform": {
+            "yaw_deg": 263.0,
+            "pitch_deg": -4.0,
+            "umin": -1.0131317377090454,
+            "umax": 1.0013840198516846,
+            "vmin": -0.5114186406135559,
+            "vmax": 0.544511616230011,
+            "pcx_norm": 0.5,
+            "pcy_norm": 0.498046875,
+            "sw_norm": 0.83984375,
+            "sh_norm": 0.43453125000000004
+          },
+          "facing_texels_covered_pct": 63.31,
+          "total_uv_touched_pct": 12.12
+        }
+      }
+    }
+  },
+  "tempo_total_s": 78.84,
+  "vram_samples_10s": [
+    [
+      0.1,
+      2880
+    ],
+    [
+      10.1,
+      3189
+    ],
+    [
+      20.2,
+      3189
+    ],
+    [
+      30.2,
+      3253
+    ],
+    [
+      40.3,
+      3201
+    ],
+    [
+      50.3,
+      3201
+    ],
+    [
+      60.4,
+      3229
+    ],
+    [
+      70.5,
+      3229
+    ],
+    [
+      79.0,
+      3195
+    ]
+  ],
+  "vram_pico_mib": 3253,
+  "vram_baseline_mib": 2880
+}

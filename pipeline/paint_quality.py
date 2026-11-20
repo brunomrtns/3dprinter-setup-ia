@@ -29,6 +29,7 @@ sys.path.insert(0, str(REPO_ROOT / "tools" / "generator"))
 
 import cv2  # noqa: E402
 import numpy as np  # noqa: E402
+from scipy.ndimage import distance_transform_edt  # noqa: E402
 import torch  # noqa: E402
 import trimesh  # noqa: E402
 from huggingface_hub import snapshot_download  # noqa: E402
@@ -188,6 +189,91 @@ def upscale_multiviews_sr(multiviews: list[Image.Image], target_size: int) -> li
     return out_views
 
 
+def apply_uv_island_gutter_bleed(
+    mesh: trimesh.Trimesh,
+    tex_rgb: np.ndarray,
+    valid_mask: np.ndarray,
+    gutter_px: int = 24,
+) -> tuple[np.ndarray, np.ndarray, int]:
+    """Per-island UV flood + Voronoi gutter bleed BEFORE uv_inpaint (zero cross-island bleed).
+
+    1. Rasterizes UV triangles to find connected UV islands.
+    2. Fills uncovered texels INSIDE each island strictly from that island's own valid texels
+       (iterative masked dilation so colors never cross island boundaries).
+    3. Floods each island's own color outward up to `gutter_px` via exact Voronoi EDT.
+    """
+    h, w, _ = tex_rgb.shape
+    uv = getattr(mesh.visual, "uv", None)
+    if uv is None or len(uv) != len(mesh.vertices):
+        return tex_rgb, valid_mask, 0
+
+    uv_px = np.empty_like(uv, dtype=np.float32)
+    uv_px[:, 0] = np.clip(uv[:, 0], 0.0, 1.0) * (w - 1)
+    uv_px[:, 1] = (1.0 - np.clip(uv[:, 1], 0.0, 1.0)) * (h - 1)
+    tris = np.round(uv_px[np.asarray(mesh.faces, dtype=np.int32)]).astype(np.int32)
+
+    uv_mask = np.zeros((h, w), dtype=np.uint8)
+    for tri in tris:
+        cv2.fillConvexPoly(uv_mask, tri, 255)
+
+    num_labels, labels = cv2.connectedComponents(uv_mask, connectivity=4)
+    num_islands = max(0, int(num_labels) - 1)
+
+    out = tex_rgb.copy()
+    filled = (valid_mask > 0) & (uv_mask > 0)
+
+    # Step 1: Intra-island fill (strictly respects island ID, never crosses islands)
+    k3 = np.ones((3, 3), dtype=np.uint8)
+    unfilled_inside = (uv_mask > 0) & (~filled)
+    if unfilled_inside.any():
+        # Fast 8-neighbor propagation restricted to matching island label
+        shifts = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]
+        for _ in range(max(16, gutter_px)):
+            if not unfilled_inside.any():
+                break
+            newly_filled = np.zeros((h, w), dtype=bool)
+            acc = np.zeros((h, w, 3), dtype=np.float32)
+            cnt = np.zeros((h, w), dtype=np.float32)
+            for dy, dx in shifts:
+                src_y0 = max(0, -dy)
+                src_y1 = h - max(0, dy)
+                src_x0 = max(0, -dx)
+                src_x1 = w - max(0, dx)
+                dst_y0 = max(0, dy)
+                dst_y1 = h - max(0, -dy)
+                dst_x0 = max(0, dx)
+                dst_x1 = w - max(0, -dx)
+
+                same_isl = (
+                    unfilled_inside[dst_y0:dst_y1, dst_x0:dst_x1]
+                    & filled[src_y0:src_y1, src_x0:src_x1]
+                    & (labels[dst_y0:dst_y1, dst_x0:dst_x1] == labels[src_y0:src_y1, src_x0:src_x1])
+                )
+                if same_isl.any():
+                    acc_slice = acc[dst_y0:dst_y1, dst_x0:dst_x1]
+                    cnt_slice = cnt[dst_y0:dst_y1, dst_x0:dst_x1]
+                    acc_slice[same_isl] += out[src_y0:src_y1, src_x0:src_x1][same_isl]
+                    cnt_slice[same_isl] += 1.0
+                    newly_filled[dst_y0:dst_y1, dst_x0:dst_x1] |= same_isl
+            if not newly_filled.any():
+                break
+            out[newly_filled] = np.clip(
+                np.round(acc[newly_filled] / cnt[newly_filled][..., None]), 0, 255
+            ).astype(np.uint8)
+            filled |= newly_filled
+            unfilled_inside &= ~newly_filled
+
+    # Step 2: Outward gutter bleed (exact Voronoi EDT up to gutter_px outside islands)
+    if filled.any() and gutter_px > 0:
+        dist, idx = distance_transform_edt(~filled, return_indices=True)
+        gutter = (~filled) & (dist <= float(gutter_px))
+        if gutter.any():
+            out[gutter] = out[idx[0][gutter], idx[1][gutter]]
+            filled |= gutter
+
+    return out, (filled.astype(np.uint8) * 255), num_islands
+
+
 def paint_variant(
     uv_obj_path: Path,
     delighted_imgs: list[Image.Image],
@@ -300,16 +386,26 @@ def paint_variant(
 
     tex_t, trust_t = render_bake.fast_bake_texture(project_textures, project_weighted_cos)
     mask_np = ((trust_t > 1e-8).squeeze(-1).cpu().numpy() * 255).astype(np.uint8)
-    tex_np = render_bake.uv_inpaint(tex_t, mask_np)
+    raw_bake_np = np.clip((tex_t.detach().cpu().numpy() * 255.0), 0, 255).astype(np.uint8)
+
+    gutter_px = int(paint_cfg.get("gutter_px", 24))
+    bled_np, bled_mask, num_islands = apply_uv_island_gutter_bleed(mesh, raw_bake_np, mask_np, gutter_px=gutter_px)
+    print(f"  [stage_a] UV gutter bleed: islands={num_islands}, gutter_px={gutter_px}", flush=True)
+
+    # Run uv_inpaint only on any remaining uncovered background after per-island gutter bleed
+    bled_t = torch.from_numpy(bled_np.astype(np.float32) / 255.0).to(tex_t.device)
+    tex_np = render_bake.uv_inpaint(bled_t, bled_mask)
     tex_img = Image.fromarray(np.clip(tex_np, 0, 255).astype(np.uint8), mode="RGB")
 
-    del render_bake, tex_t, trust_t, project_textures, project_weighted_cos
+    del render_bake, tex_t, trust_t, bled_t, project_textures, project_weighted_cos
     gc.collect()
     torch.cuda.empty_cache()
 
     return tex_img, {
         "texture_size": tex_size,
         "per_view_sr": True,
+        "num_uv_islands": num_islands,
+        "gutter_px": gutter_px,
         "tempo_s": round(time.time() - t0, 2),
         "laplacian_var": laplacian_variance(tex_img),
         "sat_pct": hsv_sat_pct(tex_img),
@@ -324,7 +420,7 @@ def main() -> int:
     cfg = json.loads(Path(args.config).read_text(encoding="utf-8"))
     seed = int(cfg["seed"])
     evid = Path(cfg["evidence_dir"])
-    out_dir = evid / "hunyuan_native"
+    out_dir = evid / "etapa_a"
     out_dir.mkdir(parents=True, exist_ok=True)
     cache_dir = evid / "delight_cache"
     cache_dir.mkdir(parents=True, exist_ok=True)
@@ -385,7 +481,7 @@ def main() -> int:
         report["tempo_total_s"] = round(time.time() - t_all, 2)
         report.update(sampler.stop())
 
-    (evid / "stage_a_hunyuan.json").write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
+    (out_dir / "report.json").write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
     print("STAGE_A_OK=" + json.dumps({"peak_mib": report["vram_pico_mib"], "tempo_s": report["tempo_total_s"]}))
     return 0
 

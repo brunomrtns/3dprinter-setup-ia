@@ -1,0 +1,13 @@
+{
+  "run": "fox_rearfix",
+  "timestamp_utc": "2026-11-20T21:10:00Z",
+  "seed": 42,
+  "gpu": "NVIDIA GeForce RTX 3060 12GB",
+  "published": false,
+  "verdict": "RETAIN_PREVIOUS_bb821ff — wins_vs_prev=False (view_lap 0.86x + visual ghosting/parallax from perspective photo vs ortho projection on internal features despite silhouette IoU >= 0.90)",
+  "backup_prev": "evidence/rtx3060-12gb/fox_rearfix/backup_prev/",
+  "etapa_a_report": "evidence/rtx3060-12gb/fox_rearfix/etapa_a/report.json",
+  "etapa_b_report": "evidence/rtx3060-12gb/fox_rearfix/etapa_b/report.json",
+  "etapa_c_report": "evidence/rtx3060-12gb/fox_rearfix/etapa_c/report.json",
+  "etapa_d_report": "evidence/rtx3060-12gb/fox_rearfix/etapa_d/report.json"
+}
