@@ -1,0 +1,61 @@
+{
+  "asset_id": "prop_caixote",
+  "tier": "single",
+  "overall_pass": true,
+  "gates": {
+    "lap_var": {
+      "value": 1402.59,
+      "threshold": ">= 1000.0",
+      "pass": true
+    },
+    "bright_patches": {
+      "value": 0.0,
+      "threshold": "<= 0.05%",
+      "pass": true
+    },
+    "saturation_band": {
+      "value": 53.5,
+      "threshold": "[4.0%, 85.0%]",
+      "pass": true
+    },
+    "mr_pbr_present": {
+      "value": true,
+      "threshold": "required=True",
+      "pass": true
+    },
+    "glb_sizes_sane": {
+      "value": {
+        "8k_mb": 24.7,
+        "4k_mb": 15.51
+      },
+      "threshold": "[1.0, 45.0] MB",
+      "pass": true
+    }
+  },
+  "crops": {
+    "detail_center_front": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/prop_caixote/renders/crops/pbr_detail_center_front.png",
+    "detail_center_back": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/prop_caixote/renders/crops/pbr_detail_center_back.png"
+  },
+  "tempo_total_s": 232.45,
+  "vram_pico_mib": 12002,
+  "timestamp_utc": "2026-11-20T23:24:31.574888+00:00",
+  "publish": {
+    "published": true,
+    "http": {
+      "https://brunointegrations.com/modelos3d/models/prop_caixote__pbr_8k.glb": {
+        "status": 200,
+        "content_length": 25901524,
+        "last_modified": "Fri, 20 Nov 2026 23:24:14 GMT"
+      },
+      "https://brunointegrations.com/modelos3d/models/prop_caixote__pbr_4k.glb": {
+        "status": 200,
+        "content_length": 16259440,
+        "last_modified": "Fri, 20 Nov 2026 23:24:14 GMT"
+      }
+    },
+    "modes": [
+      "pbr_8k",
+      "pbr_4k"
+    ]
+  }
+}

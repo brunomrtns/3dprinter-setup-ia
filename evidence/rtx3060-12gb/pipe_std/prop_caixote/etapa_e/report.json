@@ -1,0 +1,76 @@
+{
+  "stage": "E_pack_glb",
+  "asset_id": "prop_caixote",
+  "seed": 42,
+  "variants": {
+    "pbr": {
+      "tempo_s": 64.24,
+      "sat_before_pct": 53.284,
+      "sat_after_pct": 51.731,
+      "sat_rel_loss_pct": 2.91,
+      "resat_applied": false,
+      "sat_final_8k_pct": 51.731,
+      "glb_8k": {
+        "glb": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/prop_caixote/work/pbr/prop_caixote__pbr_8k.glb",
+        "size_mb": 24.7,
+        "size_bytes": 25901524,
+        "jpeg_mb": 13.76,
+        "has_pbr_mr": true,
+        "tex_px": [
+          8192,
+          8192
+        ]
+      },
+      "glb_4k": {
+        "glb": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/prop_caixote/work/pbr/prop_caixote__pbr_4k.glb",
+        "size_mb": 15.51,
+        "size_bytes": 16259440,
+        "jpeg_mb": 4.56,
+        "has_pbr_mr": true,
+        "tex_px": [
+          4096,
+          4096
+        ]
+      }
+    }
+  },
+  "tempo_total_s": 65.19,
+  "vram_samples_10s": [
+    [
+      0.1,
+      2211
+    ],
+    [
+      10.1,
+      8474
+    ],
+    [
+      20.2,
+      8342
+    ],
+    [
+      30.3,
+      8338
+    ],
+    [
+      40.3,
+      8332
+    ],
+    [
+      50.4,
+      8450
+    ],
+    [
+      60.4,
+      8289
+    ],
+    [
+      65.3,
+      2267
+    ]
+  ],
+  "vram_pico_mib": 8474,
+  "vram_baseline_mib": 2211,
+  "_config_hash": "130dd692a909d538",
+  "status": "OK"
+}

@@ -1,0 +1,61 @@
+{
+  "asset_id": "criatura_dragao",
+  "tier": "single",
+  "overall_pass": true,
+  "gates": {
+    "lap_var": {
+      "value": 2522.61,
+      "threshold": ">= 1200.0",
+      "pass": true
+    },
+    "bright_patches": {
+      "value": 0.0274,
+      "threshold": "<= 0.05%",
+      "pass": true
+    },
+    "saturation_band": {
+      "value": 83.75,
+      "threshold": "[5.0%, 85.0%]",
+      "pass": true
+    },
+    "mr_pbr_present": {
+      "value": true,
+      "threshold": "required=True",
+      "pass": true
+    },
+    "glb_sizes_sane": {
+      "value": {
+        "8k_mb": 20.38,
+        "4k_mb": 13.19
+      },
+      "threshold": "[1.0, 45.0] MB",
+      "pass": true
+    }
+  },
+  "crops": {
+    "detail_center_front": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/criatura_dragao/renders/crops/pbr_detail_center_front.png",
+    "detail_center_back": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/criatura_dragao/renders/crops/pbr_detail_center_back.png"
+  },
+  "tempo_total_s": 739.18,
+  "vram_pico_mib": 11913,
+  "timestamp_utc": "2026-11-20T23:03:15.100621+00:00",
+  "publish": {
+    "published": true,
+    "http": {
+      "https://brunointegrations.com/modelos3d/models/criatura_dragao__pbr_8k.glb": {
+        "status": 200,
+        "content_length": 21369160,
+        "last_modified": "Fri, 20 Nov 2026 23:02:59 GMT"
+      },
+      "https://brunointegrations.com/modelos3d/models/criatura_dragao__pbr_4k.glb": {
+        "status": 200,
+        "content_length": 13835564,
+        "last_modified": "Fri, 20 Nov 2026 23:02:59 GMT"
+      }
+    },
+    "modes": [
+      "pbr_8k",
+      "pbr_4k"
+    ]
+  }
+}

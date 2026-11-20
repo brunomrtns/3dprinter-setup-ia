@@ -114,6 +114,16 @@
 - **Fotos do kit = as MESMAS do C6** (`Downloads/fox/no-windows/` = `~/printer3d-work/carro/fotos-c7/` + `c7-prep/`): 5 fotos de 2400x1792 px (frente, frente-e-lado-diagonal, lado, traseira, de-fora-pegando-interna). Prep `*_tinted.png` reutilizado. C7-E (fotogrametria densa VGGT) retirado da fila (só reabrir se B/C falharem e houver sessão de 20-40 fotos completas).
 - **Publicação**: caso `carro_csg` (modos `kit`, `casca`, `interna`, `kit_corte`) mantido no viewer para histórico/comparação. Evidência: `evidence/rtx3060-12gb/carro-csg/report.json`.
 
+### Registro Padronização Universal + QA Automático (`pipe_std`, 2026-11-20) — `[x]` CONCLUÍDO E VALIDADO EM 3 ASSETS DIVERSOS (3/3 PASS + PUBLICADOS)
+
+- **Contrato único & Defaults (`pipeline/defaults.json` + `pipeline/config_loader.py` + `pipeline/README.md`)**: todos os parâmetros aprovados do Fox (`texture_size=2048`, `gutter_px=24`, `cos_lo=0.80`, `cos_hi=0.92`, `w_max=0.80`, `sr_factor=4`, `seed=42`, gates QA) viraram defaults globais. `cars/fox.json` convertido para o novo schema único; pré-voo UV genérico (`uv_preflight`) com relatório de ilhas/área mínima/overlap/warnings.
+- **Runner único (`pipeline/run_asset.py`)**: `python pipeline/run_asset.py --config assets/<id>.json --out <dir> [--resume] [--auto-publish]` suportando os 3 tiers (`"photos"`, `"single"`, `"none"` com 4 renders neutros Blender), `--resume` por `_config_hash`, unwrap `xatlas` automático preservando geometria quando a malha não tem UV, `qa.json` padronizado e publicação automática condicional (só se `overall_pass: true`). `app.js` atualizado com modos `pbr_8k` / `pbr_4k` (v19 PBR preservado).
+- **Validação em 3 assets diversos (do zero, tier `"single"`, `seed 42`) — 3/3 QA PASS + PUBLICADOS (`HTTP 200`):**
+  1. **`humanoide_dragonborn`** (humanoide, `249.997` faces): `663,5s`, pico VRAM `11.938 MiB`, `lap_var=3.216,0 >= 1200`, `patches=0,0041% <= 0,05%`, `sat=70,78%`, `MR=True` (`1024³+2048`), `8K=22,86 MB / 4K=13,79 MB` → **PASS + PUBLICADO**.
+  2. **`criatura_dragao`** (criatura, `250.000` faces): `739,2s`, pico VRAM `11.913 MiB`, `lap_var=2.522,6 >= 1200`, `patches=0,0274% <= 0,05%`, `sat=83,75%`, `MR=True` (`1024³+2048`), `8K=20,38 MB / 4K=13,19 MB` → **PASS + PUBLICADO**.
+  3. **`prop_caixote`** (prop hard-surface, `250.000` faces): `606,7s` total (`374,2s` 00–04 + `232,5s` resume 05–08), pico VRAM `12.002 MiB` (fallback automático `1024³→512³+2048` no TRELLIS.2), `lap_var=1.402,6 >= 1000`, `patches=0,0%`, `sat=53,5%`, `MR=True`, `8K=24,70 MB / 4K=15,51 MB` → **PASS + PUBLICADO**.
+- **3 bugs universais encontrados e corrigidos no pipeline durante a validação:** (1) `manifest_path` em `pipeline/defaults.json` apontando pro repo (`tools/modelos3d-site/manifest.json`); (2) captura de `RuntimeError: CUDA driver error: out of memory` no fallback `1024³→512³` em `pipeline/retexture_trellis.py`; (3) proteção `Path(s).is_file()` em `pipeline/run_asset.py` quando `mr_path == ""`. Evidência: `evidence/rtx3060-12gb/pipe_std/`.
+
 ### Registro Traseira + Blending Fotográfico (`fox_rearfix`, 2026-11-20) — `[x]` CONCLUÍDO (NÃO PUBLICADO — MANTIDO `bb821ff`)
 
 - **Escopo**: só `mv_b`, `seed 42`, `uv.obj` e `manifest.json` intactos, backup dos GLBs `bb821ff` salvo em `evidence/rtx3060-12gb/fox_rearfix/backup_prev/`.

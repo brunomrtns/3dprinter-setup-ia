@@ -1,0 +1,76 @@
+{
+  "stage": "E_pack_glb",
+  "asset_id": "humanoide_dragonborn",
+  "seed": 42,
+  "variants": {
+    "pbr": {
+      "tempo_s": 66.45,
+      "sat_before_pct": 70.427,
+      "sat_after_pct": 68.506,
+      "sat_rel_loss_pct": 2.73,
+      "resat_applied": false,
+      "sat_final_8k_pct": 68.506,
+      "glb_8k": {
+        "glb": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/humanoide_dragonborn/work/pbr/humanoide_dragonborn__pbr_8k.glb",
+        "size_mb": 22.86,
+        "size_bytes": 23971524,
+        "jpeg_mb": 13.71,
+        "has_pbr_mr": true,
+        "tex_px": [
+          8192,
+          8192
+        ]
+      },
+      "glb_4k": {
+        "glb": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/humanoide_dragonborn/work/pbr/humanoide_dragonborn__pbr_4k.glb",
+        "size_mb": 13.79,
+        "size_bytes": 14456584,
+        "jpeg_mb": 4.63,
+        "has_pbr_mr": true,
+        "tex_px": [
+          4096,
+          4096
+        ]
+      }
+    }
+  },
+  "tempo_total_s": 67.36,
+  "vram_samples_10s": [
+    [
+      0.1,
+      2764
+    ],
+    [
+      10.2,
+      8883
+    ],
+    [
+      20.2,
+      8881
+    ],
+    [
+      30.3,
+      8888
+    ],
+    [
+      40.3,
+      8888
+    ],
+    [
+      50.4,
+      8881
+    ],
+    [
+      60.4,
+      8881
+    ],
+    [
+      67.5,
+      2899
+    ]
+  ],
+  "vram_pico_mib": 8888,
+  "vram_baseline_mib": 2764,
+  "_config_hash": "13ca08ba2a3d763c",
+  "status": "OK"
+}

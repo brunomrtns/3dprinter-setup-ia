@@ -1,0 +1,187 @@
+{
+  "stage": "C_patch_repair",
+  "asset_id": "humanoide_dragonborn",
+  "variants": {
+    "pbr": {
+      "src": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/humanoide_dragonborn/etapa_a/pbr_native_1024.png",
+      "dst": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/humanoide_dragonborn/etapa_c/pbr_repaired.png",
+      "patches_detected": 10,
+      "patches_repaired": 10,
+      "patches_residual": 0,
+      "patch_texels_before": 970,
+      "patch_texels_before_pct": 0.0925,
+      "patch_texels_after": 0,
+      "patch_texels_after_pct": 0.0,
+      "dark_specks_detected": 0,
+      "dark_specks_residual": 0,
+      "blocked_by_photo_guard_2d": 0,
+      "blocked_2d_samples": [],
+      "patches": [
+        {
+          "area_px": 157,
+          "uv_center": [
+            0.524,
+            0.99
+          ],
+          "bbox_px": [
+            526,
+            1,
+            18,
+            18
+          ],
+          "comp_lum": 182.9,
+          "ring_med_lum": 40.7,
+          "dark_perimeter_ratio": 0.794
+        },
+        {
+          "area_px": 78,
+          "uv_center": [
+            0.1471,
+            0.8938
+          ],
+          "bbox_px": [
+            147,
+            103,
+            9,
+            12
+          ],
+          "comp_lum": 201.9,
+          "ring_med_lum": 17.3,
+          "dark_perimeter_ratio": 0.875
+        },
+        {
+          "area_px": 401,
+          "uv_center": [
+            0.0838,
+            0.7024
+          ],
+          "bbox_px": [
+            70,
+            295,
+            36,
+            20
+          ],
+          "comp_lum": 187.3,
+          "ring_med_lum": 58.2,
+          "dark_perimeter_ratio": 0.701
+        },
+        {
+          "area_px": 75,
+          "uv_center": [
+            0.9502,
+            0.6657
+          ],
+          "bbox_px": [
+            966,
+            336,
+            15,
+            13
+          ],
+          "comp_lum": 191.8,
+          "ring_med_lum": 47.6,
+          "dark_perimeter_ratio": 0.722
+        },
+        {
+          "area_px": 52,
+          "uv_center": [
+            0.3087,
+            0.652
+          ],
+          "bbox_px": [
+            312,
+            353,
+            9,
+            9
+          ],
+          "comp_lum": 189.8,
+          "ring_med_lum": 27.2,
+          "dark_perimeter_ratio": 0.885
+        },
+        {
+          "area_px": 84,
+          "uv_center": [
+            0.119,
+            0.6334
+          ],
+          "bbox_px": [
+            118,
+            370,
+            9,
+            13
+          ],
+          "comp_lum": 206.8,
+          "ring_med_lum": 37.1,
+          "dark_perimeter_ratio": 1.0
+        },
+        {
+          "area_px": 52,
+          "uv_center": [
+            0.9959,
+            0.5274
+          ],
+          "bbox_px": [
+            1016,
+            480,
+            8,
+            11
+          ],
+          "comp_lum": 216.0,
+          "ring_med_lum": 29.4,
+          "dark_perimeter_ratio": 0.957
+        },
+        {
+          "area_px": 19,
+          "uv_center": [
+            0.3823,
+            0.2822
+          ],
+          "bbox_px": [
+            390,
+            733,
+            5,
+            5
+          ],
+          "comp_lum": 185.5,
+          "ring_med_lum": 23.0,
+          "dark_perimeter_ratio": 0.735
+        },
+        {
+          "area_px": 15,
+          "uv_center": [
+            0.7141,
+            0.2115
+          ],
+          "bbox_px": [
+            727,
+            807,
+            9,
+            2
+          ],
+          "comp_lum": 206.2,
+          "ring_med_lum": 40.6,
+          "dark_perimeter_ratio": 0.845
+        },
+        {
+          "area_px": 37,
+          "uv_center": [
+            0.6642,
+            0.1907
+          ],
+          "bbox_px": [
+            678,
+            826,
+            6,
+            8
+          ],
+          "comp_lum": 205.7,
+          "ring_med_lum": 38.6,
+          "dark_perimeter_ratio": 0.818
+        }
+      ],
+      "dark_3d_uv_islands_repaired": 1,
+      "blocked_by_photo_guard_3d": 0
+    }
+  },
+  "_config_hash": "13ca08ba2a3d763c",
+  "status": "OK"
+}

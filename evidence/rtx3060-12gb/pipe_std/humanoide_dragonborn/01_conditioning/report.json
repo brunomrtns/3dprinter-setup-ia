@@ -1,0 +1,8 @@
+{
+  "tier": "single",
+  "ref_images": [
+    "/home/bruno/printer3d-work/testset_preproc/humanoide_dragonborn_preproc.png"
+  ],
+  "_config_hash": "13ca08ba2a3d763c",
+  "status": "OK"
+}

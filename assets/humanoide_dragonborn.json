@@ -1,0 +1,22 @@
+{
+  "id": "humanoide_dragonborn",
+  "variant_id": "pbr",
+  "mesh": "/home/bruno/printer3d-work/modelos3d-site/models/humanoide_dragonborn__triposg.glb",
+  "uv": "/home/bruno/printer3d-work/modelos3d-site/models/humanoide_dragonborn__triposg.glb",
+  "tier": "single",
+  "input_images": [
+    "/home/bruno/printer3d-work/testset_preproc/humanoide_dragonborn_preproc.png"
+  ],
+  "outputs": {
+    "mode_8k": "pbr_8k",
+    "mode_4k": "pbr_4k",
+    "glb_names": ["humanoide_dragonborn__pbr_8k.glb", "humanoide_dragonborn__pbr_4k.glb"]
+  },
+  "qa": {
+    "lap_min": 1200.0,
+    "patch_max_pct": 0.05,
+    "sat_min_pct": 5.0,
+    "sat_max_pct": 85.0
+  },
+  "notes": "Asset de validação 1/3 (humanoide — topologia orgânica com armadura/cabeça/membros)."
+}

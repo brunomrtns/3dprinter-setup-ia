@@ -1,0 +1,8 @@
+{
+  "tier": "single",
+  "ref_images": [
+    "/home/bruno/printer3d-work/testset_preproc/prop_caixote_preproc.png"
+  ],
+  "_config_hash": "130dd692a909d538",
+  "status": "OK"
+}

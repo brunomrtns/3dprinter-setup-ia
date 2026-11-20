@@ -1,0 +1,23 @@
+{
+  "uv_obj": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/criatura_dragao/work/pbr/uv.obj",
+  "unwrap": {
+    "uv_obj": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/criatura_dragao/work/pbr/uv.obj",
+    "unwrapped_now": true,
+    "faces_before": 250000,
+    "faces_after": 250000,
+    "verts_after": 144800,
+    "unwrap_s": 142.47
+  },
+  "preflight": {
+    "has_uv": true,
+    "verts": 144800,
+    "faces": 250000,
+    "num_islands": 1212,
+    "min_island_area_px": 1,
+    "uv_utilization_pct": 61.5,
+    "overlap_pct": 35.62,
+    "warning": "UV muito fragmentado (ilhas mínimas <= 1px) — qualidade de pintura limitada por UV. | UV com sobreposição alta (35.62%) — qualidade de pintura limitada por UV."
+  },
+  "_config_hash": "68aa9ff3a73004bd",
+  "status": "OK"
+}

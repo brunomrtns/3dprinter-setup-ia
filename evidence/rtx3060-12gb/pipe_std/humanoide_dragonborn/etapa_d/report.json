@@ -1,0 +1,154 @@
+{
+  "stage": "D_eval_quality",
+  "asset_id": "humanoide_dragonborn",
+  "variants": {
+    "pbr": {
+      "before": {
+        "texture_size": [
+          512,
+          512
+        ],
+        "texture_laplacian_var": 0.0,
+        "texture_sat_pct": 6.27,
+        "patch_count": 0,
+        "patch_texels_pct": 0.0,
+        "views_laplacian_mean": 3773.12,
+        "photo_consistency": {
+          "front": {
+            "mae_255": 117.19,
+            "ssim": 0.0148
+          }
+        },
+        "views": {
+          "front": {
+            "laplacian_var": 3940.06,
+            "sat_pct": 6.28,
+            "lum_mean": 195.4,
+            "dark_lt80_pct": 0.0,
+            "bright_gt180_pct": 100.0
+          },
+          "back": {
+            "laplacian_var": 3945.32,
+            "sat_pct": 6.28,
+            "lum_mean": 195.4,
+            "dark_lt80_pct": 0.0,
+            "bright_gt180_pct": 100.0
+          },
+          "left": {
+            "laplacian_var": 3222.13,
+            "sat_pct": 6.28,
+            "lum_mean": 195.4,
+            "dark_lt80_pct": 0.0,
+            "bright_gt180_pct": 100.0
+          },
+          "right": {
+            "laplacian_var": 3222.91,
+            "sat_pct": 6.28,
+            "lum_mean": 195.4,
+            "dark_lt80_pct": 0.0,
+            "bright_gt180_pct": 100.0
+          },
+          "top": {
+            "laplacian_var": 2848.48,
+            "sat_pct": 6.28,
+            "lum_mean": 195.4,
+            "dark_lt80_pct": 0.0,
+            "bright_gt180_pct": 100.0
+          },
+          "three_quarter_front": {
+            "laplacian_var": 4492.84,
+            "sat_pct": 6.28,
+            "lum_mean": 195.4,
+            "dark_lt80_pct": 0.0,
+            "bright_gt180_pct": 100.0
+          },
+          "three_quarter_back": {
+            "laplacian_var": 4740.11,
+            "sat_pct": 6.28,
+            "lum_mean": 195.4,
+            "dark_lt80_pct": 0.0,
+            "bright_gt180_pct": 100.0
+          }
+        }
+      },
+      "final": {
+        "texture_size": [
+          1024,
+          1024
+        ],
+        "texture_laplacian_var": 1170.55,
+        "texture_sat_pct": 70.78,
+        "patch_count": 2,
+        "patch_texels_pct": 0.0041,
+        "views_laplacian_mean": 3216.01,
+        "photo_consistency": {
+          "front": {
+            "mae_255": 58.48,
+            "ssim": 0.1618
+          }
+        },
+        "views": {
+          "front": {
+            "laplacian_var": 2475.34,
+            "sat_pct": 70.91,
+            "lum_mean": 54.4,
+            "dark_lt80_pct": 77.6,
+            "bright_gt180_pct": 2.0
+          },
+          "back": {
+            "laplacian_var": 2204.33,
+            "sat_pct": 69.86,
+            "lum_mean": 58.8,
+            "dark_lt80_pct": 73.6,
+            "bright_gt180_pct": 0.1
+          },
+          "left": {
+            "laplacian_var": 2752.73,
+            "sat_pct": 70.34,
+            "lum_mean": 55.5,
+            "dark_lt80_pct": 75.4,
+            "bright_gt180_pct": 0.4
+          },
+          "right": {
+            "laplacian_var": 2475.65,
+            "sat_pct": 68.34,
+            "lum_mean": 50.8,
+            "dark_lt80_pct": 79.6,
+            "bright_gt180_pct": 0.7
+          },
+          "top": {
+            "laplacian_var": 3720.44,
+            "sat_pct": 65.74,
+            "lum_mean": 73.8,
+            "dark_lt80_pct": 63.6,
+            "bright_gt180_pct": 1.9
+          },
+          "three_quarter_front": {
+            "laplacian_var": 4934.15,
+            "sat_pct": 70.43,
+            "lum_mean": 55.8,
+            "dark_lt80_pct": 77.4,
+            "bright_gt180_pct": 1.6
+          },
+          "three_quarter_back": {
+            "laplacian_var": 3949.4,
+            "sat_pct": 69.92,
+            "lum_mean": 59.7,
+            "dark_lt80_pct": 73.6,
+            "bright_gt180_pct": 0.2
+          }
+        }
+      },
+      "gt_sat_mean_pct": 47.35,
+      "sharpness_tex_ratio": 1170550000.0,
+      "sharpness_views_ratio": 0.85,
+      "wins_vs_prev": false,
+      "crops": {
+        "detail_center_front": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/humanoide_dragonborn/renders/crops/pbr_detail_center_front.png",
+        "detail_center_back": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/humanoide_dragonborn/renders/crops/pbr_detail_center_back.png"
+      }
+    }
+  },
+  "_config_hash": "13ca08ba2a3d763c",
+  "status": "OK"
+}

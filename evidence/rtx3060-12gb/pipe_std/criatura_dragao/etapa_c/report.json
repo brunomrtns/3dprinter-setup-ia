@@ -1,0 +1,619 @@
+{
+  "stage": "C_patch_repair",
+  "asset_id": "criatura_dragao",
+  "variants": {
+    "pbr": {
+      "src": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/criatura_dragao/etapa_a/pbr_native_1024.png",
+      "dst": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/criatura_dragao/etapa_c/pbr_repaired.png",
+      "patches_detected": 37,
+      "patches_repaired": 37,
+      "patches_residual": 0,
+      "patch_texels_before": 21260,
+      "patch_texels_before_pct": 2.0275,
+      "patch_texels_after": 0,
+      "patch_texels_after_pct": 0.0,
+      "dark_specks_detected": 4,
+      "dark_specks_residual": 0,
+      "blocked_by_photo_guard_2d": 0,
+      "blocked_2d_samples": [],
+      "patches": [
+        {
+          "area_px": 967,
+          "uv_center": [
+            0.1005,
+            0.9917
+          ],
+          "bbox_px": [
+            72,
+            0,
+            59,
+            23
+          ],
+          "comp_lum": 205.4,
+          "ring_med_lum": 28.7,
+          "dark_perimeter_ratio": 0.747
+        },
+        {
+          "area_px": 4998,
+          "uv_center": [
+            0.9518,
+            0.9507
+          ],
+          "bbox_px": [
+            898,
+            0,
+            126,
+            92
+          ],
+          "comp_lum": 216.3,
+          "ring_med_lum": 37.0,
+          "dark_perimeter_ratio": 0.81
+        },
+        {
+          "area_px": 78,
+          "uv_center": [
+            0.3782,
+            0.9818
+          ],
+          "bbox_px": [
+            382,
+            14,
+            10,
+            11
+          ],
+          "comp_lum": 193.9,
+          "ring_med_lum": 40.5,
+          "dark_perimeter_ratio": 0.98
+        },
+        {
+          "area_px": 133,
+          "uv_center": [
+            0.4846,
+            0.9759
+          ],
+          "bbox_px": [
+            490,
+            18,
+            13,
+            14
+          ],
+          "comp_lum": 194.6,
+          "ring_med_lum": 66.0,
+          "dark_perimeter_ratio": 0.745
+        },
+        {
+          "area_px": 122,
+          "uv_center": [
+            0.4037,
+            0.9697
+          ],
+          "bbox_px": [
+            406,
+            24,
+            14,
+            13
+          ],
+          "comp_lum": 190.4,
+          "ring_med_lum": 24.9,
+          "dark_perimeter_ratio": 1.0
+        },
+        {
+          "area_px": 87,
+          "uv_center": [
+            0.1825,
+            0.9648
+          ],
+          "bbox_px": [
+            181,
+            30,
+            12,
+            11
+          ],
+          "comp_lum": 208.1,
+          "ring_med_lum": 62.4,
+          "dark_perimeter_ratio": 0.716
+        },
+        {
+          "area_px": 129,
+          "uv_center": [
+            0.0737,
+            0.8541
+          ],
+          "bbox_px": [
+            68,
+            143,
+            17,
+            14
+          ],
+          "comp_lum": 191.4,
+          "ring_med_lum": 25.7,
+          "dark_perimeter_ratio": 0.795
+        },
+        {
+          "area_px": 151,
+          "uv_center": [
+            0.4953,
+            0.8005
+          ],
+          "bbox_px": [
+            500,
+            198,
+            14,
+            15
+          ],
+          "comp_lum": 193.5,
+          "ring_med_lum": 28.7,
+          "dark_perimeter_ratio": 0.765
+        },
+        {
+          "area_px": 103,
+          "uv_center": [
+            0.6033,
+            0.8013
+          ],
+          "bbox_px": [
+            612,
+            198,
+            14,
+            12
+          ],
+          "comp_lum": 192.9,
+          "ring_med_lum": 39.3,
+          "dark_perimeter_ratio": 0.825
+        },
+        {
+          "area_px": 28,
+          "uv_center": [
+            0.6881,
+            0.7871
+          ],
+          "bbox_px": [
+            702,
+            216,
+            7,
+            6
+          ],
+          "comp_lum": 191.0,
+          "ring_med_lum": 48.0,
+          "dark_perimeter_ratio": 0.788
+        },
+        {
+          "area_px": 112,
+          "uv_center": [
+            0.251,
+            0.6921
+          ],
+          "bbox_px": [
+            249,
+            310,
+            16,
+            12
+          ],
+          "comp_lum": 196.6,
+          "ring_med_lum": 34.0,
+          "dark_perimeter_ratio": 0.785
+        },
+        {
+          "area_px": 172,
+          "uv_center": [
+            0.804,
+            0.6861
+          ],
+          "bbox_px": [
+            817,
+            312,
+            13,
+            21
+          ],
+          "comp_lum": 187.1,
+          "ring_med_lum": 30.7,
+          "dark_perimeter_ratio": 1.0
+        },
+        {
+          "area_px": 204,
+          "uv_center": [
+            0.7295,
+            0.669
+          ],
+          "bbox_px": [
+            735,
+            328,
+            20,
+            19
+          ],
+          "comp_lum": 200.4,
+          "ring_med_lum": 9.9,
+          "dark_perimeter_ratio": 0.855
+        },
+        {
+          "area_px": 130,
+          "uv_center": [
+            0.1354,
+            0.6576
+          ],
+          "bbox_px": [
+            131,
+            344,
+            16,
+            15
+          ],
+          "comp_lum": 191.8,
+          "ring_med_lum": 75.9,
+          "dark_perimeter_ratio": 0.766
+        },
+        {
+          "area_px": 62,
+          "uv_center": [
+            0.1255,
+            0.6287
+          ],
+          "bbox_px": [
+            126,
+            375,
+            6,
+            11
+          ],
+          "comp_lum": 187.0,
+          "ring_med_lum": 24.0,
+          "dark_perimeter_ratio": 0.909
+        },
+        {
+          "area_px": 14,
+          "uv_center": [
+            0.0884,
+            0.6143
+          ],
+          "bbox_px": [
+            89,
+            393,
+            4,
+            5
+          ],
+          "comp_lum": 196.2,
+          "ring_med_lum": 44.7,
+          "dark_perimeter_ratio": 0.702
+        },
+        {
+          "area_px": 1032,
+          "uv_center": [
+            0.4732,
+            0.5843
+          ],
+          "bbox_px": [
+            453,
+            415,
+            70,
+            25
+          ],
+          "comp_lum": 211.1,
+          "ring_med_lum": 48.8,
+          "dark_perimeter_ratio": 0.732
+        },
+        {
+          "area_px": 870,
+          "uv_center": [
+            0.138,
+            0.5777
+          ],
+          "bbox_px": [
+            121,
+            419,
+            43,
+            32
+          ],
+          "comp_lum": 200.9,
+          "ring_med_lum": 33.6,
+          "dark_perimeter_ratio": 0.898
+        },
+        {
+          "area_px": 133,
+          "uv_center": [
+            0.0637,
+            0.4603
+          ],
+          "bbox_px": [
+            58,
+            547,
+            15,
+            14
+          ],
+          "comp_lum": 188.6,
+          "ring_med_lum": 42.0,
+          "dark_perimeter_ratio": 0.856
+        },
+        {
+          "area_px": 44,
+          "uv_center": [
+            0.3433,
+            0.4397
+          ],
+          "bbox_px": [
+            347,
+            571,
+            9,
+            7
+          ],
+          "comp_lum": 191.6,
+          "ring_med_lum": 43.2,
+          "dark_perimeter_ratio": 1.0
+        },
+        {
+          "area_px": 69,
+          "uv_center": [
+            0.1868,
+            0.4305
+          ],
+          "bbox_px": [
+            187,
+            579,
+            11,
+            11
+          ],
+          "comp_lum": 185.0,
+          "ring_med_lum": 24.5,
+          "dark_perimeter_ratio": 1.0
+        },
+        {
+          "area_px": 188,
+          "uv_center": [
+            0.0089,
+            0.3815
+          ],
+          "bbox_px": [
+            0,
+            624,
+            17,
+            18
+          ],
+          "comp_lum": 194.2,
+          "ring_med_lum": 47.7,
+          "dark_perimeter_ratio": 0.712
+        },
+        {
+          "area_px": 303,
+          "uv_center": [
+            0.0887,
+            0.3499
+          ],
+          "bbox_px": [
+            82,
+            653,
+            20,
+            29
+          ],
+          "comp_lum": 195.7,
+          "ring_med_lum": 51.2,
+          "dark_perimeter_ratio": 0.718
+        },
+        {
+          "area_px": 26,
+          "uv_center": [
+            0.1043,
+            0.3405
+          ],
+          "bbox_px": [
+            106,
+            670,
+            3,
+            11
+          ],
+          "comp_lum": 181.4,
+          "ring_med_lum": 52.4,
+          "dark_perimeter_ratio": 0.845
+        },
+        {
+          "area_px": 1852,
+          "uv_center": [
+            0.5818,
+            0.2953
+          ],
+          "bbox_px": [
+            571,
+            691,
+            49,
+            63
+          ],
+          "comp_lum": 212.7,
+          "ring_med_lum": 24.8,
+          "dark_perimeter_ratio": 0.866
+        },
+        {
+          "area_px": 229,
+          "uv_center": [
+            0.3405,
+            0.2742
+          ],
+          "bbox_px": [
+            338,
+            736,
+            21,
+            17
+          ],
+          "comp_lum": 199.0,
+          "ring_med_lum": 52.4,
+          "dark_perimeter_ratio": 0.816
+        },
+        {
+          "area_px": 289,
+          "uv_center": [
+            0.0673,
+            0.261
+          ],
+          "bbox_px": [
+            60,
+            743,
+            17,
+            30
+          ],
+          "comp_lum": 205.1,
+          "ring_med_lum": 32.8,
+          "dark_perimeter_ratio": 0.853
+        },
+        {
+          "area_px": 2194,
+          "uv_center": [
+            0.6334,
+            0.2502
+          ],
+          "bbox_px": [
+            609,
+            744,
+            82,
+            44
+          ],
+          "comp_lum": 203.2,
+          "ring_med_lum": 36.7,
+          "dark_perimeter_ratio": 0.747
+        },
+        {
+          "area_px": 159,
+          "uv_center": [
+            0.3818,
+            0.1884
+          ],
+          "bbox_px": [
+            384,
+            823,
+            15,
+            16
+          ],
+          "comp_lum": 236.4,
+          "ring_med_lum": 22.0,
+          "dark_perimeter_ratio": 0.879
+        },
+        {
+          "area_px": 150,
+          "uv_center": [
+            0.3397,
+            0.1732
+          ],
+          "bbox_px": [
+            339,
+            834,
+            16,
+            25
+          ],
+          "comp_lum": 191.9,
+          "ring_med_lum": 63.7,
+          "dark_perimeter_ratio": 0.71
+        },
+        {
+          "area_px": 183,
+          "uv_center": [
+            0.4284,
+            0.1574
+          ],
+          "bbox_px": [
+            430,
+            853,
+            15,
+            23
+          ],
+          "comp_lum": 192.2,
+          "ring_med_lum": 37.9,
+          "dark_perimeter_ratio": 0.9
+        },
+        {
+          "area_px": 3249,
+          "uv_center": [
+            0.6436,
+            0.1057
+          ],
+          "bbox_px": [
+            629,
+            867,
+            60,
+            93
+          ],
+          "comp_lum": 224.6,
+          "ring_med_lum": 22.8,
+          "dark_perimeter_ratio": 0.853
+        },
+        {
+          "area_px": 58,
+          "uv_center": [
+            0.1514,
+            0.1412
+          ],
+          "bbox_px": [
+            151,
+            874,
+            9,
+            11
+          ],
+          "comp_lum": 186.1,
+          "ring_med_lum": 21.2,
+          "dark_perimeter_ratio": 0.79
+        },
+        {
+          "area_px": 90,
+          "uv_center": [
+            0.3805,
+            0.1436
+          ],
+          "bbox_px": [
+            383,
+            874,
+            15,
+            8
+          ],
+          "comp_lum": 193.4,
+          "ring_med_lum": 52.8,
+          "dark_perimeter_ratio": 0.765
+        },
+        {
+          "area_px": 2403,
+          "uv_center": [
+            0.4221,
+            0.0644
+          ],
+          "bbox_px": [
+            394,
+            926,
+            71,
+            63
+          ],
+          "comp_lum": 205.3,
+          "ring_med_lum": 43.5,
+          "dark_perimeter_ratio": 0.828
+        },
+        {
+          "area_px": 121,
+          "uv_center": [
+            0.7788,
+            0.0631
+          ],
+          "bbox_px": [
+            793,
+            952,
+            10,
+            16
+          ],
+          "comp_lum": 197.7,
+          "ring_med_lum": 34.3,
+          "dark_perimeter_ratio": 0.81
+        },
+        {
+          "area_px": 128,
+          "uv_center": [
+            0.4089,
+            0.0239
+          ],
+          "bbox_px": [
+            411,
+            995,
+            16,
+            11
+          ],
+          "comp_lum": 198.1,
+          "ring_med_lum": 65.1,
+          "dark_perimeter_ratio": 0.842
+        }
+      ],
+      "dark_3d_uv_islands_repaired": 18,
+      "blocked_by_photo_guard_3d": 0
+    }
+  },
+  "_config_hash": "68aa9ff3a73004bd",
+  "status": "OK"
+}

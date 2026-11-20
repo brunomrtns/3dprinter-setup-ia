@@ -280,7 +280,9 @@ def main() -> int:
                         )
                         ok = True
                         break
-                    except torch.cuda.OutOfMemoryError as e:
+                    except (torch.cuda.OutOfMemoryError, RuntimeError) as e:
+                        if isinstance(e, RuntimeError) and "out of memory" not in str(e).lower():
+                            raise
                         gc.collect()
                         torch.cuda.empty_cache()
                         msg = f"{vid} OOM at res={res_try}/tex={tex_try}: {str(e)[:120]}"

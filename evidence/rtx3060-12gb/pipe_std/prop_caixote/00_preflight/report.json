@@ -1,0 +1,23 @@
+{
+  "uv_obj": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/prop_caixote/work/pbr/uv.obj",
+  "unwrap": {
+    "uv_obj": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/prop_caixote/work/pbr/uv.obj",
+    "unwrapped_now": true,
+    "faces_before": 250000,
+    "faces_after": 250000,
+    "verts_after": 156343,
+    "unwrap_s": 72.99
+  },
+  "preflight": {
+    "has_uv": true,
+    "verts": 156343,
+    "faces": 250000,
+    "num_islands": 1625,
+    "min_island_area_px": 1,
+    "uv_utilization_pct": 67.26,
+    "overlap_pct": 42.49,
+    "warning": "UV muito fragmentado (ilhas mínimas <= 1px) — qualidade de pintura limitada por UV. | UV com sobreposição alta (42.49%) — qualidade de pintura limitada por UV."
+  },
+  "_config_hash": "130dd692a909d538",
+  "status": "OK"
+}

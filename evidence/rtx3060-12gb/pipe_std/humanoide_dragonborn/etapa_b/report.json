@@ -1,0 +1,6 @@
+{
+  "skipped": true,
+  "reason": "tier=single (photo_blend only runs on tier='photos')",
+  "_config_hash": "13ca08ba2a3d763c",
+  "status": "OK"
+}

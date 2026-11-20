@@ -38,3 +38,7 @@ desktop.ini
 
 # Local GLB backups for rollback
 evidence/**/backup_prev/*.glb
+
+# Universal pipeline intermediate work meshes and staged GLBs
+evidence/**/work/
+evidence/**/staged_models/

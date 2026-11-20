@@ -4,6 +4,8 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const MODES = [
+  'pbr_8k',
+  'pbr_4k',
   'mv_a_8k',
   'mv_b_8k',
   'mv_a_4k',
@@ -31,6 +33,8 @@ const MODES = [
   'triposr',
 ];
 const MODE_LABEL = {
+  pbr_8k: '★ Pintura PBR (8K)',
+  pbr_4k: 'Pintura PBR (4K)',
   mv_a_8k: '★ Grade 2x2 (8K)',
   mv_b_8k: '★ Fotos Reais (8K)',
   mv_a_4k: 'Grade 2x2 (4K Game-Ready)',

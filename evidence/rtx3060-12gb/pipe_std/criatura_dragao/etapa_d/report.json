@@ -1,0 +1,154 @@
+{
+  "stage": "D_eval_quality",
+  "asset_id": "criatura_dragao",
+  "variants": {
+    "pbr": {
+      "before": {
+        "texture_size": [
+          512,
+          512
+        ],
+        "texture_laplacian_var": 0.0,
+        "texture_sat_pct": 6.27,
+        "patch_count": 0,
+        "patch_texels_pct": 0.0,
+        "views_laplacian_mean": 2735.69,
+        "photo_consistency": {
+          "front": {
+            "mae_255": 95.26,
+            "ssim": 0.0235
+          }
+        },
+        "views": {
+          "front": {
+            "laplacian_var": 2480.51,
+            "sat_pct": 6.28,
+            "lum_mean": 195.4,
+            "dark_lt80_pct": 0.0,
+            "bright_gt180_pct": 100.0
+          },
+          "back": {
+            "laplacian_var": 2480.26,
+            "sat_pct": 6.28,
+            "lum_mean": 195.4,
+            "dark_lt80_pct": 0.0,
+            "bright_gt180_pct": 100.0
+          },
+          "left": {
+            "laplacian_var": 2147.29,
+            "sat_pct": 6.28,
+            "lum_mean": 195.4,
+            "dark_lt80_pct": 0.0,
+            "bright_gt180_pct": 100.0
+          },
+          "right": {
+            "laplacian_var": 2146.05,
+            "sat_pct": 6.28,
+            "lum_mean": 195.4,
+            "dark_lt80_pct": 0.0,
+            "bright_gt180_pct": 100.0
+          },
+          "top": {
+            "laplacian_var": 2159.75,
+            "sat_pct": 6.28,
+            "lum_mean": 195.4,
+            "dark_lt80_pct": 0.0,
+            "bright_gt180_pct": 100.0
+          },
+          "three_quarter_front": {
+            "laplacian_var": 3731.07,
+            "sat_pct": 6.28,
+            "lum_mean": 195.4,
+            "dark_lt80_pct": 0.0,
+            "bright_gt180_pct": 100.0
+          },
+          "three_quarter_back": {
+            "laplacian_var": 4004.89,
+            "sat_pct": 6.28,
+            "lum_mean": 195.4,
+            "dark_lt80_pct": 0.0,
+            "bright_gt180_pct": 100.0
+          }
+        }
+      },
+      "final": {
+        "texture_size": [
+          1024,
+          1024
+        ],
+        "texture_laplacian_var": 1389.0,
+        "texture_sat_pct": 83.75,
+        "patch_count": 11,
+        "patch_texels_pct": 0.0274,
+        "views_laplacian_mean": 2522.61,
+        "photo_consistency": {
+          "front": {
+            "mae_255": 66.88,
+            "ssim": 0.0987
+          }
+        },
+        "views": {
+          "front": {
+            "laplacian_var": 2208.07,
+            "sat_pct": 84.97,
+            "lum_mean": 82.7,
+            "dark_lt80_pct": 61.0,
+            "bright_gt180_pct": 9.7
+          },
+          "back": {
+            "laplacian_var": 2092.48,
+            "sat_pct": 84.2,
+            "lum_mean": 73.4,
+            "dark_lt80_pct": 60.6,
+            "bright_gt180_pct": 3.6
+          },
+          "left": {
+            "laplacian_var": 1616.89,
+            "sat_pct": 86.5,
+            "lum_mean": 84.3,
+            "dark_lt80_pct": 54.9,
+            "bright_gt180_pct": 4.9
+          },
+          "right": {
+            "laplacian_var": 2285.79,
+            "sat_pct": 81.2,
+            "lum_mean": 68.4,
+            "dark_lt80_pct": 64.1,
+            "bright_gt180_pct": 5.5
+          },
+          "top": {
+            "laplacian_var": 2218.09,
+            "sat_pct": 80.1,
+            "lum_mean": 92.1,
+            "dark_lt80_pct": 57.1,
+            "bright_gt180_pct": 14.0
+          },
+          "three_quarter_front": {
+            "laplacian_var": 3639.5,
+            "sat_pct": 84.64,
+            "lum_mean": 83.7,
+            "dark_lt80_pct": 63.8,
+            "bright_gt180_pct": 9.4
+          },
+          "three_quarter_back": {
+            "laplacian_var": 3597.42,
+            "sat_pct": 84.82,
+            "lum_mean": 63.0,
+            "dark_lt80_pct": 69.9,
+            "bright_gt180_pct": 3.6
+          }
+        }
+      },
+      "gt_sat_mean_pct": 54.05,
+      "sharpness_tex_ratio": 1389000000.0,
+      "sharpness_views_ratio": 0.92,
+      "wins_vs_prev": false,
+      "crops": {
+        "detail_center_front": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/criatura_dragao/renders/crops/pbr_detail_center_front.png",
+        "detail_center_back": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/criatura_dragao/renders/crops/pbr_detail_center_back.png"
+      }
+    }
+  },
+  "_config_hash": "68aa9ff3a73004bd",
+  "status": "OK"
+}

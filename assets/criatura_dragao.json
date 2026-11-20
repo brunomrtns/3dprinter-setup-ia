@@ -1,0 +1,22 @@
+{
+  "id": "criatura_dragao",
+  "variant_id": "pbr",
+  "mesh": "/home/bruno/printer3d-work/modelos3d-site/models/criatura_dragao__triposg.glb",
+  "uv": "/home/bruno/printer3d-work/modelos3d-site/models/criatura_dragao__triposg.glb",
+  "tier": "single",
+  "input_images": [
+    "/home/bruno/printer3d-work/testset_preproc/criatura_dragao_preproc.png"
+  ],
+  "outputs": {
+    "mode_8k": "pbr_8k",
+    "mode_4k": "pbr_4k",
+    "glb_names": ["criatura_dragao__pbr_8k.glb", "criatura_dragao__pbr_4k.glb"]
+  },
+  "qa": {
+    "lap_min": 1200.0,
+    "patch_max_pct": 0.05,
+    "sat_min_pct": 5.0,
+    "sat_max_pct": 85.0
+  },
+  "notes": "Asset de validação 2/3 (criatura — asas, cauda, chifres e alta concavidade)."
+}

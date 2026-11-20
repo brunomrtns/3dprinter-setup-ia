@@ -1,0 +1,76 @@
+{
+  "stage": "E_pack_glb",
+  "asset_id": "criatura_dragao",
+  "seed": 42,
+  "variants": {
+    "pbr": {
+      "tempo_s": 62.19,
+      "sat_before_pct": 83.618,
+      "sat_after_pct": 83.063,
+      "sat_rel_loss_pct": 0.66,
+      "resat_applied": false,
+      "sat_final_8k_pct": 83.063,
+      "glb_8k": {
+        "glb": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/criatura_dragao/work/pbr/criatura_dragao__pbr_8k.glb",
+        "size_mb": 20.38,
+        "size_bytes": 21369160,
+        "jpeg_mb": 10.62,
+        "has_pbr_mr": true,
+        "tex_px": [
+          8192,
+          8192
+        ]
+      },
+      "glb_4k": {
+        "glb": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/criatura_dragao/work/pbr/criatura_dragao__pbr_4k.glb",
+        "size_mb": 13.19,
+        "size_bytes": 13835564,
+        "jpeg_mb": 3.44,
+        "has_pbr_mr": true,
+        "tex_px": [
+          4096,
+          4096
+        ]
+      }
+    }
+  },
+  "tempo_total_s": 63.11,
+  "vram_samples_10s": [
+    [
+      0.1,
+      2752
+    ],
+    [
+      10.1,
+      8864
+    ],
+    [
+      20.2,
+      8864
+    ],
+    [
+      30.3,
+      8864
+    ],
+    [
+      40.3,
+      8864
+    ],
+    [
+      50.4,
+      8866
+    ],
+    [
+      60.4,
+      8864
+    ],
+    [
+      63.2,
+      2868
+    ]
+  ],
+  "vram_pico_mib": 8866,
+  "vram_baseline_mib": 2752,
+  "_config_hash": "68aa9ff3a73004bd",
+  "status": "OK"
+}

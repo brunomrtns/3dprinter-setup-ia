@@ -1,0 +1,173 @@
+{
+  "stage": "A_hunyuan_native",
+  "asset_id": "humanoide_dragonborn",
+  "seed": 42,
+  "target_texture_size": 2048,
+  "vram_limit_mib": 11000,
+  "variants": {
+    "pbr": {
+      "texture_path": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/humanoide_dragonborn/etapa_a/pbr_native_1024.png",
+      "texture_size": 1024,
+      "per_view_sr": true,
+      "num_uv_islands": 1152,
+      "gutter_px": 24,
+      "tempo_s": 146.32,
+      "laplacian_var": 1195.1,
+      "sat_pct": 70.77
+    }
+  },
+  "notes": [
+    "pbr: peak VRAM 11872 MiB > limit 11000 MiB -> falling back to 1024"
+  ],
+  "tempo_total_s": 347.47,
+  "vram_samples_10s": [
+    [
+      0.1,
+      2993
+    ],
+    [
+      10.2,
+      3775
+    ],
+    [
+      20.2,
+      3151
+    ],
+    [
+      30.3,
+      3153
+    ],
+    [
+      40.3,
+      10256
+    ],
+    [
+      50.4,
+      11870
+    ],
+    [
+      60.5,
+      11870
+    ],
+    [
+      70.5,
+      11870
+    ],
+    [
+      80.5,
+      11870
+    ],
+    [
+      90.6,
+      11870
+    ],
+    [
+      100.7,
+      11872
+    ],
+    [
+      110.7,
+      11872
+    ],
+    [
+      120.8,
+      11870
+    ],
+    [
+      130.8,
+      11863
+    ],
+    [
+      140.9,
+      11870
+    ],
+    [
+      150.9,
+      11870
+    ],
+    [
+      161.0,
+      11872
+    ],
+    [
+      171.0,
+      11872
+    ],
+    [
+      181.1,
+      2878
+    ],
+    [
+      191.2,
+      3807
+    ],
+    [
+      201.3,
+      3031
+    ],
+    [
+      211.3,
+      2925
+    ],
+    [
+      221.4,
+      11249
+    ],
+    [
+      231.4,
+      11936
+    ],
+    [
+      241.5,
+      11936
+    ],
+    [
+      251.5,
+      11929
+    ],
+    [
+      261.6,
+      11936
+    ],
+    [
+      271.6,
+      11936
+    ],
+    [
+      281.7,
+      11938
+    ],
+    [
+      291.7,
+      11938
+    ],
+    [
+      301.8,
+      11936
+    ],
+    [
+      311.8,
+      11936
+    ],
+    [
+      321.9,
+      11936
+    ],
+    [
+      331.9,
+      3651
+    ],
+    [
+      342.0,
+      3799
+    ],
+    [
+      347.6,
+      2985
+    ]
+  ],
+  "vram_pico_mib": 11938,
+  "vram_baseline_mib": 2993,
+  "_config_hash": "13ca08ba2a3d763c",
+  "status": "OK"
+}
