@@ -1,0 +1,350 @@
+{
+  "mv_a": {
+    "front": {
+      "vidros": {
+        "px": 47003,
+        "lum_mean": 102.3,
+        "dark_lt80_pct": 65.3,
+        "bright_gt180_pct": 32.6,
+        "sat_mean_pct": 6.07,
+        "gt_lum_mean": 95.1,
+        "gt_sat_mean_pct": 6.51,
+        "rgb_error_pct": 5.05
+      },
+      "farois": {
+        "px": 15708,
+        "lum_mean": 154.6,
+        "dark_lt80_pct": 15.4,
+        "bright_gt180_pct": 52.6,
+        "sat_mean_pct": 4.33,
+        "gt_lum_mean": 147.6,
+        "gt_sat_mean_pct": 5.32,
+        "rgb_error_pct": 10.43
+      },
+      "grade": {
+        "px": 48577,
+        "lum_mean": 86.0,
+        "dark_lt80_pct": 61.3,
+        "bright_gt180_pct": 18.3,
+        "sat_mean_pct": 7.81,
+        "gt_lum_mean": 84.6,
+        "gt_sat_mean_pct": 8.63,
+        "rgb_error_pct": 4.63
+      },
+      "rodas": {
+        "px": 12210,
+        "lum_mean": 75.1,
+        "dark_lt80_pct": 66.1,
+        "bright_gt180_pct": 18.1,
+        "sat_mean_pct": 6.31,
+        "gt_lum_mean": 62.3,
+        "gt_sat_mean_pct": 7.63,
+        "rgb_error_pct": 9.69
+      },
+      "lataria": {
+        "px": 45022,
+        "lum_mean": 180.3,
+        "dark_lt80_pct": 18.0,
+        "bright_gt180_pct": 71.8,
+        "sat_mean_pct": 3.0,
+        "gt_lum_mean": 181.9,
+        "gt_sat_mean_pct": 3.33,
+        "rgb_error_pct": 13.82
+      }
+    },
+    "back": {
+      "vidros": {
+        "px": 41138,
+        "lum_mean": 93.8,
+        "dark_lt80_pct": 68.7,
+        "bright_gt180_pct": 26.0,
+        "sat_mean_pct": 6.24,
+        "gt_lum_mean": 89.5,
+        "gt_sat_mean_pct": 6.62,
+        "rgb_error_pct": 3.46
+      },
+      "farois": {
+        "px": 13774,
+        "lum_mean": 163.7,
+        "dark_lt80_pct": 17.9,
+        "bright_gt180_pct": 74.3,
+        "sat_mean_pct": 17.03,
+        "gt_lum_mean": 159.7,
+        "gt_sat_mean_pct": 19.47,
+        "rgb_error_pct": 3.18
+      },
+      "grade": {
+        "px": 27064,
+        "lum_mean": 115.9,
+        "dark_lt80_pct": 42.4,
+        "bright_gt180_pct": 35.3,
+        "sat_mean_pct": 7.53,
+        "gt_lum_mean": 97.1,
+        "gt_sat_mean_pct": 8.22,
+        "rgb_error_pct": 7.38
+      },
+      "rodas": {
+        "px": 13830,
+        "lum_mean": 75.7,
+        "dark_lt80_pct": 69.0,
+        "bright_gt180_pct": 22.8,
+        "sat_mean_pct": 8.78,
+        "gt_lum_mean": 31.8,
+        "gt_sat_mean_pct": 11.26,
+        "rgb_error_pct": 9.26
+      },
+      "lataria": {
+        "px": 74424,
+        "lum_mean": 150.9,
+        "dark_lt80_pct": 28.9,
+        "bright_gt180_pct": 60.1,
+        "sat_mean_pct": 6.36,
+        "gt_lum_mean": 152.4,
+        "gt_sat_mean_pct": 8.05,
+        "rgb_error_pct": 9.73
+      }
+    },
+    "left": {
+      "rodas": {
+        "px": 41261,
+        "lum_mean": 76.6,
+        "dark_lt80_pct": 64.4,
+        "bright_gt180_pct": 18.7,
+        "sat_mean_pct": 11.14,
+        "gt_lum_mean": 69.7,
+        "gt_sat_mean_pct": 12.27,
+        "rgb_error_pct": 3.77
+      },
+      "vidros": {
+        "px": 44204,
+        "lum_mean": 92.5,
+        "dark_lt80_pct": 65.5,
+        "bright_gt180_pct": 29.5,
+        "sat_mean_pct": 8.15,
+        "gt_lum_mean": 97.2,
+        "gt_sat_mean_pct": 8.04,
+        "rgb_error_pct": 3.35
+      },
+      "farois": {
+        "px": 10876,
+        "lum_mean": 161.8,
+        "dark_lt80_pct": 20.4,
+        "bright_gt180_pct": 64.6,
+        "sat_mean_pct": 9.21,
+        "gt_lum_mean": 163.9,
+        "gt_sat_mean_pct": 8.04,
+        "rgb_error_pct": 6.23
+      },
+      "grade": {
+        "px": 8030,
+        "lum_mean": 97.1,
+        "dark_lt80_pct": 52.5,
+        "bright_gt180_pct": 15.5,
+        "sat_mean_pct": 4.3,
+        "gt_lum_mean": 72.8,
+        "gt_sat_mean_pct": 5.25,
+        "rgb_error_pct": 8.5
+      },
+      "lataria": {
+        "px": 62501,
+        "lum_mean": 176.4,
+        "dark_lt80_pct": 13.9,
+        "bright_gt180_pct": 77.2,
+        "sat_mean_pct": 3.75,
+        "gt_lum_mean": 181.6,
+        "gt_sat_mean_pct": 3.79,
+        "rgb_error_pct": 4.07
+      }
+    },
+    "top": {
+      "vidros": {
+        "px": 55965,
+        "lum_mean": 122.0,
+        "dark_lt80_pct": 55.2,
+        "bright_gt180_pct": 42.7,
+        "sat_mean_pct": 4.98
+      },
+      "lataria": {
+        "px": 153249,
+        "lum_mean": 189.7,
+        "dark_lt80_pct": 14.2,
+        "bright_gt180_pct": 79.7,
+        "sat_mean_pct": 2.73
+      }
+    }
+  },
+  "mv_b": {
+    "front": {
+      "vidros": {
+        "px": 47042,
+        "lum_mean": 130.7,
+        "dark_lt80_pct": 45.3,
+        "bright_gt180_pct": 43.7,
+        "sat_mean_pct": 3.74,
+        "gt_lum_mean": 120.8,
+        "gt_sat_mean_pct": 4.19,
+        "rgb_error_pct": 7.83
+      },
+      "farois": {
+        "px": 15708,
+        "lum_mean": 155.0,
+        "dark_lt80_pct": 15.3,
+        "bright_gt180_pct": 52.3,
+        "sat_mean_pct": 4.82,
+        "gt_lum_mean": 144.0,
+        "gt_sat_mean_pct": 6.54,
+        "rgb_error_pct": 8.95
+      },
+      "grade": {
+        "px": 48577,
+        "lum_mean": 88.0,
+        "dark_lt80_pct": 61.4,
+        "bright_gt180_pct": 26.2,
+        "sat_mean_pct": 8.94,
+        "gt_lum_mean": 82.5,
+        "gt_sat_mean_pct": 10.0,
+        "rgb_error_pct": 5.75
+      },
+      "rodas": {
+        "px": 13242,
+        "lum_mean": 67.5,
+        "dark_lt80_pct": 69.0,
+        "bright_gt180_pct": 14.9,
+        "sat_mean_pct": 6.18,
+        "gt_lum_mean": 59.7,
+        "gt_sat_mean_pct": 7.69,
+        "rgb_error_pct": 8.05
+      },
+      "lataria": {
+        "px": 43536,
+        "lum_mean": 185.3,
+        "dark_lt80_pct": 16.8,
+        "bright_gt180_pct": 73.8,
+        "sat_mean_pct": 2.3,
+        "gt_lum_mean": 189.0,
+        "gt_sat_mean_pct": 3.1,
+        "rgb_error_pct": 11.86
+      }
+    },
+    "back": {
+      "vidros": {
+        "px": 41138,
+        "lum_mean": 111.6,
+        "dark_lt80_pct": 58.7,
+        "bright_gt180_pct": 28.9,
+        "sat_mean_pct": 4.38,
+        "gt_lum_mean": 108.1,
+        "gt_sat_mean_pct": 4.71,
+        "rgb_error_pct": 7.97
+      },
+      "farois": {
+        "px": 13774,
+        "lum_mean": 166.7,
+        "dark_lt80_pct": 18.7,
+        "bright_gt180_pct": 74.1,
+        "sat_mean_pct": 15.91,
+        "gt_lum_mean": 164.3,
+        "gt_sat_mean_pct": 17.4,
+        "rgb_error_pct": 2.68
+      },
+      "grade": {
+        "px": 26613,
+        "lum_mean": 110.4,
+        "dark_lt80_pct": 47.0,
+        "bright_gt180_pct": 33.0,
+        "sat_mean_pct": 5.39,
+        "gt_lum_mean": 98.7,
+        "gt_sat_mean_pct": 5.75,
+        "rgb_error_pct": 5.5
+      },
+      "rodas": {
+        "px": 14942,
+        "lum_mean": 61.2,
+        "dark_lt80_pct": 74.8,
+        "bright_gt180_pct": 14.7,
+        "sat_mean_pct": 6.08,
+        "gt_lum_mean": 32.0,
+        "gt_sat_mean_pct": 7.14,
+        "rgb_error_pct": 4.93
+      },
+      "lataria": {
+        "px": 74064,
+        "lum_mean": 150.9,
+        "dark_lt80_pct": 27.3,
+        "bright_gt180_pct": 57.2,
+        "sat_mean_pct": 8.96,
+        "gt_lum_mean": 152.9,
+        "gt_sat_mean_pct": 10.22,
+        "rgb_error_pct": 9.57
+      }
+    },
+    "left": {
+      "rodas": {
+        "px": 44807,
+        "lum_mean": 77.0,
+        "dark_lt80_pct": 64.0,
+        "bright_gt180_pct": 18.1,
+        "sat_mean_pct": 7.88,
+        "gt_lum_mean": 71.0,
+        "gt_sat_mean_pct": 8.7,
+        "rgb_error_pct": 3.53
+      },
+      "vidros": {
+        "px": 44031,
+        "lum_mean": 135.5,
+        "dark_lt80_pct": 46.5,
+        "bright_gt180_pct": 44.5,
+        "sat_mean_pct": 4.0,
+        "gt_lum_mean": 138.4,
+        "gt_sat_mean_pct": 4.05,
+        "rgb_error_pct": 3.85
+      },
+      "farois": {
+        "px": 10754,
+        "lum_mean": 163.2,
+        "dark_lt80_pct": 20.1,
+        "bright_gt180_pct": 64.6,
+        "sat_mean_pct": 8.17,
+        "gt_lum_mean": 168.6,
+        "gt_sat_mean_pct": 6.25,
+        "rgb_error_pct": 6.16
+      },
+      "grade": {
+        "px": 6333,
+        "lum_mean": 82.5,
+        "dark_lt80_pct": 55.1,
+        "bright_gt180_pct": 1.3,
+        "sat_mean_pct": 2.81,
+        "gt_lum_mean": 80.6,
+        "gt_sat_mean_pct": 2.87,
+        "rgb_error_pct": 3.48
+      },
+      "lataria": {
+        "px": 61564,
+        "lum_mean": 180.8,
+        "dark_lt80_pct": 12.7,
+        "bright_gt180_pct": 79.2,
+        "sat_mean_pct": 2.41,
+        "gt_lum_mean": 183.8,
+        "gt_sat_mean_pct": 2.24,
+        "rgb_error_pct": 3.36
+      }
+    },
+    "top": {
+      "vidros": {
+        "px": 55965,
+        "lum_mean": 147.1,
+        "dark_lt80_pct": 37.2,
+        "bright_gt180_pct": 52.4,
+        "sat_mean_pct": 2.85
+      },
+      "lataria": {
+        "px": 155593,
+        "lum_mean": 195.8,
+        "dark_lt80_pct": 12.3,
+        "bright_gt180_pct": 80.2,
+        "sat_mean_pct": 1.85
+      }
+    }
+  }
+}

@@ -1,0 +1,1662 @@
+{
+  "run": "fox_aipaint",
+  "timestamp_utc": "2026-11-20T18:05:39.841834+00:00",
+  "seed": 42,
+  "gpu": "NVIDIA GeForce RTX 3060 12GB",
+  "caminho_usado": "AI_1024",
+  "fallback_semantico_usado": false,
+  "override_rodas_c_plus_usado": false,
+  "base_meshes_reusadas": {
+    "commit_origem": "954e4d8",
+    "mv_a_obj": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/uv.obj",
+    "mv_b_obj": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/uv.obj",
+    "malha_uv_manifest_intactos": true
+  },
+  "etapa_0_color_audit": {
+    "etapa_0a_saturacao": {
+      "mv_a": {
+        "textura_2k_sat_pct": 3.9,
+        "fotos_gt_sat_pct": 7.36,
+        "queda_relativa_pct": 47.01,
+        "alerta_gt_15pct": true,
+        "causa": "~46-50% dos texels UV fora da cobertura receberam fill chapado cinza-neutro (S ≈ 0.8%, RGB ~[225,223,224]), diluindo a saturação média da textura pela metade."
+      },
+      "mv_b": {
+        "textura_2k_sat_pct": 2.72,
+        "fotos_gt_sat_pct": 6.51,
+        "queda_relativa_pct": 58.22,
+        "alerta_gt_15pct": true,
+        "causa": "~46-50% dos texels UV fora da cobertura receberam fill chapado cinza-neutro (S ≈ 0.8%, RGB ~[225,223,224]), diluindo a saturação média da textura pela metade."
+      }
+    },
+    "etapa_0b_espaco_cor": {
+      "mv_a": {
+        "red_dominant_px": 14950,
+        "blue_dominant_px": 0,
+        "bgr_swap_detected": false,
+        "double_gamma_detected": false,
+        "nota": "PIL lê RGB, cv2.inpaint é independente de canal, PIL salva RGB; nenhuma conversão linear->sRGB duplicada no bake."
+      },
+      "mv_b": {
+        "red_dominant_px": 17409,
+        "blue_dominant_px": 6323,
+        "bgr_swap_detected": false,
+        "double_gamma_detected": false,
+        "nota": "PIL lê RGB, cv2.inpaint é independente de canal, PIL salva RGB; nenhuma conversão linear->sRGB duplicada no bake."
+      }
+    },
+    "etapa_0c_blender_standard": {
+      "mv_a": {
+        "view_transform": "Standard",
+        "look": "None",
+        "views": {
+          "front": {
+            "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/before/mv_a_before_front.png",
+            "sil_px": 108521,
+            "dark_pct": 47.01,
+            "mud_pct": 11.92,
+            "bright_pct": 41.06,
+            "ok_dark_4_20": false,
+            "ok_mud_lt_10": false,
+            "pass": false
+          },
+          "back": {
+            "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/before/mv_a_before_back.png",
+            "sil_px": 108521,
+            "dark_pct": 42.55,
+            "mud_pct": 9.97,
+            "bright_pct": 47.47,
+            "ok_dark_4_20": false,
+            "ok_mud_lt_10": true,
+            "pass": false
+          },
+          "left": {
+            "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/before/mv_a_before_left.png",
+            "sil_px": 63012,
+            "dark_pct": 42.36,
+            "mud_pct": 10.34,
+            "bright_pct": 47.31,
+            "ok_dark_4_20": false,
+            "ok_mud_lt_10": false,
+            "pass": false
+          },
+          "top": {
+            "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/before/mv_a_before_top.png",
+            "sil_px": 92660,
+            "dark_pct": 25.54,
+            "mud_pct": 4.1,
+            "bright_pct": 70.37,
+            "ok_dark_4_20": false,
+            "ok_mud_lt_10": true,
+            "pass": false
+          }
+        }
+      },
+      "mv_b": {
+        "view_transform": "Standard",
+        "look": "None",
+        "views": {
+          "front": {
+            "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/before/mv_b_before_front.png",
+            "sil_px": 112214,
+            "dark_pct": 41.54,
+            "mud_pct": 12.24,
+            "bright_pct": 46.22,
+            "ok_dark_4_20": false,
+            "ok_mud_lt_10": false,
+            "pass": false
+          },
+          "back": {
+            "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/before/mv_b_before_back.png",
+            "sil_px": 112214,
+            "dark_pct": 40.91,
+            "mud_pct": 12.51,
+            "bright_pct": 46.58,
+            "ok_dark_4_20": false,
+            "ok_mud_lt_10": false,
+            "pass": false
+          },
+          "left": {
+            "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/before/mv_b_before_left.png",
+            "sil_px": 64134,
+            "dark_pct": 37.33,
+            "mud_pct": 11.54,
+            "bright_pct": 51.12,
+            "ok_dark_4_20": false,
+            "ok_mud_lt_10": false,
+            "pass": false
+          },
+          "top": {
+            "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/before/mv_b_before_top.png",
+            "sil_px": 90654,
+            "dark_pct": 19.66,
+            "mud_pct": 6.68,
+            "bright_pct": 73.67,
+            "ok_dark_4_20": true,
+            "ok_mud_lt_10": true,
+            "pass": true
+          }
+        }
+      }
+    },
+    "etapa_0d_viewer_srgb": {
+      "achado": "app.js já tem renderer.outputColorSpace = THREE.SRGBColorSpace, MAS (1) não forçava tex.colorSpace = THREE.SRGBColorSpace ao recriar MeshStandardMaterial, (2) usava metalness=0.08 + HemisphereLight chão escuro 0x1a1d22 + rim azulado 0x88aaff, deixando carro branco com aparência cinza-azulada lavada.",
+      "correcao_planejada": "Forçar tex.colorSpace = THREE.SRGBColorSpace, renderer.toneMapping = THREE.NoToneMapping, metalness = 0.0, roughness = 0.65 em GLBs texturizados e luz de preenchimento neutra."
+    }
+  },
+  "etapa_a_region_diag_before": {
+    "mv_a": {
+      "front": {
+        "vidros": {
+          "px": 47003,
+          "lum_mean": 102.3,
+          "dark_lt80_pct": 65.3,
+          "bright_gt180_pct": 32.6,
+          "sat_mean_pct": 6.07,
+          "gt_lum_mean": 95.1,
+          "gt_sat_mean_pct": 6.51,
+          "rgb_error_pct": 5.05
+        },
+        "farois": {
+          "px": 15708,
+          "lum_mean": 154.6,
+          "dark_lt80_pct": 15.4,
+          "bright_gt180_pct": 52.6,
+          "sat_mean_pct": 4.33,
+          "gt_lum_mean": 147.6,
+          "gt_sat_mean_pct": 5.32,
+          "rgb_error_pct": 10.43
+        },
+        "grade": {
+          "px": 48577,
+          "lum_mean": 86.0,
+          "dark_lt80_pct": 61.3,
+          "bright_gt180_pct": 18.3,
+          "sat_mean_pct": 7.81,
+          "gt_lum_mean": 84.6,
+          "gt_sat_mean_pct": 8.63,
+          "rgb_error_pct": 4.63
+        },
+        "rodas": {
+          "px": 12210,
+          "lum_mean": 75.1,
+          "dark_lt80_pct": 66.1,
+          "bright_gt180_pct": 18.1,
+          "sat_mean_pct": 6.31,
+          "gt_lum_mean": 62.3,
+          "gt_sat_mean_pct": 7.63,
+          "rgb_error_pct": 9.69
+        },
+        "lataria": {
+          "px": 45022,
+          "lum_mean": 180.3,
+          "dark_lt80_pct": 18.0,
+          "bright_gt180_pct": 71.8,
+          "sat_mean_pct": 3.0,
+          "gt_lum_mean": 181.9,
+          "gt_sat_mean_pct": 3.33,
+          "rgb_error_pct": 13.82
+        }
+      },
+      "back": {
+        "vidros": {
+          "px": 41138,
+          "lum_mean": 93.8,
+          "dark_lt80_pct": 68.7,
+          "bright_gt180_pct": 26.0,
+          "sat_mean_pct": 6.24,
+          "gt_lum_mean": 89.5,
+          "gt_sat_mean_pct": 6.62,
+          "rgb_error_pct": 3.46
+        },
+        "farois": {
+          "px": 13774,
+          "lum_mean": 163.7,
+          "dark_lt80_pct": 17.9,
+          "bright_gt180_pct": 74.3,
+          "sat_mean_pct": 17.03,
+          "gt_lum_mean": 159.7,
+          "gt_sat_mean_pct": 19.47,
+          "rgb_error_pct": 3.18
+        },
+        "grade": {
+          "px": 27064,
+          "lum_mean": 115.9,
+          "dark_lt80_pct": 42.4,
+          "bright_gt180_pct": 35.3,
+          "sat_mean_pct": 7.53,
+          "gt_lum_mean": 97.1,
+          "gt_sat_mean_pct": 8.22,
+          "rgb_error_pct": 7.38
+        },
+        "rodas": {
+          "px": 13830,
+          "lum_mean": 75.7,
+          "dark_lt80_pct": 69.0,
+          "bright_gt180_pct": 22.8,
+          "sat_mean_pct": 8.78,
+          "gt_lum_mean": 31.8,
+          "gt_sat_mean_pct": 11.26,
+          "rgb_error_pct": 9.26
+        },
+        "lataria": {
+          "px": 74424,
+          "lum_mean": 150.9,
+          "dark_lt80_pct": 28.9,
+          "bright_gt180_pct": 60.1,
+          "sat_mean_pct": 6.36,
+          "gt_lum_mean": 152.4,
+          "gt_sat_mean_pct": 8.05,
+          "rgb_error_pct": 9.73
+        }
+      },
+      "left": {
+        "rodas": {
+          "px": 41261,
+          "lum_mean": 76.6,
+          "dark_lt80_pct": 64.4,
+          "bright_gt180_pct": 18.7,
+          "sat_mean_pct": 11.14,
+          "gt_lum_mean": 69.7,
+          "gt_sat_mean_pct": 12.27,
+          "rgb_error_pct": 3.77
+        },
+        "vidros": {
+          "px": 44204,
+          "lum_mean": 92.5,
+          "dark_lt80_pct": 65.5,
+          "bright_gt180_pct": 29.5,
+          "sat_mean_pct": 8.15,
+          "gt_lum_mean": 97.2,
+          "gt_sat_mean_pct": 8.04,
+          "rgb_error_pct": 3.35
+        },
+        "farois": {
+          "px": 10876,
+          "lum_mean": 161.8,
+          "dark_lt80_pct": 20.4,
+          "bright_gt180_pct": 64.6,
+          "sat_mean_pct": 9.21,
+          "gt_lum_mean": 163.9,
+          "gt_sat_mean_pct": 8.04,
+          "rgb_error_pct": 6.23
+        },
+        "grade": {
+          "px": 8030,
+          "lum_mean": 97.1,
+          "dark_lt80_pct": 52.5,
+          "bright_gt180_pct": 15.5,
+          "sat_mean_pct": 4.3,
+          "gt_lum_mean": 72.8,
+          "gt_sat_mean_pct": 5.25,
+          "rgb_error_pct": 8.5
+        },
+        "lataria": {
+          "px": 62501,
+          "lum_mean": 176.4,
+          "dark_lt80_pct": 13.9,
+          "bright_gt180_pct": 77.2,
+          "sat_mean_pct": 3.75,
+          "gt_lum_mean": 181.6,
+          "gt_sat_mean_pct": 3.79,
+          "rgb_error_pct": 4.07
+        }
+      },
+      "top": {
+        "vidros": {
+          "px": 55965,
+          "lum_mean": 122.0,
+          "dark_lt80_pct": 55.2,
+          "bright_gt180_pct": 42.7,
+          "sat_mean_pct": 4.98
+        },
+        "lataria": {
+          "px": 153249,
+          "lum_mean": 189.7,
+          "dark_lt80_pct": 14.2,
+          "bright_gt180_pct": 79.7,
+          "sat_mean_pct": 2.73
+        }
+      }
+    },
+    "mv_b": {
+      "front": {
+        "vidros": {
+          "px": 47042,
+          "lum_mean": 130.7,
+          "dark_lt80_pct": 45.3,
+          "bright_gt180_pct": 43.7,
+          "sat_mean_pct": 3.74,
+          "gt_lum_mean": 120.8,
+          "gt_sat_mean_pct": 4.19,
+          "rgb_error_pct": 7.83
+        },
+        "farois": {
+          "px": 15708,
+          "lum_mean": 155.0,
+          "dark_lt80_pct": 15.3,
+          "bright_gt180_pct": 52.3,
+          "sat_mean_pct": 4.82,
+          "gt_lum_mean": 144.0,
+          "gt_sat_mean_pct": 6.54,
+          "rgb_error_pct": 8.95
+        },
+        "grade": {
+          "px": 48577,
+          "lum_mean": 88.0,
+          "dark_lt80_pct": 61.4,
+          "bright_gt180_pct": 26.2,
+          "sat_mean_pct": 8.94,
+          "gt_lum_mean": 82.5,
+          "gt_sat_mean_pct": 10.0,
+          "rgb_error_pct": 5.75
+        },
+        "rodas": {
+          "px": 13242,
+          "lum_mean": 67.5,
+          "dark_lt80_pct": 69.0,
+          "bright_gt180_pct": 14.9,
+          "sat_mean_pct": 6.18,
+          "gt_lum_mean": 59.7,
+          "gt_sat_mean_pct": 7.69,
+          "rgb_error_pct": 8.05
+        },
+        "lataria": {
+          "px": 43536,
+          "lum_mean": 185.3,
+          "dark_lt80_pct": 16.8,
+          "bright_gt180_pct": 73.8,
+          "sat_mean_pct": 2.3,
+          "gt_lum_mean": 189.0,
+          "gt_sat_mean_pct": 3.1,
+          "rgb_error_pct": 11.86
+        }
+      },
+      "back": {
+        "vidros": {
+          "px": 41138,
+          "lum_mean": 111.6,
+          "dark_lt80_pct": 58.7,
+          "bright_gt180_pct": 28.9,
+          "sat_mean_pct": 4.38,
+          "gt_lum_mean": 108.1,
+          "gt_sat_mean_pct": 4.71,
+          "rgb_error_pct": 7.97
+        },
+        "farois": {
+          "px": 13774,
+          "lum_mean": 166.7,
+          "dark_lt80_pct": 18.7,
+          "bright_gt180_pct": 74.1,
+          "sat_mean_pct": 15.91,
+          "gt_lum_mean": 164.3,
+          "gt_sat_mean_pct": 17.4,
+          "rgb_error_pct": 2.68
+        },
+        "grade": {
+          "px": 26613,
+          "lum_mean": 110.4,
+          "dark_lt80_pct": 47.0,
+          "bright_gt180_pct": 33.0,
+          "sat_mean_pct": 5.39,
+          "gt_lum_mean": 98.7,
+          "gt_sat_mean_pct": 5.75,
+          "rgb_error_pct": 5.5
+        },
+        "rodas": {
+          "px": 14942,
+          "lum_mean": 61.2,
+          "dark_lt80_pct": 74.8,
+          "bright_gt180_pct": 14.7,
+          "sat_mean_pct": 6.08,
+          "gt_lum_mean": 32.0,
+          "gt_sat_mean_pct": 7.14,
+          "rgb_error_pct": 4.93
+        },
+        "lataria": {
+          "px": 74064,
+          "lum_mean": 150.9,
+          "dark_lt80_pct": 27.3,
+          "bright_gt180_pct": 57.2,
+          "sat_mean_pct": 8.96,
+          "gt_lum_mean": 152.9,
+          "gt_sat_mean_pct": 10.22,
+          "rgb_error_pct": 9.57
+        }
+      },
+      "left": {
+        "rodas": {
+          "px": 44807,
+          "lum_mean": 77.0,
+          "dark_lt80_pct": 64.0,
+          "bright_gt180_pct": 18.1,
+          "sat_mean_pct": 7.88,
+          "gt_lum_mean": 71.0,
+          "gt_sat_mean_pct": 8.7,
+          "rgb_error_pct": 3.53
+        },
+        "vidros": {
+          "px": 44031,
+          "lum_mean": 135.5,
+          "dark_lt80_pct": 46.5,
+          "bright_gt180_pct": 44.5,
+          "sat_mean_pct": 4.0,
+          "gt_lum_mean": 138.4,
+          "gt_sat_mean_pct": 4.05,
+          "rgb_error_pct": 3.85
+        },
+        "farois": {
+          "px": 10754,
+          "lum_mean": 163.2,
+          "dark_lt80_pct": 20.1,
+          "bright_gt180_pct": 64.6,
+          "sat_mean_pct": 8.17,
+          "gt_lum_mean": 168.6,
+          "gt_sat_mean_pct": 6.25,
+          "rgb_error_pct": 6.16
+        },
+        "grade": {
+          "px": 6333,
+          "lum_mean": 82.5,
+          "dark_lt80_pct": 55.1,
+          "bright_gt180_pct": 1.3,
+          "sat_mean_pct": 2.81,
+          "gt_lum_mean": 80.6,
+          "gt_sat_mean_pct": 2.87,
+          "rgb_error_pct": 3.48
+        },
+        "lataria": {
+          "px": 61564,
+          "lum_mean": 180.8,
+          "dark_lt80_pct": 12.7,
+          "bright_gt180_pct": 79.2,
+          "sat_mean_pct": 2.41,
+          "gt_lum_mean": 183.8,
+          "gt_sat_mean_pct": 2.24,
+          "rgb_error_pct": 3.36
+        }
+      },
+      "top": {
+        "vidros": {
+          "px": 55965,
+          "lum_mean": 147.1,
+          "dark_lt80_pct": 37.2,
+          "bright_gt180_pct": 52.4,
+          "sat_mean_pct": 2.85
+        },
+        "lataria": {
+          "px": 155593,
+          "lum_mean": 195.8,
+          "dark_lt80_pct": 12.3,
+          "bright_gt180_pct": 80.2,
+          "sat_mean_pct": 1.85
+        }
+      }
+    }
+  },
+  "etapa_c_ai_paint": {
+    "seed": 42,
+    "caminho_usado": "AI_1024",
+    "ref_images": [
+      "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R1_front.png",
+      "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R2_side.png",
+      "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R3_back.png",
+      "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R2r_right.png"
+    ],
+    "meshes": {
+      "mv_a": {
+        "raw_ai_png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/ai_textures/mv_a_ai_1024.png",
+        "bake2048_png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/bake2048.png",
+        "tex_size": 1024,
+        "ref_mode": "multi_ref_4",
+        "tempo_s": 183.89,
+        "sat_pct": 6.23
+      },
+      "mv_b": {
+        "raw_ai_png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/ai_textures/mv_b_ai_1024.png",
+        "bake2048_png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/bake2048.png",
+        "tex_size": 1024,
+        "ref_mode": "multi_ref_4",
+        "tempo_s": 145.96,
+        "sat_pct": 9.36
+      }
+    },
+    "erros": [],
+    "tempo_total_s": 336.92,
+    "vram_samples_10s": [
+      [
+        0.1,
+        1428
+      ],
+      [
+        10.2,
+        1728
+      ],
+      [
+        20.2,
+        1721
+      ],
+      [
+        30.3,
+        5983
+      ],
+      [
+        40.4,
+        9671
+      ],
+      [
+        50.4,
+        9831
+      ],
+      [
+        60.5,
+        9824
+      ],
+      [
+        70.6,
+        9824
+      ],
+      [
+        80.6,
+        9831
+      ],
+      [
+        90.7,
+        9831
+      ],
+      [
+        100.7,
+        9824
+      ],
+      [
+        110.8,
+        9824
+      ],
+      [
+        120.9,
+        9824
+      ],
+      [
+        131.0,
+        9824
+      ],
+      [
+        141.0,
+        9831
+      ],
+      [
+        151.1,
+        9824
+      ],
+      [
+        161.2,
+        9824
+      ],
+      [
+        171.2,
+        9824
+      ],
+      [
+        181.3,
+        9824
+      ],
+      [
+        191.4,
+        2633
+      ],
+      [
+        201.4,
+        2639
+      ],
+      [
+        211.4,
+        8939
+      ],
+      [
+        221.5,
+        9134
+      ],
+      [
+        231.5,
+        9427
+      ],
+      [
+        241.6,
+        9298
+      ],
+      [
+        251.6,
+        9291
+      ],
+      [
+        261.7,
+        9259
+      ],
+      [
+        271.7,
+        9195
+      ],
+      [
+        281.8,
+        9195
+      ],
+      [
+        291.8,
+        9195
+      ],
+      [
+        301.8,
+        9209
+      ],
+      [
+        311.9,
+        9202
+      ],
+      [
+        321.9,
+        9319
+      ],
+      [
+        332.0,
+        9298
+      ],
+      [
+        337.0,
+        2707
+      ]
+    ],
+    "vram_pico_mib": 9831,
+    "vram_baseline_mib": 1428
+  },
+  "etapa_e_eval_v2": {
+    "meshes": {
+      "mv_a": {
+        "texture_sat_pct": 6.63,
+        "gt_photos_sat_pct": 7.36,
+        "sat_delta_pct": -0.73,
+        "rodas_eval_ok": true,
+        "rodas_left_metrics": {
+          "px": 41261,
+          "lum_mean": 53.2,
+          "dark_lt80_pct": 75.8,
+          "bright_gt180_pct": 15.5,
+          "sat_mean_pct": 7.33,
+          "gt_lum_mean": 69.7,
+          "gt_sat_mean_pct": 12.27,
+          "rgb_error_pct": 18.31
+        },
+        "global_4views": {
+          "front": {
+            "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/final/mv_a_final_front.png",
+            "sil_px": 108521,
+            "dark_pct": 53.04,
+            "mud_pct": 10.43,
+            "bright_pct": 36.53,
+            "ok_dark_4_20": false,
+            "ok_mud_lt_10": false,
+            "pass": false
+          },
+          "back": {
+            "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/final/mv_a_final_back.png",
+            "sil_px": 108521,
+            "dark_pct": 47.09,
+            "mud_pct": 12.75,
+            "bright_pct": 40.16,
+            "ok_dark_4_20": false,
+            "ok_mud_lt_10": false,
+            "pass": false
+          },
+          "left": {
+            "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/final/mv_a_final_left.png",
+            "sil_px": 63012,
+            "dark_pct": 43.92,
+            "mud_pct": 9.33,
+            "bright_pct": 46.75,
+            "ok_dark_4_20": false,
+            "ok_mud_lt_10": true,
+            "pass": false
+          },
+          "top": {
+            "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/final/mv_a_final_top.png",
+            "sil_px": 92660,
+            "dark_pct": 30.78,
+            "mud_pct": 11.35,
+            "bright_pct": 57.86,
+            "ok_dark_4_20": false,
+            "ok_mud_lt_10": false,
+            "pass": false
+          }
+        },
+        "regions_before": {
+          "front": {
+            "vidros": {
+              "px": 47003,
+              "lum_mean": 102.3,
+              "dark_lt80_pct": 65.3,
+              "bright_gt180_pct": 32.6,
+              "sat_mean_pct": 6.07,
+              "gt_lum_mean": 95.1,
+              "gt_sat_mean_pct": 6.51,
+              "rgb_error_pct": 5.05
+            },
+            "farois": {
+              "px": 15708,
+              "lum_mean": 154.6,
+              "dark_lt80_pct": 15.4,
+              "bright_gt180_pct": 52.6,
+              "sat_mean_pct": 4.33,
+              "gt_lum_mean": 147.6,
+              "gt_sat_mean_pct": 5.32,
+              "rgb_error_pct": 10.43
+            },
+            "grade": {
+              "px": 48577,
+              "lum_mean": 86.0,
+              "dark_lt80_pct": 61.3,
+              "bright_gt180_pct": 18.3,
+              "sat_mean_pct": 7.81,
+              "gt_lum_mean": 84.6,
+              "gt_sat_mean_pct": 8.63,
+              "rgb_error_pct": 4.63
+            },
+            "rodas": {
+              "px": 12210,
+              "lum_mean": 75.1,
+              "dark_lt80_pct": 66.1,
+              "bright_gt180_pct": 18.1,
+              "sat_mean_pct": 6.31,
+              "gt_lum_mean": 62.3,
+              "gt_sat_mean_pct": 7.63,
+              "rgb_error_pct": 9.69
+            },
+            "lataria": {
+              "px": 45022,
+              "lum_mean": 180.3,
+              "dark_lt80_pct": 18.0,
+              "bright_gt180_pct": 71.8,
+              "sat_mean_pct": 3.0,
+              "gt_lum_mean": 181.9,
+              "gt_sat_mean_pct": 3.33,
+              "rgb_error_pct": 13.82
+            }
+          },
+          "back": {
+            "vidros": {
+              "px": 41138,
+              "lum_mean": 93.8,
+              "dark_lt80_pct": 68.7,
+              "bright_gt180_pct": 26.0,
+              "sat_mean_pct": 6.24,
+              "gt_lum_mean": 89.5,
+              "gt_sat_mean_pct": 6.62,
+              "rgb_error_pct": 3.46
+            },
+            "farois": {
+              "px": 13774,
+              "lum_mean": 163.7,
+              "dark_lt80_pct": 17.9,
+              "bright_gt180_pct": 74.3,
+              "sat_mean_pct": 17.03,
+              "gt_lum_mean": 159.7,
+              "gt_sat_mean_pct": 19.47,
+              "rgb_error_pct": 3.18
+            },
+            "grade": {
+              "px": 27064,
+              "lum_mean": 115.9,
+              "dark_lt80_pct": 42.4,
+              "bright_gt180_pct": 35.3,
+              "sat_mean_pct": 7.53,
+              "gt_lum_mean": 97.1,
+              "gt_sat_mean_pct": 8.22,
+              "rgb_error_pct": 7.38
+            },
+            "rodas": {
+              "px": 13830,
+              "lum_mean": 75.7,
+              "dark_lt80_pct": 69.0,
+              "bright_gt180_pct": 22.8,
+              "sat_mean_pct": 8.78,
+              "gt_lum_mean": 31.8,
+              "gt_sat_mean_pct": 11.26,
+              "rgb_error_pct": 9.26
+            },
+            "lataria": {
+              "px": 74424,
+              "lum_mean": 150.9,
+              "dark_lt80_pct": 28.9,
+              "bright_gt180_pct": 60.1,
+              "sat_mean_pct": 6.36,
+              "gt_lum_mean": 152.4,
+              "gt_sat_mean_pct": 8.05,
+              "rgb_error_pct": 9.73
+            }
+          },
+          "left": {
+            "rodas": {
+              "px": 41261,
+              "lum_mean": 76.6,
+              "dark_lt80_pct": 64.4,
+              "bright_gt180_pct": 18.7,
+              "sat_mean_pct": 11.14,
+              "gt_lum_mean": 69.7,
+              "gt_sat_mean_pct": 12.27,
+              "rgb_error_pct": 3.77
+            },
+            "vidros": {
+              "px": 44204,
+              "lum_mean": 92.5,
+              "dark_lt80_pct": 65.5,
+              "bright_gt180_pct": 29.5,
+              "sat_mean_pct": 8.15,
+              "gt_lum_mean": 97.2,
+              "gt_sat_mean_pct": 8.04,
+              "rgb_error_pct": 3.35
+            },
+            "farois": {
+              "px": 10876,
+              "lum_mean": 161.8,
+              "dark_lt80_pct": 20.4,
+              "bright_gt180_pct": 64.6,
+              "sat_mean_pct": 9.21,
+              "gt_lum_mean": 163.9,
+              "gt_sat_mean_pct": 8.04,
+              "rgb_error_pct": 6.23
+            },
+            "grade": {
+              "px": 8030,
+              "lum_mean": 97.1,
+              "dark_lt80_pct": 52.5,
+              "bright_gt180_pct": 15.5,
+              "sat_mean_pct": 4.3,
+              "gt_lum_mean": 72.8,
+              "gt_sat_mean_pct": 5.25,
+              "rgb_error_pct": 8.5
+            },
+            "lataria": {
+              "px": 62501,
+              "lum_mean": 176.4,
+              "dark_lt80_pct": 13.9,
+              "bright_gt180_pct": 77.2,
+              "sat_mean_pct": 3.75,
+              "gt_lum_mean": 181.6,
+              "gt_sat_mean_pct": 3.79,
+              "rgb_error_pct": 4.07
+            }
+          },
+          "top": {
+            "vidros": {
+              "px": 55965,
+              "lum_mean": 122.0,
+              "dark_lt80_pct": 55.2,
+              "bright_gt180_pct": 42.7,
+              "sat_mean_pct": 4.98
+            },
+            "lataria": {
+              "px": 153249,
+              "lum_mean": 189.7,
+              "dark_lt80_pct": 14.2,
+              "bright_gt180_pct": 79.7,
+              "sat_mean_pct": 2.73
+            }
+          }
+        },
+        "regions_final": {
+          "front": {
+            "vidros": {
+              "px": 47003,
+              "lum_mean": 77.1,
+              "dark_lt80_pct": 69.7,
+              "bright_gt180_pct": 24.4,
+              "sat_mean_pct": 1.55,
+              "gt_lum_mean": 95.1,
+              "gt_sat_mean_pct": 6.51,
+              "rgb_error_pct": 23.8
+            },
+            "farois": {
+              "px": 15708,
+              "lum_mean": 143.0,
+              "dark_lt80_pct": 32.8,
+              "bright_gt180_pct": 54.3,
+              "sat_mean_pct": 2.38,
+              "gt_lum_mean": 147.6,
+              "gt_sat_mean_pct": 5.32,
+              "rgb_error_pct": 23.17
+            },
+            "grade": {
+              "px": 48577,
+              "lum_mean": 92.0,
+              "dark_lt80_pct": 54.8,
+              "bright_gt180_pct": 24.9,
+              "sat_mean_pct": 4.42,
+              "gt_lum_mean": 84.6,
+              "gt_sat_mean_pct": 8.63,
+              "rgb_error_pct": 24.68
+            },
+            "rodas": {
+              "px": 12210,
+              "lum_mean": 22.1,
+              "dark_lt80_pct": 92.3,
+              "bright_gt180_pct": 4.3,
+              "sat_mean_pct": 9.15,
+              "gt_lum_mean": 62.3,
+              "gt_sat_mean_pct": 7.63,
+              "rgb_error_pct": 23.52
+            },
+            "lataria": {
+              "px": 45022,
+              "lum_mean": 148.4,
+              "dark_lt80_pct": 30.4,
+              "bright_gt180_pct": 61.2,
+              "sat_mean_pct": 2.27,
+              "gt_lum_mean": 181.9,
+              "gt_sat_mean_pct": 3.33,
+              "rgb_error_pct": 21.15
+            }
+          },
+          "back": {
+            "vidros": {
+              "px": 41138,
+              "lum_mean": 95.8,
+              "dark_lt80_pct": 63.1,
+              "bright_gt180_pct": 31.1,
+              "sat_mean_pct": 4.22,
+              "gt_lum_mean": 89.5,
+              "gt_sat_mean_pct": 6.62,
+              "rgb_error_pct": 18.11
+            },
+            "farois": {
+              "px": 13774,
+              "lum_mean": 165.1,
+              "dark_lt80_pct": 20.0,
+              "bright_gt180_pct": 65.1,
+              "sat_mean_pct": 20.86,
+              "gt_lum_mean": 159.7,
+              "gt_sat_mean_pct": 19.47,
+              "rgb_error_pct": 12.25
+            },
+            "grade": {
+              "px": 27064,
+              "lum_mean": 42.3,
+              "dark_lt80_pct": 84.5,
+              "bright_gt180_pct": 8.2,
+              "sat_mean_pct": 10.9,
+              "gt_lum_mean": 97.1,
+              "gt_sat_mean_pct": 8.22,
+              "rgb_error_pct": 26.01
+            },
+            "rodas": {
+              "px": 13830,
+              "lum_mean": 6.5,
+              "dark_lt80_pct": 100.0,
+              "bright_gt180_pct": 0.0,
+              "sat_mean_pct": 24.86,
+              "gt_lum_mean": 31.8,
+              "gt_sat_mean_pct": 11.26,
+              "rgb_error_pct": 10.05
+            },
+            "lataria": {
+              "px": 74424,
+              "lum_mean": 154.5,
+              "dark_lt80_pct": 22.7,
+              "bright_gt180_pct": 56.3,
+              "sat_mean_pct": 5.6,
+              "gt_lum_mean": 152.4,
+              "gt_sat_mean_pct": 8.05,
+              "rgb_error_pct": 21.67
+            }
+          },
+          "left": {
+            "rodas": {
+              "px": 41261,
+              "lum_mean": 53.2,
+              "dark_lt80_pct": 75.8,
+              "bright_gt180_pct": 15.5,
+              "sat_mean_pct": 7.33,
+              "gt_lum_mean": 69.7,
+              "gt_sat_mean_pct": 12.27,
+              "rgb_error_pct": 18.31
+            },
+            "vidros": {
+              "px": 44204,
+              "lum_mean": 105.8,
+              "dark_lt80_pct": 51.7,
+              "bright_gt180_pct": 34.1,
+              "sat_mean_pct": 3.44,
+              "gt_lum_mean": 97.2,
+              "gt_sat_mean_pct": 8.04,
+              "rgb_error_pct": 25.12
+            },
+            "farois": {
+              "px": 10876,
+              "lum_mean": 154.0,
+              "dark_lt80_pct": 28.2,
+              "bright_gt180_pct": 61.4,
+              "sat_mean_pct": 10.94,
+              "gt_lum_mean": 163.9,
+              "gt_sat_mean_pct": 8.04,
+              "rgb_error_pct": 17.21
+            },
+            "grade": {
+              "px": 8030,
+              "lum_mean": 76.7,
+              "dark_lt80_pct": 64.1,
+              "bright_gt180_pct": 28.6,
+              "sat_mean_pct": 5.74,
+              "gt_lum_mean": 72.8,
+              "gt_sat_mean_pct": 5.25,
+              "rgb_error_pct": 21.55
+            },
+            "lataria": {
+              "px": 62501,
+              "lum_mean": 172.8,
+              "dark_lt80_pct": 18.9,
+              "bright_gt180_pct": 73.6,
+              "sat_mean_pct": 2.29,
+              "gt_lum_mean": 181.6,
+              "gt_sat_mean_pct": 3.79,
+              "rgb_error_pct": 16.11
+            }
+          },
+          "top": {
+            "vidros": {
+              "px": 55965,
+              "lum_mean": 70.5,
+              "dark_lt80_pct": 73.6,
+              "bright_gt180_pct": 20.2,
+              "sat_mean_pct": 2.13
+            },
+            "lataria": {
+              "px": 153249,
+              "lum_mean": 174.8,
+              "dark_lt80_pct": 14.6,
+              "bright_gt180_pct": 70.5,
+              "sat_mean_pct": 1.48
+            }
+          }
+        }
+      },
+      "mv_b": {
+        "texture_sat_pct": 9.79,
+        "gt_photos_sat_pct": 6.51,
+        "sat_delta_pct": 3.28,
+        "rodas_eval_ok": true,
+        "rodas_left_metrics": {
+          "px": 44807,
+          "lum_mean": 57.0,
+          "dark_lt80_pct": 72.5,
+          "bright_gt180_pct": 14.8,
+          "sat_mean_pct": 10.17,
+          "gt_lum_mean": 71.0,
+          "gt_sat_mean_pct": 8.7,
+          "rgb_error_pct": 18.76
+        },
+        "global_4views": {
+          "front": {
+            "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/final/mv_b_final_front.png",
+            "sil_px": 112214,
+            "dark_pct": 52.82,
+            "mud_pct": 12.69,
+            "bright_pct": 34.49,
+            "ok_dark_4_20": false,
+            "ok_mud_lt_10": false,
+            "pass": false
+          },
+          "back": {
+            "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/final/mv_b_final_back.png",
+            "sil_px": 112214,
+            "dark_pct": 45.59,
+            "mud_pct": 12.52,
+            "bright_pct": 41.89,
+            "ok_dark_4_20": false,
+            "ok_mud_lt_10": false,
+            "pass": false
+          },
+          "left": {
+            "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/final/mv_b_final_left.png",
+            "sil_px": 64134,
+            "dark_pct": 45.18,
+            "mud_pct": 9.41,
+            "bright_pct": 45.42,
+            "ok_dark_4_20": false,
+            "ok_mud_lt_10": true,
+            "pass": false
+          },
+          "top": {
+            "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/final/mv_b_final_top.png",
+            "sil_px": 90654,
+            "dark_pct": 32.28,
+            "mud_pct": 8.82,
+            "bright_pct": 58.9,
+            "ok_dark_4_20": false,
+            "ok_mud_lt_10": true,
+            "pass": false
+          }
+        },
+        "regions_before": {
+          "front": {
+            "vidros": {
+              "px": 47042,
+              "lum_mean": 130.7,
+              "dark_lt80_pct": 45.3,
+              "bright_gt180_pct": 43.7,
+              "sat_mean_pct": 3.74,
+              "gt_lum_mean": 120.8,
+              "gt_sat_mean_pct": 4.19,
+              "rgb_error_pct": 7.83
+            },
+            "farois": {
+              "px": 15708,
+              "lum_mean": 155.0,
+              "dark_lt80_pct": 15.3,
+              "bright_gt180_pct": 52.3,
+              "sat_mean_pct": 4.82,
+              "gt_lum_mean": 144.0,
+              "gt_sat_mean_pct": 6.54,
+              "rgb_error_pct": 8.95
+            },
+            "grade": {
+              "px": 48577,
+              "lum_mean": 88.0,
+              "dark_lt80_pct": 61.4,
+              "bright_gt180_pct": 26.2,
+              "sat_mean_pct": 8.94,
+              "gt_lum_mean": 82.5,
+              "gt_sat_mean_pct": 10.0,
+              "rgb_error_pct": 5.75
+            },
+            "rodas": {
+              "px": 13242,
+              "lum_mean": 67.5,
+              "dark_lt80_pct": 69.0,
+              "bright_gt180_pct": 14.9,
+              "sat_mean_pct": 6.18,
+              "gt_lum_mean": 59.7,
+              "gt_sat_mean_pct": 7.69,
+              "rgb_error_pct": 8.05
+            },
+            "lataria": {
+              "px": 43536,
+              "lum_mean": 185.3,
+              "dark_lt80_pct": 16.8,
+              "bright_gt180_pct": 73.8,
+              "sat_mean_pct": 2.3,
+              "gt_lum_mean": 189.0,
+              "gt_sat_mean_pct": 3.1,
+              "rgb_error_pct": 11.86
+            }
+          },
+          "back": {
+            "vidros": {
+              "px": 41138,
+              "lum_mean": 111.6,
+              "dark_lt80_pct": 58.7,
+              "bright_gt180_pct": 28.9,
+              "sat_mean_pct": 4.38,
+              "gt_lum_mean": 108.1,
+              "gt_sat_mean_pct": 4.71,
+              "rgb_error_pct": 7.97
+            },
+            "farois": {
+              "px": 13774,
+              "lum_mean": 166.7,
+              "dark_lt80_pct": 18.7,
+              "bright_gt180_pct": 74.1,
+              "sat_mean_pct": 15.91,
+              "gt_lum_mean": 164.3,
+              "gt_sat_mean_pct": 17.4,
+              "rgb_error_pct": 2.68
+            },
+            "grade": {
+              "px": 26613,
+              "lum_mean": 110.4,
+              "dark_lt80_pct": 47.0,
+              "bright_gt180_pct": 33.0,
+              "sat_mean_pct": 5.39,
+              "gt_lum_mean": 98.7,
+              "gt_sat_mean_pct": 5.75,
+              "rgb_error_pct": 5.5
+            },
+            "rodas": {
+              "px": 14942,
+              "lum_mean": 61.2,
+              "dark_lt80_pct": 74.8,
+              "bright_gt180_pct": 14.7,
+              "sat_mean_pct": 6.08,
+              "gt_lum_mean": 32.0,
+              "gt_sat_mean_pct": 7.14,
+              "rgb_error_pct": 4.93
+            },
+            "lataria": {
+              "px": 74064,
+              "lum_mean": 150.9,
+              "dark_lt80_pct": 27.3,
+              "bright_gt180_pct": 57.2,
+              "sat_mean_pct": 8.96,
+              "gt_lum_mean": 152.9,
+              "gt_sat_mean_pct": 10.22,
+              "rgb_error_pct": 9.57
+            }
+          },
+          "left": {
+            "rodas": {
+              "px": 44807,
+              "lum_mean": 77.0,
+              "dark_lt80_pct": 64.0,
+              "bright_gt180_pct": 18.1,
+              "sat_mean_pct": 7.88,
+              "gt_lum_mean": 71.0,
+              "gt_sat_mean_pct": 8.7,
+              "rgb_error_pct": 3.53
+            },
+            "vidros": {
+              "px": 44031,
+              "lum_mean": 135.5,
+              "dark_lt80_pct": 46.5,
+              "bright_gt180_pct": 44.5,
+              "sat_mean_pct": 4.0,
+              "gt_lum_mean": 138.4,
+              "gt_sat_mean_pct": 4.05,
+              "rgb_error_pct": 3.85
+            },
+            "farois": {
+              "px": 10754,
+              "lum_mean": 163.2,
+              "dark_lt80_pct": 20.1,
+              "bright_gt180_pct": 64.6,
+              "sat_mean_pct": 8.17,
+              "gt_lum_mean": 168.6,
+              "gt_sat_mean_pct": 6.25,
+              "rgb_error_pct": 6.16
+            },
+            "grade": {
+              "px": 6333,
+              "lum_mean": 82.5,
+              "dark_lt80_pct": 55.1,
+              "bright_gt180_pct": 1.3,
+              "sat_mean_pct": 2.81,
+              "gt_lum_mean": 80.6,
+              "gt_sat_mean_pct": 2.87,
+              "rgb_error_pct": 3.48
+            },
+            "lataria": {
+              "px": 61564,
+              "lum_mean": 180.8,
+              "dark_lt80_pct": 12.7,
+              "bright_gt180_pct": 79.2,
+              "sat_mean_pct": 2.41,
+              "gt_lum_mean": 183.8,
+              "gt_sat_mean_pct": 2.24,
+              "rgb_error_pct": 3.36
+            }
+          },
+          "top": {
+            "vidros": {
+              "px": 55965,
+              "lum_mean": 147.1,
+              "dark_lt80_pct": 37.2,
+              "bright_gt180_pct": 52.4,
+              "sat_mean_pct": 2.85
+            },
+            "lataria": {
+              "px": 155593,
+              "lum_mean": 195.8,
+              "dark_lt80_pct": 12.3,
+              "bright_gt180_pct": 80.2,
+              "sat_mean_pct": 1.85
+            }
+          }
+        },
+        "regions_final": {
+          "front": {
+            "vidros": {
+              "px": 47042,
+              "lum_mean": 67.7,
+              "dark_lt80_pct": 72.9,
+              "bright_gt180_pct": 22.4,
+              "sat_mean_pct": 1.87,
+              "gt_lum_mean": 120.8,
+              "gt_sat_mean_pct": 4.19,
+              "rgb_error_pct": 35.3
+            },
+            "farois": {
+              "px": 15708,
+              "lum_mean": 143.3,
+              "dark_lt80_pct": 34.3,
+              "bright_gt180_pct": 55.7,
+              "sat_mean_pct": 2.13,
+              "gt_lum_mean": 144.0,
+              "gt_sat_mean_pct": 6.54,
+              "rgb_error_pct": 22.95
+            },
+            "grade": {
+              "px": 48577,
+              "lum_mean": 91.8,
+              "dark_lt80_pct": 51.9,
+              "bright_gt180_pct": 18.1,
+              "sat_mean_pct": 3.97,
+              "gt_lum_mean": 82.5,
+              "gt_sat_mean_pct": 10.0,
+              "rgb_error_pct": 25.74
+            },
+            "rodas": {
+              "px": 13242,
+              "lum_mean": 11.7,
+              "dark_lt80_pct": 99.7,
+              "bright_gt180_pct": 0.0,
+              "sat_mean_pct": 11.35,
+              "gt_lum_mean": 59.7,
+              "gt_sat_mean_pct": 7.69,
+              "rgb_error_pct": 19.91
+            },
+            "lataria": {
+              "px": 43536,
+              "lum_mean": 154.6,
+              "dark_lt80_pct": 27.5,
+              "bright_gt180_pct": 64.5,
+              "sat_mean_pct": 2.04,
+              "gt_lum_mean": 189.0,
+              "gt_sat_mean_pct": 3.1,
+              "rgb_error_pct": 20.97
+            }
+          },
+          "back": {
+            "vidros": {
+              "px": 41138,
+              "lum_mean": 88.1,
+              "dark_lt80_pct": 64.8,
+              "bright_gt180_pct": 29.8,
+              "sat_mean_pct": 4.38,
+              "gt_lum_mean": 108.1,
+              "gt_sat_mean_pct": 4.71,
+              "rgb_error_pct": 35.27
+            },
+            "farois": {
+              "px": 13774,
+              "lum_mean": 166.0,
+              "dark_lt80_pct": 19.3,
+              "bright_gt180_pct": 66.1,
+              "sat_mean_pct": 19.73,
+              "gt_lum_mean": 164.3,
+              "gt_sat_mean_pct": 17.4,
+              "rgb_error_pct": 11.05
+            },
+            "grade": {
+              "px": 26613,
+              "lum_mean": 45.5,
+              "dark_lt80_pct": 82.2,
+              "bright_gt180_pct": 7.0,
+              "sat_mean_pct": 8.04,
+              "gt_lum_mean": 98.7,
+              "gt_sat_mean_pct": 5.75,
+              "rgb_error_pct": 31.02
+            },
+            "rodas": {
+              "px": 14942,
+              "lum_mean": 13.8,
+              "dark_lt80_pct": 94.9,
+              "bright_gt180_pct": 2.4,
+              "sat_mean_pct": 24.6,
+              "gt_lum_mean": 32.0,
+              "gt_sat_mean_pct": 7.14,
+              "rgb_error_pct": 13.83
+            },
+            "lataria": {
+              "px": 74064,
+              "lum_mean": 161.1,
+              "dark_lt80_pct": 19.8,
+              "bright_gt180_pct": 60.9,
+              "sat_mean_pct": 5.79,
+              "gt_lum_mean": 152.9,
+              "gt_sat_mean_pct": 10.22,
+              "rgb_error_pct": 22.57
+            }
+          },
+          "left": {
+            "rodas": {
+              "px": 44807,
+              "lum_mean": 57.0,
+              "dark_lt80_pct": 72.5,
+              "bright_gt180_pct": 14.8,
+              "sat_mean_pct": 10.17,
+              "gt_lum_mean": 71.0,
+              "gt_sat_mean_pct": 8.7,
+              "rgb_error_pct": 18.76
+            },
+            "vidros": {
+              "px": 44031,
+              "lum_mean": 98.7,
+              "dark_lt80_pct": 56.5,
+              "bright_gt180_pct": 32.6,
+              "sat_mean_pct": 3.54,
+              "gt_lum_mean": 138.4,
+              "gt_sat_mean_pct": 4.05,
+              "rgb_error_pct": 33.3
+            },
+            "farois": {
+              "px": 10754,
+              "lum_mean": 156.6,
+              "dark_lt80_pct": 26.5,
+              "bright_gt180_pct": 64.2,
+              "sat_mean_pct": 10.69,
+              "gt_lum_mean": 168.6,
+              "gt_sat_mean_pct": 6.25,
+              "rgb_error_pct": 15.9
+            },
+            "grade": {
+              "px": 6333,
+              "lum_mean": 72.7,
+              "dark_lt80_pct": 62.8,
+              "bright_gt180_pct": 23.2,
+              "sat_mean_pct": 9.61,
+              "gt_lum_mean": 80.6,
+              "gt_sat_mean_pct": 2.87,
+              "rgb_error_pct": 14.49
+            },
+            "lataria": {
+              "px": 61564,
+              "lum_mean": 171.7,
+              "dark_lt80_pct": 19.5,
+              "bright_gt180_pct": 73.5,
+              "sat_mean_pct": 2.31,
+              "gt_lum_mean": 183.8,
+              "gt_sat_mean_pct": 2.24,
+              "rgb_error_pct": 14.18
+            }
+          },
+          "top": {
+            "vidros": {
+              "px": 55965,
+              "lum_mean": 68.2,
+              "dark_lt80_pct": 72.9,
+              "bright_gt180_pct": 22.0,
+              "sat_mean_pct": 2.63
+            },
+            "lataria": {
+              "px": 155593,
+              "lum_mean": 173.0,
+              "dark_lt80_pct": 17.5,
+              "bright_gt180_pct": 71.3,
+              "sat_mean_pct": 1.49
+            }
+          }
+        }
+      }
+    }
+  },
+  "etapa_f_upscale_pack": {
+    "seed": 42,
+    "modelo_upscale": "RealESRGAN_x4plus (RRDBNet 23b FP16 tile=512)",
+    "variants": {
+      "mv_a": {
+        "tempo_upscale_s": 23.93,
+        "tempo_total_tag_s": 50.21,
+        "sat_before_upscale_pct": 6.633,
+        "sat_after_upscale_pct": 8.847,
+        "sat_rel_loss_pct": -33.38,
+        "resat_105_applied": false,
+        "sat_final_8k_pct": 8.847,
+        "glb_8k": {
+          "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/carro_foxh__mv_a_8k.glb",
+          "size_mb": 16.02,
+          "size_bytes": 16801816,
+          "jpeg_mb": 7.85,
+          "verts": 162982,
+          "faces": 279836,
+          "tex_px": [
+            8192,
+            8192
+          ],
+          "mime": "image/jpeg",
+          "jpeg_quality": 95
+        },
+        "glb_4k": {
+          "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/carro_foxh__mv_a_4k.glb",
+          "size_mb": 10.57,
+          "size_bytes": 11087796,
+          "jpeg_mb": 2.4,
+          "verts": 162982,
+          "faces": 279836,
+          "tex_px": [
+            4096,
+            4096
+          ],
+          "mime": "image/jpeg",
+          "jpeg_quality": 95
+        },
+        "site_glb_8k": "/home/bruno/printer3d-work/modelos3d-site/models/carro_foxh__mv_a_8k.glb",
+        "site_glb_4k": "/home/bruno/printer3d-work/modelos3d-site/models/carro_foxh__mv_a_4k.glb"
+      },
+      "mv_b": {
+        "tempo_upscale_s": 22.5,
+        "tempo_total_tag_s": 48.74,
+        "sat_before_upscale_pct": 9.79,
+        "sat_after_upscale_pct": 9.925,
+        "sat_rel_loss_pct": -1.38,
+        "resat_105_applied": false,
+        "sat_final_8k_pct": 9.925,
+        "glb_8k": {
+          "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/carro_foxh__mv_b_8k.glb",
+          "size_mb": 16.25,
+          "size_bytes": 17035012,
+          "jpeg_mb": 7.89,
+          "verts": 168786,
+          "faces": 279624,
+          "tex_px": [
+            8192,
+            8192
+          ],
+          "mime": "image/jpeg",
+          "jpeg_quality": 95
+        },
+        "glb_4k": {
+          "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/carro_foxh__mv_b_4k.glb",
+          "size_mb": 10.76,
+          "size_bytes": 11282560,
+          "jpeg_mb": 2.41,
+          "verts": 168786,
+          "faces": 279624,
+          "tex_px": [
+            4096,
+            4096
+          ],
+          "mime": "image/jpeg",
+          "jpeg_quality": 95
+        },
+        "site_glb_8k": "/home/bruno/printer3d-work/modelos3d-site/models/carro_foxh__mv_b_8k.glb",
+        "site_glb_4k": "/home/bruno/printer3d-work/modelos3d-site/models/carro_foxh__mv_b_4k.glb"
+      }
+    },
+    "tempo_total_s": 99.91,
+    "vram_samples_10s": [
+      [
+        0.1,
+        1590
+      ],
+      [
+        10.1,
+        7709
+      ],
+      [
+        20.2,
+        7709
+      ],
+      [
+        30.2,
+        7709
+      ],
+      [
+        40.3,
+        7702
+      ],
+      [
+        50.4,
+        7709
+      ],
+      [
+        60.4,
+        7709
+      ],
+      [
+        70.5,
+        7709
+      ],
+      [
+        80.5,
+        7709
+      ],
+      [
+        90.6,
+        7709
+      ],
+      [
+        100.1,
+        1713
+      ]
+    ],
+    "vram_pico_mib": 7709,
+    "vram_baseline_mib": 1590
+  },
+  "http_verification": {
+    "endpoints": {
+      "https://brunointegrations.com/modelos3d/manifest.json": {
+        "status": 200,
+        "content_length": 17717,
+        "last_modified": "Thu, 19 Nov 2026 23:44:52 GMT",
+        "etag": "\"6aff89f4-4535\""
+      },
+      "https://brunointegrations.com/modelos3d/models/carro_foxh__mv_a_8k.glb": {
+        "status": 200,
+        "content_length": 16801816,
+        "last_modified": "Fri, 20 Nov 2026 18:02:08 GMT",
+        "etag": "\"6b008b20-1006018\""
+      },
+      "https://brunointegrations.com/modelos3d/models/carro_foxh__mv_b_8k.glb": {
+        "status": 200,
+        "content_length": 17035012,
+        "last_modified": "Fri, 20 Nov 2026 18:02:57 GMT",
+        "etag": "\"6b008b51-103ef04\""
+      },
+      "https://brunointegrations.com/modelos3d/models/carro_foxh__mv_a_4k.glb": {
+        "status": 200,
+        "content_length": 11087796,
+        "last_modified": "Fri, 20 Nov 2026 18:02:08 GMT",
+        "etag": "\"6b008b20-a92fb4\""
+      },
+      "https://brunointegrations.com/modelos3d/models/carro_foxh__mv_b_4k.glb": {
+        "status": 200,
+        "content_length": 11282560,
+        "last_modified": "Fri, 20 Nov 2026 18:02:57 GMT",
+        "etag": "\"6b008b51-ac2880\""
+      }
+    },
+    "manifest_carro_foxh_modes": []
+  },
+  "viewer_urls": {
+    "site": "https://brunointegrations.com/modelos3d",
+    "mv_a_8k": "https://brunointegrations.com/modelos3d/#carro_foxh/mv_a_8k",
+    "mv_b_8k": "https://brunointegrations.com/modelos3d/#carro_foxh/mv_b_8k",
+    "mv_a_4k": "https://brunointegrations.com/modelos3d/#carro_foxh/mv_a_4k",
+    "mv_b_4k": "https://brunointegrations.com/modelos3d/#carro_foxh/mv_b_4k"
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "etapa_0a_saturacao": {
+    "mv_a": {
+      "textura_2k_sat_pct": 3.9,
+      "fotos_gt_sat_pct": 7.36,
+      "queda_relativa_pct": 47.01,
+      "alerta_gt_15pct": true,
+      "causa": "~46-50% dos texels UV fora da cobertura receberam fill chapado cinza-neutro (S ≈ 0.8%, RGB ~[225,223,224]), diluindo a saturação média da textura pela metade."
+    },
+    "mv_b": {
+      "textura_2k_sat_pct": 2.72,
+      "fotos_gt_sat_pct": 6.51,
+      "queda_relativa_pct": 58.22,
+      "alerta_gt_15pct": true,
+      "causa": "~46-50% dos texels UV fora da cobertura receberam fill chapado cinza-neutro (S ≈ 0.8%, RGB ~[225,223,224]), diluindo a saturação média da textura pela metade."
+    }
+  },
+  "etapa_0b_espaco_cor": {
+    "mv_a": {
+      "red_dominant_px": 14950,
+      "blue_dominant_px": 0,
+      "bgr_swap_detected": false,
+      "double_gamma_detected": false,
+      "nota": "PIL lê RGB, cv2.inpaint é independente de canal, PIL salva RGB; nenhuma conversão linear->sRGB duplicada no bake."
+    },
+    "mv_b": {
+      "red_dominant_px": 17409,
+      "blue_dominant_px": 6323,
+      "bgr_swap_detected": false,
+      "double_gamma_detected": false,
+      "nota": "PIL lê RGB, cv2.inpaint é independente de canal, PIL salva RGB; nenhuma conversão linear->sRGB duplicada no bake."
+    }
+  },
+  "etapa_0c_blender_standard": {
+    "mv_a": {
+      "view_transform": "Standard",
+      "look": "None",
+      "views": {
+        "front": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/before/mv_a_before_front.png",
+          "sil_px": 108521,
+          "dark_pct": 47.01,
+          "mud_pct": 11.92,
+          "bright_pct": 41.06,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": false,
+          "pass": false
+        },
+        "back": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/before/mv_a_before_back.png",
+          "sil_px": 108521,
+          "dark_pct": 42.55,
+          "mud_pct": 9.97,
+          "bright_pct": 47.47,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": true,
+          "pass": false
+        },
+        "left": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/before/mv_a_before_left.png",
+          "sil_px": 63012,
+          "dark_pct": 42.36,
+          "mud_pct": 10.34,
+          "bright_pct": 47.31,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": false,
+          "pass": false
+        },
+        "top": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/before/mv_a_before_top.png",
+          "sil_px": 92660,
+          "dark_pct": 25.54,
+          "mud_pct": 4.1,
+          "bright_pct": 70.37,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": true,
+          "pass": false
+        }
+      }
+    },
+    "mv_b": {
+      "view_transform": "Standard",
+      "look": "None",
+      "views": {
+        "front": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/before/mv_b_before_front.png",
+          "sil_px": 112214,
+          "dark_pct": 41.54,
+          "mud_pct": 12.24,
+          "bright_pct": 46.22,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": false,
+          "pass": false
+        },
+        "back": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/before/mv_b_before_back.png",
+          "sil_px": 112214,
+          "dark_pct": 40.91,
+          "mud_pct": 12.51,
+          "bright_pct": 46.58,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": false,
+          "pass": false
+        },
+        "left": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/before/mv_b_before_left.png",
+          "sil_px": 64134,
+          "dark_pct": 37.33,
+          "mud_pct": 11.54,
+          "bright_pct": 51.12,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": false,
+          "pass": false
+        },
+        "top": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/renders/before/mv_b_before_top.png",
+          "sil_px": 90654,
+          "dark_pct": 19.66,
+          "mud_pct": 6.68,
+          "bright_pct": 73.67,
+          "ok_dark_4_20": true,
+          "ok_mud_lt_10": true,
+          "pass": true
+        }
+      }
+    }
+  },
+  "etapa_0d_viewer_srgb": {
+    "achado": "app.js já tem renderer.outputColorSpace = THREE.SRGBColorSpace, MAS (1) não forçava tex.colorSpace = THREE.SRGBColorSpace ao recriar MeshStandardMaterial, (2) usava metalness=0.08 + HemisphereLight chão escuro 0x1a1d22 + rim azulado 0x88aaff, deixando carro branco com aparência cinza-azulada lavada.",
+    "correcao_planejada": "Forçar tex.colorSpace = THREE.SRGBColorSpace, renderer.toneMapping = THREE.NoToneMapping, metalness = 0.0, roughness = 0.65 em GLBs texturizados e luz de preenchimento neutra."
+  }
+}

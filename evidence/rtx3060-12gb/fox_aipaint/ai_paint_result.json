@@ -1,0 +1,174 @@
+{
+  "seed": 42,
+  "caminho_usado": "AI_1024",
+  "ref_images": [
+    "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R1_front.png",
+    "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R2_side.png",
+    "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R3_back.png",
+    "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R2r_right.png"
+  ],
+  "meshes": {
+    "mv_a": {
+      "raw_ai_png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/ai_textures/mv_a_ai_1024.png",
+      "bake2048_png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/bake2048.png",
+      "tex_size": 1024,
+      "ref_mode": "multi_ref_4",
+      "tempo_s": 183.89,
+      "sat_pct": 6.23
+    },
+    "mv_b": {
+      "raw_ai_png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/ai_textures/mv_b_ai_1024.png",
+      "bake2048_png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/bake2048.png",
+      "tex_size": 1024,
+      "ref_mode": "multi_ref_4",
+      "tempo_s": 145.96,
+      "sat_pct": 9.36
+    }
+  },
+  "erros": [],
+  "tempo_total_s": 336.92,
+  "vram_samples_10s": [
+    [
+      0.1,
+      1428
+    ],
+    [
+      10.2,
+      1728
+    ],
+    [
+      20.2,
+      1721
+    ],
+    [
+      30.3,
+      5983
+    ],
+    [
+      40.4,
+      9671
+    ],
+    [
+      50.4,
+      9831
+    ],
+    [
+      60.5,
+      9824
+    ],
+    [
+      70.6,
+      9824
+    ],
+    [
+      80.6,
+      9831
+    ],
+    [
+      90.7,
+      9831
+    ],
+    [
+      100.7,
+      9824
+    ],
+    [
+      110.8,
+      9824
+    ],
+    [
+      120.9,
+      9824
+    ],
+    [
+      131.0,
+      9824
+    ],
+    [
+      141.0,
+      9831
+    ],
+    [
+      151.1,
+      9824
+    ],
+    [
+      161.2,
+      9824
+    ],
+    [
+      171.2,
+      9824
+    ],
+    [
+      181.3,
+      9824
+    ],
+    [
+      191.4,
+      2633
+    ],
+    [
+      201.4,
+      2639
+    ],
+    [
+      211.4,
+      8939
+    ],
+    [
+      221.5,
+      9134
+    ],
+    [
+      231.5,
+      9427
+    ],
+    [
+      241.6,
+      9298
+    ],
+    [
+      251.6,
+      9291
+    ],
+    [
+      261.7,
+      9259
+    ],
+    [
+      271.7,
+      9195
+    ],
+    [
+      281.8,
+      9195
+    ],
+    [
+      291.8,
+      9195
+    ],
+    [
+      301.8,
+      9209
+    ],
+    [
+      311.9,
+      9202
+    ],
+    [
+      321.9,
+      9319
+    ],
+    [
+      332.0,
+      9298
+    ],
+    [
+      337.0,
+      2707
+    ]
+  ],
+  "vram_pico_mib": 9831,
+  "vram_baseline_mib": 1428
+}

@@ -114,7 +114,30 @@
 - **Fotos do kit = as MESMAS do C6** (`Downloads/fox/no-windows/` = `~/printer3d-work/carro/fotos-c7/` + `c7-prep/`): 5 fotos de 2400x1792 px (frente, frente-e-lado-diagonal, lado, traseira, de-fora-pegando-interna). Prep `*_tinted.png` reutilizado. C7-E (fotogrametria densa VGGT) retirado da fila (só reabrir se B/C falharem e houver sessão de 20-40 fotos completas).
 - **Publicação**: caso `carro_csg` (modos `kit`, `casca`, `interna`, `kit_corte`) mantido no viewer para histórico/comparação. Evidência: `evidence/rtx3060-12gb/carro-csg/report.json`.
 
-### Registro Correção de Pintura do Fox (`fox_fixpaint`, 2026-11-20) — `[x]` CONCLUÍDO E REPUBLICADO POR CIMA NO VIEWER
+### Registro Pintura AI Real do Fox (`fox_aipaint`, 2026-11-20) — `[x]` CONCLUÍDO E REPUBLICADO POR CIMA NO VIEWER
+
+- **Motivação**: `fox_fixpaint` (`6a088c8`) reprovado pelo dono (colocação ~70%, rodas incorretas e pintura cinza/lavada pelo fill chapado em ~46–50% dos texels).
+- **Reaproveitamento estrito**: malhas/UVs (`mv_a/uv.obj`, `mv_b/uv.obj` de `954e4d8`) e `manifest.json` 100% intactos; `seed 42` em tudo; VRAM log 10s ativo o run inteiro.
+- **ETAPA 0 (Auditoria de Cor — `tools/generator/audit_and_region_diag.py`)**:
+  - **0a Saturação HSV**: `mv_a` textura 2K = `3,90%` vs fotos GT `7,36%` (`-47,01%`, alerta >15%); `mv_b` = `2,72%` vs GT `6,51%` (`-58,22%`, alerta >15%). Causa raiz: ~46–50% dos texels fora da projeção preenchidos com cinza neutro `[225,223,224]` (`S ≈ 0,8%`).
+  - **0b Espaço de cor**: zero swap RGB/BGR (lanternas vermelhas `R-B>40` confirmadas) e zero dupla gamma no bake.
+  - **0c Blender Standard**: baseline re-renderizado com `view_transform = 'Standard'`, `look = 'None'` e shader `Emission` (`renders/before/`).
+  - **0d Viewer sRGB (`tools/modelos3d-site/app.js` v18)**: adicionado `renderer.toneMapping = THREE.NoToneMapping`, forçado `tex.colorSpace = THREE.SRGBColorSpace` ao criar `MeshStandardMaterial`, e ajustado PBR de texturizados para `metalness: 0.0, roughness: 0.65, envMapIntensity: 0.85`.
+- **ETAPA A (Diagnóstico por Região)**: `evidence/rtx3060-12gb/fox_aipaint/region_diag.json` com métricas por região (`rodas`, `vidros`, `grade`, `farois`, `lataria`) nas 4 vistas.
+- **ETAPA B & C (Setup + Pintura AI Real `Hunyuan3D-Paint v2-0`, `tools/generator/hunyuan_paint_runner.py`)**:
+  - Compiladas extensões CUDA/C++ (`custom_rasterizer` + `differentiable_renderer`/`mesh_processor`) em `~/.venvs/hunyuan` com `CUDA 12.8 / SM 8.6 / gcc-14`; baixados `hunyuan3d-delight-v2-0` e `hunyuan3d-paint-v2-0` (`tencent/Hunyuan3D-2`).
+  - Offload manual por estágio (`vae ↔ unet` antes/depois do `denoise` com VAE slicing/tiling + attention slicing) permitiu rodar **multi-ref com as 4 fotos reais** (`R1_front..R2r_right`) em FP16 sem OOM:
+    - **`mv_a`**: `183,89s`, caminho **`AI_1024`**, saturação `3,90% → 6,63%` (vs GT `7,36%`, dentro de ±10%).
+    - **`mv_b`**: `145,96s`, caminho **`AI_1024`**, saturação `2,72% → 9,79%` (vs GT `6,51%`).
+    - **VRAM pico**: **`9.831 MiB`** (`9,60 GiB`, ligeiramente acima de `9,5 GB = 9.728 MiB` → mantido `AI_1024` pela regra B.2). Tempo total: `336,92s`. Fallback semântico (Etapa D) e override de rodas (C+) **não foram necessários**.
+- **ETAPA E (Avaliação v2 por Região + Crops — `tools/generator/eval_aipaint_v2.py`)**:
+  - `rodas_eval_ok = True` em ambas as malhas: `mv_a` perfil rodas `dark=75,8%, lum=53,2`; `mv_b` perfil rodas `dark=72,5%, lum=57,0`.
+  - Crops lado a lado BEFORE vs FINAL (`rodas`, `farois`, `grade`) em `evidence/rtx3060-12gb/fox_aipaint/renders/crops/` e renders finais em `renders/final/`.
+- **ETAPA F (Upscale 8K/4K + Republicação — `tools/generator/etapa_f_upscale_pack.py`)**:
+  - `RealESRGAN_x4plus` FP16 tiles 512 (`seed 42`, `99,91s`, VRAM pico `7.709 MiB`): `mv_a` sat `6,633% → 8,847%`; `mv_b` sat `9,790% → 9,925%` (perda < 3%, sem necessidade de boost 1,05×).
+  - 4 GLBs JPEG q95 sobrescritos nos mesmos nomes (`mv_a_8k` `16,02 MB`, `mv_b_8k` `16,25 MB`, `mv_a_4k` `10,57 MB`, `mv_b_4k` `10,76 MB`), deploy + `HTTP 200` verificado com novos timestamps (`2026-11-20 18:02 GMT`). Evidência completa: `evidence/rtx3060-12gb/fox_aipaint/report.json`.
+
+### Registro Correção de Pintura do Fox (`fox_fixpaint`, 2026-11-20) — `[x]` REPROVADO PELO DONO (substituído por `fox_aipaint`)
 
 - **Reaproveitamento estrito**: ZERO regeneração de malha/UV — usadas exatamente `mv_a/uv.obj` e `mv_b/uv.obj` do commit `954e4d8`.
 - **ETAPA 1 (`tools/generator/rebake_fox_paint.py`, seed 42)**: rebake `2048×2048` por projeção 4-vistas ortogonais com rasterização UV exata em GPU, Z-buffer de oclusão `1024²`, auto-alinhamento por IoU de silhueta, máscara de cobertura (`mv_a`: `54,27%` coberto / `45,73%` preenchido com cor dominante `[225, 223, 224]` em `8,9s`; `mv_b`: `49,96%` coberto / `50,04%` preenchido com `[228, 227, 228]` em `8,85s`), Telea inpaint nas bordas (`raio 6px`) e preenchimento zero-preto fora da máscara.

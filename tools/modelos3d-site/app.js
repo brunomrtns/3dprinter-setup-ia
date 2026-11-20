@@ -203,6 +203,7 @@ function makeViewport(index) {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.NoToneMapping;
   wrap.appendChild(renderer.domElement);
 
   const scene = new THREE.Scene();
@@ -380,11 +381,14 @@ function refreshViewport(i) {
         if (!o.geometry.attributes.normal) o.geometry.computeVertexNormals();
         const tex = o.material && o.material.map ? o.material.map : null;
         if (tex) {
-          // GLB 3D texturizado: preserva mapa de cor com iluminação PBR real
+          // GLB 3D texturizado: garante sRGB explícito e material neutro sem acinzentar branco
+          tex.colorSpace = THREE.SRGBColorSpace;
+          tex.needsUpdate = true;
           o.material = new THREE.MeshStandardMaterial({
             map: tex,
-            roughness: 0.48,
-            metalness: 0.08,
+            roughness: 0.65,
+            metalness: 0.0,
+            envMapIntensity: 0.85,
             side: THREE.DoubleSide,
           });
         } else {
