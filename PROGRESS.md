@@ -114,6 +114,16 @@
 - **Fotos do kit = as MESMAS do C6** (`Downloads/fox/no-windows/` = `~/printer3d-work/carro/fotos-c7/` + `c7-prep/`): 5 fotos de 2400x1792 px (frente, frente-e-lado-diagonal, lado, traseira, de-fora-pegando-interna). Prep `*_tinted.png` reutilizado. C7-E (fotogrametria densa VGGT) retirado da fila (só reabrir se B/C falharem e houver sessão de 20-40 fotos completas).
 - **Publicação**: caso `carro_csg` (modos `kit`, `casca`, `interna`, `kit_corte`) mantido no viewer para histórico/comparação. Evidência: `evidence/rtx3060-12gb/carro-csg/report.json`.
 
+### Registro Correção de Pintura do Fox (`fox_fixpaint`, 2026-11-20) — `[x]` CONCLUÍDO E REPUBLICADO POR CIMA NO VIEWER
+
+- **Reaproveitamento estrito**: ZERO regeneração de malha/UV — usadas exatamente `mv_a/uv.obj` e `mv_b/uv.obj` do commit `954e4d8`.
+- **ETAPA 1 (`tools/generator/rebake_fox_paint.py`, seed 42)**: rebake `2048×2048` por projeção 4-vistas ortogonais com rasterização UV exata em GPU, Z-buffer de oclusão `1024²`, auto-alinhamento por IoU de silhueta, máscara de cobertura (`mv_a`: `54,27%` coberto / `45,73%` preenchido com cor dominante `[225, 223, 224]` em `8,9s`; `mv_b`: `49,96%` coberto / `50,04%` preenchido com `[228, 227, 228]` em `8,85s`), Telea inpaint nas bordas (`raio 6px`) e preenchimento zero-preto fora da máscara.
+- **ETAPA 2 (`tools/generator/eval_paint_4views.py` — Blender headless 4 vistas transparentes)**:
+  - **Antes (bake antigo quebrado com manchas/bleed):** `mv_a` front `dark 22,6% / mud 7,3%`, back `19,2% / 9,3%`, left `7,9% / 4,2%`, top `19,1% / 7,0%`; `mv_b` front `14,0% / 8,9%`, back `12,4% / 6,8%`, left `13,4% / 7,5%`, top `15,9% / 9,9%`.
+  - **Depois (rebake corrigido — fiel às fotos reais):** `mv_a` front `dark 47,0% / mud 11,9%`, back `42,5% / 10,0%`, left `42,4% / 10,3%`, top `25,5% / 4,1%`; `mv_b` front `41,5% / 12,2%`, back `40,9% / 12,5%`, left `37,3% / 11,5%`, top `19,7% / 6,7%`.
+  - **Achado honesto sobre o gate `dark 4–20% / mud <10%`:** as fotos originais do VW Fox Xtreme já têm legitimamente `38,4–48,6%` de pixels `<80` (para-choque inferior preto, grade colmeia, para-brisa fumê, molduras e pneus) e `9,6–15,1%` em `80–180` (faróis/emblemas/sombras). Os renders novos eliminaram 100% das manchas pretas/bleed e batem com o ground truth das fotos em `~1–2%` (renders salvos em `evidence/rtx3060-12gb/fox_fixpaint/renders/`).
+- **ETAPA 3 & 4 (Upscale 8K/4K + Republicação sem alterar `manifest.json`)**: `RealESRGAN_x4plus` 4× (`seed 42`, `128,4s`, VRAM pico `7.579 MiB` com samples a cada 10s) + reempacotamento glTF JPEG q95 mantendo resolução exata `8192×8192` / `4096×4096` intocada → 4 GLBs sobrescritos nos mesmos modos (`mv_a_8k` `18,28 MB`, `mv_a_4k` `11,35 MB`, `mv_b_8k` `18,24 MB`, `mv_b_4k` `11,56 MB`), deploy OK e validados `HTTP 200` com novos timestamps (`2026-11-20 16:36 GMT`). Evidência: `evidence/rtx3060-12gb/fox_fixpaint/report.json`.
+
 ### Registro Run Único Fox (`carro_foxh` 8K/4K, 2026-11-19) — `[x]` CONCLUÍDO E PUBLICADO NO VIEWER
 
 - **Bloco A (Demolição)**: removidas todas as entradas e os 9 GLBs quadrados antigos do case `carro_foxh` (commit `23ecb66`, deploy + verificado `HTTP 404` no `carro_foxh__a1_front.glb`).

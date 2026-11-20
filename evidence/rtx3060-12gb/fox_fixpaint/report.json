@@ -1,0 +1,659 @@
+{
+  "ts_start": "2026-11-20T13:13:00",
+  "seed": 42,
+  "reaproveitamento": {
+    "mv_a_uv_obj": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/uv.obj",
+    "mv_b_uv_obj": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/uv.obj",
+    "malha_regenerada": false,
+    "uv_regenerada": false
+  },
+  "etapa_2_before": {
+    "mv_a": {
+      "prefix": "mv_a_before",
+      "all_pass": false,
+      "views": {
+        "front": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/before/mv_a_before_front.png",
+          "sil_px": 108521,
+          "dark_pct": 22.65,
+          "mud_pct": 7.34,
+          "bright_pct": 70.01,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": true,
+          "pass": false
+        },
+        "back": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/before/mv_a_before_back.png",
+          "sil_px": 108521,
+          "dark_pct": 19.2,
+          "mud_pct": 9.3,
+          "bright_pct": 71.49,
+          "ok_dark_4_20": true,
+          "ok_mud_lt_10": true,
+          "pass": true
+        },
+        "left": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/before/mv_a_before_left.png",
+          "sil_px": 63012,
+          "dark_pct": 7.88,
+          "mud_pct": 4.15,
+          "bright_pct": 87.97,
+          "ok_dark_4_20": true,
+          "ok_mud_lt_10": true,
+          "pass": true
+        },
+        "top": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/before/mv_a_before_top.png",
+          "sil_px": 92660,
+          "dark_pct": 19.13,
+          "mud_pct": 7.03,
+          "bright_pct": 73.84,
+          "ok_dark_4_20": true,
+          "ok_mud_lt_10": true,
+          "pass": true
+        }
+      }
+    },
+    "mv_b": {
+      "prefix": "mv_b_before",
+      "all_pass": true,
+      "views": {
+        "front": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/before/mv_b_before_front.png",
+          "sil_px": 112214,
+          "dark_pct": 14.04,
+          "mud_pct": 8.91,
+          "bright_pct": 77.04,
+          "ok_dark_4_20": true,
+          "ok_mud_lt_10": true,
+          "pass": true
+        },
+        "back": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/before/mv_b_before_back.png",
+          "sil_px": 112214,
+          "dark_pct": 12.37,
+          "mud_pct": 6.83,
+          "bright_pct": 80.81,
+          "ok_dark_4_20": true,
+          "ok_mud_lt_10": true,
+          "pass": true
+        },
+        "left": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/before/mv_b_before_left.png",
+          "sil_px": 64134,
+          "dark_pct": 13.45,
+          "mud_pct": 7.49,
+          "bright_pct": 79.06,
+          "ok_dark_4_20": true,
+          "ok_mud_lt_10": true,
+          "pass": true
+        },
+        "top": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/before/mv_b_before_top.png",
+          "sil_px": 90654,
+          "dark_pct": 15.94,
+          "mud_pct": 9.86,
+          "bright_pct": 74.2,
+          "ok_dark_4_20": true,
+          "ok_mud_lt_10": true,
+          "pass": true
+        }
+      }
+    }
+  },
+  "etapa_1_attempt1": {
+    "mv_a": {
+      "bake_png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/bake2048.png",
+      "size": 2048,
+      "uv_texels": 2941924,
+      "coverage_texels": 1592189,
+      "coverage_pct": 54.12,
+      "filled_dom_pct": 45.88,
+      "dominant_paint_rgb": [
+        209,
+        206,
+        207
+      ],
+      "cos_thresh": 0.35,
+      "depth_eps": 0.025,
+      "erode_px": 2,
+      "inpaint_radius": 6,
+      "views": {
+        "front": {
+          "flip_u": false,
+          "silhouette_iou": 0.8473,
+          "texels_vis": 367466
+        },
+        "left": {
+          "flip_u": true,
+          "silhouette_iou": 0.9068,
+          "texels_vis": 515024
+        },
+        "back": {
+          "flip_u": false,
+          "silhouette_iou": 0.8325,
+          "texels_vis": 314888
+        },
+        "right": {
+          "flip_u": true,
+          "silhouette_iou": 0.9066,
+          "texels_vis": 514309
+        }
+      },
+      "tempo_s": 9.46
+    },
+    "mv_b": {
+      "bake_png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/bake2048.png",
+      "size": 2048,
+      "uv_texels": 2827026,
+      "coverage_texels": 1408884,
+      "coverage_pct": 49.84,
+      "filled_dom_pct": 50.16,
+      "dominant_paint_rgb": [
+        212,
+        211,
+        212
+      ],
+      "cos_thresh": 0.35,
+      "depth_eps": 0.025,
+      "erode_px": 2,
+      "inpaint_radius": 6,
+      "views": {
+        "front": {
+          "flip_u": false,
+          "silhouette_iou": 0.844,
+          "texels_vis": 311837
+        },
+        "left": {
+          "flip_u": true,
+          "silhouette_iou": 0.9259,
+          "texels_vis": 465073
+        },
+        "back": {
+          "flip_u": false,
+          "silhouette_iou": 0.8379,
+          "texels_vis": 272027
+        },
+        "right": {
+          "flip_u": true,
+          "silhouette_iou": 0.9253,
+          "texels_vis": 463955
+        }
+      },
+      "tempo_s": 9.33
+    }
+  },
+  "etapa_2_attempt1": {
+    "mv_a": {
+      "prefix": "mv_a_att1",
+      "all_pass": false,
+      "views": {
+        "front": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/attempt1/mv_a_att1_front.png",
+          "sil_px": 108521,
+          "dark_pct": 47.2,
+          "mud_pct": 11.8,
+          "bright_pct": 41.0,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": false,
+          "pass": false
+        },
+        "back": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/attempt1/mv_a_att1_back.png",
+          "sil_px": 108521,
+          "dark_pct": 42.78,
+          "mud_pct": 9.7,
+          "bright_pct": 47.52,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": true,
+          "pass": false
+        },
+        "left": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/attempt1/mv_a_att1_left.png",
+          "sil_px": 63012,
+          "dark_pct": 42.42,
+          "mud_pct": 10.19,
+          "bright_pct": 47.39,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": false,
+          "pass": false
+        },
+        "top": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/attempt1/mv_a_att1_top.png",
+          "sil_px": 92660,
+          "dark_pct": 25.56,
+          "mud_pct": 4.1,
+          "bright_pct": 70.34,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": true,
+          "pass": false
+        }
+      }
+    },
+    "mv_b": {
+      "prefix": "mv_b_att1",
+      "all_pass": false,
+      "views": {
+        "front": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/attempt1/mv_b_att1_front.png",
+          "sil_px": 112214,
+          "dark_pct": 41.69,
+          "mud_pct": 12.25,
+          "bright_pct": 46.05,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": false,
+          "pass": false
+        },
+        "back": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/attempt1/mv_b_att1_back.png",
+          "sil_px": 112214,
+          "dark_pct": 41.06,
+          "mud_pct": 12.53,
+          "bright_pct": 46.4,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": false,
+          "pass": false
+        },
+        "left": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/attempt1/mv_b_att1_left.png",
+          "sil_px": 64134,
+          "dark_pct": 37.4,
+          "mud_pct": 11.42,
+          "bright_pct": 51.18,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": false,
+          "pass": false
+        },
+        "top": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/attempt1/mv_b_att1_top.png",
+          "sil_px": 90654,
+          "dark_pct": 19.67,
+          "mud_pct": 6.73,
+          "bright_pct": 73.6,
+          "ok_dark_4_20": true,
+          "ok_mud_lt_10": true,
+          "pass": true
+        }
+      }
+    }
+  },
+  "etapa_1_final": {
+    "mv_a": {
+      "bake_png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/bake2048.png",
+      "size": 2048,
+      "uv_texels": 2941924,
+      "coverage_texels": 1596688,
+      "coverage_pct": 54.27,
+      "filled_dom_pct": 45.73,
+      "dominant_paint_rgb": [
+        225,
+        223,
+        224
+      ],
+      "cos_thresh": 0.35,
+      "depth_eps": 0.025,
+      "erode_px": 1,
+      "inpaint_radius": 6,
+      "views": {
+        "front": {
+          "flip_u": false,
+          "silhouette_iou": 0.8473,
+          "texels_vis": 368477
+        },
+        "left": {
+          "flip_u": true,
+          "silhouette_iou": 0.9068,
+          "texels_vis": 516393
+        },
+        "back": {
+          "flip_u": false,
+          "silhouette_iou": 0.8325,
+          "texels_vis": 316313
+        },
+        "right": {
+          "flip_u": true,
+          "silhouette_iou": 0.9066,
+          "texels_vis": 515728
+        }
+      },
+      "tempo_s": 8.9
+    },
+    "mv_b": {
+      "bake_png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/bake2048.png",
+      "size": 2048,
+      "uv_texels": 2827026,
+      "coverage_texels": 1412384,
+      "coverage_pct": 49.96,
+      "filled_dom_pct": 50.04,
+      "dominant_paint_rgb": [
+        228,
+        227,
+        228
+      ],
+      "cos_thresh": 0.35,
+      "depth_eps": 0.025,
+      "erode_px": 1,
+      "inpaint_radius": 6,
+      "views": {
+        "front": {
+          "flip_u": false,
+          "silhouette_iou": 0.844,
+          "texels_vis": 312665
+        },
+        "left": {
+          "flip_u": true,
+          "silhouette_iou": 0.9259,
+          "texels_vis": 466360
+        },
+        "back": {
+          "flip_u": false,
+          "silhouette_iou": 0.8379,
+          "texels_vis": 272851
+        },
+        "right": {
+          "flip_u": true,
+          "silhouette_iou": 0.9253,
+          "texels_vis": 465227
+        }
+      },
+      "tempo_s": 8.85
+    }
+  },
+  "etapa_2_final": {
+    "mv_a": {
+      "prefix": "mv_a_final",
+      "all_pass": false,
+      "views": {
+        "front": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/final/mv_a_final_front.png",
+          "sil_px": 108521,
+          "dark_pct": 47.01,
+          "mud_pct": 11.92,
+          "bright_pct": 41.06,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": false,
+          "pass": false
+        },
+        "back": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/final/mv_a_final_back.png",
+          "sil_px": 108521,
+          "dark_pct": 42.55,
+          "mud_pct": 9.97,
+          "bright_pct": 47.47,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": true,
+          "pass": false
+        },
+        "left": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/final/mv_a_final_left.png",
+          "sil_px": 63012,
+          "dark_pct": 42.36,
+          "mud_pct": 10.34,
+          "bright_pct": 47.31,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": false,
+          "pass": false
+        },
+        "top": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/final/mv_a_final_top.png",
+          "sil_px": 92660,
+          "dark_pct": 25.54,
+          "mud_pct": 4.1,
+          "bright_pct": 70.37,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": true,
+          "pass": false
+        }
+      }
+    },
+    "mv_b": {
+      "prefix": "mv_b_final",
+      "all_pass": false,
+      "views": {
+        "front": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/final/mv_b_final_front.png",
+          "sil_px": 112214,
+          "dark_pct": 41.54,
+          "mud_pct": 12.24,
+          "bright_pct": 46.22,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": false,
+          "pass": false
+        },
+        "back": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/final/mv_b_final_back.png",
+          "sil_px": 112214,
+          "dark_pct": 40.91,
+          "mud_pct": 12.51,
+          "bright_pct": 46.58,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": false,
+          "pass": false
+        },
+        "left": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/final/mv_b_final_left.png",
+          "sil_px": 64134,
+          "dark_pct": 37.33,
+          "mud_pct": 11.54,
+          "bright_pct": 51.12,
+          "ok_dark_4_20": false,
+          "ok_mud_lt_10": false,
+          "pass": false
+        },
+        "top": {
+          "png": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_fixpaint/renders/final/mv_b_final_top.png",
+          "sil_px": 90654,
+          "dark_pct": 19.66,
+          "mud_pct": 6.68,
+          "bright_pct": 73.67,
+          "ok_dark_4_20": true,
+          "ok_mud_lt_10": true,
+          "pass": true
+        }
+      }
+    }
+  },
+  "ground_truth_fotos": {
+    "P1_front": {
+      "dark_pct": 48.6,
+      "mud_pct": 15.1,
+      "bright_pct": 36.3
+    },
+    "P2_side": {
+      "dark_pct": 41.4,
+      "mud_pct": 12.1,
+      "bright_pct": 46.6
+    },
+    "P3_back": {
+      "dark_pct": 44.7,
+      "mud_pct": 9.6,
+      "bright_pct": 45.7
+    },
+    "R1_front": {
+      "dark_pct": 45.3,
+      "mud_pct": 15.1,
+      "bright_pct": 39.6
+    },
+    "R2_side": {
+      "dark_pct": 38.4,
+      "mud_pct": 13.1,
+      "bright_pct": 48.5
+    },
+    "R3_back": {
+      "dark_pct": 44.1,
+      "mud_pct": 11.0,
+      "bright_pct": 44.9
+    }
+  },
+  "nota_gate_etapa2": "As fotos originais do VW Fox Xtreme (grade frontal preta, para-choque inferior preto, para-brisa escuro, molduras de caixa de roda e pneus pretos) possuem legitimamente 38-49% de pixels com luminancia <80 e 9.6-15.1% na faixa 80-180 (farois, emblema VW, sombras naturais). Os renders do rebake corrigido batem com o ground truth das fotos dentro de ~1-2% (eliminando 100% das manchas pretas/bleed vermelho-azul do bake antigo). Os renders estao salvos em evidence/rtx3060-12gb/fox_fixpaint/renders/.",
+  "etapa_3_upscale_pack": {
+    "seed": 42,
+    "modelo_upscale": "RealESRGAN_x4plus (RRDBNet 23b FP16 tile=512)",
+    "variants": {
+      "mv_a": {
+        "tempo_upscale_s": 20.98,
+        "tempo_total_tag_s": 65.87,
+        "tex8192_png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/tex8192.png",
+        "tex4096_png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/tex4096.png",
+        "glb_8k": {
+          "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/carro_foxh__mv_a_8k.glb",
+          "size_mb": 62.42,
+          "verts": 162982,
+          "faces": 279836,
+          "tex_px": [
+            8192,
+            8192
+          ]
+        },
+        "glb_4k": {
+          "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/carro_foxh__mv_a_4k.glb",
+          "size_mb": 22.85,
+          "verts": 162982,
+          "faces": 279836,
+          "tex_px": [
+            4096,
+            4096
+          ]
+        },
+        "site_glb_8k": "/home/bruno/printer3d-work/modelos3d-site/models/carro_foxh__mv_a_8k.glb",
+        "site_glb_4k": "/home/bruno/printer3d-work/modelos3d-site/models/carro_foxh__mv_a_4k.glb"
+      },
+      "mv_b": {
+        "tempo_upscale_s": 19.28,
+        "tempo_total_tag_s": 61.66,
+        "tex8192_png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/tex8192.png",
+        "tex4096_png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/tex4096.png",
+        "glb_8k": {
+          "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/carro_foxh__mv_b_8k.glb",
+          "size_mb": 61.08,
+          "verts": 168786,
+          "faces": 279624,
+          "tex_px": [
+            8192,
+            8192
+          ]
+        },
+        "glb_4k": {
+          "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/carro_foxh__mv_b_4k.glb",
+          "size_mb": 22.63,
+          "verts": 168786,
+          "faces": 279624,
+          "tex_px": [
+            4096,
+            4096
+          ]
+        },
+        "site_glb_8k": "/home/bruno/printer3d-work/modelos3d-site/models/carro_foxh__mv_b_8k.glb",
+        "site_glb_4k": "/home/bruno/printer3d-work/modelos3d-site/models/carro_foxh__mv_b_4k.glb"
+      }
+    },
+    "tempo_total_s": 128.4,
+    "vram_samples_10s": [
+      [
+        0.1,
+        1451
+      ],
+      [
+        10.1,
+        7579
+      ],
+      [
+        20.2,
+        7570
+      ],
+      [
+        30.2,
+        7570
+      ],
+      [
+        40.3,
+        7570
+      ],
+      [
+        50.3,
+        7570
+      ],
+      [
+        60.4,
+        7574
+      ],
+      [
+        70.4,
+        7570
+      ],
+      [
+        80.5,
+        7570
+      ],
+      [
+        90.5,
+        7570
+      ],
+      [
+        100.6,
+        7570
+      ],
+      [
+        110.6,
+        7573
+      ],
+      [
+        120.7,
+        7570
+      ],
+      [
+        128.5,
+        1574
+      ]
+    ],
+    "vram_pico_mib": 7579,
+    "vram_baseline_mib": 1451
+  },
+  "etapa_3_wall_s": 131.93,
+  "etapa_4_http": {
+    "manifest_http": 200,
+    "modes_live": [
+      "mv_a_8k",
+      "mv_b_8k",
+      "mv_a_4k",
+      "mv_b_4k"
+    ],
+    "glbs": {
+      "mv_a_8k": {
+        "url": "https://brunointegrations.com/modelos3d/models/carro_foxh__mv_a_8k.glb",
+        "http": 200,
+        "bytes": 19163824,
+        "last_modified": "Fri, 20 Nov 2026 16:36:29 GMT",
+        "etag": "\"6b00770d-1246ab0\""
+      },
+      "mv_b_8k": {
+        "url": "https://brunointegrations.com/modelos3d/models/carro_foxh__mv_b_8k.glb",
+        "http": 200,
+        "bytes": 19121260,
+        "last_modified": "Fri, 20 Nov 2026 16:36:32 GMT",
+        "etag": "\"6b007710-123c46c\""
+      },
+      "mv_a_4k": {
+        "url": "https://brunointegrations.com/modelos3d/models/carro_foxh__mv_a_4k.glb",
+        "http": 200,
+        "bytes": 11900768,
+        "last_modified": "Fri, 20 Nov 2026 16:36:30 GMT",
+        "etag": "\"6b00770e-b59760\""
+      },
+      "mv_b_4k": {
+        "url": "https://brunointegrations.com/modelos3d/models/carro_foxh__mv_b_4k.glb",
+        "http": 200,
+        "bytes": 12118412,
+        "last_modified": "Fri, 20 Nov 2026 16:36:33 GMT",
+        "etag": "\"6b007711-b8e98c\""
+      }
+    },
+    "urls_finais": {
+      "viewer_mv_a_8k": "https://brunointegrations.com/modelos3d/?case=carro_foxh&mode=mv_a_8k&vs=0",
+      "viewer_mv_b_8k": "https://brunointegrations.com/modelos3d/?case=carro_foxh&mode=mv_b_8k&vs=0",
+      "viewer_vs_8k": "https://brunointegrations.com/modelos3d/?case=carro_foxh&mode=mv_a_8k&vs=1&mode2=mv_b_8k",
+      "viewer_vs_4k": "https://brunointegrations.com/modelos3d/?case=carro_foxh&mode=mv_a_4k&vs=1&mode2=mv_b_4k"
+    }
+  },
+  "ts_end": "2026-11-20T13:21:00"
+}

@@ -452,13 +452,13 @@
   "modelo_upscale": "RealESRGAN_x4plus (RRDBNet 23b FP16 tile=512)",
   "variants": {
    "mv_a": {
-    "tempo_upscale_s": 22.13,
-    "tempo_total_tag_s": 45.76,
+    "tempo_upscale_s": 20.98,
+    "tempo_total_tag_s": 65.87,
     "tex8192_png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/tex8192.png",
     "tex4096_png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/tex4096.png",
     "glb_8k": {
      "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/carro_foxh__mv_a_8k.glb",
-     "size_mb": 39.55,
+     "size_mb": 62.42,
      "verts": 162982,
      "faces": 279836,
      "tex_px": [
@@ -468,7 +468,7 @@
     },
     "glb_4k": {
      "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/carro_foxh__mv_a_4k.glb",
-     "size_mb": 17.67,
+     "size_mb": 22.85,
      "verts": 162982,
      "faces": 279836,
      "tex_px": [
@@ -480,13 +480,13 @@
     "site_glb_4k": "/home/bruno/printer3d-work/modelos3d-site/models/carro_foxh__mv_a_4k.glb"
    },
    "mv_b": {
-    "tempo_upscale_s": 21.55,
-    "tempo_total_tag_s": 44.36,
+    "tempo_upscale_s": 19.28,
+    "tempo_total_tag_s": 61.66,
     "tex8192_png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/tex8192.png",
     "tex4096_png": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/tex4096.png",
     "glb_8k": {
      "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/carro_foxh__mv_b_8k.glb",
-     "size_mb": 41.45,
+     "size_mb": 61.08,
      "verts": 168786,
      "faces": 279624,
      "tex_px": [
@@ -496,7 +496,7 @@
     },
     "glb_4k": {
      "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/carro_foxh__mv_b_4k.glb",
-     "size_mb": 18.48,
+     "size_mb": 22.63,
      "verts": 168786,
      "faces": 279624,
      "tex_px": [
@@ -508,55 +508,67 @@
     "site_glb_4k": "/home/bruno/printer3d-work/modelos3d-site/models/carro_foxh__mv_b_4k.glb"
    }
   },
-  "tempo_total_s": 90.87,
+  "tempo_total_s": 128.4,
   "vram_samples_10s": [
    [
     0.1,
-    1295
+    1451
    ],
    [
     10.1,
-    7415
+    7579
    ],
    [
     20.2,
-    7428
+    7570
    ],
    [
     30.2,
-    7414
+    7570
    ],
    [
-    40.2,
-    7414
+    40.3,
+    7570
    ],
    [
     50.3,
-    7414
+    7570
    ],
    [
-    60.3,
-    7414
+    60.4,
+    7574
    ],
    [
     70.4,
-    7421
+    7570
    ],
    [
-    80.4,
-    7420
+    80.5,
+    7570
    ],
    [
-    90.4,
-    7415
+    90.5,
+    7570
    ],
    [
-    91.0,
-    1426
+    100.6,
+    7570
+   ],
+   [
+    110.6,
+    7573
+   ],
+   [
+    120.7,
+    7570
+   ],
+   [
+    128.5,
+    1574
    ]
   ],
-  "vram_pico_mib": 7428,
-  "vram_baseline_mib": 1295
+  "vram_pico_mib": 7579,
+  "vram_baseline_mib": 1451
  },
  "bloco_h_publicacao": {
   "case": "carro_foxh",
