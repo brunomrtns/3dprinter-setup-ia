@@ -370,7 +370,7 @@ function refreshViewport(i) {
   v.spin.style.display = 'flex';
 
   const req = (v._req = (v._req || 0) + 1);
-  loader.load(`models/${c.id}__${mode}.glb?v=14`, g => {
+  loader.load(`models/${c.id}__${mode}.glb?v=19`, g => {
     if (v._req !== req) return;
     v.spin.style.display = 'none';
     if (v.group) v.scene.remove(v.group);
@@ -379,16 +379,27 @@ function refreshViewport(i) {
     g.scene.traverse(o => {
       if (o.isMesh) {
         if (!o.geometry.attributes.normal) o.geometry.computeVertexNormals();
-        const tex = o.material && o.material.map ? o.material.map : null;
-        if (tex) {
-          // GLB 3D texturizado: garante sRGB explícito e material neutro sem acinzentar branco
+        const origMat = o.material;
+        const tex = origMat && origMat.map ? origMat.map : null;
+        const hasPbr = Boolean(origMat && (origMat.metalnessMap || origMat.roughnessMap));
+        if (tex && hasPbr) {
+          // GLB com PBR (metallicRoughnessTexture): respeita o material do glTF como veio
           tex.colorSpace = THREE.SRGBColorSpace;
           tex.needsUpdate = true;
-          o.material = new THREE.MeshStandardMaterial({
+          origMat.side = THREE.DoubleSide;
+          if (typeof origMat.envMapIntensity !== 'number') origMat.envMapIntensity = 0.85;
+          origMat.needsUpdate = true;
+        } else if (tex) {
+          // GLB albedo-only: MeshPhysicalMaterial com clearcoat leve + RoomEnvironment
+          tex.colorSpace = THREE.SRGBColorSpace;
+          tex.needsUpdate = true;
+          o.material = new THREE.MeshPhysicalMaterial({
             map: tex,
-            roughness: 0.65,
+            roughness: 0.55,
             metalness: 0.0,
-            envMapIntensity: 0.85,
+            clearcoat: 0.4,
+            clearcoatRoughness: 0.22,
+            envMapIntensity: 0.7,
             side: THREE.DoubleSide,
           });
         } else {

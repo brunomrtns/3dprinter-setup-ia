@@ -1,0 +1,133 @@
+{
+  "stage": "B_trellis2_pbr",
+  "asset_id": "carro_foxh",
+  "seed": 42,
+  "attn_backend": "xformers",
+  "cond_image": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R1_front.png",
+  "cond_tag": "front",
+  "status": "OK",
+  "quant_mode": {
+    "tex_slat_flow_model_512": "fp16_bf16_native",
+    "tex_slat_flow_model_1024": "fp16_bf16_native"
+  },
+  "variants": {
+    "mv_a": {
+      "basecolor_path": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/trellis2_pbr/mv_a_front_basecolor.png",
+      "mr_path": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/trellis2_pbr/mv_a_front_metallic_roughness.png",
+      "resolution": 1024,
+      "texture_size": 2048,
+      "tempo_s": 49.07,
+      "faces_before": 279836,
+      "faces_after": 279836,
+      "verts_before": 162982,
+      "verts_after": 162982,
+      "hausdorff_bbox_pct": 0.0,
+      "shape_guard_ok": true,
+      "basecolor_size": [
+        2048,
+        2048
+      ],
+      "mr_size": [
+        2048,
+        2048
+      ],
+      "basecolor_lap_var": 124.47
+    },
+    "mv_b": {
+      "basecolor_path": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/trellis2_pbr/mv_b_front_basecolor.png",
+      "mr_path": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/trellis2_pbr/mv_b_front_metallic_roughness.png",
+      "resolution": 1024,
+      "texture_size": 2048,
+      "tempo_s": 52.51,
+      "faces_before": 279624,
+      "faces_after": 279624,
+      "verts_before": 168786,
+      "verts_after": 168786,
+      "hausdorff_bbox_pct": 0.0,
+      "shape_guard_ok": true,
+      "basecolor_size": [
+        2048,
+        2048
+      ],
+      "mr_size": [
+        2048,
+        2048
+      ],
+      "basecolor_lap_var": 97.57
+    }
+  },
+  "notes": [],
+  "tempo_total_s": 155.15,
+  "vram_samples_10s": [
+    [
+      0.0,
+      1177
+    ],
+    [
+      10.1,
+      1176
+    ],
+    [
+      20.1,
+      1173
+    ],
+    [
+      30.2,
+      1173
+    ],
+    [
+      40.2,
+      1175
+    ],
+    [
+      50.3,
+      2709
+    ],
+    [
+      60.3,
+      5503
+    ],
+    [
+      70.4,
+      5503
+    ],
+    [
+      80.4,
+      5503
+    ],
+    [
+      90.5,
+      5506
+    ],
+    [
+      100.5,
+      6026
+    ],
+    [
+      110.6,
+      6023
+    ],
+    [
+      120.6,
+      6023
+    ],
+    [
+      130.7,
+      6023
+    ],
+    [
+      140.7,
+      6023
+    ],
+    [
+      150.8,
+      6307
+    ],
+    [
+      155.2,
+      1368
+    ]
+  ],
+  "vram_pico_mib": 6307,
+  "vram_baseline_mib": 1177
+}

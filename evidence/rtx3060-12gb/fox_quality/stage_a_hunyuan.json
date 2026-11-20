@@ -1,0 +1,159 @@
+{
+  "stage": "A_hunyuan_native",
+  "asset_id": "carro_foxh",
+  "seed": 42,
+  "target_texture_size": 2048,
+  "vram_limit_mib": 11000,
+  "variants": {
+    "mv_a": {
+      "texture_path": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/hunyuan_native/mv_a_native_2048.png",
+      "texture_size": 2048,
+      "per_view_sr": true,
+      "tempo_s": 153.58,
+      "laplacian_var": 465.67,
+      "sat_pct": 9.826
+    },
+    "mv_b": {
+      "texture_path": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/hunyuan_native/mv_b_native_2048.png",
+      "texture_size": 2048,
+      "per_view_sr": true,
+      "tempo_s": 150.05,
+      "laplacian_var": 481.2,
+      "sat_pct": 10.062
+    }
+  },
+  "notes": [],
+  "tempo_total_s": 309.78,
+  "vram_samples_10s": [
+    [
+      0.1,
+      1065
+    ],
+    [
+      10.1,
+      1298
+    ],
+    [
+      20.2,
+      1264
+    ],
+    [
+      30.2,
+      8925
+    ],
+    [
+      40.3,
+      9505
+    ],
+    [
+      50.3,
+      9511
+    ],
+    [
+      60.4,
+      9511
+    ],
+    [
+      70.4,
+      9511
+    ],
+    [
+      80.5,
+      9660
+    ],
+    [
+      90.5,
+      9660
+    ],
+    [
+      100.6,
+      9556
+    ],
+    [
+      110.6,
+      9561
+    ],
+    [
+      120.7,
+      9561
+    ],
+    [
+      130.7,
+      9561
+    ],
+    [
+      140.7,
+      9557
+    ],
+    [
+      150.8,
+      2307
+    ],
+    [
+      160.8,
+      1404
+    ],
+    [
+      170.9,
+      3282
+    ],
+    [
+      180.9,
+      9619
+    ],
+    [
+      191.0,
+      9564
+    ],
+    [
+      201.0,
+      9564
+    ],
+    [
+      211.1,
+      9564
+    ],
+    [
+      221.1,
+      9564
+    ],
+    [
+      231.2,
+      9564
+    ],
+    [
+      241.2,
+      9564
+    ],
+    [
+      251.3,
+      9564
+    ],
+    [
+      261.3,
+      9564
+    ],
+    [
+      271.4,
+      9564
+    ],
+    [
+      281.4,
+      9564
+    ],
+    [
+      291.4,
+      9564
+    ],
+    [
+      301.5,
+      2189
+    ],
+    [
+      309.9,
+      1485
+    ]
+  ],
+  "vram_pico_mib": 9660,
+  "vram_baseline_mib": 1065
+}

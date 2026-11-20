@@ -1,0 +1,3731 @@
+{
+  "run": "fox_quality",
+  "timestamp_utc": "2026-11-20T19:57:12.419337+00:00",
+  "seed": 42,
+  "gpu": "NVIDIA GeForce RTX 3060 12GB",
+  "winner_architecture": "Hybrid Universal PBR: BaseColor (Hunyuan3D-Paint v2-0 native 2048 + per-view Real-ESRGAN x4 SR + generic patch_repair) + MetallicRoughness PBR 2048 PNG (TRELLIS.2-4B TexturingPipeline 1024^3 cond=three_quarter, same UV layout)",
+  "pbr_included": true,
+  "generic_pipeline_scripts": [
+    "pipeline/paint_quality.py",
+    "pipeline/retexture_trellis.py",
+    "pipeline/patch_repair.py",
+    "pipeline/eval_texture.py",
+    "pipeline/pack_glb.py"
+  ],
+  "asset_config": "cars/fox.json",
+  "genericity_debt": false,
+  "backup_prev_dir": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/backup_prev",
+  "viewer_version": "v19 (PBR preserved when metallicRoughnessTexture present; MeshPhysicalMaterial clearcoat 0.4 + RoomEnvironment for albedo-only; NoToneMapping + SRGBColorSpace)",
+  "stage_a_hunyuan_2048": {
+    "stage": "A_hunyuan_native",
+    "asset_id": "carro_foxh",
+    "seed": 42,
+    "target_texture_size": 2048,
+    "vram_limit_mib": 11000,
+    "variants": {
+      "mv_a": {
+        "texture_path": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/hunyuan_native/mv_a_native_2048.png",
+        "texture_size": 2048,
+        "per_view_sr": true,
+        "tempo_s": 153.58,
+        "laplacian_var": 465.67,
+        "sat_pct": 9.826
+      },
+      "mv_b": {
+        "texture_path": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/hunyuan_native/mv_b_native_2048.png",
+        "texture_size": 2048,
+        "per_view_sr": true,
+        "tempo_s": 150.05,
+        "laplacian_var": 481.2,
+        "sat_pct": 10.062
+      }
+    },
+    "notes": [],
+    "tempo_total_s": 309.78,
+    "vram_samples_10s": [
+      [
+        0.1,
+        1065
+      ],
+      [
+        10.1,
+        1298
+      ],
+      [
+        20.2,
+        1264
+      ],
+      [
+        30.2,
+        8925
+      ],
+      [
+        40.3,
+        9505
+      ],
+      [
+        50.3,
+        9511
+      ],
+      [
+        60.4,
+        9511
+      ],
+      [
+        70.4,
+        9511
+      ],
+      [
+        80.5,
+        9660
+      ],
+      [
+        90.5,
+        9660
+      ],
+      [
+        100.6,
+        9556
+      ],
+      [
+        110.6,
+        9561
+      ],
+      [
+        120.7,
+        9561
+      ],
+      [
+        130.7,
+        9561
+      ],
+      [
+        140.7,
+        9557
+      ],
+      [
+        150.8,
+        2307
+      ],
+      [
+        160.8,
+        1404
+      ],
+      [
+        170.9,
+        3282
+      ],
+      [
+        180.9,
+        9619
+      ],
+      [
+        191.0,
+        9564
+      ],
+      [
+        201.0,
+        9564
+      ],
+      [
+        211.1,
+        9564
+      ],
+      [
+        221.1,
+        9564
+      ],
+      [
+        231.2,
+        9564
+      ],
+      [
+        241.2,
+        9564
+      ],
+      [
+        251.3,
+        9564
+      ],
+      [
+        261.3,
+        9564
+      ],
+      [
+        271.4,
+        9564
+      ],
+      [
+        281.4,
+        9564
+      ],
+      [
+        291.4,
+        9564
+      ],
+      [
+        301.5,
+        2189
+      ],
+      [
+        309.9,
+        1485
+      ]
+    ],
+    "vram_pico_mib": 9660,
+    "vram_baseline_mib": 1065
+  },
+  "stage_b_trellis2_pbr_front": {
+    "stage": "B_trellis2_pbr",
+    "asset_id": "carro_foxh",
+    "seed": 42,
+    "attn_backend": "xformers",
+    "cond_image": "/mnt/c/Users/Bruno/Downloads/fox/prep_real/R1_front.png",
+    "cond_tag": "front",
+    "status": "OK",
+    "quant_mode": {
+      "tex_slat_flow_model_512": "fp16_bf16_native",
+      "tex_slat_flow_model_1024": "fp16_bf16_native"
+    },
+    "variants": {
+      "mv_a": {
+        "basecolor_path": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/trellis2_pbr/mv_a_front_basecolor.png",
+        "mr_path": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/trellis2_pbr/mv_a_front_metallic_roughness.png",
+        "resolution": 1024,
+        "texture_size": 2048,
+        "tempo_s": 49.07,
+        "faces_before": 279836,
+        "faces_after": 279836,
+        "verts_before": 162982,
+        "verts_after": 162982,
+        "hausdorff_bbox_pct": 0.0,
+        "shape_guard_ok": true,
+        "basecolor_size": [
+          2048,
+          2048
+        ],
+        "mr_size": [
+          2048,
+          2048
+        ],
+        "basecolor_lap_var": 124.47
+      },
+      "mv_b": {
+        "basecolor_path": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/trellis2_pbr/mv_b_front_basecolor.png",
+        "mr_path": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/trellis2_pbr/mv_b_front_metallic_roughness.png",
+        "resolution": 1024,
+        "texture_size": 2048,
+        "tempo_s": 52.51,
+        "faces_before": 279624,
+        "faces_after": 279624,
+        "verts_before": 168786,
+        "verts_after": 168786,
+        "hausdorff_bbox_pct": 0.0,
+        "shape_guard_ok": true,
+        "basecolor_size": [
+          2048,
+          2048
+        ],
+        "mr_size": [
+          2048,
+          2048
+        ],
+        "basecolor_lap_var": 97.57
+      }
+    },
+    "notes": [],
+    "tempo_total_s": 155.15,
+    "vram_samples_10s": [
+      [
+        0.0,
+        1177
+      ],
+      [
+        10.1,
+        1176
+      ],
+      [
+        20.1,
+        1173
+      ],
+      [
+        30.2,
+        1173
+      ],
+      [
+        40.2,
+        1175
+      ],
+      [
+        50.3,
+        2709
+      ],
+      [
+        60.3,
+        5503
+      ],
+      [
+        70.4,
+        5503
+      ],
+      [
+        80.4,
+        5503
+      ],
+      [
+        90.5,
+        5506
+      ],
+      [
+        100.5,
+        6026
+      ],
+      [
+        110.6,
+        6023
+      ],
+      [
+        120.6,
+        6023
+      ],
+      [
+        130.7,
+        6023
+      ],
+      [
+        140.7,
+        6023
+      ],
+      [
+        150.8,
+        6307
+      ],
+      [
+        155.2,
+        1368
+      ]
+    ],
+    "vram_pico_mib": 6307,
+    "vram_baseline_mib": 1177
+  },
+  "stage_b_trellis2_pbr_three_quarter": {
+    "stage": "B_trellis2_pbr",
+    "asset_id": "carro_foxh",
+    "seed": 42,
+    "attn_backend": "xformers",
+    "cond_image": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/before/mv_b_before_three_quarter.png",
+    "cond_tag": "three_quarter",
+    "status": "OK",
+    "quant_mode": {
+      "tex_slat_flow_model_512": "fp16_bf16_native",
+      "tex_slat_flow_model_1024": "fp16_bf16_native"
+    },
+    "variants": {
+      "mv_a": {
+        "basecolor_path": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/trellis2_pbr/mv_a_three_quarter_basecolor.png",
+        "mr_path": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/trellis2_pbr/mv_a_three_quarter_metallic_roughness.png",
+        "resolution": 1024,
+        "texture_size": 2048,
+        "tempo_s": 50.24,
+        "faces_before": 279836,
+        "faces_after": 279836,
+        "verts_before": 162982,
+        "verts_after": 162982,
+        "hausdorff_bbox_pct": 0.0,
+        "shape_guard_ok": true,
+        "basecolor_size": [
+          2048,
+          2048
+        ],
+        "mr_size": [
+          2048,
+          2048
+        ],
+        "basecolor_lap_var": 190.09
+      },
+      "mv_b": {
+        "basecolor_path": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/trellis2_pbr/mv_b_three_quarter_basecolor.png",
+        "mr_path": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/trellis2_pbr/mv_b_three_quarter_metallic_roughness.png",
+        "resolution": 1024,
+        "texture_size": 2048,
+        "tempo_s": 50.65,
+        "faces_before": 279624,
+        "faces_after": 279624,
+        "verts_before": 168786,
+        "verts_after": 168786,
+        "hausdorff_bbox_pct": 0.0,
+        "shape_guard_ok": true,
+        "basecolor_size": [
+          2048,
+          2048
+        ],
+        "mr_size": [
+          2048,
+          2048
+        ],
+        "basecolor_lap_var": 161.16
+      }
+    },
+    "notes": [],
+    "tempo_total_s": 154.86,
+    "vram_samples_10s": [
+      [
+        0.0,
+        1176
+      ],
+      [
+        10.1,
+        1174
+      ],
+      [
+        20.1,
+        1182
+      ],
+      [
+        30.2,
+        1178
+      ],
+      [
+        40.2,
+        1180
+      ],
+      [
+        50.3,
+        2528
+      ],
+      [
+        60.4,
+        5508
+      ],
+      [
+        70.4,
+        5508
+      ],
+      [
+        80.4,
+        5516
+      ],
+      [
+        90.5,
+        5508
+      ],
+      [
+        100.5,
+        6030
+      ],
+      [
+        110.6,
+        6028
+      ],
+      [
+        120.6,
+        6028
+      ],
+      [
+        130.7,
+        6028
+      ],
+      [
+        140.7,
+        6028
+      ],
+      [
+        150.8,
+        6312
+      ],
+      [
+        154.9,
+        1371
+      ]
+    ],
+    "vram_pico_mib": 6312,
+    "vram_baseline_mib": 1176
+  },
+  "stage_c_patch_repair_winner_basecolor": {
+    "stage": "C_patch_repair",
+    "asset_id": "carro_foxh",
+    "variants": {
+      "mv_a": {
+        "src": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/hunyuan_native/mv_a_native_2048.png",
+        "dst": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/hunyuan_repaired/mv_a_repaired.png",
+        "patches_detected": 144,
+        "patches_repaired": 144,
+        "patches_residual": 0,
+        "patch_texels_before": 98436,
+        "patch_texels_before_pct": 2.3469,
+        "patch_texels_after": 0,
+        "patch_texels_after_pct": 0.0,
+        "patches": [
+          {
+            "area_px": 458,
+            "uv_center": [
+              0.495,
+              0.9978
+            ],
+            "bbox_px": [
+              986,
+              0,
+              54,
+              17
+            ],
+            "comp_lum": 204.2,
+            "ring_med_lum": 25.1,
+            "dark_perimeter_ratio": 0.772
+          },
+          {
+            "area_px": 232,
+            "uv_center": [
+              0.5373,
+              0.9977
+            ],
+            "bbox_px": [
+              1088,
+              0,
+              25,
+              14
+            ],
+            "comp_lum": 218.7,
+            "ring_med_lum": 16.2,
+            "dark_perimeter_ratio": 0.821
+          },
+          {
+            "area_px": 167,
+            "uv_center": [
+              0.5677,
+              0.9981
+            ],
+            "bbox_px": [
+              1151,
+              0,
+              27,
+              10
+            ],
+            "comp_lum": 202.4,
+            "ring_med_lum": 11.7,
+            "dark_perimeter_ratio": 0.731
+          },
+          {
+            "area_px": 175,
+            "uv_center": [
+              0.596,
+              0.998
+            ],
+            "bbox_px": [
+              1210,
+              0,
+              22,
+              12
+            ],
+            "comp_lum": 198.7,
+            "ring_med_lum": 29.1,
+            "dark_perimeter_ratio": 0.755
+          },
+          {
+            "area_px": 476,
+            "uv_center": [
+              0.8194,
+              0.9939
+            ],
+            "bbox_px": [
+              1669,
+              0,
+              22,
+              33
+            ],
+            "comp_lum": 204.4,
+            "ring_med_lum": 35.7,
+            "dark_perimeter_ratio": 0.752
+          },
+          {
+            "area_px": 560,
+            "uv_center": [
+              0.9072,
+              0.9947
+            ],
+            "bbox_px": [
+              1843,
+              0,
+              31,
+              25
+            ],
+            "comp_lum": 210.4,
+            "ring_med_lum": 33.1,
+            "dark_perimeter_ratio": 0.774
+          },
+          {
+            "area_px": 953,
+            "uv_center": [
+              0.9936,
+              0.9793
+            ],
+            "bbox_px": [
+              2010,
+              12,
+              38,
+              50
+            ],
+            "comp_lum": 207.7,
+            "ring_med_lum": 3.9,
+            "dark_perimeter_ratio": 0.803
+          },
+          {
+            "area_px": 262,
+            "uv_center": [
+              0.602,
+              0.9817
+            ],
+            "bbox_px": [
+              1224,
+              27,
+              20,
+              22
+            ],
+            "comp_lum": 211.7,
+            "ring_med_lum": 29.9,
+            "dark_perimeter_ratio": 0.777
+          },
+          {
+            "area_px": 134,
+            "uv_center": [
+              0.534,
+              0.9819
+            ],
+            "bbox_px": [
+              1086,
+              30,
+              16,
+              15
+            ],
+            "comp_lum": 217.3,
+            "ring_med_lum": 12.0,
+            "dark_perimeter_ratio": 0.787
+          },
+          {
+            "area_px": 129,
+            "uv_center": [
+              0.5638,
+              0.9807
+            ],
+            "bbox_px": [
+              1150,
+              33,
+              13,
+              14
+            ],
+            "comp_lum": 219.0,
+            "ring_med_lum": 28.0,
+            "dark_perimeter_ratio": 0.722
+          },
+          {
+            "area_px": 298,
+            "uv_center": [
+              0.8187,
+              0.9758
+            ],
+            "bbox_px": [
+              1669,
+              35,
+              16,
+              27
+            ],
+            "comp_lum": 205.5,
+            "ring_med_lum": 19.5,
+            "dark_perimeter_ratio": 0.784
+          },
+          {
+            "area_px": 114,
+            "uv_center": [
+              0.4255,
+              0.9757
+            ],
+            "bbox_px": [
+              863,
+              45,
+              17,
+              10
+            ],
+            "comp_lum": 209.1,
+            "ring_med_lum": 42.2,
+            "dark_perimeter_ratio": 0.778
+          },
+          {
+            "area_px": 68,
+            "uv_center": [
+              0.7715,
+              0.9767
+            ],
+            "bbox_px": [
+              1574,
+              44,
+              12,
+              8
+            ],
+            "comp_lum": 217.9,
+            "ring_med_lum": 32.3,
+            "dark_perimeter_ratio": 0.784
+          },
+          {
+            "area_px": 78,
+            "uv_center": [
+              0.7839,
+              0.9753
+            ],
+            "bbox_px": [
+              1598,
+              47,
+              15,
+              8
+            ],
+            "comp_lum": 206.5,
+            "ring_med_lum": 33.9,
+            "dark_perimeter_ratio": 0.833
+          },
+          {
+            "area_px": 165,
+            "uv_center": [
+              0.9011,
+              0.9716
+            ],
+            "bbox_px": [
+              1840,
+              47,
+              12,
+              24
+            ],
+            "comp_lum": 197.2,
+            "ring_med_lum": 25.0,
+            "dark_perimeter_ratio": 0.752
+          },
+          {
+            "area_px": 1442,
+            "uv_center": [
+              0.2778,
+              0.9474
+            ],
+            "bbox_px": [
+              547,
+              82,
+              40,
+              55
+            ],
+            "comp_lum": 210.9,
+            "ring_med_lum": 18.9,
+            "dark_perimeter_ratio": 0.762
+          },
+          {
+            "area_px": 255,
+            "uv_center": [
+              0.8666,
+              0.9474
+            ],
+            "bbox_px": [
+              1767,
+              96,
+              15,
+              26
+            ],
+            "comp_lum": 201.2,
+            "ring_med_lum": 12.5,
+            "dark_perimeter_ratio": 0.708
+          },
+          {
+            "area_px": 1174,
+            "uv_center": [
+              0.9962,
+              0.9255
+            ],
+            "bbox_px": [
+              2027,
+              109,
+              21,
+              97
+            ],
+            "comp_lum": 212.3,
+            "ring_med_lum": 12.9,
+            "dark_perimeter_ratio": 0.817
+          },
+          {
+            "area_px": 274,
+            "uv_center": [
+              0.6576,
+              0.9325
+            ],
+            "bbox_px": [
+              1330,
+              133,
+              34,
+              12
+            ],
+            "comp_lum": 204.4,
+            "ring_med_lum": 55.0,
+            "dark_perimeter_ratio": 0.784
+          },
+          {
+            "area_px": 248,
+            "uv_center": [
+              0.8883,
+              0.9221
+            ],
+            "bbox_px": [
+              1810,
+              152,
+              19,
+              17
+            ],
+            "comp_lum": 213.6,
+            "ring_med_lum": 33.3,
+            "dark_perimeter_ratio": 0.746
+          },
+          {
+            "area_px": 344,
+            "uv_center": [
+              0.94,
+              0.889
+            ],
+            "bbox_px": [
+              1919,
+              200,
+              14,
+              46
+            ],
+            "comp_lum": 199.5,
+            "ring_med_lum": 39.2,
+            "dark_perimeter_ratio": 0.724
+          },
+          {
+            "area_px": 215,
+            "uv_center": [
+              0.996,
+              0.8872
+            ],
+            "bbox_px": [
+              2030,
+              224,
+              18,
+              15
+            ],
+            "comp_lum": 216.7,
+            "ring_med_lum": 28.6,
+            "dark_perimeter_ratio": 0.844
+          },
+          {
+            "area_px": 530,
+            "uv_center": [
+              0.3559,
+              0.8745
+            ],
+            "bbox_px": [
+              716,
+              241,
+              28,
+              29
+            ],
+            "comp_lum": 209.4,
+            "ring_med_lum": 21.8,
+            "dark_perimeter_ratio": 0.734
+          },
+          {
+            "area_px": 133,
+            "uv_center": [
+              0.944,
+              0.8532
+            ],
+            "bbox_px": [
+              1928,
+              292,
+              10,
+              21
+            ],
+            "comp_lum": 203.6,
+            "ring_med_lum": 26.5,
+            "dark_perimeter_ratio": 0.726
+          },
+          {
+            "area_px": 227,
+            "uv_center": [
+              0.1118,
+              0.8535
+            ],
+            "bbox_px": [
+              216,
+              294,
+              23,
+              14
+            ],
+            "comp_lum": 205.7,
+            "ring_med_lum": 20.2,
+            "dark_perimeter_ratio": 0.721
+          },
+          {
+            "area_px": 524,
+            "uv_center": [
+              0.0063,
+              0.8362
+            ],
+            "bbox_px": [
+              0,
+              325,
+              29,
+              21
+            ],
+            "comp_lum": 193.9,
+            "ring_med_lum": 26.1,
+            "dark_perimeter_ratio": 0.753
+          },
+          {
+            "area_px": 748,
+            "uv_center": [
+              0.0847,
+              0.8307
+            ],
+            "bbox_px": [
+              159,
+              324,
+              30,
+              40
+            ],
+            "comp_lum": 213.0,
+            "ring_med_lum": 32.3,
+            "dark_perimeter_ratio": 0.788
+          },
+          {
+            "area_px": 168,
+            "uv_center": [
+              0.9338,
+              0.8367
+            ],
+            "bbox_px": [
+              1905,
+              329,
+              16,
+              13
+            ],
+            "comp_lum": 213.5,
+            "ring_med_lum": 23.0,
+            "dark_perimeter_ratio": 0.741
+          },
+          {
+            "area_px": 162,
+            "uv_center": [
+              0.0462,
+              0.8185
+            ],
+            "bbox_px": [
+              88,
+              364,
+              17,
+              16
+            ],
+            "comp_lum": 208.1,
+            "ring_med_lum": 24.2,
+            "dark_perimeter_ratio": 0.706
+          },
+          {
+            "area_px": 84,
+            "uv_center": [
+              0.3211,
+              0.8021
+            ],
+            "bbox_px": [
+              654,
+              399,
+              10,
+              15
+            ],
+            "comp_lum": 208.8,
+            "ring_med_lum": 16.2,
+            "dark_perimeter_ratio": 0.776
+          },
+          {
+            "area_px": 612,
+            "uv_center": [
+              0.9831,
+              0.7822
+            ],
+            "bbox_px": [
+              2004,
+              424,
+              20,
+              47
+            ],
+            "comp_lum": 212.7,
+            "ring_med_lum": 17.5,
+            "dark_perimeter_ratio": 0.773
+          },
+          {
+            "area_px": 161,
+            "uv_center": [
+              0.9002,
+              0.7636
+            ],
+            "bbox_px": [
+              1809,
+              456,
+              52,
+              51
+            ],
+            "comp_lum": 209.8,
+            "ring_med_lum": 6.7,
+            "dark_perimeter_ratio": 0.719
+          },
+          {
+            "area_px": 20016,
+            "uv_center": [
+              0.3389,
+              0.7348
+            ],
+            "bbox_px": [
+              440,
+              473,
+              623,
+              103
+            ],
+            "comp_lum": 209.3,
+            "ring_med_lum": 51.1,
+            "dark_perimeter_ratio": 0.722
+          },
+          {
+            "area_px": 255,
+            "uv_center": [
+              0.2844,
+              0.7647
+            ],
+            "bbox_px": [
+              575,
+              473,
+              19,
+              22
+            ],
+            "comp_lum": 203.5,
+            "ring_med_lum": 35.1,
+            "dark_perimeter_ratio": 0.794
+          },
+          {
+            "area_px": 1534,
+            "uv_center": [
+              0.954,
+              0.7533
+            ],
+            "bbox_px": [
+              1927,
+              476,
+              57,
+              60
+            ],
+            "comp_lum": 213.0,
+            "ring_med_lum": 30.3,
+            "dark_perimeter_ratio": 0.753
+          },
+          {
+            "area_px": 565,
+            "uv_center": [
+              0.3429,
+              0.7599
+            ],
+            "bbox_px": [
+              687,
+              479,
+              32,
+              25
+            ],
+            "comp_lum": 209.3,
+            "ring_med_lum": 47.4,
+            "dark_perimeter_ratio": 0.791
+          },
+          {
+            "area_px": 687,
+            "uv_center": [
+              0.0081,
+              0.7297
+            ],
+            "bbox_px": [
+              0,
+              538,
+              34,
+              33
+            ],
+            "comp_lum": 211.9,
+            "ring_med_lum": 37.7,
+            "dark_perimeter_ratio": 0.825
+          },
+          {
+            "area_px": 816,
+            "uv_center": [
+              0.9351,
+              0.7187
+            ],
+            "bbox_px": [
+              1904,
+              545,
+              26,
+              54
+            ],
+            "comp_lum": 210.1,
+            "ring_med_lum": 29.0,
+            "dark_perimeter_ratio": 0.778
+          },
+          {
+            "area_px": 713,
+            "uv_center": [
+              0.9942,
+              0.7221
+            ],
+            "bbox_px": [
+              2023,
+              552,
+              25,
+              38
+            ],
+            "comp_lum": 207.7,
+            "ring_med_lum": 14.2,
+            "dark_perimeter_ratio": 0.819
+          },
+          {
+            "area_px": 288,
+            "uv_center": [
+              0.0764,
+              0.7235
+            ],
+            "bbox_px": [
+              143,
+              558,
+              26,
+              16
+            ],
+            "comp_lum": 211.6,
+            "ring_med_lum": 36.2,
+            "dark_perimeter_ratio": 0.779
+          }
+        ]
+      },
+      "mv_b": {
+        "src": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/hunyuan_native/mv_b_native_2048.png",
+        "dst": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/hunyuan_repaired/mv_b_repaired.png",
+        "patches_detected": 238,
+        "patches_repaired": 237,
+        "patches_residual": 1,
+        "patch_texels_before": 128224,
+        "patch_texels_before_pct": 3.0571,
+        "patch_texels_after": 18,
+        "patch_texels_after_pct": 0.0004,
+        "patches": [
+          {
+            "area_px": 1247,
+            "uv_center": [
+              0.0955,
+              0.994
+            ],
+            "bbox_px": [
+              173,
+              0,
+              52,
+              31
+            ],
+            "comp_lum": 212.2,
+            "ring_med_lum": 36.1,
+            "dark_perimeter_ratio": 0.82
+          },
+          {
+            "area_px": 533,
+            "uv_center": [
+              0.4264,
+              0.9943
+            ],
+            "bbox_px": [
+              857,
+              0,
+              32,
+              26
+            ],
+            "comp_lum": 211.1,
+            "ring_med_lum": 34.9,
+            "dark_perimeter_ratio": 0.802
+          },
+          {
+            "area_px": 1460,
+            "uv_center": [
+              0.5135,
+              0.9948
+            ],
+            "bbox_px": [
+              1015,
+              0,
+              78,
+              26
+            ],
+            "comp_lum": 215.7,
+            "ring_med_lum": 23.5,
+            "dark_perimeter_ratio": 0.85
+          },
+          {
+            "area_px": 198,
+            "uv_center": [
+              0.7721,
+              0.9897
+            ],
+            "bbox_px": [
+              1575,
+              12,
+              14,
+              20
+            ],
+            "comp_lum": 214.8,
+            "ring_med_lum": 27.5,
+            "dark_perimeter_ratio": 0.816
+          },
+          {
+            "area_px": 48,
+            "uv_center": [
+              0.9928,
+              0.9918
+            ],
+            "bbox_px": [
+              2029,
+              13,
+              8,
+              9
+            ],
+            "comp_lum": 208.8,
+            "ring_med_lum": 51.9,
+            "dark_perimeter_ratio": 0.727
+          },
+          {
+            "area_px": 57,
+            "uv_center": [
+              0.2149,
+              0.9852
+            ],
+            "bbox_px": [
+              436,
+              25,
+              9,
+              12
+            ],
+            "comp_lum": 210.7,
+            "ring_med_lum": 49.0,
+            "dark_perimeter_ratio": 0.72
+          },
+          {
+            "area_px": 42,
+            "uv_center": [
+              0.9596,
+              0.9846
+            ],
+            "bbox_px": [
+              1959,
+              29,
+              14,
+              7
+            ],
+            "comp_lum": 203.7,
+            "ring_med_lum": 24.1,
+            "dark_perimeter_ratio": 0.755
+          },
+          {
+            "area_px": 1061,
+            "uv_center": [
+              0.9055,
+              0.9738
+            ],
+            "bbox_px": [
+              1832,
+              37,
+              48,
+              31
+            ],
+            "comp_lum": 213.4,
+            "ring_med_lum": 19.0,
+            "dark_perimeter_ratio": 0.842
+          },
+          {
+            "area_px": 238,
+            "uv_center": [
+              0.4715,
+              0.9768
+            ],
+            "bbox_px": [
+              956,
+              39,
+              18,
+              20
+            ],
+            "comp_lum": 209.8,
+            "ring_med_lum": 13.1,
+            "dark_perimeter_ratio": 0.811
+          },
+          {
+            "area_px": 139,
+            "uv_center": [
+              0.2206,
+              0.9766
+            ],
+            "bbox_px": [
+              444,
+              40,
+              14,
+              15
+            ],
+            "comp_lum": 208.4,
+            "ring_med_lum": 37.1,
+            "dark_perimeter_ratio": 0.793
+          },
+          {
+            "area_px": 379,
+            "uv_center": [
+              0.2635,
+              0.9701
+            ],
+            "bbox_px": [
+              530,
+              46,
+              22,
+              36
+            ],
+            "comp_lum": 213.0,
+            "ring_med_lum": 43.0,
+            "dark_perimeter_ratio": 0.744
+          },
+          {
+            "area_px": 109,
+            "uv_center": [
+              0.829,
+              0.9686
+            ],
+            "bbox_px": [
+              1694,
+              56,
+              8,
+              18
+            ],
+            "comp_lum": 210.6,
+            "ring_med_lum": 20.0,
+            "dark_perimeter_ratio": 0.857
+          },
+          {
+            "area_px": 13,
+            "uv_center": [
+              0.2928,
+              0.9703
+            ],
+            "bbox_px": [
+              596,
+              60,
+              9,
+              3
+            ],
+            "comp_lum": 189.6,
+            "ring_med_lum": 14.3,
+            "dark_perimeter_ratio": 0.851
+          },
+          {
+            "area_px": 359,
+            "uv_center": [
+              0.2354,
+              0.966
+            ],
+            "bbox_px": [
+              466,
+              62,
+              36,
+              19
+            ],
+            "comp_lum": 207.0,
+            "ring_med_lum": 26.3,
+            "dark_perimeter_ratio": 0.785
+          },
+          {
+            "area_px": 847,
+            "uv_center": [
+              0.6998,
+              0.9559
+            ],
+            "bbox_px": [
+              1418,
+              62,
+              29,
+              58
+            ],
+            "comp_lum": 215.3,
+            "ring_med_lum": 20.2,
+            "dark_perimeter_ratio": 0.828
+          },
+          {
+            "area_px": 4541,
+            "uv_center": [
+              0.5837,
+              0.9435
+            ],
+            "bbox_px": [
+              1155,
+              64,
+              110,
+              94
+            ],
+            "comp_lum": 210.4,
+            "ring_med_lum": 23.5,
+            "dark_perimeter_ratio": 0.751
+          },
+          {
+            "area_px": 26,
+            "uv_center": [
+              0.3009,
+              0.9637
+            ],
+            "bbox_px": [
+              615,
+              70,
+              4,
+              10
+            ],
+            "comp_lum": 221.1,
+            "ring_med_lum": 6.0,
+            "dark_perimeter_ratio": 0.762
+          },
+          {
+            "area_px": 32,
+            "uv_center": [
+              0.2198,
+              0.9584
+            ],
+            "bbox_px": [
+              446,
+              83,
+              9,
+              6
+            ],
+            "comp_lum": 202.9,
+            "ring_med_lum": 19.0,
+            "dark_perimeter_ratio": 0.788
+          },
+          {
+            "area_px": 2233,
+            "uv_center": [
+              0.5213,
+              0.9446
+            ],
+            "bbox_px": [
+              1036,
+              90,
+              65,
+              55
+            ],
+            "comp_lum": 212.1,
+            "ring_med_lum": 24.8,
+            "dark_perimeter_ratio": 0.753
+          },
+          {
+            "area_px": 1762,
+            "uv_center": [
+              0.8892,
+              0.9357
+            ],
+            "bbox_px": [
+              1801,
+              91,
+              45,
+              68
+            ],
+            "comp_lum": 212.7,
+            "ring_med_lum": 9.6,
+            "dark_perimeter_ratio": 0.814
+          },
+          {
+            "area_px": 104,
+            "uv_center": [
+              0.3342,
+              0.9364
+            ],
+            "bbox_px": [
+              680,
+              125,
+              10,
+              14
+            ],
+            "comp_lum": 206.3,
+            "ring_med_lum": 23.2,
+            "dark_perimeter_ratio": 0.852
+          },
+          {
+            "area_px": 83,
+            "uv_center": [
+              0.7017,
+              0.9342
+            ],
+            "bbox_px": [
+              1431,
+              130,
+              13,
+              10
+            ],
+            "comp_lum": 208.5,
+            "ring_med_lum": 52.6,
+            "dark_perimeter_ratio": 0.807
+          },
+          {
+            "area_px": 559,
+            "uv_center": [
+              0.522,
+              0.9289
+            ],
+            "bbox_px": [
+              1046,
+              132,
+              47,
+              31
+            ],
+            "comp_lum": 209.8,
+            "ring_med_lum": 23.2,
+            "dark_perimeter_ratio": 0.711
+          },
+          {
+            "area_px": 397,
+            "uv_center": [
+              0.4628,
+              0.9295
+            ],
+            "bbox_px": [
+              921,
+              140,
+              63,
+              13
+            ],
+            "comp_lum": 212.6,
+            "ring_med_lum": 11.0,
+            "dark_perimeter_ratio": 0.854
+          },
+          {
+            "area_px": 1509,
+            "uv_center": [
+              0.4902,
+              0.9185
+            ],
+            "bbox_px": [
+              947,
+              153,
+              95,
+              42
+            ],
+            "comp_lum": 217.8,
+            "ring_med_lum": 30.0,
+            "dark_perimeter_ratio": 0.773
+          },
+          {
+            "area_px": 29,
+            "uv_center": [
+              0.4529,
+              0.9199
+            ],
+            "bbox_px": [
+              925,
+              161,
+              6,
+              7
+            ],
+            "comp_lum": 198.2,
+            "ring_med_lum": 31.6,
+            "dark_perimeter_ratio": 0.746
+          },
+          {
+            "area_px": 326,
+            "uv_center": [
+              0.5177,
+              0.9086
+            ],
+            "bbox_px": [
+              1050,
+              165,
+              18,
+              42
+            ],
+            "comp_lum": 221.0,
+            "ring_med_lum": 44.0,
+            "dark_perimeter_ratio": 0.73
+          },
+          {
+            "area_px": 30,
+            "uv_center": [
+              0.3566,
+              0.9157
+            ],
+            "bbox_px": [
+              728,
+              167,
+              5,
+              11
+            ],
+            "comp_lum": 218.9,
+            "ring_med_lum": 13.3,
+            "dark_perimeter_ratio": 0.891
+          },
+          {
+            "area_px": 228,
+            "uv_center": [
+              0.6851,
+              0.9157
+            ],
+            "bbox_px": [
+              1394,
+              166,
+              19,
+              16
+            ],
+            "comp_lum": 213.3,
+            "ring_med_lum": 26.3,
+            "dark_perimeter_ratio": 0.851
+          },
+          {
+            "area_px": 186,
+            "uv_center": [
+              0.7741,
+              0.9152
+            ],
+            "bbox_px": [
+              1575,
+              169,
+              24,
+              10
+            ],
+            "comp_lum": 205.3,
+            "ring_med_lum": 29.9,
+            "dark_perimeter_ratio": 0.82
+          },
+          {
+            "area_px": 237,
+            "uv_center": [
+              0.1544,
+              0.9098
+            ],
+            "bbox_px": [
+              309,
+              176,
+              16,
+              21
+            ],
+            "comp_lum": 214.1,
+            "ring_med_lum": 2.0,
+            "dark_perimeter_ratio": 0.864
+          },
+          {
+            "area_px": 1188,
+            "uv_center": [
+              0.8351,
+              0.9028
+            ],
+            "bbox_px": [
+              1689,
+              178,
+              42,
+              49
+            ],
+            "comp_lum": 213.9,
+            "ring_med_lum": 28.4,
+            "dark_perimeter_ratio": 0.768
+          },
+          {
+            "area_px": 348,
+            "uv_center": [
+              0.4315,
+              0.9056
+            ],
+            "bbox_px": [
+              877,
+              180,
+              15,
+              31
+            ],
+            "comp_lum": 214.8,
+            "ring_med_lum": 25.0,
+            "dark_perimeter_ratio": 0.85
+          },
+          {
+            "area_px": 177,
+            "uv_center": [
+              0.5671,
+              0.9045
+            ],
+            "bbox_px": [
+              1154,
+              187,
+              15,
+              17
+            ],
+            "comp_lum": 206.0,
+            "ring_med_lum": 28.4,
+            "dark_perimeter_ratio": 0.727
+          },
+          {
+            "area_px": 139,
+            "uv_center": [
+              0.8765,
+              0.9026
+            ],
+            "bbox_px": [
+              1761,
+              191,
+              76,
+              30
+            ],
+            "comp_lum": 215.5,
+            "ring_med_lum": 6.6,
+            "dark_perimeter_ratio": 0.799
+          },
+          {
+            "area_px": 76,
+            "uv_center": [
+              0.9103,
+              0.9013
+            ],
+            "bbox_px": [
+              1846,
+              193,
+              39,
+              25
+            ],
+            "comp_lum": 210.7,
+            "ring_med_lum": 6.5,
+            "dark_perimeter_ratio": 0.757
+          },
+          {
+            "area_px": 275,
+            "uv_center": [
+              0.472,
+              0.8903
+            ],
+            "bbox_px": [
+              957,
+              213,
+              20,
+              26
+            ],
+            "comp_lum": 206.4,
+            "ring_med_lum": 40.1,
+            "dark_perimeter_ratio": 0.754
+          },
+          {
+            "area_px": 175,
+            "uv_center": [
+              0.3334,
+              0.8891
+            ],
+            "bbox_px": [
+              677,
+              216,
+              11,
+              24
+            ],
+            "comp_lum": 210.4,
+            "ring_med_lum": 50.2,
+            "dark_perimeter_ratio": 0.736
+          },
+          {
+            "area_px": 295,
+            "uv_center": [
+              0.9431,
+              0.8885
+            ],
+            "bbox_px": [
+              1924,
+              218,
+              16,
+              23
+            ],
+            "comp_lum": 210.0,
+            "ring_med_lum": 21.0,
+            "dark_perimeter_ratio": 0.819
+          },
+          {
+            "area_px": 695,
+            "uv_center": [
+              0.5933,
+              0.8826
+            ],
+            "bbox_px": [
+              1193,
+              232,
+              48,
+              20
+            ],
+            "comp_lum": 207.5,
+            "ring_med_lum": 17.8,
+            "dark_perimeter_ratio": 0.821
+          }
+        ]
+      }
+    }
+  },
+  "stage_c_patch_repair_trellis2": {
+    "stage": "C_patch_repair",
+    "asset_id": "carro_foxh",
+    "variants": {
+      "mv_a": {
+        "src": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/trellis2_selected/mv_a_t2.png",
+        "dst": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/trellis2_repaired/mv_a_repaired.png",
+        "patches_detected": 145,
+        "patches_repaired": 145,
+        "patches_residual": 0,
+        "patch_texels_before": 66237,
+        "patch_texels_before_pct": 1.5792,
+        "patch_texels_after": 0,
+        "patch_texels_after_pct": 0.0,
+        "patches": [
+          {
+            "area_px": 350,
+            "uv_center": [
+              0.0076,
+              0.9976
+            ],
+            "bbox_px": [
+              0,
+              0,
+              34,
+              13
+            ],
+            "comp_lum": 230.0,
+            "ring_med_lum": 57.0,
+            "dark_perimeter_ratio": 0.753
+          },
+          {
+            "area_px": 713,
+            "uv_center": [
+              0.6603,
+              0.9941
+            ],
+            "bbox_px": [
+              1335,
+              0,
+              33,
+              27
+            ],
+            "comp_lum": 242.6,
+            "ring_med_lum": 14.6,
+            "dark_perimeter_ratio": 0.824
+          },
+          {
+            "area_px": 402,
+            "uv_center": [
+              0.6975,
+              0.9948
+            ],
+            "bbox_px": [
+              1419,
+              0,
+              20,
+              27
+            ],
+            "comp_lum": 239.7,
+            "ring_med_lum": 34.6,
+            "dark_perimeter_ratio": 0.803
+          },
+          {
+            "area_px": 428,
+            "uv_center": [
+              0.8199,
+              0.9947
+            ],
+            "bbox_px": [
+              1669,
+              0,
+              24,
+              30
+            ],
+            "comp_lum": 235.0,
+            "ring_med_lum": 19.9,
+            "dark_perimeter_ratio": 0.791
+          },
+          {
+            "area_px": 501,
+            "uv_center": [
+              0.9084,
+              0.9951
+            ],
+            "bbox_px": [
+              1844,
+              0,
+              33,
+              26
+            ],
+            "comp_lum": 220.6,
+            "ring_med_lum": 32.7,
+            "dark_perimeter_ratio": 0.778
+          },
+          {
+            "area_px": 92,
+            "uv_center": [
+              0.9452,
+              0.9991
+            ],
+            "bbox_px": [
+              1926,
+              0,
+              21,
+              6
+            ],
+            "comp_lum": 215.3,
+            "ring_med_lum": 28.4,
+            "dark_perimeter_ratio": 0.796
+          },
+          {
+            "area_px": 1038,
+            "uv_center": [
+              0.9941,
+              0.981
+            ],
+            "bbox_px": [
+              2010,
+              0,
+              38,
+              63
+            ],
+            "comp_lum": 233.7,
+            "ring_med_lum": 20.3,
+            "dark_perimeter_ratio": 0.777
+          },
+          {
+            "area_px": 92,
+            "uv_center": [
+              0.865,
+              0.9868
+            ],
+            "bbox_px": [
+              1766,
+              22,
+              14,
+              10
+            ],
+            "comp_lum": 224.0,
+            "ring_med_lum": 73.0,
+            "dark_perimeter_ratio": 0.739
+          },
+          {
+            "area_px": 238,
+            "uv_center": [
+              0.4005,
+              0.9783
+            ],
+            "bbox_px": [
+              813,
+              32,
+              15,
+              24
+            ],
+            "comp_lum": 238.5,
+            "ring_med_lum": 21.0,
+            "dark_perimeter_ratio": 0.829
+          },
+          {
+            "area_px": 315,
+            "uv_center": [
+              0.5026,
+              0.9784
+            ],
+            "bbox_px": [
+              1020,
+              33,
+              21,
+              28
+            ],
+            "comp_lum": 233.4,
+            "ring_med_lum": 35.5,
+            "dark_perimeter_ratio": 0.815
+          },
+          {
+            "area_px": 153,
+            "uv_center": [
+              0.0016,
+              0.9771
+            ],
+            "bbox_px": [
+              0,
+              36,
+              9,
+              23
+            ],
+            "comp_lum": 237.8,
+            "ring_med_lum": 55.8,
+            "dark_perimeter_ratio": 0.799
+          },
+          {
+            "area_px": 281,
+            "uv_center": [
+              0.7889,
+              0.9769
+            ],
+            "bbox_px": [
+              1598,
+              39,
+              32,
+              15
+            ],
+            "comp_lum": 236.1,
+            "ring_med_lum": 27.0,
+            "dark_perimeter_ratio": 0.81
+          },
+          {
+            "area_px": 1274,
+            "uv_center": [
+              0.9453,
+              0.9751
+            ],
+            "bbox_px": [
+              1896,
+              38,
+              78,
+              28
+            ],
+            "comp_lum": 231.1,
+            "ring_med_lum": 18.2,
+            "dark_perimeter_ratio": 0.725
+          },
+          {
+            "area_px": 200,
+            "uv_center": [
+              0.91,
+              0.9754
+            ],
+            "bbox_px": [
+              1854,
+              42,
+              18,
+              17
+            ],
+            "comp_lum": 228.5,
+            "ring_med_lum": 39.5,
+            "dark_perimeter_ratio": 0.812
+          },
+          {
+            "area_px": 108,
+            "uv_center": [
+              0.4257,
+              0.9761
+            ],
+            "bbox_px": [
+              863,
+              44,
+              17,
+              10
+            ],
+            "comp_lum": 233.9,
+            "ring_med_lum": 11.7,
+            "dark_perimeter_ratio": 0.854
+          },
+          {
+            "area_px": 196,
+            "uv_center": [
+              0.1758,
+              0.9668
+            ],
+            "bbox_px": [
+              354,
+              58,
+              12,
+              22
+            ],
+            "comp_lum": 225.6,
+            "ring_med_lum": 16.1,
+            "dark_perimeter_ratio": 0.769
+          },
+          {
+            "area_px": 271,
+            "uv_center": [
+              0.6941,
+              0.9559
+            ],
+            "bbox_px": [
+              1414,
+              79,
+              17,
+              23
+            ],
+            "comp_lum": 240.0,
+            "ring_med_lum": 46.3,
+            "dark_perimeter_ratio": 0.791
+          },
+          {
+            "area_px": 315,
+            "uv_center": [
+              0.8665,
+              0.9471
+            ],
+            "bbox_px": [
+              1767,
+              94,
+              16,
+              28
+            ],
+            "comp_lum": 241.1,
+            "ring_med_lum": 13.4,
+            "dark_perimeter_ratio": 0.816
+          },
+          {
+            "area_px": 888,
+            "uv_center": [
+              0.9957,
+              0.9335
+            ],
+            "bbox_px": [
+              2027,
+              108,
+              21,
+              61
+            ],
+            "comp_lum": 243.8,
+            "ring_med_lum": 39.9,
+            "dark_perimeter_ratio": 0.751
+          },
+          {
+            "area_px": 254,
+            "uv_center": [
+              0.6579,
+              0.9327
+            ],
+            "bbox_px": [
+              1333,
+              132,
+              31,
+              12
+            ],
+            "comp_lum": 237.0,
+            "ring_med_lum": 29.0,
+            "dark_perimeter_ratio": 0.805
+          },
+          {
+            "area_px": 239,
+            "uv_center": [
+              0.8883,
+              0.9224
+            ],
+            "bbox_px": [
+              1810,
+              151,
+              19,
+              18
+            ],
+            "comp_lum": 241.3,
+            "ring_med_lum": 17.2,
+            "dark_perimeter_ratio": 0.824
+          },
+          {
+            "area_px": 786,
+            "uv_center": [
+              0.9175,
+              0.9145
+            ],
+            "bbox_px": [
+              1858,
+              157,
+              47,
+              30
+            ],
+            "comp_lum": 239.6,
+            "ring_med_lum": 37.9,
+            "dark_perimeter_ratio": 0.775
+          },
+          {
+            "area_px": 323,
+            "uv_center": [
+              0.0029,
+              0.9107
+            ],
+            "bbox_px": [
+              0,
+              171,
+              17,
+              29
+            ],
+            "comp_lum": 241.3,
+            "ring_med_lum": 11.9,
+            "dark_perimeter_ratio": 0.819
+          },
+          {
+            "area_px": 377,
+            "uv_center": [
+              0.997,
+              0.9076
+            ],
+            "bbox_px": [
+              2035,
+              170,
+              13,
+              36
+            ],
+            "comp_lum": 239.8,
+            "ring_med_lum": 12.3,
+            "dark_perimeter_ratio": 0.753
+          },
+          {
+            "area_px": 326,
+            "uv_center": [
+              0.967,
+              0.9009
+            ],
+            "bbox_px": [
+              1966,
+              196,
+              31,
+              16
+            ],
+            "comp_lum": 239.4,
+            "ring_med_lum": 51.9,
+            "dark_perimeter_ratio": 0.801
+          },
+          {
+            "area_px": 200,
+            "uv_center": [
+              0.9962,
+              0.8874
+            ],
+            "bbox_px": [
+              2032,
+              223,
+              16,
+              16
+            ],
+            "comp_lum": 235.0,
+            "ring_med_lum": 10.0,
+            "dark_perimeter_ratio": 0.811
+          },
+          {
+            "area_px": 174,
+            "uv_center": [
+              0.9795,
+              0.8851
+            ],
+            "bbox_px": [
+              1995,
+              229,
+              23,
+              13
+            ],
+            "comp_lum": 223.6,
+            "ring_med_lum": 45.0,
+            "dark_perimeter_ratio": 0.813
+          },
+          {
+            "area_px": 501,
+            "uv_center": [
+              0.3558,
+              0.8747
+            ],
+            "bbox_px": [
+              716,
+              241,
+              28,
+              28
+            ],
+            "comp_lum": 222.7,
+            "ring_med_lum": 24.8,
+            "dark_perimeter_ratio": 0.767
+          },
+          {
+            "area_px": 646,
+            "uv_center": [
+              0.9481,
+              0.8686
+            ],
+            "bbox_px": [
+              1927,
+              244,
+              30,
+              49
+            ],
+            "comp_lum": 236.3,
+            "ring_med_lum": 28.8,
+            "dark_perimeter_ratio": 0.799
+          },
+          {
+            "area_px": 15,
+            "uv_center": [
+              0.1382,
+              0.8761
+            ],
+            "bbox_px": [
+              279,
+              253,
+              10,
+              2
+            ],
+            "comp_lum": 200.4,
+            "ring_med_lum": 37.3,
+            "dark_perimeter_ratio": 0.713
+          },
+          {
+            "area_px": 304,
+            "uv_center": [
+              0.9772,
+              0.8704
+            ],
+            "bbox_px": [
+              1991,
+              254,
+              24,
+              23
+            ],
+            "comp_lum": 230.4,
+            "ring_med_lum": 28.4,
+            "dark_perimeter_ratio": 0.756
+          },
+          {
+            "area_px": 34,
+            "uv_center": [
+              0.944,
+              0.8496
+            ],
+            "bbox_px": [
+              1931,
+              305,
+              6,
+              8
+            ],
+            "comp_lum": 197.8,
+            "ring_med_lum": 74.3,
+            "dark_perimeter_ratio": 0.722
+          },
+          {
+            "area_px": 129,
+            "uv_center": [
+              0.0105,
+              0.8372
+            ],
+            "bbox_px": [
+              16,
+              326,
+              13,
+              16
+            ],
+            "comp_lum": 215.6,
+            "ring_med_lum": 15.7,
+            "dark_perimeter_ratio": 0.8
+          },
+          {
+            "area_px": 143,
+            "uv_center": [
+              0.9814,
+              0.8288
+            ],
+            "bbox_px": [
+              2005,
+              342,
+              12,
+              18
+            ],
+            "comp_lum": 236.6,
+            "ring_med_lum": 33.3,
+            "dark_perimeter_ratio": 0.824
+          },
+          {
+            "area_px": 2963,
+            "uv_center": [
+              0.7072,
+              0.8017
+            ],
+            "bbox_px": [
+              1349,
+              376,
+              161,
+              47
+            ],
+            "comp_lum": 222.6,
+            "ring_med_lum": 57.4,
+            "dark_perimeter_ratio": 0.702
+          },
+          {
+            "area_px": 159,
+            "uv_center": [
+              0.7769,
+              0.8001
+            ],
+            "bbox_px": [
+              1583,
+              402,
+              18,
+              16
+            ],
+            "comp_lum": 217.2,
+            "ring_med_lum": 64.1,
+            "dark_perimeter_ratio": 0.751
+          },
+          {
+            "area_px": 132,
+            "uv_center": [
+              0.8087,
+              0.7996
+            ],
+            "bbox_px": [
+              1649,
+              405,
+              16,
+              12
+            ],
+            "comp_lum": 234.6,
+            "ring_med_lum": 58.4,
+            "dark_perimeter_ratio": 0.778
+          },
+          {
+            "area_px": 1329,
+            "uv_center": [
+              0.8238,
+              0.7725
+            ],
+            "bbox_px": [
+              1669,
+              441,
+              40,
+              62
+            ],
+            "comp_lum": 234.3,
+            "ring_med_lum": 54.4,
+            "dark_perimeter_ratio": 0.706
+          },
+          {
+            "area_px": 411,
+            "uv_center": [
+              0.0591,
+              0.7681
+            ],
+            "bbox_px": [
+              108,
+              466,
+              31,
+              18
+            ],
+            "comp_lum": 236.3,
+            "ring_med_lum": 18.2,
+            "dark_perimeter_ratio": 0.79
+          },
+          {
+            "area_px": 143,
+            "uv_center": [
+              0.225,
+              0.7662
+            ],
+            "bbox_px": [
+              453,
+              473,
+              16,
+              13
+            ],
+            "comp_lum": 223.1,
+            "ring_med_lum": 15.2,
+            "dark_perimeter_ratio": 0.752
+          }
+        ]
+      },
+      "mv_b": {
+        "src": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/trellis2_selected/mv_b_t2.png",
+        "dst": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/trellis2_repaired/mv_b_repaired.png",
+        "patches_detected": 172,
+        "patches_repaired": 170,
+        "patches_residual": 2,
+        "patch_texels_before": 77963,
+        "patch_texels_before_pct": 1.8588,
+        "patch_texels_after": 928,
+        "patch_texels_after_pct": 0.0221,
+        "patches": [
+          {
+            "area_px": 1021,
+            "uv_center": [
+              0.0956,
+              0.9946
+            ],
+            "bbox_px": [
+              172,
+              0,
+              52,
+              26
+            ],
+            "comp_lum": 228.8,
+            "ring_med_lum": 27.0,
+            "dark_perimeter_ratio": 0.708
+          },
+          {
+            "area_px": 42,
+            "uv_center": [
+              0.3253,
+              0.9994
+            ],
+            "bbox_px": [
+              660,
+              0,
+              14,
+              5
+            ],
+            "comp_lum": 218.2,
+            "ring_med_lum": 49.8,
+            "dark_perimeter_ratio": 0.805
+          },
+          {
+            "area_px": 496,
+            "uv_center": [
+              0.4263,
+              0.9945
+            ],
+            "bbox_px": [
+              857,
+              0,
+              32,
+              24
+            ],
+            "comp_lum": 226.1,
+            "ring_med_lum": 25.3,
+            "dark_perimeter_ratio": 0.779
+          },
+          {
+            "area_px": 1026,
+            "uv_center": [
+              0.508,
+              0.9943
+            ],
+            "bbox_px": [
+              1014,
+              0,
+              54,
+              26
+            ],
+            "comp_lum": 231.5,
+            "ring_med_lum": 32.8,
+            "dark_perimeter_ratio": 0.779
+          },
+          {
+            "area_px": 147,
+            "uv_center": [
+              0.5304,
+              0.9955
+            ],
+            "bbox_px": [
+              1077,
+              0,
+              16,
+              16
+            ],
+            "comp_lum": 222.0,
+            "ring_med_lum": 19.7,
+            "dark_perimeter_ratio": 0.796
+          },
+          {
+            "area_px": 231,
+            "uv_center": [
+              0.6621,
+              0.9978
+            ],
+            "bbox_px": [
+              1343,
+              0,
+              27,
+              13
+            ],
+            "comp_lum": 223.8,
+            "ring_med_lum": 33.7,
+            "dark_perimeter_ratio": 0.785
+          },
+          {
+            "area_px": 296,
+            "uv_center": [
+              0.9965,
+              0.9932
+            ],
+            "bbox_px": [
+              2031,
+              0,
+              17,
+              26
+            ],
+            "comp_lum": 226.9,
+            "ring_med_lum": 39.1,
+            "dark_perimeter_ratio": 0.767
+          },
+          {
+            "area_px": 197,
+            "uv_center": [
+              0.2145,
+              0.9878
+            ],
+            "bbox_px": [
+              434,
+              12,
+              11,
+              26
+            ],
+            "comp_lum": 223.3,
+            "ring_med_lum": 32.0,
+            "dark_perimeter_ratio": 0.76
+          },
+          {
+            "area_px": 154,
+            "uv_center": [
+              0.7723,
+              0.9896
+            ],
+            "bbox_px": [
+              1576,
+              12,
+              12,
+              19
+            ],
+            "comp_lum": 222.2,
+            "ring_med_lum": 36.1,
+            "dark_perimeter_ratio": 0.805
+          },
+          {
+            "area_px": 101,
+            "uv_center": [
+              0.145,
+              0.9822
+            ],
+            "bbox_px": [
+              292,
+              32,
+              12,
+              11
+            ],
+            "comp_lum": 222.6,
+            "ring_med_lum": 22.6,
+            "dark_perimeter_ratio": 0.837
+          },
+          {
+            "area_px": 774,
+            "uv_center": [
+              0.9034,
+              0.9744
+            ],
+            "bbox_px": [
+              1833,
+              36,
+              36,
+              31
+            ],
+            "comp_lum": 231.1,
+            "ring_med_lum": 20.4,
+            "dark_perimeter_ratio": 0.792
+          },
+          {
+            "area_px": 155,
+            "uv_center": [
+              0.4707,
+              0.9781
+            ],
+            "bbox_px": [
+              956,
+              39,
+              17,
+              14
+            ],
+            "comp_lum": 208.3,
+            "ring_med_lum": 6.9,
+            "dark_perimeter_ratio": 0.809
+          },
+          {
+            "area_px": 547,
+            "uv_center": [
+              0.0037,
+              0.962
+            ],
+            "bbox_px": [
+              0,
+              60,
+              20,
+              36
+            ],
+            "comp_lum": 224.9,
+            "ring_med_lum": 11.3,
+            "dark_perimeter_ratio": 0.774
+          },
+          {
+            "area_px": 249,
+            "uv_center": [
+              0.2324,
+              0.9648
+            ],
+            "bbox_px": [
+              466,
+              64,
+              21,
+              16
+            ],
+            "comp_lum": 220.7,
+            "ring_med_lum": 35.9,
+            "dark_perimeter_ratio": 0.789
+          },
+          {
+            "area_px": 206,
+            "uv_center": [
+              0.6132,
+              0.9646
+            ],
+            "bbox_px": [
+              1245,
+              64,
+              20,
+              17
+            ],
+            "comp_lum": 226.7,
+            "ring_med_lum": 25.2,
+            "dark_perimeter_ratio": 0.743
+          },
+          {
+            "area_px": 304,
+            "uv_center": [
+              0.7025,
+              0.9639
+            ],
+            "bbox_px": [
+              1430,
+              64,
+              18,
+              23
+            ],
+            "comp_lum": 228.3,
+            "ring_med_lum": 22.3,
+            "dark_perimeter_ratio": 0.809
+          },
+          {
+            "area_px": 252,
+            "uv_center": [
+              0.6028,
+              0.9605
+            ],
+            "bbox_px": [
+              1227,
+              73,
+              17,
+              20
+            ],
+            "comp_lum": 227.9,
+            "ring_med_lum": 37.5,
+            "dark_perimeter_ratio": 0.73
+          },
+          {
+            "area_px": 499,
+            "uv_center": [
+              0.5802,
+              0.94
+            ],
+            "bbox_px": [
+              1177,
+              106,
+              21,
+              32
+            ],
+            "comp_lum": 229.5,
+            "ring_med_lum": 14.8,
+            "dark_perimeter_ratio": 0.811
+          },
+          {
+            "area_px": 462,
+            "uv_center": [
+              0.0423,
+              0.939
+            ],
+            "bbox_px": [
+              72,
+              113,
+              26,
+              26
+            ],
+            "comp_lum": 229.0,
+            "ring_med_lum": 36.7,
+            "dark_perimeter_ratio": 0.769
+          },
+          {
+            "area_px": 322,
+            "uv_center": [
+              0.5317,
+              0.9371
+            ],
+            "bbox_px": [
+              1073,
+              118,
+              30,
+              29
+            ],
+            "comp_lum": 217.8,
+            "ring_med_lum": 23.6,
+            "dark_perimeter_ratio": 0.718
+          },
+          {
+            "area_px": 119,
+            "uv_center": [
+              0.3338,
+              0.937
+            ],
+            "bbox_px": [
+              679,
+              122,
+              11,
+              16
+            ],
+            "comp_lum": 224.6,
+            "ring_med_lum": 13.1,
+            "dark_perimeter_ratio": 0.849
+          },
+          {
+            "area_px": 12,
+            "uv_center": [
+              0.3753,
+              0.9373
+            ],
+            "bbox_px": [
+              767,
+              126,
+              4,
+              5
+            ],
+            "comp_lum": 193.2,
+            "ring_med_lum": 31.3,
+            "dark_perimeter_ratio": 0.739
+          },
+          {
+            "area_px": 161,
+            "uv_center": [
+              0.1138,
+              0.9313
+            ],
+            "bbox_px": [
+              226,
+              135,
+              18,
+              14
+            ],
+            "comp_lum": 223.5,
+            "ring_med_lum": 26.1,
+            "dark_perimeter_ratio": 0.784
+          },
+          {
+            "area_px": 319,
+            "uv_center": [
+              0.5449,
+              0.9224
+            ],
+            "bbox_px": [
+              1100,
+              152,
+              32,
+              13
+            ],
+            "comp_lum": 222.8,
+            "ring_med_lum": 36.6,
+            "dark_perimeter_ratio": 0.721
+          },
+          {
+            "area_px": 532,
+            "uv_center": [
+              0.3316,
+              0.9183
+            ],
+            "bbox_px": [
+              660,
+              154,
+              40,
+              27
+            ],
+            "comp_lum": 226.7,
+            "ring_med_lum": 35.4,
+            "dark_perimeter_ratio": 0.774
+          },
+          {
+            "area_px": 228,
+            "uv_center": [
+              0.6851,
+              0.9158
+            ],
+            "bbox_px": [
+              1394,
+              165,
+              19,
+              17
+            ],
+            "comp_lum": 228.5,
+            "ring_med_lum": 14.0,
+            "dark_perimeter_ratio": 0.824
+          },
+          {
+            "area_px": 137,
+            "uv_center": [
+              0.7734,
+              0.9155
+            ],
+            "bbox_px": [
+              1575,
+              168,
+              20,
+              10
+            ],
+            "comp_lum": 212.5,
+            "ring_med_lum": 41.7,
+            "dark_perimeter_ratio": 0.76
+          },
+          {
+            "area_px": 151,
+            "uv_center": [
+              0.5978,
+              0.9134
+            ],
+            "bbox_px": [
+              1216,
+              170,
+              18,
+              13
+            ],
+            "comp_lum": 225.2,
+            "ring_med_lum": 29.9,
+            "dark_perimeter_ratio": 0.813
+          },
+          {
+            "area_px": 218,
+            "uv_center": [
+              0.0129,
+              0.911
+            ],
+            "bbox_px": [
+              18,
+              173,
+              17,
+              20
+            ],
+            "comp_lum": 222.2,
+            "ring_med_lum": 17.2,
+            "dark_perimeter_ratio": 0.826
+          },
+          {
+            "area_px": 268,
+            "uv_center": [
+              0.5185,
+              0.907
+            ],
+            "bbox_px": [
+              1055,
+              175,
+              14,
+              32
+            ],
+            "comp_lum": 210.0,
+            "ring_med_lum": 23.7,
+            "dark_perimeter_ratio": 0.773
+          },
+          {
+            "area_px": 364,
+            "uv_center": [
+              0.5634,
+              0.9083
+            ],
+            "bbox_px": [
+              1138,
+              175,
+              31,
+              28
+            ],
+            "comp_lum": 227.6,
+            "ring_med_lum": 24.8,
+            "dark_perimeter_ratio": 0.785
+          },
+          {
+            "area_px": 979,
+            "uv_center": [
+              0.8353,
+              0.9052
+            ],
+            "bbox_px": [
+              1687,
+              178,
+              43,
+              40
+            ],
+            "comp_lum": 224.5,
+            "ring_med_lum": 10.0,
+            "dark_perimeter_ratio": 0.783
+          },
+          {
+            "area_px": 313,
+            "uv_center": [
+              0.4316,
+              0.9058
+            ],
+            "bbox_px": [
+              878,
+              180,
+              13,
+              30
+            ],
+            "comp_lum": 229.7,
+            "ring_med_lum": 14.1,
+            "dark_perimeter_ratio": 0.809
+          },
+          {
+            "area_px": 180,
+            "uv_center": [
+              0.0635,
+              0.9072
+            ],
+            "bbox_px": [
+              123,
+              182,
+              16,
+              16
+            ],
+            "comp_lum": 226.1,
+            "ring_med_lum": 18.7,
+            "dark_perimeter_ratio": 0.81
+          },
+          {
+            "area_px": 92,
+            "uv_center": [
+              0.0652,
+              0.8972
+            ],
+            "bbox_px": [
+              127,
+              207,
+              14,
+              10
+            ],
+            "comp_lum": 207.1,
+            "ring_med_lum": 32.1,
+            "dark_perimeter_ratio": 0.788
+          },
+          {
+            "area_px": 288,
+            "uv_center": [
+              0.9436,
+              0.8886
+            ],
+            "bbox_px": [
+              1925,
+              218,
+              16,
+              22
+            ],
+            "comp_lum": 226.8,
+            "ring_med_lum": 46.3,
+            "dark_perimeter_ratio": 0.743
+          },
+          {
+            "area_px": 109,
+            "uv_center": [
+              0.9801,
+              0.8889
+            ],
+            "bbox_px": [
+              2003,
+              220,
+              10,
+              17
+            ],
+            "comp_lum": 217.5,
+            "ring_med_lum": 26.4,
+            "dark_perimeter_ratio": 0.784
+          },
+          {
+            "area_px": 434,
+            "uv_center": [
+              0.5959,
+              0.8831
+            ],
+            "bbox_px": [
+              1203,
+              232,
+              37,
+              17
+            ],
+            "comp_lum": 228.3,
+            "ring_med_lum": 34.1,
+            "dark_perimeter_ratio": 0.775
+          },
+          {
+            "area_px": 651,
+            "uv_center": [
+              0.3995,
+              0.88
+            ],
+            "bbox_px": [
+              798,
+              234,
+              42,
+              23
+            ],
+            "comp_lum": 225.0,
+            "ring_med_lum": 20.7,
+            "dark_perimeter_ratio": 0.773
+          },
+          {
+            "area_px": 130,
+            "uv_center": [
+              0.1106,
+              0.8792
+            ],
+            "bbox_px": [
+              220,
+              239,
+              15,
+              15
+            ],
+            "comp_lum": 223.7,
+            "ring_med_lum": 19.4,
+            "dark_perimeter_ratio": 0.804
+          }
+        ]
+      }
+    }
+  },
+  "stage_d_eval_winner_basecolor": {
+    "stage": "D_eval_quality",
+    "asset_id": "carro_foxh",
+    "variants": {
+      "mv_a": {
+        "before": {
+          "texture_size": [
+            1024,
+            1024
+          ],
+          "texture_laplacian_var": 609.91,
+          "texture_sat_pct": 6.23,
+          "patch_count": 124,
+          "patch_texels_pct": 1.9081,
+          "views_laplacian_mean": 4160.89,
+          "views": {
+            "front": {
+              "laplacian_var": 3429.33,
+              "sat_pct": 3.19,
+              "lum_mean": 103.3,
+              "dark_lt80_pct": 52.9,
+              "bright_gt180_pct": 36.4
+            },
+            "back": {
+              "laplacian_var": 3326.16,
+              "sat_pct": 8.03,
+              "lum_mean": 114.4,
+              "dark_lt80_pct": 46.8,
+              "bright_gt180_pct": 40.0
+            },
+            "left": {
+              "laplacian_var": 3383.38,
+              "sat_pct": 4.51,
+              "lum_mean": 121.1,
+              "dark_lt80_pct": 43.8,
+              "bright_gt180_pct": 46.6
+            },
+            "right": {
+              "laplacian_var": 3060.2,
+              "sat_pct": 4.39,
+              "lum_mean": 120.6,
+              "dark_lt80_pct": 43.8,
+              "bright_gt180_pct": 46.0
+            },
+            "top": {
+              "laplacian_var": 3922.87,
+              "sat_pct": 1.67,
+              "lum_mean": 147.3,
+              "dark_lt80_pct": 30.7,
+              "bright_gt180_pct": 57.9
+            },
+            "three_quarter": {
+              "laplacian_var": 7843.42,
+              "sat_pct": 2.24,
+              "lum_mean": 132.6,
+              "dark_lt80_pct": 38.2,
+              "bright_gt180_pct": 51.5
+            }
+          }
+        },
+        "final": {
+          "texture_size": [
+            2048,
+            2048
+          ],
+          "texture_laplacian_var": 392.5,
+          "texture_sat_pct": 10.03,
+          "patch_count": 0,
+          "patch_texels_pct": 0.0,
+          "views_laplacian_mean": 8762.43,
+          "views": {
+            "front": {
+              "laplacian_var": 8173.7,
+              "sat_pct": 5.54,
+              "lum_mean": 100.9,
+              "dark_lt80_pct": 55.6,
+              "bright_gt180_pct": 37.0
+            },
+            "back": {
+              "laplacian_var": 10427.38,
+              "sat_pct": 9.47,
+              "lum_mean": 113.1,
+              "dark_lt80_pct": 49.2,
+              "bright_gt180_pct": 41.9
+            },
+            "left": {
+              "laplacian_var": 6896.66,
+              "sat_pct": 7.73,
+              "lum_mean": 112.8,
+              "dark_lt80_pct": 49.2,
+              "bright_gt180_pct": 44.6
+            },
+            "right": {
+              "laplacian_var": 7263.71,
+              "sat_pct": 7.18,
+              "lum_mean": 115.1,
+              "dark_lt80_pct": 47.9,
+              "bright_gt180_pct": 45.8
+            },
+            "top": {
+              "laplacian_var": 6784.68,
+              "sat_pct": 2.41,
+              "lum_mean": 145.4,
+              "dark_lt80_pct": 33.5,
+              "bright_gt180_pct": 58.6
+            },
+            "three_quarter": {
+              "laplacian_var": 13028.43,
+              "sat_pct": 4.36,
+              "lum_mean": 127.3,
+              "dark_lt80_pct": 42.3,
+              "bright_gt180_pct": 50.5
+            }
+          }
+        },
+        "gt_sat_mean_pct": 7.3,
+        "sharpness_tex_ratio": 0.64,
+        "sharpness_views_ratio": 2.11,
+        "wins_vs_prev": true,
+        "crops": {
+          "lower_profile_left": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_a_lower_profile_left.png",
+          "lower_profile_right": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_a_lower_profile_right.png",
+          "upper_profile_left": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_a_upper_profile_left.png",
+          "upper_profile_right": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_a_upper_profile_right.png",
+          "front_mid": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_a_front_mid.png",
+          "top_front": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_a_top_front.png"
+        }
+      },
+      "mv_b": {
+        "before": {
+          "texture_size": [
+            1024,
+            1024
+          ],
+          "texture_laplacian_var": 629.15,
+          "texture_sat_pct": 9.36,
+          "patch_count": 190,
+          "patch_texels_pct": 3.1259,
+          "views_laplacian_mean": 4194.41,
+          "views": {
+            "front": {
+              "laplacian_var": 3101.51,
+              "sat_pct": 3.16,
+              "lum_mean": 101.4,
+              "dark_lt80_pct": 52.8,
+              "bright_gt180_pct": 34.3
+            },
+            "back": {
+              "laplacian_var": 3240.73,
+              "sat_pct": 7.98,
+              "lum_mean": 116.0,
+              "dark_lt80_pct": 45.7,
+              "bright_gt180_pct": 41.5
+            },
+            "left": {
+              "laplacian_var": 3838.21,
+              "sat_pct": 5.53,
+              "lum_mean": 118.1,
+              "dark_lt80_pct": 45.2,
+              "bright_gt180_pct": 45.3
+            },
+            "right": {
+              "laplacian_var": 3483.35,
+              "sat_pct": 5.64,
+              "lum_mean": 118.3,
+              "dark_lt80_pct": 45.1,
+              "bright_gt180_pct": 45.1
+            },
+            "top": {
+              "laplacian_var": 3484.4,
+              "sat_pct": 1.76,
+              "lum_mean": 145.8,
+              "dark_lt80_pct": 32.1,
+              "bright_gt180_pct": 58.8
+            },
+            "three_quarter": {
+              "laplacian_var": 8018.29,
+              "sat_pct": 3.12,
+              "lum_mean": 126.2,
+              "dark_lt80_pct": 41.0,
+              "bright_gt180_pct": 48.7
+            }
+          }
+        },
+        "final": {
+          "texture_size": [
+            2048,
+            2048
+          ],
+          "texture_laplacian_var": 379.39,
+          "texture_sat_pct": 10.28,
+          "patch_count": 1,
+          "patch_texels_pct": 0.0004,
+          "views_laplacian_mean": 10256.66,
+          "views": {
+            "front": {
+              "laplacian_var": 8889.29,
+              "sat_pct": 5.48,
+              "lum_mean": 99.3,
+              "dark_lt80_pct": 55.6,
+              "bright_gt180_pct": 35.9
+            },
+            "back": {
+              "laplacian_var": 12786.75,
+              "sat_pct": 9.05,
+              "lum_mean": 109.8,
+              "dark_lt80_pct": 50.3,
+              "bright_gt180_pct": 40.7
+            },
+            "left": {
+              "laplacian_var": 7715.74,
+              "sat_pct": 7.55,
+              "lum_mean": 112.4,
+              "dark_lt80_pct": 49.3,
+              "bright_gt180_pct": 44.6
+            },
+            "right": {
+              "laplacian_var": 7607.39,
+              "sat_pct": 7.59,
+              "lum_mean": 113.2,
+              "dark_lt80_pct": 49.1,
+              "bright_gt180_pct": 45.0
+            },
+            "top": {
+              "laplacian_var": 8594.67,
+              "sat_pct": 2.64,
+              "lum_mean": 141.3,
+              "dark_lt80_pct": 37.1,
+              "bright_gt180_pct": 57.9
+            },
+            "three_quarter": {
+              "laplacian_var": 15946.15,
+              "sat_pct": 4.54,
+              "lum_mean": 121.6,
+              "dark_lt80_pct": 45.4,
+              "bright_gt180_pct": 48.2
+            }
+          }
+        },
+        "gt_sat_mean_pct": 5.92,
+        "sharpness_tex_ratio": 0.6,
+        "sharpness_views_ratio": 2.45,
+        "wins_vs_prev": true,
+        "crops": {
+          "lower_profile_left": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_b_lower_profile_left.png",
+          "lower_profile_right": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_b_lower_profile_right.png",
+          "upper_profile_left": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_b_upper_profile_left.png",
+          "upper_profile_right": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_b_upper_profile_right.png",
+          "front_mid": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_b_front_mid.png",
+          "top_front": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_b_top_front.png"
+        }
+      }
+    }
+  },
+  "stage_d_eval_trellis2": {
+    "stage": "D_eval_quality",
+    "asset_id": "carro_foxh",
+    "variants": {
+      "mv_a": {
+        "before": {
+          "texture_size": [
+            1024,
+            1024
+          ],
+          "texture_laplacian_var": 609.91,
+          "texture_sat_pct": 6.23,
+          "patch_count": 124,
+          "patch_texels_pct": 1.9081,
+          "views_laplacian_mean": 4160.89,
+          "views": {
+            "front": {
+              "laplacian_var": 3429.33,
+              "sat_pct": 3.19,
+              "lum_mean": 103.3,
+              "dark_lt80_pct": 52.9,
+              "bright_gt180_pct": 36.4
+            },
+            "back": {
+              "laplacian_var": 3326.16,
+              "sat_pct": 8.03,
+              "lum_mean": 114.4,
+              "dark_lt80_pct": 46.8,
+              "bright_gt180_pct": 40.0
+            },
+            "left": {
+              "laplacian_var": 3383.38,
+              "sat_pct": 4.51,
+              "lum_mean": 121.1,
+              "dark_lt80_pct": 43.8,
+              "bright_gt180_pct": 46.6
+            },
+            "right": {
+              "laplacian_var": 3060.2,
+              "sat_pct": 4.39,
+              "lum_mean": 120.6,
+              "dark_lt80_pct": 43.8,
+              "bright_gt180_pct": 46.0
+            },
+            "top": {
+              "laplacian_var": 3922.87,
+              "sat_pct": 1.67,
+              "lum_mean": 147.3,
+              "dark_lt80_pct": 30.7,
+              "bright_gt180_pct": 57.9
+            },
+            "three_quarter": {
+              "laplacian_var": 7843.42,
+              "sat_pct": 2.24,
+              "lum_mean": 132.6,
+              "dark_lt80_pct": 38.2,
+              "bright_gt180_pct": 51.5
+            }
+          }
+        },
+        "final": {
+          "texture_size": [
+            2048,
+            2048
+          ],
+          "texture_laplacian_var": 161.38,
+          "texture_sat_pct": 10.61,
+          "patch_count": 0,
+          "patch_texels_pct": 0.0,
+          "views_laplacian_mean": 7246.14,
+          "views": {
+            "front": {
+              "laplacian_var": 7328.49,
+              "sat_pct": 7.52,
+              "lum_mean": 109.5,
+              "dark_lt80_pct": 53.2,
+              "bright_gt180_pct": 37.9
+            },
+            "back": {
+              "laplacian_var": 8629.92,
+              "sat_pct": 10.54,
+              "lum_mean": 121.7,
+              "dark_lt80_pct": 50.0,
+              "bright_gt180_pct": 44.8
+            },
+            "left": {
+              "laplacian_var": 4713.51,
+              "sat_pct": 6.66,
+              "lum_mean": 130.6,
+              "dark_lt80_pct": 46.0,
+              "bright_gt180_pct": 47.9
+            },
+            "right": {
+              "laplacian_var": 4873.86,
+              "sat_pct": 6.46,
+              "lum_mean": 127.6,
+              "dark_lt80_pct": 47.8,
+              "bright_gt180_pct": 46.7
+            },
+            "top": {
+              "laplacian_var": 6354.67,
+              "sat_pct": 3.26,
+              "lum_mean": 159.0,
+              "dark_lt80_pct": 35.4,
+              "bright_gt180_pct": 61.0
+            },
+            "three_quarter": {
+              "laplacian_var": 11576.42,
+              "sat_pct": 4.55,
+              "lum_mean": 140.5,
+              "dark_lt80_pct": 41.8,
+              "bright_gt180_pct": 52.2
+            }
+          }
+        },
+        "gt_sat_mean_pct": 7.3,
+        "sharpness_tex_ratio": 0.26,
+        "sharpness_views_ratio": 1.74,
+        "wins_vs_prev": true,
+        "crops": {
+          "lower_profile_left": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_a_lower_profile_left.png",
+          "lower_profile_right": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_a_lower_profile_right.png",
+          "upper_profile_left": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_a_upper_profile_left.png",
+          "upper_profile_right": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_a_upper_profile_right.png",
+          "front_mid": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_a_front_mid.png",
+          "top_front": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_a_top_front.png"
+        }
+      },
+      "mv_b": {
+        "before": {
+          "texture_size": [
+            1024,
+            1024
+          ],
+          "texture_laplacian_var": 629.15,
+          "texture_sat_pct": 9.36,
+          "patch_count": 190,
+          "patch_texels_pct": 3.1259,
+          "views_laplacian_mean": 4194.41,
+          "views": {
+            "front": {
+              "laplacian_var": 3101.51,
+              "sat_pct": 3.16,
+              "lum_mean": 101.4,
+              "dark_lt80_pct": 52.8,
+              "bright_gt180_pct": 34.3
+            },
+            "back": {
+              "laplacian_var": 3240.73,
+              "sat_pct": 7.98,
+              "lum_mean": 116.0,
+              "dark_lt80_pct": 45.7,
+              "bright_gt180_pct": 41.5
+            },
+            "left": {
+              "laplacian_var": 3838.21,
+              "sat_pct": 5.53,
+              "lum_mean": 118.1,
+              "dark_lt80_pct": 45.2,
+              "bright_gt180_pct": 45.3
+            },
+            "right": {
+              "laplacian_var": 3483.35,
+              "sat_pct": 5.64,
+              "lum_mean": 118.3,
+              "dark_lt80_pct": 45.1,
+              "bright_gt180_pct": 45.1
+            },
+            "top": {
+              "laplacian_var": 3484.4,
+              "sat_pct": 1.76,
+              "lum_mean": 145.8,
+              "dark_lt80_pct": 32.1,
+              "bright_gt180_pct": 58.8
+            },
+            "three_quarter": {
+              "laplacian_var": 8018.29,
+              "sat_pct": 3.12,
+              "lum_mean": 126.2,
+              "dark_lt80_pct": 41.0,
+              "bright_gt180_pct": 48.7
+            }
+          }
+        },
+        "final": {
+          "texture_size": [
+            2048,
+            2048
+          ],
+          "texture_laplacian_var": 130.45,
+          "texture_sat_pct": 11.8,
+          "patch_count": 2,
+          "patch_texels_pct": 0.0221,
+          "views_laplacian_mean": 6561.04,
+          "views": {
+            "front": {
+              "laplacian_var": 4761.23,
+              "sat_pct": 15.83,
+              "lum_mean": 98.7,
+              "dark_lt80_pct": 56.6,
+              "bright_gt180_pct": 34.7
+            },
+            "back": {
+              "laplacian_var": 8495.06,
+              "sat_pct": 12.99,
+              "lum_mean": 102.4,
+              "dark_lt80_pct": 56.7,
+              "bright_gt180_pct": 36.8
+            },
+            "left": {
+              "laplacian_var": 4128.46,
+              "sat_pct": 6.26,
+              "lum_mean": 124.1,
+              "dark_lt80_pct": 46.3,
+              "bright_gt180_pct": 45.5
+            },
+            "right": {
+              "laplacian_var": 4118.68,
+              "sat_pct": 6.16,
+              "lum_mean": 122.1,
+              "dark_lt80_pct": 47.5,
+              "bright_gt180_pct": 44.6
+            },
+            "top": {
+              "laplacian_var": 6646.37,
+              "sat_pct": 11.91,
+              "lum_mean": 145.1,
+              "dark_lt80_pct": 37.7,
+              "bright_gt180_pct": 57.6
+            },
+            "three_quarter": {
+              "laplacian_var": 11216.47,
+              "sat_pct": 11.48,
+              "lum_mean": 127.7,
+              "dark_lt80_pct": 44.6,
+              "bright_gt180_pct": 48.2
+            }
+          }
+        },
+        "gt_sat_mean_pct": 5.92,
+        "sharpness_tex_ratio": 0.21,
+        "sharpness_views_ratio": 1.56,
+        "wins_vs_prev": true,
+        "crops": {
+          "lower_profile_left": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_b_lower_profile_left.png",
+          "lower_profile_right": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_b_lower_profile_right.png",
+          "upper_profile_left": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_b_upper_profile_left.png",
+          "upper_profile_right": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_b_upper_profile_right.png",
+          "front_mid": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_b_front_mid.png",
+          "top_front": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_b_top_front.png"
+        }
+      }
+    }
+  },
+  "stage_e_pack_glb": {
+    "stage": "E_pack_glb",
+    "asset_id": "carro_foxh",
+    "seed": 42,
+    "variants": {
+      "mv_a": {
+        "tempo_s": 48.09,
+        "sat_before_pct": 10.034,
+        "sat_after_pct": 10.23,
+        "sat_rel_loss_pct": -1.95,
+        "resat_applied": false,
+        "sat_final_8k_pct": 10.23,
+        "glb_8k": {
+          "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/carro_foxh__mv_a_8k.glb",
+          "size_mb": 18.56,
+          "size_bytes": 19461588,
+          "jpeg_mb": 8.07,
+          "has_pbr_mr": true,
+          "tex_px": [
+            8192,
+            8192
+          ]
+        },
+        "glb_4k": {
+          "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/carro_foxh__mv_a_4k.glb",
+          "size_mb": 13.11,
+          "size_bytes": 13751016,
+          "jpeg_mb": 2.62,
+          "has_pbr_mr": true,
+          "tex_px": [
+            4096,
+            4096
+          ]
+        }
+      },
+      "mv_b": {
+        "tempo_s": 47.58,
+        "sat_before_pct": 10.28,
+        "sat_after_pct": 10.732,
+        "sat_rel_loss_pct": -4.4,
+        "resat_applied": false,
+        "sat_final_8k_pct": 10.732,
+        "glb_8k": {
+          "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/carro_foxh__mv_b_8k.glb",
+          "size_mb": 19.61,
+          "size_bytes": 20562964,
+          "jpeg_mb": 8.13,
+          "has_pbr_mr": true,
+          "tex_px": [
+            8192,
+            8192
+          ]
+        },
+        "glb_4k": {
+          "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/carro_foxh__mv_b_4k.glb",
+          "size_mb": 14.1,
+          "size_bytes": 14789268,
+          "jpeg_mb": 2.63,
+          "has_pbr_mr": true,
+          "tex_px": [
+            4096,
+            4096
+          ]
+        }
+      }
+    },
+    "tempo_total_s": 96.39,
+    "vram_samples_10s": [
+      [
+        0.1,
+        1193
+      ],
+      [
+        10.1,
+        7301
+      ],
+      [
+        20.2,
+        7301
+      ],
+      [
+        30.2,
+        7301
+      ],
+      [
+        40.3,
+        7320
+      ],
+      [
+        50.3,
+        7303
+      ],
+      [
+        60.4,
+        7303
+      ],
+      [
+        70.4,
+        7303
+      ],
+      [
+        80.5,
+        7303
+      ],
+      [
+        90.5,
+        7303
+      ],
+      [
+        96.5,
+        1314
+      ]
+    ],
+    "vram_pico_mib": 7320,
+    "vram_baseline_mib": 1193
+  },
+  "http_verification": {
+    "https://brunointegrations.com/modelos3d/manifest.json": {
+      "status": 200,
+      "content_length": 17717,
+      "last_modified": "Thu, 19 Nov 2026 23:44:52 GMT",
+      "etag": "\"6aff89f4-4535\""
+    },
+    "https://brunointegrations.com/modelos3d/models/carro_foxh__mv_a_8k.glb": {
+      "status": 200,
+      "content_length": 19461588,
+      "last_modified": "Fri, 20 Nov 2026 19:53:50 GMT",
+      "etag": "\"6b00a54e-128f5d4\""
+    },
+    "https://brunointegrations.com/modelos3d/models/carro_foxh__mv_b_8k.glb": {
+      "status": 200,
+      "content_length": 20562964,
+      "last_modified": "Fri, 20 Nov 2026 19:54:38 GMT",
+      "etag": "\"6b00a57e-139c414\""
+    },
+    "https://brunointegrations.com/modelos3d/models/carro_foxh__mv_a_4k.glb": {
+      "status": 200,
+      "content_length": 13751016,
+      "last_modified": "Fri, 20 Nov 2026 19:53:50 GMT",
+      "etag": "\"6b00a54e-d1d2e8\""
+    },
+    "https://brunointegrations.com/modelos3d/models/carro_foxh__mv_b_4k.glb": {
+      "status": 200,
+      "content_length": 14789268,
+      "last_modified": "Fri, 20 Nov 2026 19:54:38 GMT",
+      "etag": "\"6b00a57e-e1aa94\""
+    }
+  },
+  "viewer_urls": {
+    "mv_b_8k": "https://brunointegrations.com/modelos3d/?case=carro_foxh&mode=mv_b_8k",
+    "mv_a_8k": "https://brunointegrations.com/modelos3d/?case=carro_foxh&mode=mv_a_8k",
+    "vs_8k": "https://brunointegrations.com/modelos3d/?case=carro_foxh&mode=mv_b_8k&vs=1&mode2=mv_a_8k",
+    "mv_b_4k": "https://brunointegrations.com/modelos3d/?case=carro_foxh&mode=mv_b_4k",
+    "mv_a_4k": "https://brunointegrations.com/modelos3d/?case=carro_foxh&mode=mv_a_4k"
+  }
+}

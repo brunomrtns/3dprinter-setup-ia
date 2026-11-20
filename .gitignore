@@ -35,3 +35,6 @@ weights/
 Thumbs.db
 .DS_Store
 desktop.ini
+
+# Local GLB backups for rollback
+evidence/**/backup_prev/*.glb
