@@ -6,17 +6,6 @@
   "evidence_dir": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality",
   "variants": [
     {
-      "id": "mv_a",
-      "uv_obj": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/uv.obj",
-      "prev_texture": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/ai_textures/mv_a_ai_1024.png",
-      "gt_views": {
-        "front": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P1_front.png",
-        "left": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P2_side.png",
-        "back": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P3_back.png",
-        "right": "/mnt/c/Users/Bruno/Downloads/fox-h/panels/prep/P2r_right.png"
-      }
-    },
-    {
       "id": "mv_b",
       "uv_obj": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/uv.obj",
       "prev_texture": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_aipaint/ai_textures/mv_b_ai_1024.png",
@@ -52,7 +41,15 @@
     "max_component_area_ratio": 0.015,
     "ring_width_px": 6,
     "inpaint_radius_px": 9,
-    "feather_sigma": 2.0
+    "feather_sigma": 2.0,
+    "repair_dark_specks": true,
+    "dark_speck_lum_max": 115,
+    "bright_ring_lum_min": 185,
+    "dark_speck_delta_min": 75,
+    "bright_perimeter_ratio_min": 0.75,
+    "dark_speck_min_px": 1,
+    "dark_speck_max_area_ratio": 0.0006,
+    "dark_speck_ring_width_px": 5
   },
   "pack": {
     "upscale_scale": 4,

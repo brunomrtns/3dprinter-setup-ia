@@ -2,130 +2,6 @@
   "stage": "D_eval_quality",
   "asset_id": "carro_foxh",
   "variants": {
-    "mv_a": {
-      "before": {
-        "texture_size": [
-          1024,
-          1024
-        ],
-        "texture_laplacian_var": 609.91,
-        "texture_sat_pct": 6.23,
-        "patch_count": 124,
-        "patch_texels_pct": 1.9081,
-        "views_laplacian_mean": 4160.89,
-        "views": {
-          "front": {
-            "laplacian_var": 3429.33,
-            "sat_pct": 3.19,
-            "lum_mean": 103.3,
-            "dark_lt80_pct": 52.9,
-            "bright_gt180_pct": 36.4
-          },
-          "back": {
-            "laplacian_var": 3326.16,
-            "sat_pct": 8.03,
-            "lum_mean": 114.4,
-            "dark_lt80_pct": 46.8,
-            "bright_gt180_pct": 40.0
-          },
-          "left": {
-            "laplacian_var": 3383.38,
-            "sat_pct": 4.51,
-            "lum_mean": 121.1,
-            "dark_lt80_pct": 43.8,
-            "bright_gt180_pct": 46.6
-          },
-          "right": {
-            "laplacian_var": 3060.2,
-            "sat_pct": 4.39,
-            "lum_mean": 120.6,
-            "dark_lt80_pct": 43.8,
-            "bright_gt180_pct": 46.0
-          },
-          "top": {
-            "laplacian_var": 3922.87,
-            "sat_pct": 1.67,
-            "lum_mean": 147.3,
-            "dark_lt80_pct": 30.7,
-            "bright_gt180_pct": 57.9
-          },
-          "three_quarter": {
-            "laplacian_var": 7843.42,
-            "sat_pct": 2.24,
-            "lum_mean": 132.6,
-            "dark_lt80_pct": 38.2,
-            "bright_gt180_pct": 51.5
-          }
-        }
-      },
-      "final": {
-        "texture_size": [
-          2048,
-          2048
-        ],
-        "texture_laplacian_var": 392.5,
-        "texture_sat_pct": 10.03,
-        "patch_count": 0,
-        "patch_texels_pct": 0.0,
-        "views_laplacian_mean": 8762.43,
-        "views": {
-          "front": {
-            "laplacian_var": 8173.7,
-            "sat_pct": 5.54,
-            "lum_mean": 100.9,
-            "dark_lt80_pct": 55.6,
-            "bright_gt180_pct": 37.0
-          },
-          "back": {
-            "laplacian_var": 10427.38,
-            "sat_pct": 9.47,
-            "lum_mean": 113.1,
-            "dark_lt80_pct": 49.2,
-            "bright_gt180_pct": 41.9
-          },
-          "left": {
-            "laplacian_var": 6896.66,
-            "sat_pct": 7.73,
-            "lum_mean": 112.8,
-            "dark_lt80_pct": 49.2,
-            "bright_gt180_pct": 44.6
-          },
-          "right": {
-            "laplacian_var": 7263.71,
-            "sat_pct": 7.18,
-            "lum_mean": 115.1,
-            "dark_lt80_pct": 47.9,
-            "bright_gt180_pct": 45.8
-          },
-          "top": {
-            "laplacian_var": 6784.68,
-            "sat_pct": 2.41,
-            "lum_mean": 145.4,
-            "dark_lt80_pct": 33.5,
-            "bright_gt180_pct": 58.6
-          },
-          "three_quarter": {
-            "laplacian_var": 13028.43,
-            "sat_pct": 4.36,
-            "lum_mean": 127.3,
-            "dark_lt80_pct": 42.3,
-            "bright_gt180_pct": 50.5
-          }
-        }
-      },
-      "gt_sat_mean_pct": 7.3,
-      "sharpness_tex_ratio": 0.64,
-      "sharpness_views_ratio": 2.11,
-      "wins_vs_prev": true,
-      "crops": {
-        "lower_profile_left": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_a_lower_profile_left.png",
-        "lower_profile_right": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_a_lower_profile_right.png",
-        "upper_profile_left": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_a_upper_profile_left.png",
-        "upper_profile_right": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_a_upper_profile_right.png",
-        "front_mid": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_a_front_mid.png",
-        "top_front": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_a_top_front.png"
-      }
-    },
     "mv_b": {
       "before": {
         "texture_size": [
@@ -187,59 +63,59 @@
           2048,
           2048
         ],
-        "texture_laplacian_var": 379.39,
-        "texture_sat_pct": 10.28,
-        "patch_count": 1,
-        "patch_texels_pct": 0.0004,
-        "views_laplacian_mean": 10256.66,
+        "texture_laplacian_var": 369.01,
+        "texture_sat_pct": 10.16,
+        "patch_count": 127,
+        "patch_texels_pct": 0.2937,
+        "views_laplacian_mean": 7257.92,
         "views": {
           "front": {
-            "laplacian_var": 8889.29,
-            "sat_pct": 5.48,
-            "lum_mean": 99.3,
-            "dark_lt80_pct": 55.6,
-            "bright_gt180_pct": 35.9
+            "laplacian_var": 7170.35,
+            "sat_pct": 5.4,
+            "lum_mean": 101.3,
+            "dark_lt80_pct": 54.7,
+            "bright_gt180_pct": 37.4
           },
           "back": {
-            "laplacian_var": 12786.75,
-            "sat_pct": 9.05,
-            "lum_mean": 109.8,
-            "dark_lt80_pct": 50.3,
-            "bright_gt180_pct": 40.7
+            "laplacian_var": 7553.32,
+            "sat_pct": 8.82,
+            "lum_mean": 114.6,
+            "dark_lt80_pct": 48.0,
+            "bright_gt180_pct": 43.8
           },
           "left": {
-            "laplacian_var": 7715.74,
-            "sat_pct": 7.55,
-            "lum_mean": 112.4,
-            "dark_lt80_pct": 49.3,
-            "bright_gt180_pct": 44.6
+            "laplacian_var": 6180.72,
+            "sat_pct": 7.44,
+            "lum_mean": 114.7,
+            "dark_lt80_pct": 48.3,
+            "bright_gt180_pct": 46.1
           },
           "right": {
-            "laplacian_var": 7607.39,
-            "sat_pct": 7.59,
-            "lum_mean": 113.2,
-            "dark_lt80_pct": 49.1,
-            "bright_gt180_pct": 45.0
+            "laplacian_var": 5834.71,
+            "sat_pct": 7.48,
+            "lum_mean": 115.7,
+            "dark_lt80_pct": 48.0,
+            "bright_gt180_pct": 46.7
           },
           "top": {
-            "laplacian_var": 8594.67,
-            "sat_pct": 2.64,
-            "lum_mean": 141.3,
-            "dark_lt80_pct": 37.1,
-            "bright_gt180_pct": 57.9
+            "laplacian_var": 5019.09,
+            "sat_pct": 2.38,
+            "lum_mean": 146.8,
+            "dark_lt80_pct": 34.4,
+            "bright_gt180_pct": 61.3
           },
           "three_quarter": {
-            "laplacian_var": 15946.15,
-            "sat_pct": 4.54,
-            "lum_mean": 121.6,
-            "dark_lt80_pct": 45.4,
-            "bright_gt180_pct": 48.2
+            "laplacian_var": 11789.31,
+            "sat_pct": 4.41,
+            "lum_mean": 124.6,
+            "dark_lt80_pct": 44.0,
+            "bright_gt180_pct": 50.2
           }
         }
       },
       "gt_sat_mean_pct": 5.92,
-      "sharpness_tex_ratio": 0.6,
-      "sharpness_views_ratio": 2.45,
+      "sharpness_tex_ratio": 0.59,
+      "sharpness_views_ratio": 1.73,
       "wins_vs_prev": true,
       "crops": {
         "lower_profile_left": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/fox_quality/renders/crops/mv_b_lower_profile_left.png",

@@ -3,48 +3,18 @@
   "asset_id": "carro_foxh",
   "seed": 42,
   "variants": {
-    "mv_a": {
-      "tempo_s": 48.09,
-      "sat_before_pct": 10.034,
-      "sat_after_pct": 10.23,
-      "sat_rel_loss_pct": -1.95,
-      "resat_applied": false,
-      "sat_final_8k_pct": 10.23,
-      "glb_8k": {
-        "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/carro_foxh__mv_a_8k.glb",
-        "size_mb": 18.56,
-        "size_bytes": 19461588,
-        "jpeg_mb": 8.07,
-        "has_pbr_mr": true,
-        "tex_px": [
-          8192,
-          8192
-        ]
-      },
-      "glb_4k": {
-        "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_a/carro_foxh__mv_a_4k.glb",
-        "size_mb": 13.11,
-        "size_bytes": 13751016,
-        "jpeg_mb": 2.62,
-        "has_pbr_mr": true,
-        "tex_px": [
-          4096,
-          4096
-        ]
-      }
-    },
     "mv_b": {
-      "tempo_s": 47.58,
-      "sat_before_pct": 10.28,
-      "sat_after_pct": 10.732,
-      "sat_rel_loss_pct": -4.4,
+      "tempo_s": 56.85,
+      "sat_before_pct": 10.162,
+      "sat_after_pct": 10.887,
+      "sat_rel_loss_pct": -7.13,
       "resat_applied": false,
-      "sat_final_8k_pct": 10.732,
+      "sat_final_8k_pct": 10.887,
       "glb_8k": {
         "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/carro_foxh__mv_b_8k.glb",
-        "size_mb": 19.61,
-        "size_bytes": 20562964,
-        "jpeg_mb": 8.13,
+        "size_mb": 19.71,
+        "size_bytes": 20663408,
+        "jpeg_mb": 8.23,
         "has_pbr_mr": true,
         "tex_px": [
           8192,
@@ -53,9 +23,9 @@
       },
       "glb_4k": {
         "glb": "/home/bruno/printer3d-work/carro/fox_fullrun/mv_b/carro_foxh__mv_b_4k.glb",
-        "size_mb": 14.1,
-        "size_bytes": 14789268,
-        "jpeg_mb": 2.63,
+        "size_mb": 14.13,
+        "size_bytes": 14817484,
+        "jpeg_mb": 2.66,
         "has_pbr_mr": true,
         "tex_px": [
           4096,
@@ -64,53 +34,37 @@
       }
     }
   },
-  "tempo_total_s": 96.39,
+  "tempo_total_s": 57.76,
   "vram_samples_10s": [
     [
       0.1,
-      1193
+      3253
     ],
     [
-      10.1,
-      7301
+      10.2,
+      8214
     ],
     [
       20.2,
-      7301
+      9372
     ],
     [
-      30.2,
-      7301
+      30.3,
+      9383
     ],
     [
       40.3,
-      7320
+      9369
     ],
     [
-      50.3,
-      7303
+      50.4,
+      9371
     ],
     [
-      60.4,
-      7303
-    ],
-    [
-      70.4,
-      7303
-    ],
-    [
-      80.5,
-      7303
-    ],
-    [
-      90.5,
-      7303
-    ],
-    [
-      96.5,
-      1314
+      57.9,
+      3381
     ]
   ],
-  "vram_pico_mib": 7320,
-  "vram_baseline_mib": 1193
+  "vram_pico_mib": 9383,
+  "vram_baseline_mib": 3253
 }
