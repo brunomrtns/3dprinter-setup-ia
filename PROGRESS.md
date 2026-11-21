@@ -115,6 +115,13 @@
 - **Fotos do kit = as MESMAS do C6** (`Downloads/fox/no-windows/` = `~/printer3d-work/carro/fotos-c7/` + `c7-prep/`): 5 fotos de 2400x1792 px (frente, frente-e-lado-diagonal, lado, traseira, de-fora-pegando-interna). Prep `*_tinted.png` reutilizado. C7-E (fotogrametria densa VGGT) retirado da fila (só reabrir se B/C falharem e houver sessão de 20-40 fotos completas).
 - **Publicação**: caso `carro_csg` (modos `kit`, `casca`, `interna`, `kit_corte`) mantido no viewer para histórico/comparação. Evidência: `evidence/rtx3060-12gb/carro-csg/report.json`.
 
+### Registro REJEIÇÃO — API em nuvem do TripoAI (`tripo_paint_v1`, 2026-11-21) — `[x]` REVERTIDO (`ba801e6`) — NUNCA MAIS
+
+- O RUN `tripo_paint_v1` (commit `4f81db1`) havia integrado a **API em nuvem do TripoAI** (`pipeline/tripo_client.py`, endpoint `/v3/models/texture` + upload STS/S3) como pintor principal do pipeline. **Rejeitado de forma enfática pelo dono na mesma data** e **integralmente revertido** (`git revert 4f81db1` → `ba801e6`, 828 linhas fora): cliente de API, testes mock, integração em `run_asset.py`/`defaults.json`/`patch_repair.py`, `TRIPO_API_KEY` do `factory/worker/.env.example` e o ADR-009 antigo — tudo removido.
+- **Decisão vinculante do dono (ADR-009, `docs/decisions/ADR-009-pintura-100-local-api-tripo-rejeitada.md`):** o projeto existe para ser **100% local** — se a solução para qualidade é depender do TripoAI, o projeto perde o sentido. **NUNCA MAIS** propor ou implementar integração com API/serviço em nuvem do TripoAI (pintura, geração ou qualquer etapa), em nenhum run ou prompt.
+- **O que FICA:** os modelos open-source **locais** TripoSR/TripoSG/TripoSF (pesos abertos nas GPUs locais) não são afetados — não são a API em nuvem. Pintor principal volta a ser **Hunyuan3D-Paint local + TRELLIS.2 (PBR híbrido)**, e a meta "pintura perfeita de primeira" segue sendo perseguida **no caminho local** (UV/atlasing, blending multi-foto, PBR local, QA numérico).
+- **Correção de benchmark herdada:** referências de qualidade "nível Fox" foram removidas dos docs da Fase P e dos prompts de run — o Fox é a **PIOR** peça pintada do acervo; benchmark de qualidade = a MELHOR peça aprovada pelo dono.
+
 ### Registro Acabamento Universal + Triagem VLM (`paintfix_v2`, 2026-11-21) — `[x]` CONCLUÍDO (AGUARDA VEREDITO VISUAL DO DONO)
 
 - **ETAPA A (`patch_repair.py` v2 + `defaults.json` + `test_patch_repair_v2.py` — `6a38559`):**

@@ -2,10 +2,15 @@
 
 > Fonte: clonagem dos repos `3dprinter-setup-ia`, `portfolio-v2`, `avesia` (2026-11-20) +
 > histórico dos runs fox_quality / fox_rearfix / pipe_std.
+>
+> **NOTA (2026-11-21):** "Fox" nos nomes de runs/configs é referência HISTÓRICA de receita
+> (parâmetros validados) — a peça Fox é a **PIOR pintada do acervo** (2.086 UV islands,
+> gutter bleed) e **NUNCA** serve de benchmark de qualidade. Qualidade-alvo = a MELHOR peça
+> aprovada pelo dono. API em nuvem do TripoAI: **REJEITADA** (ADR-009) — pipeline 100% local.
 
 ## 1. O arsenal atual (3dprinter-setup-ia)
 
-### 1.1 Pipeline de pintura (validado, nível Fox)
+### 1.1 Pipeline de pintura (validado nos runs fox_quality / fox_rearfix)
 Scripts em `pipeline/` (todos genéricos, zero nome de peça em código; parâmetros por asset em
 `--config`, ex. `cars/fox.json`):
 
@@ -53,7 +58,9 @@ Fábrica o absorve como **viewer de peça** (toggle pintado/sem pintura + downlo
   limpo possível (rembg corrige o resto).
 - **O que produz:** malha (Hunyuan3D-2mv multi-vista + TripoSF512 + pós-proc watertight, C6) ou
   malha existente; pintura 8K PBR com fidelidade real nas 4 faces.
-- **Gargalo honesto:** a qualidade do Fox veio de fotos reais alinhadas. É o tier de topo.
+- **Gargalo honesto:** a qualidade deste tier vem de fotos reais alinhadas (o que se aproveita
+  do Fox é a receita/parâmetros — a peça em si é a pior do acervo). É o tier de topo do
+  pipeline local.
 
 ### Cenário B — Single-image ("receita Anubis")
 - **Entrada:** 1 foto (após `preprocess_input.py`: fundo removido, quadrado 1024).
@@ -80,7 +87,7 @@ fotos = não validado; a UI limita a 4 e explica os ângulos ideais.
 | Modo | UI | Entrada | Pipeline | Qualidade esperada |
 |---|---|---|---|---|
 | **1 foto** | padrão | 1 imagem | preprocess (rembg+pad) → TripoSG→TripoSF512 → pintura tier "single" → PBR | Bom; fidelidade frontal alta, costas estimadas |
-| **Multi-foto** | recomendado | 3–4 fotos (front/side/back/side-repeat) | preprocess → multi-vista (C6) → pintura tier "photos" (blending real) → PBR | **Máxima (nível Fox)** |
+| **Multi-foto** | recomendado | 3–4 fotos (front/side/back/side-repeat) | preprocess → multi-vista (C6) → pintura tier "photos" (blending real) → PBR | **Máxima do pipeline local (multi-foto)** |
 | **Peça existente** | avançado | malha OU peça já no sistema | tier "none" ou re-run de pintura/reparo sobre a peça | Acabamento máximo sobre a malha dada |
 
 A UI guia por conteúdo: "Tenho só uma foto" / "Consigo fotografar de vários ângulos" /

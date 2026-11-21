@@ -45,6 +45,7 @@
 - venv isolado `printer3d-ia`; `game-ai3d` é intocável/referência (ADR-004)
 - Multi-máquina: caminhos portáveis, perfis por máquina, guard paramétrico, evidências namespaced (ADR-006)
 - **Sem default mode para gerador image→3D** (ADR-005): dono reprovou TRELLIS e TripoSR globalmente (benchmark + 3 reprovações visuais na Jubarte). NÃO reinstalar, NÃO reavaliar os mesmos pesos sem ordem do dono e NÃO propor "mais uma tentativa" sem caminho novo de qualidade.
+- **NUNCA integrar API/serviço em nuvem do TripoAI — nem pintura, nem geração, nem qualquer etapa** (ADR-009, decisão enfática do dono em 2026-11-21): o projeto existe para ser 100% local; o run `tripo_paint_v1` (`4f81db1`) foi revertido (`ba801e6`). Não confundir: os modelos open-source LOCAIS TripoSR/TripoSG/TripoSF (pesos abertos nas GPUs locais) continuam — eles NÃO são a API em nuvem.
 - Jobs GPU sempre serializados com guard de VRAM (`docs/knowledge/wsl-gpu.md`) — **o dono joga no Windows**: nunca iniciar job GPU sem o guard; se VRAM ocupada, o guard espera (poll 1Hz), não força.
 
 ## Cuidados conhecidos do ambiente

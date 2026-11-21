@@ -8,7 +8,7 @@
 ## O que é isto
 
 Série de documentos que define o próximo ciclo do projeto: transformar o pipeline de pintura/geração
-validado (nível Fox) em um **produto de uso real**, integrado ao ecossistema Bruno Integrations:
+validado (pipeline 100% local) em um **produto de uso real**, integrado ao ecossistema Bruno Integrations:
 
 - Interface web (padrão TripoAI de simplicidade) para gerar objetos 3D a partir de fotos;
 - Máquina local (RTX 3060 12GB) como **worker** consumindo uma **fila de jobs** na VPS;
