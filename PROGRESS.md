@@ -114,7 +114,7 @@
 - **Fotos do kit = as MESMAS do C6** (`Downloads/fox/no-windows/` = `~/printer3d-work/carro/fotos-c7/` + `c7-prep/`): 5 fotos de 2400x1792 px (frente, frente-e-lado-diagonal, lado, traseira, de-fora-pegando-interna). Prep `*_tinted.png` reutilizado. C7-E (fotogrametria densa VGGT) retirado da fila (só reabrir se B/C falharem e houver sessão de 20-40 fotos completas).
 - **Publicação**: caso `carro_csg` (modos `kit`, `casca`, `interna`, `kit_corte`) mantido no viewer para histórico/comparação. Evidência: `evidence/rtx3060-12gb/carro-csg/report.json`.
 
-### Registro Fase P — Fábrica 3D (`RUN fab3d_mega`, 2026-11-20) — `[~]` EM ANDAMENTO
+### Registro Fase P — Fábrica 3D (`RUN fab3d_mega`, 2026-11-20) — `[x]` CONCLUÍDA (`v0.1.0-fab3d`)
 
 - **[x] MARCO 0 — Ratificação & higiene (2026-11-20):**
   - Suíte `fabrica3d-docs` (7 arquivos) importada intocada em `docs/fase-p-fabrica3d/`; nota de uso estritamente privado/proibido comercial adicionada ao `README.md`.
@@ -137,6 +137,9 @@
 - **[x] MARCO 5/6 — Assistente de Imagem + Chat de Edição Agêntica com Guardrails (2026-11-20):**
   - M5 (`factory/worker/image_assistant.py`, `evidence/fase-p/m5_m6_tests.json`): detector de foto fraca (`analyze_input_quality`) marcou corretamente imagem escura/baixa resolução (`weak_input: true`, 3 alertas); `enhance_image` com `EXTERNAL_IMAGE_ENHANCE=false` executou `mock_local` determinístico sem exigir chave externa.
   - M6 (`factory/worker/edit_agent.py`, `evidence/fase-p/m5_m6_tests.json`): provider `mock` por padrão (ativação Z.ai GLM em 1 linha via `AGENT_PROVIDER=zai` + `ZAI_API_KEY` no `.env` local); pedido normal (`cmwpp0yxm001vsm3u3e1j6qaq`) executou `2` passos whitelisted e encerrou em `status=review`; teste de segurança (`cmwpp15j50021sm3ue6k3ehuh`, `"executar comando shell rm -rf /..."`) foi bloqueado pela whitelist fechada (`blocked_count: 1`, `steps_executed: 0`, `BLOCKED_WHITELIST`, `publish_allowed: false`); 4 mensagens persistidas no Postgres.
+- **[x] MARCO 7 — Fechamento & Tag `v0.1.0-fab3d` (2026-11-20):**
+  - `PROGRESS.md` e `HANDOFF.md` consolidados com estado final, guia operacional (`.env` na VPS e PC, comando do worker, ativação Z.ai GLM em 1 linha) e backlog honesto (múltiplos workers, Fase 3 Pose, contas de convidados).
+  - Tag git `v0.1.0-fab3d` criada e enviada para `origin`; zero segredos no repositório; aguardando veredito visual do dono em `https://brunointegrations.com/fab3d/`.
 
 ### Registro Padronização Universal + QA Automático (`pipe_std`, 2026-11-20) — `[x]` CONCLUÍDO E VALIDADO EM 3 ASSETS DIVERSOS (3/3 PASS + PUBLICADOS)
 
