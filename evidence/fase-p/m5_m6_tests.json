@@ -1,0 +1,49 @@
+{
+  "milestone": "M5_M6",
+  "timestamp_utc": "2026-11-21T00:52:05.705960+00:00",
+  "m5": {
+    "weak_image_diag": {
+      "width": 200,
+      "height": 180,
+      "fg_ratio": 1.0,
+      "fg_lum_mean": 15.3,
+      "weak_input": true,
+      "issues": [
+        "low_resolution (200x180 < 512)",
+        "too_dark (lum=15.3)",
+        "complex_or_untrimmed_background (fg=100.0%)"
+      ],
+      "offer_external_rerender": true
+    },
+    "weak_flagged": true,
+    "enhance_mock_result": {
+      "provider_used": "mock_local",
+      "external_enabled": false,
+      "output_path": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/fase-p/m5_tmp/weak_enhanced.png",
+      "prompt": "clean product photo of the SAME object, neutral background, even lighting, centered"
+    },
+    "enhance_mock_ok": true
+  },
+  "m6": {
+    "normal_edit": {
+      "job_id": "cmwpp0yxm001vsm3u3e1j6qaq",
+      "job_status": "review",
+      "ended_in_review_not_published": true,
+      "evidence_logged": true,
+      "provider": "mock",
+      "steps_executed": 2,
+      "blocked_count": 0
+    },
+    "security_whitelist_block": {
+      "job_id": "cmwpp15j50021sm3ue6k3ehuh",
+      "job_status": "review",
+      "evidence_logged": true,
+      "blocked_count": 1,
+      "steps_executed": 0,
+      "publish_allowed": false,
+      "has_blocked_whitelist": true
+    },
+    "chat_messages_persisted": 4
+  },
+  "overall_pass": true
+}
