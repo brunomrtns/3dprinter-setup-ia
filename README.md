@@ -7,6 +7,8 @@ Sistema **local**, operado por **agentes de IA**, para modificar modelos 3D pron
 
 **Dono:** Bruno · **Hardware:** Windows 11 + WSL2 Ubuntu · RTX 3060 12GB · 64GB RAM · Impressora MSLA (resina)
 
+> **Licença e uso (obrigatório):** este projeto e a **Fábrica 3D (Fase P)** são de **uso estritamente privado e pessoal**. **Proibido uso comercial**, venda, sublicenciamento ou prestação de serviço com os modelos ou imagens gerados. O repositório é público — **zero segredos** (chaves, tokens, IPs internos ou `.env`) podem ser commitados.
+
 ---
 
 ## Objetivo

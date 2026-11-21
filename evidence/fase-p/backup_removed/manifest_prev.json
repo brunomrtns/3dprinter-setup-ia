@@ -1,0 +1,771 @@
+{
+  "cases": [
+    {
+      "id": "trex_figurine",
+      "category": "miniatura",
+      "modes": {
+        "trellis2": {
+          "glb": "models/trex_figurine__trellis2.glb",
+          "verts": 858845,
+          "faces": 1971555,
+          "tempo_s": 157.11,
+          "vram": 5229,
+          "manifold_antes": false,
+          "manifold_depois": false
+        },
+        "triposg": {
+          "glb": "models/trex_figurine__triposg.glb",
+          "verts": 694738,
+          "faces": 1388904,
+          "tempo_s": 88.49,
+          "vram": 11254,
+          "manifold_antes": true,
+          "manifold_depois": true
+        },
+        "triposr": {
+          "glb": "models/trex_figurine__triposr.glb",
+          "verts": 65404,
+          "faces": 130740,
+          "tempo_s": 43.57,
+          "vram": 3860,
+          "manifold_antes": true,
+          "manifold_depois": true
+        }
+      }
+    },
+    {
+      "id": "humanoide_dragonborn",
+      "category": "miniatura humanoide (caso de uso do Estúdio de Pose — Fase 3)",
+      "modes": {
+        "trellis2": {
+          "glb": "models/humanoide_dragonborn__trellis2.glb",
+          "verts": 430551,
+          "faces": 884276,
+          "tempo_s": 153.03,
+          "vram": 5327,
+          "manifold_antes": false,
+          "manifold_depois": false
+        },
+        "triposg": {
+          "glb": "models/humanoide_dragonborn__triposg.glb",
+          "verts": 586210,
+          "faces": 1172420,
+          "tempo_s": 73.63,
+          "vram": 10759,
+          "manifold_antes": true,
+          "manifold_depois": true
+        },
+        "triposr": {
+          "glb": "models/humanoide_dragonborn__triposr.glb",
+          "verts": 45929,
+          "faces": 91854,
+          "tempo_s": 46.78,
+          "vram": 4056,
+          "manifold_antes": true,
+          "manifold_depois": true
+        },
+        "pbr_8k": {
+          "faces": 249997,
+          "verts": 155035,
+          "tempo_s": 663.5,
+          "vram": 11938,
+          "size_mb": 22.86,
+          "pbr": true
+        },
+        "pbr_4k": {
+          "faces": 249997,
+          "verts": 155035,
+          "tempo_s": 663.5,
+          "vram": 11938,
+          "size_mb": 13.79,
+          "pbr": true
+        }
+      }
+    },
+    {
+      "id": "criatura_dragao",
+      "category": "criatura detalhada",
+      "modes": {
+        "trellis2": {
+          "glb": "models/criatura_dragao__trellis2.glb",
+          "verts": 293452,
+          "faces": 586616,
+          "tempo_s": 154.87,
+          "vram": 5180,
+          "manifold_antes": false,
+          "manifold_depois": false
+        },
+        "triposg": {
+          "glb": "models/criatura_dragao__triposg.glb",
+          "verts": 551556,
+          "faces": 1103100,
+          "tempo_s": 74.0,
+          "vram": 11625,
+          "manifold_antes": true,
+          "manifold_depois": true
+        },
+        "triposr": {
+          "glb": "models/criatura_dragao__triposr.glb",
+          "verts": 46544,
+          "faces": 93084,
+          "tempo_s": 43.08,
+          "vram": 4057,
+          "manifold_antes": true,
+          "manifold_depois": true
+        },
+        "pbr_8k": {
+          "faces": 250000,
+          "verts": 144800,
+          "tempo_s": 739.2,
+          "vram": 11913,
+          "size_mb": 20.38,
+          "pbr": true
+        },
+        "pbr_4k": {
+          "faces": 250000,
+          "verts": 144800,
+          "tempo_s": 739.2,
+          "vram": 11913,
+          "size_mb": 13.19,
+          "pbr": true
+        }
+      }
+    },
+    {
+      "id": "estrutura_castelo",
+      "category": "estrutura",
+      "modes": {
+        "trellis2": {
+          "glb": "models/estrutura_castelo__trellis2.glb",
+          "verts": 922918,
+          "faces": 1985201,
+          "tempo_s": 194.27,
+          "vram": 5121,
+          "manifold_antes": false,
+          "manifold_depois": false
+        },
+        "triposg": {
+          "glb": "models/estrutura_castelo__triposg.glb",
+          "verts": 1687086,
+          "faces": 3374128,
+          "tempo_s": 145.1,
+          "vram": 12039,
+          "manifold_antes": false,
+          "manifold_depois": false
+        },
+        "triposr": {
+          "glb": "models/estrutura_castelo__triposr.glb",
+          "verts": 67673,
+          "faces": 135134,
+          "tempo_s": 44.23,
+          "vram": 4058,
+          "manifold_antes": true,
+          "manifold_depois": true
+        }
+      }
+    },
+    {
+      "id": "estrutura_piramide",
+      "category": "estrutura geométrica simples",
+      "modes": {
+        "trellis2": {
+          "glb": "models/estrutura_piramide__trellis2.glb",
+          "verts": 905859,
+          "faces": 1895072,
+          "tempo_s": 170.71,
+          "vram": 5080,
+          "manifold_antes": false,
+          "manifold_depois": false
+        },
+        "triposg": {
+          "glb": "models/estrutura_piramide__triposg.glb",
+          "verts": 1108953,
+          "faces": 2217908,
+          "tempo_s": 94.67,
+          "vram": 10396,
+          "manifold_antes": false,
+          "manifold_depois": false
+        },
+        "triposr": {
+          "glb": "models/estrutura_piramide__triposr.glb",
+          "verts": 95600,
+          "faces": 191164,
+          "tempo_s": 42.75,
+          "vram": 4058,
+          "manifold_antes": true,
+          "manifold_depois": true
+        }
+      }
+    },
+    {
+      "id": "prop_caixote",
+      "category": "prop simples",
+      "modes": {
+        "trellis2": {
+          "glb": "models/prop_caixote__trellis2.glb",
+          "verts": 969024,
+          "faces": 1981005,
+          "tempo_s": 210.31,
+          "vram": 5081,
+          "manifold_antes": false,
+          "manifold_depois": false
+        },
+        "triposg": {
+          "glb": "models/prop_caixote__triposg.glb",
+          "verts": 2112753,
+          "faces": 4225492,
+          "tempo_s": 124.52,
+          "vram": 10215,
+          "manifold_antes": false,
+          "manifold_depois": false
+        },
+        "triposr": {
+          "glb": "models/prop_caixote__triposr.glb",
+          "verts": 96241,
+          "faces": 192454,
+          "tempo_s": 42.76,
+          "vram": 4060,
+          "manifold_antes": true,
+          "manifold_depois": true
+        },
+        "pbr_8k": {
+          "faces": 250000,
+          "verts": 156343,
+          "tempo_s": 232.4,
+          "vram": 12002,
+          "size_mb": 24.7,
+          "pbr": true
+        },
+        "pbr_4k": {
+          "faces": 250000,
+          "verts": 156343,
+          "tempo_s": 232.4,
+          "vram": 12002,
+          "size_mb": 15.51,
+          "pbr": true
+        }
+      }
+    },
+    {
+      "id": "robo_caranguejo",
+      "category": "hard surface",
+      "modes": {
+        "trellis2": {
+          "glb": "models/robo_caranguejo__trellis2.glb",
+          "verts": 903245,
+          "faces": 1959706,
+          "tempo_s": 173.13,
+          "vram": 5081,
+          "manifold_antes": false,
+          "manifold_depois": false
+        },
+        "triposg": {
+          "glb": "models/robo_caranguejo__triposg.glb",
+          "verts": 1283068,
+          "faces": 2566084,
+          "tempo_s": 99.42,
+          "vram": 11455,
+          "manifold_antes": true,
+          "manifold_depois": true
+        },
+        "triposr": {
+          "glb": "models/robo_caranguejo__triposr.glb",
+          "verts": 106893,
+          "faces": 213734,
+          "tempo_s": 75.11,
+          "vram": 5818,
+          "manifold_antes": false,
+          "manifold_depois": false
+        }
+      }
+    },
+    {
+      "id": "local_caneca",
+      "category": "peça funcional (uso real do dono)",
+      "modes": {
+        "trellis2": {
+          "glb": "models/local_caneca__trellis2.glb",
+          "verts": 873590,
+          "faces": 1892378,
+          "tempo_s": 151.6,
+          "vram": 5451,
+          "manifold_antes": false,
+          "manifold_depois": false
+        },
+        "triposr": {
+          "glb": "models/local_caneca__triposr.glb",
+          "verts": 71416,
+          "faces": 142832,
+          "tempo_s": 80.44,
+          "vram": 5887,
+          "manifold_antes": true,
+          "manifold_depois": true
+        }
+      }
+    },
+    {
+      "id": "local_engrenagem",
+      "category": "peça funcional mecânica",
+      "modes": {
+        "trellis2": {
+          "glb": "models/local_engrenagem__trellis2.glb",
+          "verts": 645341,
+          "faces": 1292748,
+          "tempo_s": 147.21,
+          "vram": 5207,
+          "manifold_antes": false,
+          "manifold_depois": false
+        },
+        "triposr": {
+          "glb": "models/local_engrenagem__triposr.glb",
+          "verts": 44650,
+          "faces": 89296,
+          "tempo_s": 78.03,
+          "vram": 5905,
+          "manifold_antes": true,
+          "manifold_depois": true
+        }
+      }
+    },
+    {
+      "id": "local_gancho",
+      "category": "peça funcional (impressão prática)",
+      "modes": {
+        "trellis2": {
+          "glb": "models/local_gancho__trellis2.glb",
+          "verts": 842559,
+          "faces": 1957432,
+          "tempo_s": 151.02,
+          "vram": 5208,
+          "manifold_antes": false,
+          "manifold_depois": false
+        },
+        "trellis": {
+          "glb": "models/local_gancho__trellis.glb",
+          "verts": 68392,
+          "faces": 136784,
+          "tempo_s": 53.83,
+          "vram": 11202,
+          "manifold_antes": false,
+          "manifold_depois": false
+        },
+        "triposr": {
+          "glb": "models/local_gancho__triposr.glb",
+          "verts": 51196,
+          "faces": 102392,
+          "tempo_s": 74.68,
+          "vram": 10642,
+          "manifold_antes": false,
+          "manifold_depois": false
+        }
+      }
+    },
+    {
+      "id": "anubis_a",
+      "category": "anubis (avulso do dono)",
+      "modes": {
+        "hunyuan_21_posproc": {
+          "glb": "models/anubis_a__hunyuan_21_posproc.glb",
+          "verts": 124994,
+          "faces": 250000,
+          "tempo_s": 469.83,
+          "vram": 8211,
+          "manifold_antes": false,
+          "manifold_depois": true
+        },
+        "hunyuan_21": {
+          "glb": "models/anubis_a__hunyuan_21.glb",
+          "verts": 183675,
+          "faces": 367370,
+          "tempo_s": 423.73,
+          "vram": null,
+          "manifold_antes": false,
+          "manifold_depois": false
+        },
+        "trellis2": {
+          "glb": "models/anubis_a__trellis2.glb",
+          "verts": 299328,
+          "faces": 604404,
+          "tempo_s": 142.0,
+          "vram": null,
+          "manifold_antes": null,
+          "manifold_depois": null
+        },
+        "triposg": {
+          "glb": "models/anubis_a__triposg.glb",
+          "verts": 268396,
+          "faces": 536792,
+          "tempo_s": 65.6,
+          "vram": null,
+          "manifold_antes": null,
+          "manifold_depois": null
+        },
+        "triposf256": {
+          "glb": "models/anubis_a__triposf256.glb",
+          "verts": 78282,
+          "faces": 156536,
+          "tempo_s": 24.51,
+          "vram": 5601,
+          "manifold_antes": true,
+          "manifold_depois": true
+        },
+        "triposf512": {
+          "glb": "models/anubis_a__triposf512.glb",
+          "verts": 308054,
+          "faces": 615998,
+          "tempo_s": 29.51,
+          "vram": 7509,
+          "manifold_antes": false,
+          "manifold_depois": false
+        },
+        "posproc": {
+          "glb": "models/anubis_a__posproc.glb",
+          "verts": 100000,
+          "faces": 200000,
+          "tempo_s": 74.85,
+          "vram": 0,
+          "manifold_antes": false,
+          "manifold_depois": true
+        },
+        "posproc_oco": {
+          "glb": "models/anubis_a__posproc_oco.glb",
+          "verts": 117233,
+          "faces": 234466,
+          "tempo_s": 4.07,
+          "vram": 0,
+          "manifold_antes": false,
+          "manifold_depois": true
+        },
+        "posproc_corte": {
+          "glb": "models/anubis_a__posproc_corte.glb",
+          "verts": 92304,
+          "faces": 184640,
+          "tempo_s": 4.07,
+          "vram": 0,
+          "manifold_antes": false,
+          "manifold_depois": true
+        }
+      }
+    },
+    {
+      "id": "anubis_b",
+      "category": "anubis (avulso do dono)",
+      "modes": {
+        "trellis2": {
+          "glb": "models/anubis_b__trellis2.glb",
+          "verts": 304568,
+          "faces": 684682,
+          "tempo_s": 134.0,
+          "vram": null,
+          "manifold_antes": null,
+          "manifold_depois": null
+        },
+        "triposg": {
+          "glb": "models/anubis_b__triposg.glb",
+          "verts": 274424,
+          "faces": 548852,
+          "tempo_s": 59.4,
+          "vram": null,
+          "manifold_antes": null,
+          "manifold_depois": null
+        },
+        "triposf256": {
+          "glb": "models/anubis_b__triposf256.glb",
+          "verts": 79798,
+          "faces": 159532,
+          "tempo_s": 23.51,
+          "vram": 5703,
+          "manifold_antes": true,
+          "manifold_depois": true
+        },
+        "triposf512": {
+          "glb": "models/anubis_b__triposf512.glb",
+          "verts": 315441,
+          "faces": 630756,
+          "tempo_s": 28.51,
+          "vram": 7198,
+          "manifold_antes": false,
+          "manifold_depois": false
+        }
+      }
+    },
+    {
+      "id": "carro_front",
+      "category": "carro fox (avulso do dono, 2026-11-18)",
+      "modes": {
+        "trellis2": {
+          "glb": "models/carro_front__trellis2.glb",
+          "verts": 266241,
+          "faces": 600000,
+          "tempo_s": 42.37,
+          "vram": null,
+          "manifold_antes": null,
+          "manifold_depois": null
+        },
+        "triposg": {
+          "glb": "models/carro_front__triposg.glb",
+          "verts": 299566,
+          "faces": 599993,
+          "tempo_s": 79.62,
+          "vram": null,
+          "manifold_antes": null,
+          "manifold_depois": null
+        },
+        "triposf512": {
+          "glb": "models/carro_front__triposf512.glb",
+          "verts": 300211,
+          "faces": 599999,
+          "tempo_s": 74.52,
+          "vram": 9035,
+          "manifold_antes": null,
+          "manifold_depois": null
+        }
+      }
+    },
+    {
+      "id": "carro_back",
+      "category": "carro fox (avulso do dono, 2026-11-18)",
+      "modes": {
+        "trellis2": {
+          "glb": "models/carro_back__trellis2.glb",
+          "verts": 258056,
+          "faces": 600000,
+          "tempo_s": 44.21,
+          "vram": null,
+          "manifold_antes": null,
+          "manifold_depois": null
+        },
+        "triposg": {
+          "glb": "models/carro_back__triposg.glb",
+          "verts": 299640,
+          "faces": 599992,
+          "tempo_s": 81.85,
+          "vram": null,
+          "manifold_antes": null,
+          "manifold_depois": null
+        },
+        "triposf512": {
+          "glb": "models/carro_back__triposf512.glb",
+          "verts": 300385,
+          "faces": 599999,
+          "tempo_s": 65.52,
+          "vram": 8727,
+          "manifold_antes": null,
+          "manifold_depois": null
+        }
+      }
+    },
+    {
+      "id": "carro_all",
+      "category": "carro fox (avulso do dono, 2026-11-18)",
+      "modes": {
+        "trellis2": {
+          "glb": "models/carro_all__trellis2.glb",
+          "verts": 276117,
+          "faces": 600000,
+          "tempo_s": 29.72,
+          "vram": null,
+          "manifold_antes": null,
+          "manifold_depois": null
+        },
+        "triposg": {
+          "glb": "models/carro_all__triposg.glb",
+          "verts": 300060,
+          "faces": 600000,
+          "tempo_s": 68.16,
+          "vram": null,
+          "manifold_antes": null,
+          "manifold_depois": null
+        },
+        "triposf512": {
+          "glb": "models/carro_all__triposf512.glb",
+          "verts": 300219,
+          "faces": 599999,
+          "tempo_s": 38.01,
+          "vram": 6103,
+          "manifold_antes": null,
+          "manifold_depois": null
+        }
+      }
+    },
+    {
+      "id": "carro_nowin",
+      "category": "carro fox definitivo (Simetria Bilateral + Blueprint 3868x1780x1552mm vs Original, 2026-11-18)",
+      "modes": {
+        "hunyuan_21": {
+          "glb": "models/carro_nowin__hunyuan_21.glb",
+          "verts": 299908,
+          "faces": 600000,
+          "tempo_s": 481.11,
+          "vram": null,
+          "manifold_antes": false,
+          "manifold_depois": false
+        },
+        "hi3dgen": {
+          "glb": "models/carro_nowin__hi3dgen.glb",
+          "verts": 296548,
+          "faces": 593226,
+          "tempo_s": 65.78,
+          "vram": 7803,
+          "manifold_antes": false,
+          "manifold_depois": false
+        },
+        "simetrico_interna": {
+          "glb": "models/carro_nowin__simetrico_interna.glb",
+          "verts": 139443,
+          "faces": 279526,
+          "tempo_s": 56.52,
+          "vram": 10227,
+          "manifold_antes": false,
+          "manifold_depois": true
+        },
+        "simetrico_4vistas": {
+          "glb": "models/carro_nowin__simetrico_4vistas.glb",
+          "verts": 139755,
+          "faces": 279746,
+          "tempo_s": 44.51,
+          "vram": 6569,
+          "manifold_antes": false,
+          "manifold_depois": true
+        },
+        "triposf512": {
+          "glb": "models/carro_nowin__triposf512.glb",
+          "verts": 139650,
+          "faces": 280000,
+          "tempo_s": 56.52,
+          "vram": 10227,
+          "manifold_antes": false,
+          "manifold_depois": true
+        },
+        "triposg": {
+          "glb": "models/carro_nowin__triposg.glb",
+          "verts": 124198,
+          "faces": 250000,
+          "tempo_s": 96.94,
+          "vram": 10317,
+          "manifold_antes": false,
+          "manifold_depois": true
+        },
+        "hunyuan_mv_sf512": {
+          "glb": "models/carro_nowin__hunyuan_mv_sf512.glb",
+          "verts": 139886,
+          "faces": 280000,
+          "tempo_s": 44.51,
+          "vram": 6569,
+          "manifold_antes": false,
+          "manifold_depois": true
+        },
+        "hunyuan_mv": {
+          "glb": "models/carro_nowin__hunyuan_mv.glb",
+          "verts": 124852,
+          "faces": 250000,
+          "tempo_s": 328.04,
+          "vram": 3369,
+          "manifold_antes": false,
+          "manifold_depois": true
+        },
+        "trellis2_fosco": {
+          "glb": "models/carro_nowin__trellis2_fosco.glb",
+          "verts": 922933,
+          "faces": 549999,
+          "tempo_s": 239.49,
+          "vram": 4177,
+          "manifold_antes": false,
+          "manifold_depois": false
+        }
+      }
+    },
+    {
+      "id": "carro_csg",
+      "category": "carro fox kit de montagem CSG (C7-A, 2026-11-18): casca + janelas booleanas 2D→3D + banheira + roda mestre 4x",
+      "modes": {
+        "kit": {
+          "glb": "models/carro_csg__kit.glb",
+          "verts": 189167,
+          "faces": 379992,
+          "tempo_s": 58.44,
+          "vram": 11688,
+          "manifold_antes": false,
+          "manifold_depois": false
+        },
+        "casca": {
+          "glb": "models/carro_csg__casca.glb",
+          "verts": 79695,
+          "faces": 159992,
+          "tempo_s": null,
+          "vram": null,
+          "manifold_antes": false,
+          "manifold_depois": false
+        },
+        "interna": {
+          "glb": "models/carro_csg__interna.glb",
+          "verts": 109472,
+          "faces": 220000,
+          "tempo_s": null,
+          "vram": null,
+          "manifold_antes": false,
+          "manifold_depois": true
+        },
+        "kit_corte": {
+          "glb": "models/carro_csg__kit_corte.glb",
+          "verts": 163878,
+          "faces": 328936,
+          "tempo_s": null,
+          "vram": null,
+          "manifold_antes": false,
+          "manifold_depois": true
+        }
+      }
+    },
+    {
+      "id": "carro_foxh",
+      "category": "carro fox fullrun 8K/4K (Hunyuan3D-2mv 4 vistas + limpeza + xatlas UV + bake 2048 + Real-ESRGAN 4x -> 8192/4096, 2026-11-19)",
+      "modes": {
+        "mv_a_8k": {
+          "glb": "models/carro_foxh__mv_a_8k.glb",
+          "verts": 162982,
+          "faces": 279836,
+          "tempo_s": 324.1,
+          "vram": 4226,
+          "manifold_antes": false,
+          "manifold_depois": true,
+          "tex_px": 8192,
+          "size_mb": 39.55
+        },
+        "mv_b_8k": {
+          "glb": "models/carro_foxh__mv_b_8k.glb",
+          "verts": 168786,
+          "faces": 279624,
+          "tempo_s": 315.8,
+          "vram": 4189,
+          "manifold_antes": false,
+          "manifold_depois": true,
+          "tex_px": 8192,
+          "size_mb": 41.45
+        },
+        "mv_a_4k": {
+          "glb": "models/carro_foxh__mv_a_4k.glb",
+          "verts": 162982,
+          "faces": 279836,
+          "tempo_s": 324.1,
+          "vram": 4226,
+          "manifold_antes": false,
+          "manifold_depois": true,
+          "tex_px": 4096,
+          "size_mb": 17.67
+        },
+        "mv_b_4k": {
+          "glb": "models/carro_foxh__mv_b_4k.glb",
+          "verts": 168786,
+          "faces": 279624,
+          "tempo_s": 315.8,
+          "vram": 4189,
+          "manifold_antes": false,
+          "manifold_depois": true,
+          "tex_px": 4096,
+          "size_mb": 18.48
+        }
+      }
+    }
+  ]
+}

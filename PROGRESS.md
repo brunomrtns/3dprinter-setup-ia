@@ -114,6 +114,14 @@
 - **Fotos do kit = as MESMAS do C6** (`Downloads/fox/no-windows/` = `~/printer3d-work/carro/fotos-c7/` + `c7-prep/`): 5 fotos de 2400x1792 px (frente, frente-e-lado-diagonal, lado, traseira, de-fora-pegando-interna). Prep `*_tinted.png` reutilizado. C7-E (fotogrametria densa VGGT) retirado da fila (só reabrir se B/C falharem e houver sessão de 20-40 fotos completas).
 - **Publicação**: caso `carro_csg` (modos `kit`, `casca`, `interna`, `kit_corte`) mantido no viewer para histórico/comparação. Evidência: `evidence/rtx3060-12gb/carro-csg/report.json`.
 
+### Registro Fase P — Fábrica 3D (`RUN fab3d_mega`, 2026-11-20) — `[~]` EM ANDAMENTO
+
+- **[x] MARCO 0 — Ratificação & higiene (2026-11-20):**
+  - Suíte `fabrica3d-docs` (7 arquivos) importada intocada em `docs/fase-p-fabrica3d/`; nota de uso estritamente privado/proibido comercial adicionada ao `README.md`.
+  - `docs/decisions/ADR-008-fabrica3d-plataforma-worker-local.md` criado (decisões D1–D6 ratificadas), Fase P registrada em `docs/roadmap.md`, `HANDOFF.md` atualizado.
+  - Inventário (`docs/fase-p-fabrica3d/inventario.md`) + backup completo verificado (`69` entradas, `530,37 MB` em `evidence/fase-p/backup_removed/removed_glbs_backup.zip` e `~/printer3d-work/backup_fab3d/`).
+  - Limpeza aplicada: `10` GLBs mantidos (`carro_foxh__mv_b_{8k,4k}`, `anubis_{a,b}__triposf512`, 3× `pipe_std` PBR `8k/4k`), `67` descartados removidos, `manifest.json` atualizado (`6` casos) e deployado (`HTTP 200` verificado em `/modelos3d/`, `/gpcg/api/health`, `/3dpanel/api/health`, `/`).
+
 ### Registro Padronização Universal + QA Automático (`pipe_std`, 2026-11-20) — `[x]` CONCLUÍDO E VALIDADO EM 3 ASSETS DIVERSOS (3/3 PASS + PUBLICADOS)
 
 - **Contrato único & Defaults (`pipeline/defaults.json` + `pipeline/config_loader.py` + `pipeline/README.md`)**: todos os parâmetros aprovados do Fox (`texture_size=2048`, `gutter_px=24`, `cos_lo=0.80`, `cos_hi=0.92`, `w_max=0.80`, `sr_factor=4`, `seed=42`, gates QA) viraram defaults globais. `cars/fox.json` convertido para o novo schema único; pré-voo UV genérico (`uv_preflight`) com relatório de ilhas/área mínima/overlap/warnings.

@@ -107,3 +107,22 @@ Critérios de aceite:
 - [ ] Pedido natural → sequência de ops correta em N casos de teste
 - [ ] Entrega automática no PrintFlow3D com sidecar de procedência preservado
 - [ ] Falhas de VRAM/validação tratadas sem corromper estado (fila + aviso)
+
+
+---
+
+## Fase P — Fábrica 3D (Produto Integrado + Worker Local) `[~] EM ANDAMENTO (aberta 2026-11-20)`
+
+> **ADR:** `docs/decisions/ADR-008-fabrica3d-plataforma-worker-local.md` · **Suíte completa:** `docs/fase-p-fabrica3d/`
+> **Relação com o roadmap canônico:** absorve **C4 ("Fila de jobs entre máquinas")** e concretiza partes da **Fase 4 ("Operador IA + entrega automática")** com camada de produto web (`factory/`) integrada ao ecossistema Bruno Integrations (`/fab3d/`). Não cancela Fase 2 (Forja) nem Fase 3 (Estúdio de Pose).
+> **Licença:** uso estritamente privado e pessoal; proibido uso comercial.
+
+| Marco | Escopo | Status |
+|---|---|---|
+| **M1 (`pipe_std`)** | Runner universal `pipeline/run_asset.py`, `defaults.json`, QA automático `qa.json`, validação em 3 assets diversos | `[x]` concluído (`a6633df`, 3/3 PASS) |
+| **M0** | Ratificação D1–D6, docs em `docs/fase-p-fabrica3d/`, ADR-008, inventário + backup completo + limpeza VPS | `[~]` em andamento |
+| **M2** | `factory/` (pnpm+Turbo): `api` Fastify+Prisma + containers dedicados (`fab3d-postgres/redis/minio`) + fila BullMQ + `web` login/home em `/fab3d/` | `[ ]` pendente |
+| **M3** | `factory/worker` (Python): poll/claim/lease → `run_asset.py` → upload MinIO → heartbeat + teste real GPU | `[ ]` pendente |
+| **M4** | Web UI completa (wizard 3 passos, fila, viewer Three.js com toggle pintado/sem pintura, review) + migração das peças aprovadas | `[ ]` pendente |
+| **M5/M6** | Assistente de imagem (detector + mock externo OFF) + modo edição agêntico (chat + provider mock/GLM + whitelist fechada) | `[ ]` pendente |
+| **M7** | Fechamento do ciclo, `PROGRESS.md`/`HANDOFF.md`, tag `v0.1.0-fab3d`, relatório final e backlog | `[ ]` pendente |

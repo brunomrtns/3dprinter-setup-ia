@@ -42,3 +42,6 @@ evidence/**/backup_prev/*.glb
 # Universal pipeline intermediate work meshes and staged GLBs
 evidence/**/work/
 evidence/**/staged_models/
+
+# Fase P local reversible backup zips (kept locally and in ~/printer3d-work/backup_fab3d/)
+evidence/fase-p/backup_removed/*.zip
