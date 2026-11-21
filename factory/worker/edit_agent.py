@@ -27,6 +27,7 @@ ALLOWED_TOOLS = {
     "eval_texture": str(REPO_ROOT / "pipeline" / "eval_texture.py"),
     "pack_glb": str(REPO_ROOT / "pipeline" / "pack_glb.py"),
     "edit_mesh_region": str(REPO_ROOT / "pipeline" / "edit_mesh_region.py"),
+    "revert_previous": "builtin:revert_previous",
     "blender": "blender",
 }
 
@@ -56,6 +57,16 @@ def build_edit_plan(user_prompt: str, qa_summary: dict[str, Any], provider: str 
     """Generates a structured edit plan via Mock (default) or Z.ai GLM when ZAI_API_KEY is configured."""
     prov = (provider or os.environ.get("AGENT_PROVIDER", "mock")).lower()
     api_key = os.environ.get("ZAI_API_KEY", "").strip()
+
+    # Fast deterministic path for revert/undo requests (zero wasted tokens, instant restore)
+    low = user_prompt.lower()
+    if any(k in low for k in ("voltar", "reverter", "desfazer", "anterior", "restaurar", "original", "undo", "revert")):
+        return {
+            "provider": "builtin:revert",
+            "tokens_used": 0,
+            "summary": "Restaurando o modelo original anterior da peça (8K e 4K intactos, antes da última edição).",
+            "steps": [{"tool": "revert_previous", "args": []}],
+        }
 
     if prov == "zai" and api_key:
         import httpx
@@ -142,6 +153,20 @@ def execute_edit_request(
 
         tool = step["tool"]
         raw_args = [str(a) for a in step.get("args", [])]
+
+        if tool == "revert_previous" and source_glbs:
+            for variant, src_path in source_glbs.items():
+                if src_path.is_file():
+                    produced_glbs[variant] = str(src_path)
+            exec_log.append({
+                "step": idx,
+                "tool": tool,
+                "blocked": False,
+                "exit_code": 0,
+                "duration_s": 0.01,
+                "restored": produced_glbs,
+            })
+            continue
 
         if tool == "edit_mesh_region" and source_glbs:
             # Strip any model-supplied --input/--output and apply cleanly to both 8k and 4k GLBs
