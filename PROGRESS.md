@@ -130,6 +130,10 @@
   - Worker outbound-only (`factory/worker/main.py`) conectado à VPS via `factory/worker/.env` (gitignored, `chmod 600`, zero portas abertas no PC).
   - Teste de expiração de lease (`evidence/fase-p/m3_lease_test.json`): job `cmwpohol0000bsm3uxrl2cgc4` claimed com lease `0.05 min` (3s) sem progresso → após 5s retornou automaticamente para `status=queued` (`pass: true`).
   - 1º job real GPU ponta-a-ponta (`evidence/fase-p/m3_real_job.json`): job `cmwpojlrn000fsm3u52jx47m2` (`Fox mv_b (Teste Worker M3)`, 4 fotos reais via MinIO → `pipeline/run_asset.py` `seed 42` + `gpu_guard.py` + VRAM 10s → Hunyuan 2048 SR + gutter 24px + `photo_blend` IoU≥0,90 + `patch_repair` + TRELLIS.2 PBR MR 2048 + `pack_glb` `8K=20,7 MB` / `4K=14,57 MB` + `eval_texture.py`) concluído em **`494,09s`** (~8,2 min), pico VRAM **`9.885 MiB`**, `0` OOM, artefatos enviados ao MinIO e job em **`status=review`** (jamais auto-publicado).
+- **[x] MARCO 4 — Interface completa + Migração das peças aprovadas + E2E J1 (2026-11-20):**
+  - Web UI React 19 + Vite + Three.js PBR em `https://brunointegrations.com/fab3d/`: Login (T3.1), Galeria/Home (T3.2), Wizard 3 passos sem knobs técnicos (T3.3), Detalhe + Viewer 3D PBR com toggle **Pintado / Clay** + aprovação/rejeição QA (T3.4), Chat de edição (T3.5) e Fila/Status do worker (T3.6).
+  - Migração sem reprocessamento (`evidence/fase-p/m4_migration.json`): `6` peças aprovadas (`10` GLBs: `VW Fox mv_b`, `Anubis A/B TripoSF 512`, `Humanoide Dragonborn`, `Criatura Dragão`, `Prop Caixote`) importadas para MinIO/Postgres; todos os downloads `8K`/`4K` verificados com `HTTP 200` e header binário `glTF`.
+  - E2E J1 (`evidence/fase-p/m4_e2e.json`): aprovação do job de teste M3 (`cmwpojlrn000fsm3u52jx47m2` → `published`, `7` peças na galeria), downloads `8K`/`4K` `200`, e `HTTP 200` confirmado em `/fab3d/`, `/api/fab3d/health`, `/modelos3d/`, `/gpcg/api/health`, `/3dpanel/api/health`, `/`.
 
 ### Registro Padronização Universal + QA Automático (`pipe_std`, 2026-11-20) — `[x]` CONCLUÍDO E VALIDADO EM 3 ASSETS DIVERSOS (3/3 PASS + PUBLICADOS)
 

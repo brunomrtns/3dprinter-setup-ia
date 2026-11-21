@@ -1,0 +1,119 @@
+{
+  "milestone": "M4_migration",
+  "timestamp_utc": "2026-11-21T00:49:47.604797+00:00",
+  "total_migrated": 6,
+  "assets": [
+    {
+      "name": "VW Fox mv_b (PBR Híbrido)",
+      "status": "migrated",
+      "asset_id": "cmwpowr2w000psm3u1208ekdq",
+      "files": {
+        "glb_4k": "cmwpo9mjr0000dv4gbhgcbzed/cmwpowr2w000psm3u1208ekdq/migrated/glb_4k.glb",
+        "glb_8k": "cmwpo9mjr0000dv4gbhgcbzed/cmwpowr2w000psm3u1208ekdq/migrated/glb_8k.glb"
+      },
+      "downloads": {
+        "8k": {
+          "status": 200,
+          "glb_magic_ok": true
+        },
+        "4k": {
+          "status": 200,
+          "glb_magic_ok": true
+        }
+      }
+    },
+    {
+      "name": "Anubis Vista A (TripoSF 512)",
+      "status": "migrated",
+      "asset_id": "cmwpoww1j000tsm3ur365d6k0",
+      "files": {
+        "glb_8k": "cmwpo9mjr0000dv4gbhgcbzed/cmwpoww1j000tsm3ur365d6k0/migrated/glb_8k.glb"
+      },
+      "downloads": {
+        "8k": {
+          "status": 200,
+          "glb_magic_ok": true
+        },
+        "4k": {
+          "status": 200,
+          "glb_magic_ok": true
+        }
+      }
+    },
+    {
+      "name": "Anubis Vista B (TripoSF 512)",
+      "status": "migrated",
+      "asset_id": "cmwpowzri000xsm3udugwb6h5",
+      "files": {
+        "glb_8k": "cmwpo9mjr0000dv4gbhgcbzed/cmwpowzri000xsm3udugwb6h5/migrated/glb_8k.glb"
+      },
+      "downloads": {
+        "8k": {
+          "status": 200,
+          "glb_magic_ok": true
+        },
+        "4k": {
+          "status": 200,
+          "glb_magic_ok": true
+        }
+      }
+    },
+    {
+      "name": "Humanoide Dragonborn (PBR pipe_std)",
+      "status": "migrated",
+      "asset_id": "cmwpoxb6v0011sm3u4jezdg63",
+      "files": {
+        "glb_4k": "cmwpo9mjr0000dv4gbhgcbzed/cmwpoxb6v0011sm3u4jezdg63/migrated/glb_4k.glb",
+        "glb_8k": "cmwpo9mjr0000dv4gbhgcbzed/cmwpoxb6v0011sm3u4jezdg63/migrated/glb_8k.glb"
+      },
+      "downloads": {
+        "8k": {
+          "status": 200,
+          "glb_magic_ok": true
+        },
+        "4k": {
+          "status": 200,
+          "glb_magic_ok": true
+        }
+      }
+    },
+    {
+      "name": "Criatura Dragão (PBR pipe_std)",
+      "status": "migrated",
+      "asset_id": "cmwpoxjhk0015sm3uq8tbm79r",
+      "files": {
+        "glb_4k": "cmwpo9mjr0000dv4gbhgcbzed/cmwpoxjhk0015sm3uq8tbm79r/migrated/glb_4k.glb",
+        "glb_8k": "cmwpo9mjr0000dv4gbhgcbzed/cmwpoxjhk0015sm3uq8tbm79r/migrated/glb_8k.glb"
+      },
+      "downloads": {
+        "8k": {
+          "status": 200,
+          "glb_magic_ok": true
+        },
+        "4k": {
+          "status": 200,
+          "glb_magic_ok": true
+        }
+      }
+    },
+    {
+      "name": "Prop Caixote (PBR pipe_std)",
+      "status": "migrated",
+      "asset_id": "cmwpoxs9w0019sm3u7jqu3buw",
+      "files": {
+        "glb_4k": "cmwpo9mjr0000dv4gbhgcbzed/cmwpoxs9w0019sm3u7jqu3buw/migrated/glb_4k.glb",
+        "glb_8k": "cmwpo9mjr0000dv4gbhgcbzed/cmwpoxs9w0019sm3u7jqu3buw/migrated/glb_8k.glb"
+      },
+      "downloads": {
+        "8k": {
+          "status": 200,
+          "glb_magic_ok": true
+        },
+        "4k": {
+          "status": 200,
+          "glb_magic_ok": true
+        }
+      }
+    }
+  ]
+}

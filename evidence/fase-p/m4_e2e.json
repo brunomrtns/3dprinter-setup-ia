@@ -1,0 +1,26 @@
+{
+  "milestone": "M4_e2e_j1",
+  "timestamp_utc": "2026-11-21T00:49:58.532677+00:00",
+  "approved_test_job_id": "cmwpojlrn000fsm3u52jx47m2",
+  "approved_test_asset_id": "cmwpojkdz000dsm3uqb4dpvem",
+  "downloads": {
+    "8k": {
+      "status": 200,
+      "glb_magic_ok": true
+    },
+    "4k": {
+      "status": 200,
+      "glb_magic_ok": true
+    }
+  },
+  "published_assets_in_gallery": 7,
+  "live_urls_http": {
+    "/fab3d/": 200,
+    "/api/fab3d/health": 200,
+    "/modelos3d/": 200,
+    "/gpcg/api/health": 200,
+    "/3dpanel/api/health": 200,
+    "/": 200
+  },
+  "overall_pass": true
+}
