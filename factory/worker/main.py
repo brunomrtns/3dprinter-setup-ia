@@ -228,12 +228,14 @@ class FactoryWorker:
                     engine = tok.split("=", 1)[1].lower()
             if base_mesh and Path(base_mesh).exists():
                 mesh_path = base_mesh
-            elif engine == "hi3dgen":
+            elif engine in ("hunyuan21", "hunyuan", "hi3dgen"):
                 self.report_progress(jid, "shape", 20)
-                gen_out = evid_dir / "shape_gen_hi3dgen"
+                hi_py = Path("/home/bruno/.venvs/hi3dgen/bin/python")
+                use_hi = engine == "hi3dgen" and hi_py.is_file()
+                gen_out = evid_dir / ("shape_gen_hi3dgen" if use_hi else "shape_gen_hunyuan21")
                 gen_out.mkdir(parents=True, exist_ok=True)
-                hi_obj = gen_out / "mesh.obj"
-                if not hi_obj.exists():
+                out_obj = gen_out / "mesh.obj"
+                if not out_obj.exists():
                     pre_png = gen_out / "entrada_preproc.png"
                     subprocess.run(
                         [
@@ -244,20 +246,34 @@ class FactoryWorker:
                         ],
                         check=True,
                     )
-                    src_for_hi = str(pre_png) if pre_png.exists() else str(img_paths[0])
-                    subprocess.run(
-                        [
-                            "/home/bruno/.venvs/hi3dgen/bin/python",
-                            str(REPO_ROOT / "tools" / "generator" / "hi3dgen_runner.py"),
-                            "--image", src_for_hi,
-                            "--output-dir", str(gen_out),
-                            "--seed", "42",
-                        ],
-                        check=True,
-                    )
-                if not hi_obj.exists():
-                    raise RuntimeError("Hi3DGen não produziu mesh.obj")
-                mesh_path = str(hi_obj)
+                    src_img = str(pre_png) if pre_png.exists() else str(img_paths[0])
+                    if use_hi:
+                        subprocess.run(
+                            [
+                                str(hi_py),
+                                str(REPO_ROOT / "tools" / "generator" / "hi3dgen_runner.py"),
+                                "--image", src_img,
+                                "--output-dir", str(gen_out),
+                                "--seed", "42",
+                            ],
+                            check=True,
+                        )
+                    else:
+                        subprocess.run(
+                            [
+                                HUNYUAN_PY,
+                                str(REPO_ROOT / "tools" / "generator" / "hunyuan_runner.py"),
+                                "--image", src_img,
+                                "--output-dir", str(gen_out),
+                                "--variant", "2.1",
+                                "--seed", "42",
+                            ],
+                            check=True,
+                        )
+                cands = [out_obj] if out_obj.exists() else (list(gen_out.rglob("*.obj")) + list(gen_out.rglob("*.glb")))
+                if not cands:
+                    raise RuntimeError("Gerador de malha não produziu mesh.obj/.glb")
+                mesh_path = str(cands[0])
             else:
                 self.report_progress(jid, "shape", 20)
                 gen_out = evid_dir / "shape_gen"
