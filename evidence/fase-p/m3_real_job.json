@@ -1,0 +1,24 @@
+{
+  "milestone": "M3_real_gpu_job",
+  "timestamp_utc": "2026-11-21T00:47:19Z",
+  "asset_id": "cmwpojkdz000dsm3uqb4dpvem",
+  "asset_name": "Fox mv_b (Teste Worker M3)",
+  "job_id": "cmwpojlrn000fsm3u52jx47m2",
+  "worker_id": "local-rtx3060-12gb",
+  "tier": "photos",
+  "inputs_count": 4,
+  "seed": 42,
+  "gpu_guard_active": true,
+  "peak_vram_mib": 9885,
+  "runtime_seconds": 494.09,
+  "stages": {
+    "paint_hunyuan_2048_sr_gutter24": {"peak_mib": 9885, "tempo_s": 190.5, "islands": 2100},
+    "photo_blend": {"front_iou": 0.9008, "left_iou": 0.9425, "back_iou": 0.9054, "right_iou": 0.9428},
+    "trellis2_pbr_mr_2048": {"peak_mib": 5909, "tempo_s": 99.96, "guard": true},
+    "pack_glb": {"peak_mib": 7556, "tempo_s": 51.1, "glb_8k_mb": 20.7, "glb_4k_mb": 14.57, "pbr": true},
+    "qa_eval": {"view_lap": 7115.89, "view_lap_gain": "4.71x"}
+  },
+  "final_job_status": "review",
+  "auto_published": false,
+  "lease_expiry_test_pass": true
+}

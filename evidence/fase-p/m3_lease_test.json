@@ -1,0 +1,11 @@
+{
+  "milestone": "M3_lease_expiry_test",
+  "timestamp_utc": "2026-11-21T00:37:20.307365+00:00",
+  "job_id": "cmwpohol0000bsm3uxrl2cgc4",
+  "lease_minutes": 0.05,
+  "lease_until": "2026-11-21T00:37:18.748Z",
+  "status_after_claim": "claimed",
+  "wait_seconds": 5.0,
+  "status_after_expiry": "queued",
+  "pass": true
+}

@@ -51,3 +51,7 @@ factory/.env
 factory/**/.env
 factory/**/node_modules/
 factory/**/dist/
+
+# Fase P local worker scratch & large job artifacts (summaries live in evidence/fase-p/m*.json)
+evidence/fase-p/worker_jobs/
+evidence/fase-p/m5_tmp/

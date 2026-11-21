@@ -126,6 +126,10 @@
   - 5 containers dedicados (`fab3d-postgres`, `fab3d-redis`, `fab3d-minio`, `fab3d-api`, `fab3d-web`) em `fab3d-net` + `trivestia-net`; rotas `/fab3d/` e `/api/fab3d/` injetadas em `trivestia-nginx` com reload sem downtime.
   - Smoke pós-deploy `HTTP 200` em `/fab3d/`, `/api/fab3d/health`, `/modelos3d/`, `/gpcg/api/health`, `/3dpanel/api/health`, `/`.
   - E2E M2 completo (`evidence/fase-p/m2_e2e.json`): `health 200 → login 200 → create asset 201 → upload MinIO 201 → enqueue job 202 (queued) → verify 200 → cleanup 200` (`overall_pass: true`).
+- **[x] MARCO 3 — Worker local GPU + 1º job real ponta-a-ponta + lease expirado (2026-11-20):**
+  - Worker outbound-only (`factory/worker/main.py`) conectado à VPS via `factory/worker/.env` (gitignored, `chmod 600`, zero portas abertas no PC).
+  - Teste de expiração de lease (`evidence/fase-p/m3_lease_test.json`): job `cmwpohol0000bsm3uxrl2cgc4` claimed com lease `0.05 min` (3s) sem progresso → após 5s retornou automaticamente para `status=queued` (`pass: true`).
+  - 1º job real GPU ponta-a-ponta (`evidence/fase-p/m3_real_job.json`): job `cmwpojlrn000fsm3u52jx47m2` (`Fox mv_b (Teste Worker M3)`, 4 fotos reais via MinIO → `pipeline/run_asset.py` `seed 42` + `gpu_guard.py` + VRAM 10s → Hunyuan 2048 SR + gutter 24px + `photo_blend` IoU≥0,90 + `patch_repair` + TRELLIS.2 PBR MR 2048 + `pack_glb` `8K=20,7 MB` / `4K=14,57 MB` + `eval_texture.py`) concluído em **`494,09s`** (~8,2 min), pico VRAM **`9.885 MiB`**, `0` OOM, artefatos enviados ao MinIO e job em **`status=review`** (jamais auto-publicado).
 
 ### Registro Padronização Universal + QA Automático (`pipe_std`, 2026-11-20) — `[x]` CONCLUÍDO E VALIDADO EM 3 ASSETS DIVERSOS (3/3 PASS + PUBLICADOS)
 
