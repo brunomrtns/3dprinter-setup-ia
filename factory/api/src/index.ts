@@ -13,6 +13,8 @@ const app = Fastify({ logger: true, bodyLimit: 100 * 1024 * 1024 });
 const JWT_SECRET = process.env.JWT_SECRET || 'dev-only-secret-change-in-env';
 const WORKER_TOKEN = process.env.WORKER_TOKEN || '';
 const LEASE_MIN = Number(process.env.JOB_LEASE_MINUTES || 30);
+const BI_IDENTITY_URL = (process.env.BI_IDENTITY_URL || 'http://bi-api:3300').replace(/\/$/, '');
+const ADMIN_EMAIL = (process.env.ADMIN_EMAIL || 'bruno@brunointegrations.com').toLowerCase();
 
 const ALLOWED_IMAGE_MIMES = new Set(['image/png', 'image/jpeg', 'image/webp']);
 const ALLOWED_MESH_EXT = new Set(['.glb', '.gltf', '.obj', '.stl']);
@@ -24,7 +26,69 @@ declare module '@fastify/jwt' {
   }
 }
 
+async function resolveBiIdentityUser(req: FastifyRequest, reply: FastifyReply) {
+  const cookieHeader = req.headers.cookie || '';
+  if (!cookieHeader.includes('bi_auth=') && !cookieHeader.includes('bi_refresh=')) {
+    return null;
+  }
+  try {
+    const resp = await fetch(`${BI_IDENTITY_URL}/api/auth/check`, {
+      method: 'GET',
+      headers: { cookie: cookieHeader },
+    });
+    if (!resp.ok) return null;
+
+    // Forward rotated bi_auth Set-Cookie headers to browser transparently
+    const setCookies = typeof (resp.headers as any).getSetCookie === 'function'
+      ? ((resp.headers as any).getSetCookie() as string[])
+      : [];
+    if (setCookies.length > 0) {
+      reply.header('set-cookie', setCookies);
+    }
+
+    const biUser = (await resp.json()) as {
+      id: string;
+      email: string;
+      name: string;
+      status?: string;
+      isSuperAdmin?: boolean;
+    };
+    if (!biUser?.email || (biUser.status && biUser.status !== 'ACTIVE')) {
+      return null;
+    }
+
+    const email = biUser.email.toLowerCase();
+    const role = biUser.isSuperAdmin || email === ADMIN_EMAIL ? 'admin' : 'user';
+    const localUser = await prisma.user.upsert({
+      where: { email },
+      update: { name: biUser.name || email, role },
+      create: {
+        email,
+        name: biUser.name || email,
+        passwordHash: 'sso-bi-identity',
+        role,
+      },
+    });
+    return {
+      sub: localUser.id,
+      email: localUser.email,
+      name: localUser.name,
+      role: localUser.role,
+    };
+  } catch (err) {
+    req.log.warn({ err }, 'BI Identity SSO check failed');
+    return null;
+  }
+}
+
 async function requireUser(req: FastifyRequest, reply: FastifyReply) {
+  // 1. Standard Bruno Integrations SSO (BI Identity cookies bi_auth / bi_refresh)
+  const ssoUser = await resolveBiIdentityUser(req, reply);
+  if (ssoUser) {
+    req.user = ssoUser;
+    return;
+  }
+  // 2. Fallback: Bearer JWT (for CLI/automated scripts)
   try {
     await req.jwtVerify();
   } catch {

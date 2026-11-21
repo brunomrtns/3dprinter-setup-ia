@@ -140,6 +140,10 @@
 - **[x] MARCO 7 — Fechamento & Tag `v0.1.0-fab3d` (2026-11-20):**
   - `PROGRESS.md` e `HANDOFF.md` consolidados com estado final, guia operacional (`.env` na VPS e PC, comando do worker, ativação Z.ai GLM em 1 linha) e backlog honesto (múltiplos workers, Fase 3 Pose, contas de convidados).
   - Tag git `v0.1.0-fab3d` criada e enviada para `origin`; zero segredos no repositório; aguardando veredito visual do dono em `https://brunointegrations.com/fab3d/`.
+- **[x] Pós-fechamento — Integração BI Identity SSO (`/id/login?redirect=/fab3d/`, 2026-11-20):**
+  - Substituída a tela de login local pelo SSO oficial do `brunointegrations.com` (**BI Identity** em `/id/login`, com login Google + e-mail + cookies HttpOnly `bi_auth`/`bi_refresh`).
+  - `fab3d-api` valida cookies diretamente em `http://bi-api:3300/api/auth/check` via `trivestia-net` (repassando `Set-Cookie` de rotação transparente e fazendo find-or-create local com promoção `admin` para `isSuperAdmin`), mantendo fallback Bearer JWT para CLI/scripts.
+  - `fab3d-web` envia `credentials: 'include'` (incluindo `GLTFLoader.setWithCredentials(true)`), tenta refresh silencioso via `/id/api/auth/check` em `401`, redireciona automaticamente para `/id/login?redirect=/fab3d/` quando deslogado e faz logout via `/id/api/auth/logout`. Deployado e verificado `HTTP 200` em todas as rotas.
 
 ### Registro Padronização Universal + QA Automático (`pipe_std`, 2026-11-20) — `[x]` CONCLUÍDO E VALIDADO EM 3 ASSETS DIVERSOS (3/3 PASS + PUBLICADOS)
 

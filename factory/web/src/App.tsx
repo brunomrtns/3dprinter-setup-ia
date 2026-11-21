@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { apiFetch, downloadUrl, getToken, setToken } from './api';
+import { apiFetch, downloadUrl, getSsoLoginUrl, redirectToSsoLogin, ssoLogout } from './api';
 import { Viewer3D } from './Viewer3D';
 
 const STAGE_PT: Record<string, string> = {
@@ -36,9 +36,7 @@ type Page = 'home' | 'wizard' | 'queue' | 'detail';
 
 export const App: React.FC = () => {
   const [user, setUser] = useState<any>(null);
-  const [email, setEmail] = useState('bruno@brunointegrations.com');
-  const [password, setPassword] = useState('');
-  const [authErr, setAuthErr] = useState('');
+  const [authChecking, setAuthChecking] = useState(true);
 
   const [page, setPage] = useState<Page>('home');
   const [assets, setAssets] = useState<any[]>([]);
@@ -77,13 +75,16 @@ export const App: React.FC = () => {
   }
 
   useEffect(() => {
-    if (!getToken()) return;
     apiFetch<{ user: any }>('/auth/me')
       .then((r) => {
         setUser(r.user);
+        setAuthChecking(false);
         refreshAll();
       })
-      .catch(() => setToken(null));
+      .catch(() => {
+        setAuthChecking(false);
+        redirectToSsoLogin();
+      });
   }, []);
 
   useEffect(() => {
@@ -94,22 +95,6 @@ export const App: React.FC = () => {
     }, 8000);
     return () => clearInterval(t);
   }, [user, page, selectedAssetId]);
-
-  async function onLogin(e: React.FormEvent) {
-    e.preventDefault();
-    setAuthErr('');
-    try {
-      const r = await apiFetch<{ token: string; user: any }>('/auth/login', {
-        method: 'POST',
-        body: JSON.stringify({ email, password }),
-      });
-      setToken(r.token);
-      setUser(r.user);
-      await refreshAll();
-    } catch (err: any) {
-      setAuthErr(err.message);
-    }
-  }
 
   function onSelectFiles(fileList: FileList | null) {
     if (!fileList) return;
@@ -186,15 +171,18 @@ export const App: React.FC = () => {
   if (!user) {
     return (
       <div style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', padding: 20 }}>
-        <form onSubmit={onLogin} className="card" style={{ width: '100%', maxWidth: 380, display: 'grid', gap: 12 }}>
+        <div className="card" style={{ width: '100%', maxWidth: 400, display: 'grid', gap: 14, textAlign: 'center' }}>
           <h2 style={{ margin: 0 }}>Fábrica 3D</h2>
-          <p style={{ margin: 0, color: '#93a1b5', fontSize: 13 }}>Bruno Integrations · Acesso privado</p>
-          <input className="input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="E-mail" required />
-          <input className="input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Senha" required />
-          {authErr && <div style={{ color: '#ef4444', fontSize: 13 }}>{authErr}</div>}
-          <button className="btn primary" type="submit">Entrar</button>
-          <div style={{ fontSize: 11, color: '#93a1b5' }}>Uso estritamente privado e pessoal. Proibido uso comercial.</div>
-        </form>
+          <p style={{ margin: 0, color: '#93a1b5', fontSize: 13 }}>
+            {authChecking
+              ? 'Verificando sessão Bruno Integrations…'
+              : 'Redirecionando para o login oficial Bruno Integrations…'}
+          </p>
+          <a className="btn primary" href={getSsoLoginUrl('/fab3d/')} style={{ textDecoration: 'none', textAlign: 'center' }}>
+            Entrar com Bruno Integrations
+          </a>
+          <div style={{ fontSize: 11, color: '#93a1b5' }}>Login unificado (Google / e-mail) · Uso estritamente privado.</div>
+        </div>
       </div>
     );
   }
@@ -217,7 +205,7 @@ export const App: React.FC = () => {
           <button className={`btn ${page === 'home' ? 'primary' : ''}`} onClick={() => setPage('home')}>Minhas Peças</button>
           <button className={`btn ${page === 'wizard' ? 'primary' : ''}`} onClick={() => { setWStep(1); setPage('wizard'); }}>+ Nova Peça</button>
           <button className={`btn ${page === 'queue' ? 'primary' : ''}`} onClick={() => setPage('queue')}>Fila ({jobs.filter((j) => ['queued', 'claimed', 'running'].includes(j.status)).length})</button>
-          <button className="btn" onClick={() => { setToken(null); setUser(null); }}>Sair</button>
+          <button className="btn" onClick={() => ssoLogout()}>Sair</button>
         </nav>
       </header>
 

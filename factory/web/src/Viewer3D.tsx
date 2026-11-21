@@ -58,6 +58,7 @@ export const Viewer3D: React.FC<Props> = ({ glbUrl }) => {
     scene.add(dir);
 
     const loader = new GLTFLoader();
+    loader.setWithCredentials(true);
     let cancelled = false;
     loader.load(
       glbUrl,
