@@ -174,10 +174,15 @@ class FactoryWorker:
                 r.raise_for_status()
 
         tok_info = f" | Tokens: {res.get('tokens_used', 0)}" if res.get("tokens_used") else ""
+        status_note = (
+            "Nova versão 8K/4K enviada para sua revisão no Studio 3D!"
+            if produced
+            else "Nenhuma alteração foi aplicada ao modelo 3D (ação não suportada ou bloqueada)."
+        )
         reply_text = (
             f"{res['summary']}\n"
-            f"Modelo: {res.get('provider')} | Passos executados: {res['steps_executed']} | Bloqueados: {res['blocked_count']}{tok_info}.\n"
-            f"{'Nova versão 8K/4K enviada para revisão no Studio 3D!' if produced else 'Aguardando sua revisão humana.'}"
+            f"Modelo: {res.get('provider')} | Bloqueados: {res['blocked_count']}{tok_info}.\n"
+            f"{status_note}"
         )
         httpx.post(
             f"{self.vps_url}/api/fab3d/worker/jobs/{jid}/chat_reply",
@@ -186,7 +191,8 @@ class FactoryWorker:
             timeout=30,
         )
         if not produced:
-            self.report_progress(jid, "qa", 100, status="review", metrics=res)
+            # Do NOT leave asset stuck in 'review' if no GLB was modified
+            self.report_progress(jid, "qa", 100, status="rejected", metrics=res)
 
     def process_new_job(self, job: dict[str, Any]) -> None:
         jid = job["id"]

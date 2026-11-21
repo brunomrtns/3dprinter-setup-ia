@@ -549,11 +549,26 @@ async function start() {
     return { messages };
   });
 
-  app.post('/api/fab3d/assets/:id/chat', { preHandler: [requireUser] }, async (req, reply) => {
+  const chatRateMap = new Map<string, number[]>();
+  const CHAT_MAX_PER_HOUR = Number(process.env.CHAT_MAX_PER_HOUR || 10);
+  const CHAT_MAX_PROMPT_LEN = 400;
+
+  app.post('/api/fab3d/assets/:id/chat', { preHandler: [requireAdmin] }, async (req, reply) => {
     const { id } = req.params as { id: string };
     const body = (req.body || {}) as { content?: string };
-    const content = (body.content || '').trim();
+    const content = (body.content || '').replace(/[\x00-\x1f\x7f]/g, ' ').trim();
     if (!content) return reply.code(400).send({ error: 'Mensagem vazia' });
+    if (content.length > CHAT_MAX_PROMPT_LEN) {
+      return reply.code(400).send({ error: `Pedido muito longo (máx. ${CHAT_MAX_PROMPT_LEN} caracteres)` });
+    }
+
+    const now = Date.now();
+    const prev = (chatRateMap.get(req.user.sub) || []).filter((t) => now - t < 3600_000);
+    if (prev.length >= CHAT_MAX_PER_HOUR) {
+      return reply.code(429).send({ error: `Limite de ${CHAT_MAX_PER_HOUR} pedidos de IA por hora atingido` });
+    }
+    prev.push(now);
+    chatRateMap.set(req.user.sub, prev);
 
     const asset = await prisma.asset.findUnique({ where: { id } });
     if (!asset) return reply.code(404).send({ error: 'Peça não encontrada' });
