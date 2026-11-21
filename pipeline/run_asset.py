@@ -265,10 +265,12 @@ def compute_qa_gates(cfg: dict, eval_rep: dict, pack_rep: dict, mr_exists: bool)
     pk = pack_rep["variants"][vid]
 
     lap_val = fin["views_laplacian_mean"]
-    patch_pct = fin["patch_texels_pct"]
+    patch_pct = fin.get("all_defect_texels_pct", fin["patch_texels_pct"])
+    color_outlier_pct = fin.get("color_outliers_pct", 0.0)
     sat_pct = fin["texture_sat_pct"]
     glb_8k_mb = pk["glb_8k"]["size_mb"]
     glb_4k_mb = pk["glb_4k"]["size_mb"]
+    co_max = float(qa_cfg.get("color_outlier_max_pct", 0.02))
 
     gates = {
         "lap_var": {
@@ -278,8 +280,13 @@ def compute_qa_gates(cfg: dict, eval_rep: dict, pack_rep: dict, mr_exists: bool)
         },
         "bright_patches": {
             "value": patch_pct,
-            "threshold": f"<= {qa_cfg['patch_max_pct']}%",
+            "threshold": f"<= {qa_cfg['patch_max_pct']}% (all classes)",
             "pass": patch_pct <= float(qa_cfg["patch_max_pct"]),
+        },
+        "color_outlier_pct": {
+            "value": color_outlier_pct,
+            "threshold": f"<= {co_max}%",
+            "pass": color_outlier_pct <= co_max,
         },
         "saturation_band": {
             "value": sat_pct,
@@ -318,6 +325,10 @@ def compute_qa_gates(cfg: dict, eval_rep: dict, pack_rep: dict, mr_exists: bool)
         "tier": cfg["tier"],
         "overall_pass": overall,
         "gates": gates,
+        "color_outliers_before": ev.get("color_outliers_before", {}),
+        "color_outliers_after": ev.get("color_outliers_after", {}),
+        "vlm_triage": ev.get("vlm_triage", {}),
+        "vlm_deferred": ev.get("vlm_deferred", []),
         "crops": ev.get("crops", {}),
     }
 

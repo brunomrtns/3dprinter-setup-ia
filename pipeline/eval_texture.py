@@ -23,7 +23,12 @@ from PIL import Image, ImageDraw
 from scipy.ndimage import binary_fill_holes
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from patch_repair import detect_bright_patches_in_dark
+from patch_repair import (
+    detect_bright_patches_in_dark,
+    detect_color_outliers,
+    detect_dark_specks_in_bright,
+    rasterize_uv_mask,
+)
 
 BLENDER_RENDER_6VIEWS = r'''
 import bpy, math, os, sys
@@ -220,10 +225,19 @@ def evaluate_texture_set(
     views: list[str],
     pr_cfg: dict,
     gt_views: dict[str, str] | None = None,
+    uv_mask: np.ndarray | None = None,
 ) -> dict:
     tex_rgb = np.asarray(Image.open(tex_path).convert("RGB"), dtype=np.uint8)
-    pmask, patches = detect_bright_patches_in_dark(tex_rgb, pr_cfg)
-    tex_patch_pct = round(float((pmask > 0).sum()) / float(tex_rgb.shape[0] * tex_rgb.shape[1]) * 100.0, 4)
+    total_px = float(tex_rgb.shape[0] * tex_rgb.shape[1])
+    pmask, patches = detect_bright_patches_in_dark(tex_rgb, pr_cfg, allow_vlm=False)
+    tex_patch_pct = round(float((pmask > 0).sum()) / total_px * 100.0, 4)
+
+    dmask, dspecks, _ = detect_dark_specks_in_bright(tex_rgb, pr_cfg)
+    dark_specks_pct = round(float((dmask > 0).sum()) / total_px * 100.0, 4)
+
+    cmask, co_info = detect_color_outliers(tex_rgb, pr_cfg, uv_mask=uv_mask, allow_vlm=False)
+    all_mask = (pmask > 0) | (dmask > 0) | (cmask > 0)
+    all_defect_pct = round(float(all_mask.sum()) / total_px * 100.0, 4)
 
     view_stats = {}
     view_laps = []
@@ -251,6 +265,12 @@ def evaluate_texture_set(
         "texture_sat_pct": sat_mean_pct(tex_rgb),
         "patch_count": len(patches),
         "patch_texels_pct": tex_patch_pct,
+        "dark_specks_count": len(dspecks),
+        "dark_specks_pct": dark_specks_pct,
+        "color_outliers_count": co_info["count"],
+        "color_outliers_pct": co_info["texels_pct"],
+        "all_defect_texels_pct": all_defect_pct,
+        "vlm_deferred": co_info.get("vlm_deferred", []),
         "views_laplacian_mean": round(float(np.mean(view_laps)), 2),
         "photo_consistency": photo_cons,
         "views": view_stats,
@@ -293,8 +313,19 @@ def main() -> int:
         render_6views(uv_obj, final_tex, r_final, f"{vid}_final", res)
 
         gt_views = var.get("gt_views", {})
-        before_m = evaluate_texture_set(prev_tex, r_before, f"{vid}_before", views, pr_cfg, gt_views)
-        final_m = evaluate_texture_set(final_tex, r_final, f"{vid}_final", views, pr_cfg, gt_views)
+        final_im = Image.open(final_tex)
+        uv_mask = rasterize_uv_mask(uv_obj, final_im.height, final_im.width)
+        before_m = evaluate_texture_set(prev_tex, r_before, f"{vid}_before", views, pr_cfg, gt_views, uv_mask=None)
+        final_m = evaluate_texture_set(final_tex, r_final, f"{vid}_final", views, pr_cfg, gt_views, uv_mask=uv_mask)
+
+        # Pull Stage C color_outliers_before/after and vlm_deferred when available
+        stage_c_rep_p = final_dir / "report.json"
+        stage_c_var = {}
+        if stage_c_rep_p.is_file():
+            try:
+                stage_c_var = json.loads(stage_c_rep_p.read_text(encoding="utf-8")).get("variants", {}).get(vid, {})
+            except Exception:
+                stage_c_var = {}
 
         # GT saturation average across all provided GT views
         gt_sats = []
@@ -328,6 +359,17 @@ def main() -> int:
         out["variants"][vid] = {
             "before": before_m,
             "final": final_m,
+            "color_outliers_before": stage_c_var.get("color_outliers_before", {
+                "count": before_m["color_outliers_count"],
+                "texels_pct": before_m["color_outliers_pct"],
+            }),
+            "color_outliers_after": stage_c_var.get("color_outliers_after", {
+                "count": final_m["color_outliers_count"],
+                "texels_pct": final_m["color_outliers_pct"],
+            }),
+            "vlm_triage": stage_c_var.get("vlm_triage", {}),
+            "vlm_protected": stage_c_var.get("vlm_protected", []),
+            "vlm_deferred": stage_c_var.get("vlm_deferred", final_m.get("vlm_deferred", [])),
             "gt_sat_mean_pct": gt_sat_mean,
             "sharpness_tex_ratio": lap_ratio,
             "sharpness_views_ratio": view_lap_ratio,
@@ -338,7 +380,8 @@ def main() -> int:
             f"[stage_d] {vid}: tex_lap {before_m['texture_laplacian_var']}->{final_m['texture_laplacian_var']} ({lap_ratio}x) | "
             f"view_lap {before_m['views_laplacian_mean']}->{final_m['views_laplacian_mean']} ({view_lap_ratio}x) | "
             f"patches {before_m['patch_count']}({before_m['patch_texels_pct']}%)->{final_m['patch_count']}({final_m['patch_texels_pct']}%) | "
-            f"wins={wins}",
+            f"color_outliers={final_m['color_outliers_count']}({final_m['color_outliers_pct']}%) | "
+            f"all_defects={final_m['all_defect_texels_pct']}% | wins={wins}",
             flush=True,
         )
 

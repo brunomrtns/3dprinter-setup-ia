@@ -1,0 +1,107 @@
+{
+  "run": "paintfix_v2",
+  "etapa": "B_regression_cpu",
+  "overall_pass": false,
+  "assets": {
+    "carro_foxh_mv_b": {
+      "source": "glb:carro_foxh__mv_b_4k.glb",
+      "shape": [
+        2048,
+        2048
+      ],
+      "uv_mask_used": true,
+      "color_outliers_before": {
+        "count": 102,
+        "texels": 3419,
+        "texels_pct": 0.0815,
+        "rejected_shape_elongated": 125,
+        "rejected_ring_incoherent": 161,
+        "rejected_uv_border": 567
+      },
+      "color_outliers_after": {
+        "count": 16,
+        "texels": 499,
+        "texels_pct": 0.0119
+      },
+      "vlm_deferred_count": 191,
+      "changed_pixels_pct": 0.392,
+      "pass_no_regression": true,
+      "elapsed_s": 3.97
+    },
+    "humanoide_dragonborn": {
+      "source": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/humanoide_dragonborn/etapa_c/pbr_repaired.png",
+      "shape": [
+        1024,
+        1024
+      ],
+      "uv_mask_used": true,
+      "color_outliers_before": {
+        "count": 80,
+        "texels": 1869,
+        "texels_pct": 0.1782,
+        "rejected_shape_elongated": 37,
+        "rejected_ring_incoherent": 112,
+        "rejected_uv_border": 699
+      },
+      "color_outliers_after": {
+        "count": 6,
+        "texels": 79,
+        "texels_pct": 0.0075
+      },
+      "vlm_deferred_count": 109,
+      "changed_pixels_pct": 0.5689,
+      "pass_no_regression": false,
+      "elapsed_s": 1.87
+    },
+    "criatura_dragao": {
+      "source": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/criatura_dragao/etapa_c/pbr_repaired.png",
+      "shape": [
+        1024,
+        1024
+      ],
+      "uv_mask_used": true,
+      "color_outliers_before": {
+        "count": 42,
+        "texels": 1293,
+        "texels_pct": 0.1233,
+        "rejected_shape_elongated": 31,
+        "rejected_ring_incoherent": 27,
+        "rejected_uv_border": 395
+      },
+      "color_outliers_after": {
+        "count": 1,
+        "texels": 10,
+        "texels_pct": 0.001
+      },
+      "vlm_deferred_count": 25,
+      "changed_pixels_pct": 0.3651,
+      "pass_no_regression": true,
+      "elapsed_s": 1.67
+    },
+    "prop_caixote": {
+      "source": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std/prop_caixote/etapa_c/pbr_repaired.png",
+      "shape": [
+        1024,
+        1024
+      ],
+      "uv_mask_used": true,
+      "color_outliers_before": {
+        "count": 146,
+        "texels": 4130,
+        "texels_pct": 0.3939,
+        "rejected_shape_elongated": 297,
+        "rejected_ring_incoherent": 141,
+        "rejected_uv_border": 746
+      },
+      "color_outliers_after": {
+        "count": 14,
+        "texels": 190,
+        "texels_pct": 0.0181
+      },
+      "vlm_deferred_count": 115,
+      "changed_pixels_pct": 1.2174,
+      "pass_no_regression": false,
+      "elapsed_s": 1.98
+    }
+  }
+}
