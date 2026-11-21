@@ -121,6 +121,11 @@
   - `docs/decisions/ADR-008-fabrica3d-plataforma-worker-local.md` criado (decisões D1–D6 ratificadas), Fase P registrada em `docs/roadmap.md`, `HANDOFF.md` atualizado.
   - Inventário (`docs/fase-p-fabrica3d/inventario.md`) + backup completo verificado (`69` entradas, `530,37 MB` em `evidence/fase-p/backup_removed/removed_glbs_backup.zip` e `~/printer3d-work/backup_fab3d/`).
   - Limpeza aplicada: `10` GLBs mantidos (`carro_foxh__mv_b_{8k,4k}`, `anubis_{a,b}__triposf512`, 3× `pipe_std` PBR `8k/4k`), `67` descartados removidos, `manifest.json` atualizado (`6` casos) e deployado (`HTTP 200` verificado em `/modelos3d/`, `/gpcg/api/health`, `/3dpanel/api/health`, `/`).
+- **[x] MARCO 2 — Infra `factory/` no ar na VPS (`https://brunointegrations.com/fab3d/`, 2026-11-20):**
+  - Monorepo `factory/` (`api/` Fastify 5 + Prisma 5 + Postgres 16 + BullMQ/Redis 7 + MinIO 8 + JWT + worker-auth, `web/` React 19 + Vite 6 + Three.js PBR, `worker/` Python outbound-only, `packages/{types,shared}`, `docker-compose.yml`, `deploy.sh`).
+  - 5 containers dedicados (`fab3d-postgres`, `fab3d-redis`, `fab3d-minio`, `fab3d-api`, `fab3d-web`) em `fab3d-net` + `trivestia-net`; rotas `/fab3d/` e `/api/fab3d/` injetadas em `trivestia-nginx` com reload sem downtime.
+  - Smoke pós-deploy `HTTP 200` em `/fab3d/`, `/api/fab3d/health`, `/modelos3d/`, `/gpcg/api/health`, `/3dpanel/api/health`, `/`.
+  - E2E M2 completo (`evidence/fase-p/m2_e2e.json`): `health 200 → login 200 → create asset 201 → upload MinIO 201 → enqueue job 202 (queued) → verify 200 → cleanup 200` (`overall_pass: true`).
 
 ### Registro Padronização Universal + QA Automático (`pipe_std`, 2026-11-20) — `[x]` CONCLUÍDO E VALIDADO EM 3 ASSETS DIVERSOS (3/3 PASS + PUBLICADOS)
 

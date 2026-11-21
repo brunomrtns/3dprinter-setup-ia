@@ -45,3 +45,9 @@ evidence/**/staged_models/
 
 # Fase P local reversible backup zips (kept locally and in ~/printer3d-work/backup_fab3d/)
 evidence/fase-p/backup_removed/*.zip
+
+# Factory secrets (never commit .env)
+factory/.env
+factory/**/.env
+factory/**/node_modules/
+factory/**/dist/

@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  role         String   @default("user") // "admin" | "user"
+  createdAt    DateTime @default(now())
+  assets       Asset[]
+}
+
+model Asset {
+  id             String         @id @default(cuid())
+  userId         String
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name           String
+  mode           String         // "single" | "multi" | "mesh"
+  notes          String         @default("")
+  status         String         @default("draft") // draft|queued|running|review|published|rejected|failed
+  currentVersion Int            @default(0)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  versions       AssetVersion[]
+  jobs           Job[]
+  chatMessages   ChatMessage[]
+}
+
+model AssetVersion {
+  id          String    @id @default(cuid())
+  assetId     String
+  asset       Asset     @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  jobId       String?
+  versionNum  Int
+  filesJson   Json      // { glb_8k, glb_4k, thumbnail, renders: [...] }
+  qaJson      Json?
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+}
+
+model Job {
+  id         String        @id @default(cuid())
+  assetId    String
+  asset      Asset         @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  type       String        @default("new") // "new" | "edit"
+  mode       String        // "single" | "multi" | "mesh"
+  status     String        @default("queued") // queued|claimed|running|review|published|rejected|failed
+  stage      String        @default("preprocess")
+  progress   Int           @default(0)
+  workerId   String?
+  leaseUntil DateTime?
+  prompt     String?       // edit instruction if type == "edit"
+  metricsJson Json?
+  resultsJson Json?
+  error      String?
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+  inputs     JobInput[]
+  messages   ChatMessage[]
+}
+
+model JobInput {
+  id        String   @id @default(cuid())
+  jobId     String
+  job       Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  kind      String   // "photo" | "mesh"
+  minioKey  String
+  filename  String
+  mimeType  String
+  sizeBytes Int
+  metaJson  Json?
+  createdAt DateTime @default(now())
+}
+
+model ChatMessage {
+  id            String   @id @default(cuid())
+  assetId       String
+  asset         Asset    @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  jobId         String?
+  job           Job?     @relation(fields: [jobId], references: [id], onDelete: SetNull)
+  role          String   // "user" | "agent" | "system"
+  content       String
+  planJson      Json?
+  artifactsJson Json?
+  createdAt     DateTime @default(now())
+}

@@ -1,0 +1,74 @@
+services:
+  fab3d-postgres:
+    image: postgres:16-alpine
+    container_name: fab3d-postgres
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - fab3d_pgdata:/var/lib/postgresql/data
+    networks:
+      - fab3d-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-fab3d} -d $${POSTGRES_DB:-fab3d}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  fab3d-redis:
+    image: redis:7-alpine
+    container_name: fab3d-redis
+    restart: unless-stopped
+    volumes:
+      - fab3d_redis:/data
+    networks:
+      - fab3d-net
+
+  fab3d-minio:
+    image: minio/minio:latest
+    container_name: fab3d-minio
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    env_file: .env
+    volumes:
+      - fab3d_minio:/data
+    networks:
+      - fab3d-net
+
+  fab3d-api:
+    build:
+      context: ./api
+    container_name: fab3d-api
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      fab3d-postgres:
+        condition: service_healthy
+      fab3d-redis:
+        condition: service_started
+      fab3d-minio:
+        condition: service_started
+    networks:
+      - fab3d-net
+      - trivestia-net
+
+  fab3d-web:
+    build:
+      context: ./web
+    container_name: fab3d-web
+    restart: unless-stopped
+    depends_on:
+      - fab3d-api
+    networks:
+      - fab3d-net
+      - trivestia-net
+
+volumes:
+  fab3d_pgdata:
+  fab3d_redis:
+  fab3d_minio:
+
+networks:
+  fab3d-net:
+    driver: bridge
+  trivestia-net:
+    external: true

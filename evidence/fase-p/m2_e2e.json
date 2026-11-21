@@ -1,0 +1,50 @@
+{
+  "milestone": "M2",
+  "timestamp_utc": "2026-11-21T00:34:12.998619+00:00",
+  "api_base": "https://brunointegrations.com/api/fab3d",
+  "steps": {
+    "health": {
+      "status": 200,
+      "ok": true,
+      "body": {
+        "ok": true,
+        "service": "fab3d-api",
+        "workerOnline": false
+      }
+    },
+    "login": {
+      "status": 200,
+      "ok": true,
+      "user": "bruno@brunointegrations.com"
+    },
+    "create_asset": {
+      "status": 201,
+      "ok": true,
+      "asset_id": "cmwpodw770003sm3ud1tt6baa"
+    },
+    "upload_input": {
+      "status": 201,
+      "ok": true,
+      "minio_key": "cmwpo9mjr0000dv4gbhgcbzed/cmwpodw770003sm3ud1tt6baa/cmwpodxv60005sm3uh3bnswp5/inputs/0_cand_42.png",
+      "size_bytes": 352257
+    },
+    "enqueue_job": {
+      "status": 202,
+      "ok": true,
+      "job_id": "cmwpodxv60005sm3uh3bnswp5",
+      "job_status": "queued",
+      "position": 1
+    },
+    "verify_job": {
+      "status": 200,
+      "ok": true,
+      "job_status": "queued",
+      "inputs_count": 1
+    },
+    "cleanup": {
+      "status": 200,
+      "ok": true
+    }
+  },
+  "overall_pass": true
+}
