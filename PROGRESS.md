@@ -13,9 +13,10 @@
 | 1 — Gerador de Peças (venv + TRELLIS/TripoSR + benchmark) | `[x]` encerrada 2026-11-16 com **veredito NEGATIVO do dono** — sem default mode (ADR-005); infra validada e reaproveitável |
 | **C — Nova geração de geradores + qualidade de entrada** | `[~]` **EM ANDAMENTO (aberta 2026-11-16)** — C2 concluído; C1 na máquina do colega; C3 na 3060 |
 | 2 — Forja (parcial: pacote entregue na Fase 1) | `[~]` pipeline/reparo funcionais; catálogo completo é Fase 2 propriamente dita — depois da Fase C |
+| **P — Fábrica 3D (`fab3d`, `v0.1.0-fab3d`)** | `[x]` **NO AR (`https://brunointegrations.com/fab3d/`)** — M0–M7 concluídos, BI Identity SSO (`/id/login`), Obsidian Studio UI, share links públicos read-only (`?share=`), Chat IA blindado (`glm-4.5-air`), UV Limpo QEM 100k + `paintfix_v2` (outliers Lab + VLM `glm-4.5v`) |
 | 3 — Pose / 4 — Operador IA | `[ ]` não abertas |
 
-**Gatilho atual:** C1 na máquina do colega (TRELLIS.2 fork na 5060 Ti) + C3 no PC do Bruno (comparativo 4 geradores na entrada pré-processada).
+**Gatilho atual:** Veredito visual do dono na nova versão `paintfix_v2` do Crash (`?share=589ad043dfbd30ac35653a2433ebffd4`) e decisão sobre o olho esquerdo.
 
 ---
 
@@ -113,6 +114,19 @@
     - O Kit de Montagem CSG voltará a ser testado **exclusivamente** sobre a base nova vencedora das Tarefas B/C (Hi3DGen / Hunyuan-2.1).
 - **Fotos do kit = as MESMAS do C6** (`Downloads/fox/no-windows/` = `~/printer3d-work/carro/fotos-c7/` + `c7-prep/`): 5 fotos de 2400x1792 px (frente, frente-e-lado-diagonal, lado, traseira, de-fora-pegando-interna). Prep `*_tinted.png` reutilizado. C7-E (fotogrametria densa VGGT) retirado da fila (só reabrir se B/C falharem e houver sessão de 20-40 fotos completas).
 - **Publicação**: caso `carro_csg` (modos `kit`, `casca`, `interna`, `kit_corte`) mantido no viewer para histórico/comparação. Evidência: `evidence/rtx3060-12gb/carro-csg/report.json`.
+
+### Registro Acabamento Universal + Triagem VLM (`paintfix_v2`, 2026-11-21) — `[x]` CONCLUÍDO (AGUARDA VEREDITO VISUAL DO DONO)
+
+- **ETAPA A (`patch_repair.py` v2 + `defaults.json` + `test_patch_repair_v2.py` — `6a38559`):**
+  - Novo detector `detect_color_outliers` (CIE76 ΔE em Lab vs mediana local `k=21`, `ΔE > 35`, área `6px..0,08%`, compacidade `aspect < 4`, anel coerente `≥ 60%` dentro de `ΔE ≤ 25`, guarda de borda de ilha UV `≤ 30%`, guarda fotográfica + **Triagem VLM** via `glm-4.5v` no Z.ai Coding Plan com fallback conservador offline para "claro-dentro-de-escuro").
+  - Testes unitários sintéticos `100% PASS` (bolotas laranja/azul e escura/laranja reparadas `6 → 0`; costura alongada, dente claro em boca escura e ponto em borda UV preservados).
+- **ETAPA B (`eval_texture.py` + `run_asset.py` + `factory/worker/main.py` — `39edeaa`):**
+  - QA v3 com novo gate `color_outlier_pct <= 0,02%`, `vlm_deferred` propagado para `qa.json`, e remoção dos limiares `qa` hardcoded do worker (herda `pipeline/defaults.json`).
+  - Regressão CPU `4/4 PASS` (`evidence/rtx3060-12gb/paintfix_v2/etapa_b/report.json`): `carro_foxh_mv_b` `0,0815%→0,0119%`, `humanoide_dragonborn` `0,1782%→0,0075%`, `criatura_dragao` `0,1233%→0,0010%`, `prop_caixote` `0,3939%→0,0181%`.
+- **ETAPA C & D (Re-processo do Crash `cmwpxq0io005asbbrbfmzl5r8` sem re-esculpir + Deploy):**
+  - Reaproveitou malha 100k + Stage A Hunyuan + TRELLIS.2 PBR em cache (`167,95s` totais, pico `7.552 MiB` no pack): `color_outliers` caiu de **`42 (0,1839%)` → `3 (0,0099%)`** (`PASS <= 0,02%`); VLM `glm-4.5v` fez `20` chamadas (`1` detalhe protegido, `13` adiados pelo orçamento `vlm_max_calls=20`).
+  - Inspeção visual da contact sheet (`evidence/rtx3060-12gb/paintfix_v2/etapa_c/crash_before_after_sheet.png`): zero apagão de detalhe legítimo (dentes, costuras e olho direito preservados); pontinho azul no queixo e sujeiras no olho direito removidos; **olho esquerdo** segue lavado/borrado (região grande do bake, pendente de decisão do dono).
+  - Nova versão (`8K=16,31 MB`, `4K=9,05 MB`) enviada ao `fab3d` preservando o mesmo share link (`https://brunointegrations.com/fab3d/?share=589ad043dfbd30ac35653a2433ebffd4`, `status=review`), `HTTP 200` confirmado no share link e em todos os apps existentes (`evidence/rtx3060-12gb/paintfix_v2/etapa_c/deploy_smoke.json`).
 
 ### Registro Fase P — Fábrica 3D (`RUN fab3d_mega`, 2026-11-20) — `[x]` CONCLUÍDA (`v0.1.0-fab3d`)
 

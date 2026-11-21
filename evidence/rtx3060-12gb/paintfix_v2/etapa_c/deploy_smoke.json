@@ -1,0 +1,23 @@
+{
+  "asset_id": "cmwpxpyl60058sbbrujp2x6uq",
+  "job_id": "cmwpxq0io005asbbrbfmzl5r8",
+  "share_token": "589ad043dfbd30ac35653a2433ebffd4",
+  "share_url": "https://brunointegrations.com/fab3d/?share=589ad043dfbd30ac35653a2433ebffd4",
+  "checks": {
+    "public_meta": {
+      "status": 200,
+      "name": "Crash (Hi3DGen + UV Limpo 100k)"
+    },
+    "public_model_4k": {
+      "status": 200,
+      "glb_magic_ok": true
+    },
+    "/fab3d/": 200,
+    "/api/fab3d/health": 200,
+    "/modelos3d/": 200,
+    "/gpcg/api/health": 200,
+    "/3dpanel/api/health": 200,
+    "/": 200
+  },
+  "all_ok": true
+}
