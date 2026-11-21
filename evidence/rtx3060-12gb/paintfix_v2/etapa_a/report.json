@@ -1,0 +1,18 @@
+{
+  "run": "paintfix_v2",
+  "etapa": "A",
+  "status": "PASS",
+  "vlm_probe": {
+    "glm-4.5v": "200 OK (32 tokens)",
+    "glm-4.6v": "200 OK (38 tokens)"
+  },
+  "unit_tests": {
+    "script": "pipeline/test_patch_repair_v2.py",
+    "result": "UNIT_TEST_PATCH_REPAIR_V2_PASS",
+    "color_outliers_before": {"count": 6, "texels": 266, "texels_pct": 0.1015},
+    "color_outliers_after": {"count": 0, "texels": 0, "texels_pct": 0.0},
+    "rejected_shape_elongated": 1,
+    "rejected_uv_border": 1,
+    "vlm_deferred_count": 1
+  }
+}
