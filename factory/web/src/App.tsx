@@ -99,9 +99,83 @@ const IconUpload = () => (
   </svg>
 );
 
+const IconShare = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" />
+    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" /><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+  </svg>
+);
+
+const PublicShareView: React.FC<{ token: string }> = ({ token }) => {
+  const [asset, setAsset] = useState<any>(null);
+  const [err, setErr] = useState<string | null>(null);
+  const [variant, setVariant] = useState<'4k' | '8k'>('4k');
+
+  useEffect(() => {
+    fetch(`/api/fab3d/public/${encodeURIComponent(token)}`)
+      .then(async (r) => {
+        if (!r.ok) throw new Error('Link inválido ou revogado pelo proprietário.');
+        return r.json();
+      })
+      .then((d) => setAsset(d.asset))
+      .catch((e) => setErr(e.message));
+  }, [token]);
+
+  if (err) {
+    return (
+      <div className="auth-splash">
+        <div className="auth-card">
+          <div className="brand-icon" style={{ width: 48, height: 48, borderRadius: 12 }}><IconCube size={24} /></div>
+          <h2 style={{ margin: 0 }}>Visualização indisponível</h2>
+          <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: 13.5 }}>{err}</p>
+        </div>
+      </div>
+    );
+  }
+
+  const effVar: '4k' | '8k' = variant === '8k' && asset?.has8k ? '8k' : asset?.has4k ? '4k' : '8k';
+  const glbUrl = asset && (asset.has4k || asset.has8k)
+    ? `/api/fab3d/public/${encodeURIComponent(token)}/model?variant=${effVar}`
+    : null;
+
+  return (
+    <div style={{ minHeight: '100dvh', display: 'flex', flexDirection: 'column', background: 'var(--bg)' }}>
+      <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 20px', background: 'var(--surface)', borderBottom: '1px solid var(--border)', gap: 12, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div className="brand-icon" style={{ width: 30, height: 30 }}><IconCube size={17} /></div>
+          <div>
+            <div style={{ fontWeight: 600, fontSize: 15 }}>{asset?.name || 'Carregando modelo 3D…'}</div>
+            <div style={{ fontSize: 11.5, color: 'var(--text-muted)' }}>Fábrica 3D · Visualização 3D somente leitura</div>
+          </div>
+        </div>
+        <span className="badge info">Link compartilhado</span>
+      </header>
+      <main style={{ flex: 1, padding: 16, display: 'flex', flexDirection: 'column' }}>
+        <div style={{ flex: 1, minHeight: 'calc(100dvh - 96px)' }}>
+          <Viewer3D
+            glbUrl={glbUrl}
+            has8k={Boolean(asset?.has8k && asset?.has4k)}
+            variant={effVar}
+            onVariantChange={(v) => setVariant(v)}
+          />
+        </div>
+      </main>
+    </div>
+  );
+};
+
 export const App: React.FC = () => {
+  const shareTokenFromUrl = new URLSearchParams(window.location.search).get('share');
+  if (shareTokenFromUrl) {
+    return <PublicShareView token={shareTokenFromUrl} />;
+  }
+  return <AuthenticatedApp />;
+};
+
+const AuthenticatedApp: React.FC = () => {
   const [user, setUser] = useState<any>(null);
   const [authChecking, setAuthChecking] = useState(true);
+  const [shareCopied, setShareCopied] = useState(false);
 
   const [page, setPage] = useState<Page>('home');
   const [assets, setAssets] = useState<any[]>([]);
@@ -269,6 +343,22 @@ export const App: React.FC = () => {
     setShowRejectBox(false);
     if (selectedAssetId) await loadDetail(selectedAssetId);
     await refreshAll();
+  }
+
+  async function onShareAsset(assetId: string) {
+    const r = await apiFetch<{ shareToken: string; shareUrl: string }>(`/assets/${assetId}/share`, { method: 'POST' });
+    const fullUrl = `${window.location.origin}${r.shareUrl}`;
+    try {
+      await navigator.clipboard.writeText(fullUrl);
+    } catch {}
+    setShareCopied(true);
+    setTimeout(() => setShareCopied(false), 3000);
+    await loadDetail(assetId);
+  }
+
+  async function onRevokeShare(assetId: string) {
+    await apiFetch(`/assets/${assetId}/share`, { method: 'DELETE' });
+    await loadDetail(assetId);
   }
 
   const activeJobsCount = useMemo(
@@ -738,7 +828,15 @@ export const App: React.FC = () => {
                 {detail && <span className="badge neutral">v{detail.currentVersion || 0}</span>}
               </div>
               {detail && hasGlb && (
-                <div style={{ display: 'flex', gap: 8 }}>
+                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                  <button className="btn sm" onClick={() => onShareAsset(detail.id)} title="Copiar link público somente leitura">
+                    <IconShare /> {shareCopied ? 'Link copiado!' : 'Compartilhar 3D'}
+                  </button>
+                  {detail.shareToken && (
+                    <button className="btn sm danger" onClick={() => onRevokeShare(detail.id)} title="Desativar link público">
+                      Revogar link
+                    </button>
+                  )}
                   {has4k && <a className="btn sm" href={downloadUrl(detail.id, '4k')} download><IconDownload /> Baixar 4K</a>}
                   {has8k && <a className="btn sm primary" href={downloadUrl(detail.id, '8k')} download><IconDownload /> Baixar 8K</a>}
                 </div>

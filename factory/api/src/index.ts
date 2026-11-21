@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import Fastify, { FastifyReply, FastifyRequest } from 'fastify';
 import cors from '@fastify/cors';
 import jwt from '@fastify/jwt';
@@ -141,6 +142,90 @@ async function start() {
   await app.register(cors, { origin: true, credentials: true });
   await app.register(jwt, { secret: JWT_SECRET });
   await app.register(multipart, { limits: { fileSize: 80 * 1024 * 1024, files: 10 } });
+
+  // ── Public Read-Only 3D Share Links (no login required, token-scoped) ─────
+  app.post('/api/fab3d/assets/:id/share', { preHandler: [requireAdmin] }, async (req, reply) => {
+    const { id } = req.params as { id: string };
+    const asset = await prisma.asset.findUnique({ where: { id } });
+    if (!asset) return reply.code(404).send({ error: 'Peça não encontrada' });
+    const token = asset.shareToken || crypto.randomBytes(16).toString('hex');
+    if (!asset.shareToken) {
+      await prisma.asset.update({ where: { id }, data: { shareToken: token } });
+    }
+    return { shareToken: token, shareUrl: `/fab3d/?share=${token}` };
+  });
+
+  app.delete('/api/fab3d/assets/:id/share', { preHandler: [requireAdmin] }, async (req, reply) => {
+    const { id } = req.params as { id: string };
+    const asset = await prisma.asset.findUnique({ where: { id } });
+    if (!asset) return reply.code(404).send({ error: 'Peça não encontrada' });
+    await prisma.asset.update({ where: { id }, data: { shareToken: null } });
+    return { revoked: true };
+  });
+
+  app.get('/api/fab3d/public/:token', async (req, reply) => {
+    const { token } = req.params as { token: string };
+    if (!token || token.length < 16) return reply.code(404).send({ error: 'Link inválido' });
+    const asset = await prisma.asset.findUnique({
+      where: { shareToken: token },
+      include: {
+        versions: { orderBy: { versionNum: 'desc' }, take: 5 },
+        jobs: { orderBy: { createdAt: 'desc' }, take: 15 },
+      },
+    });
+    if (!asset) return reply.code(404).send({ error: 'Link não encontrado ou revogado' });
+    const fileMaps: Array<Record<string, string>> = [
+      ...asset.versions.map((v) => (v.filesJson || {}) as Record<string, string>),
+      ...asset.jobs.map((j) => ((j.resultsJson as Record<string, unknown>)?.files || {}) as Record<string, string>),
+    ];
+    const has4k = fileMaps.some((fm) => Boolean(fm.glb_4k));
+    const has8k = fileMaps.some((fm) => Boolean(fm.glb_8k));
+    return {
+      asset: {
+        id: asset.id,
+        name: asset.name,
+        mode: asset.mode,
+        currentVersion: asset.currentVersion,
+        updatedAt: asset.updatedAt,
+        has4k,
+        has8k,
+      },
+    };
+  });
+
+  app.get('/api/fab3d/public/:token/model', async (req, reply) => {
+    const { token } = req.params as { token: string };
+    const q = req.query as { variant?: string };
+    if (!token || token.length < 16) return reply.code(404).send({ error: 'Link inválido' });
+    const asset = await prisma.asset.findUnique({
+      where: { shareToken: token },
+      include: {
+        versions: { orderBy: { versionNum: 'desc' }, take: 5 },
+        jobs: { orderBy: { createdAt: 'desc' }, take: 15 },
+      },
+    });
+    if (!asset) return reply.code(404).send({ error: 'Link não encontrado ou revogado' });
+    const variant = q.variant === '8k' ? 'glb_8k' : 'glb_4k';
+    const fallbackVariant = variant === 'glb_4k' ? 'glb_8k' : 'glb_4k';
+    const fileMaps: Array<Record<string, string>> = [
+      ...asset.versions.map((v) => (v.filesJson || {}) as Record<string, string>),
+      ...asset.jobs.map((j) => ((j.resultsJson as Record<string, unknown>)?.files || {}) as Record<string, string>),
+    ];
+    let targetKey = '';
+    for (const fm of fileMaps) {
+      if (fm[variant]) { targetKey = fm[variant]; break; }
+    }
+    if (!targetKey) {
+      for (const fm of fileMaps) {
+        if (fm[fallbackVariant]) { targetKey = fm[fallbackVariant]; break; }
+      }
+    }
+    if (!targetKey) return reply.code(404).send({ error: 'Modelo 3D não disponível' });
+    const stream = await getObjectStream(targetKey);
+    reply.header('Content-Type', 'model/gltf-binary');
+    reply.header('Cache-Control', 'public, max-age=300');
+    return reply.send(stream);
+  });
 
   // ── Health ────────────────────────────────────────────────────────────────
   app.get('/api/fab3d/health', async () => {

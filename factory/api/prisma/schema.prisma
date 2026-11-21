@@ -26,6 +26,7 @@ model Asset {
   notes          String         @default("")
   status         String         @default("draft") // draft|queued|running|review|published|rejected|failed
   currentVersion Int            @default(0)
+  shareToken     String?        @unique
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
   versions       AssetVersion[]
