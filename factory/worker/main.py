@@ -234,19 +234,17 @@ class FactoryWorker:
                 gen_out.mkdir(parents=True, exist_ok=True)
                 hi_obj = gen_out / "mesh.obj"
                 if not hi_obj.exists():
-                    preproc_dir = gen_out / "preproc"
-                    preproc_dir.mkdir(parents=True, exist_ok=True)
+                    pre_png = gen_out / "entrada_preproc.png"
                     subprocess.run(
                         [
                             "/home/bruno/.venvs/printer3d-ia/bin/python",
                             str(REPO_ROOT / "tools" / "generator" / "preprocess_input.py"),
-                            str(img_paths[0]),
-                            "-o", str(preproc_dir),
+                            "--input", str(img_paths[0]),
+                            "--output", str(pre_png),
                         ],
                         check=True,
                     )
-                    pre_imgs = list(preproc_dir.glob("*_preproc.png"))
-                    src_for_hi = str(pre_imgs[0]) if pre_imgs else str(img_paths[0])
+                    src_for_hi = str(pre_png) if pre_png.exists() else str(img_paths[0])
                     subprocess.run(
                         [
                             "/home/bruno/.venvs/hi3dgen/bin/python",
