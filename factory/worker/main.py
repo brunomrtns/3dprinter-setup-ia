@@ -123,28 +123,70 @@ class FactoryWorker:
             paths.append(out_p)
         return paths
 
+    def _find_latest_local_glbs(self, asset_id: str) -> dict[str, Path]:
+        """Locate the most recent 8k/4k GLBs produced locally for this asset (or any recent job)."""
+        jobs_root = REPO_ROOT / "evidence" / "fase-p" / "worker_jobs"
+        if not jobs_root.is_dir():
+            return {}
+        candidates = sorted(jobs_root.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True)
+        for jdir in candidates:
+            staged = jdir / "run" / "staged_models"
+            if staged.is_dir():
+                g8 = list(staged.glob("*_8k.glb"))
+                g4 = list(staged.glob("*_4k.glb"))
+                if g8 or g4:
+                    out: dict[str, Path] = {}
+                    if g8:
+                        out["glb_8k"] = g8[0]
+                    if g4:
+                        out["glb_4k"] = g4[0]
+                    return out
+        return {}
+
     def process_edit_job(self, job: dict[str, Any]) -> None:
         jid = job["id"]
         evid_dir = REPO_ROOT / "evidence" / "fase-p" / "worker_jobs" / jid
         self.report_progress(jid, "edit", 20)
+        source_glbs = self._find_latest_local_glbs(job["assetId"])
         res = execute_edit_request(
             user_prompt=job.get("prompt") or "",
             qa_summary=job.get("metricsJson") or {},
             job_workspace=evid_dir,
             evidence_dir=evid_dir,
+            source_glbs=source_glbs,
         )
+        produced = res.get("produced_glbs") or {}
+        if produced:
+            self.report_progress(jid, "pack", 85)
+            files = []
+            for var_key, fpath_str in produced.items():
+                fp = Path(fpath_str)
+                if fp.is_file():
+                    files.append((var_key, (fp.name, fp.read_bytes(), "model/gltf-binary")))
+            if files:
+                r = httpx.post(
+                    f"{self.vps_url}/api/fab3d/worker/jobs/{jid}/results",
+                    headers=self.headers,
+                    data={"qa_json": json.dumps({"edit_agent": res}, ensure_ascii=False)},
+                    files=files,
+                    timeout=300,
+                )
+                r.raise_for_status()
+
+        tok_info = f" | Tokens: {res.get('tokens_used', 0)}" if res.get("tokens_used") else ""
         reply_text = (
             f"{res['summary']}\n"
-            f"Passos executados: {res['steps_executed']} | Bloqueados pela whitelist: {res['blocked_count']}.\n"
-            f"Aguardando sua revisão humana para publicar."
+            f"Modelo: {res.get('provider')} | Passos executados: {res['steps_executed']} | Bloqueados: {res['blocked_count']}{tok_info}.\n"
+            f"{'Nova versão 8K/4K enviada para revisão no Studio 3D!' if produced else 'Aguardando sua revisão humana.'}"
         )
         httpx.post(
             f"{self.vps_url}/api/fab3d/worker/jobs/{jid}/chat_reply",
             headers=self.headers,
-            json={"content": reply_text, "plan": res, "artifacts": {"evidence": str(evid_dir)}},
+            json={"content": reply_text, "plan": res, "artifacts": {"evidence": str(evid_dir), "glbs": produced}},
             timeout=30,
         )
-        self.report_progress(jid, "qa", 100, status="review", metrics=res)
+        if not produced:
+            self.report_progress(jid, "qa", 100, status="review", metrics=res)
 
     def process_new_job(self, job: dict[str, Any]) -> None:
         jid = job["id"]
