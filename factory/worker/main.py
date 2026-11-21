@@ -312,7 +312,14 @@ class FactoryWorker:
         hb_thread.start()
         try:
             while True:
-                job = self.claim_next()
+                try:
+                    job = self.claim_next()
+                except Exception as e:
+                    print(f"[worker] claim warn (retrying in {self.poll_sec}s): {e}", flush=True)
+                    if once:
+                        return 1
+                    time.sleep(self.poll_sec)
+                    continue
                 if not job:
                     if once:
                         print("[worker] No queued jobs (--once exiting).", flush=True)

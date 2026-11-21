@@ -14,7 +14,12 @@ const JWT_SECRET = process.env.JWT_SECRET || 'dev-only-secret-change-in-env';
 const WORKER_TOKEN = process.env.WORKER_TOKEN || '';
 const LEASE_MIN = Number(process.env.JOB_LEASE_MINUTES || 30);
 const BI_IDENTITY_URL = (process.env.BI_IDENTITY_URL || 'http://bi-api:3300').replace(/\/$/, '');
-const ADMIN_EMAIL = (process.env.ADMIN_EMAIL || 'bruno@brunointegrations.com').toLowerCase();
+const ADMIN_EMAILS = new Set(
+  (process.env.ADMIN_EMAILS || process.env.ADMIN_EMAIL || 'bruno@brunointegrations.com')
+    .split(',')
+    .map((s) => s.trim().toLowerCase())
+    .filter(Boolean)
+);
 
 const ALLOWED_IMAGE_MIMES = new Set(['image/png', 'image/jpeg', 'image/webp']);
 const ALLOWED_MESH_EXT = new Set(['.glb', '.gltf', '.obj', '.stl']);
@@ -58,7 +63,11 @@ async function resolveBiIdentityUser(req: FastifyRequest, reply: FastifyReply) {
     }
 
     const email = biUser.email.toLowerCase();
-    const role = biUser.isSuperAdmin || email === ADMIN_EMAIL ? 'admin' : 'user';
+    const existing = await prisma.user.findUnique({ where: { email } });
+    const role =
+      existing?.role === 'admin' || biUser.isSuperAdmin || ADMIN_EMAILS.has(email)
+        ? 'admin'
+        : 'user';
     const localUser = await prisma.user.upsert({
       where: { email },
       update: { name: biUser.name || email, role },
