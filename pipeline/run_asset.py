@@ -124,8 +124,9 @@ def write_stage_report(stage_dir: Path, config_hash: str, payload: dict) -> None
     (stage_dir / "report.json").write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
-def ensure_uv_obj(mesh_path: Path, uv_out_path: Path) -> dict:
-    """Loads mesh and runs xatlas UV unwrap ONLY if UV is absent (preserves geometry verbatim)."""
+def ensure_uv_obj(mesh_path: Path, uv_out_path: Path, target_faces: int = 100000) -> dict:
+    """Loads mesh; if UV is absent, decimates high-poly raw meshes (>120k faces) cleanly via
+    pymeshlab QEM to ~100k faces and runs xatlas with 2048px/4px padding for crisp zero-overlap UVs."""
     mesh = trimesh.load(str(mesh_path), force="mesh", process=False)
     uv = getattr(mesh.visual, "uv", None)
     if uv is not None and len(uv) == len(mesh.vertices) and str(mesh_path).lower().endswith(".obj"):
@@ -139,9 +140,48 @@ def ensure_uv_obj(mesh_path: Path, uv_out_path: Path) -> dict:
     import xatlas
 
     t0 = time.time()
-    v = np.asarray(mesh.vertices, dtype=np.float32)
-    f = np.asarray(mesh.faces, dtype=np.uint32)
-    vmapping, indices, uvs = xatlas.parametrize(v, f)
+    faces_orig = int(len(mesh.faces))
+    decimated = False
+
+    # High-poly raw meshes (e.g. 500k-950k faces from TripoSF/Hi3DGen) fragment xatlas into 15k+ micro-islands.
+    # Clean quadric decimation to ~100k preserves facial/silhouette detail while yielding crisp, non-overlapping UVs.
+    if faces_orig > 120000:
+        try:
+            import pymeshlab
+
+            ms = pymeshlab.MeshSet()
+            ms.add_mesh(pymeshlab.Mesh(np.asarray(mesh.vertices, dtype=np.float64), np.asarray(mesh.faces, dtype=np.int32)))
+            ms.meshing_remove_duplicate_vertices()
+            ms.meshing_remove_duplicate_faces()
+            ms.meshing_remove_zero_area_faces()
+            ms.meshing_decimation_quadric_edge_collapse(
+                targetfacenum=target_faces,
+                preserveboundary=True,
+                preservenormal=True,
+                preservetopology=True,
+                qualitythr=0.5,
+            )
+            cm = ms.current_mesh()
+            v = np.asarray(cm.vertex_matrix(), dtype=np.float32)
+            f = np.asarray(cm.face_matrix(), dtype=np.uint32)
+            decimated = True
+            print(f"[ensure_uv_obj] QEM decimated {faces_orig} -> {len(f)} faces before xatlas", flush=True)
+        except Exception as e:
+            print(f"[ensure_uv_obj] pymeshlab decimation warn (falling back to raw mesh): {e}", flush=True)
+            v = np.asarray(mesh.vertices, dtype=np.float32)
+            f = np.asarray(mesh.faces, dtype=np.uint32)
+    else:
+        v = np.asarray(mesh.vertices, dtype=np.float32)
+        f = np.asarray(mesh.faces, dtype=np.uint32)
+
+    atlas = xatlas.Atlas()
+    atlas.add_mesh(v, f)
+    pack_opts = xatlas.PackOptions()
+    pack_opts.resolution = 2048
+    pack_opts.padding = 4
+    pack_opts.bilinear = True
+    atlas.generate(pack_options=pack_opts)
+    vmapping, indices, uvs = atlas[0]
     v_new = v[vmapping]
     mesh_uv = trimesh.Trimesh(
         vertices=v_new,
@@ -154,7 +194,8 @@ def ensure_uv_obj(mesh_path: Path, uv_out_path: Path) -> dict:
     return {
         "uv_obj": str(uv_out_path),
         "unwrapped_now": True,
-        "faces_before": int(len(f)),
+        "decimated": decimated,
+        "faces_before": faces_orig,
         "faces_after": int(len(indices)),
         "verts_after": int(len(v_new)),
         "unwrap_s": round(time.time() - t0, 2),

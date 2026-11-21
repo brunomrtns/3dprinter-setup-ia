@@ -220,11 +220,46 @@ class FactoryWorker:
             # For multi-photo Fox validation, reuse clean mv_b uv.obj if notes specifies --base-mesh=<path>
             notes = asset.get("notes") or ""
             base_mesh = ""
+            engine = "triposg"
             for tok in notes.split():
                 if tok.startswith("base_mesh="):
                     base_mesh = tok.split("=", 1)[1]
+                elif tok.startswith("engine="):
+                    engine = tok.split("=", 1)[1].lower()
             if base_mesh and Path(base_mesh).exists():
                 mesh_path = base_mesh
+            elif engine == "hi3dgen":
+                self.report_progress(jid, "shape", 20)
+                gen_out = evid_dir / "shape_gen_hi3dgen"
+                gen_out.mkdir(parents=True, exist_ok=True)
+                hi_obj = gen_out / "mesh.obj"
+                if not hi_obj.exists():
+                    preproc_dir = gen_out / "preproc"
+                    preproc_dir.mkdir(parents=True, exist_ok=True)
+                    subprocess.run(
+                        [
+                            "/home/bruno/.venvs/printer3d-ia/bin/python",
+                            str(REPO_ROOT / "tools" / "generator" / "preprocess_input.py"),
+                            str(img_paths[0]),
+                            "-o", str(preproc_dir),
+                        ],
+                        check=True,
+                    )
+                    pre_imgs = list(preproc_dir.glob("*_preproc.png"))
+                    src_for_hi = str(pre_imgs[0]) if pre_imgs else str(img_paths[0])
+                    subprocess.run(
+                        [
+                            "/home/bruno/.venvs/hi3dgen/bin/python",
+                            str(REPO_ROOT / "tools" / "generator" / "hi3dgen_runner.py"),
+                            "--image", src_for_hi,
+                            "--output-dir", str(gen_out),
+                            "--seed", "42",
+                        ],
+                        check=True,
+                    )
+                if not hi_obj.exists():
+                    raise RuntimeError("Hi3DGen não produziu mesh.obj")
+                mesh_path = str(hi_obj)
             else:
                 self.report_progress(jid, "shape", 20)
                 gen_out = evid_dir / "shape_gen"
@@ -274,7 +309,7 @@ class FactoryWorker:
         cfg_path.write_text(json.dumps(job_cfg, indent=2, ensure_ascii=False), encoding="utf-8")
 
         self.report_progress(jid, "paint", 35, metrics={"input_diagnostics": input_diags})
-        subprocess.run(
+        proc = subprocess.Popen(
             [
                 HUNYUAN_PY,
                 str(REPO_ROOT / "pipeline" / "run_asset.py"),
@@ -282,8 +317,33 @@ class FactoryWorker:
                 "--out", str(evid_dir / "run"),
                 "--resume",
             ],
-            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            bufsize=1,
         )
+        stage_progress = {
+            "00_preflight": ("paint", 40),
+            "02_paint_hunyuan": ("paint", 48),
+            "03_photo_blend": ("paint", 58),
+            "04_patch_repair": ("paint", 66),
+            "05_trellis_pbr": ("pbr", 76),
+            "06_pack_glb": ("pack", 86),
+            "07_qa_eval": ("qa", 94),
+        }
+        assert proc.stdout is not None
+        for line in proc.stdout:
+            print(line, end="", flush=True)
+            for key, (st_name, pct) in stage_progress.items():
+                if key in line:
+                    try:
+                        self.report_progress(jid, st_name, pct)
+                    except Exception:
+                        pass
+                    break
+        rc = proc.wait()
+        if rc != 0:
+            raise RuntimeError(f"run_asset.py falhou com exit code {rc}")
 
         # Upload GLB 8K/4K + renders + qa.json -> VPS MinIO (enters 'review', never auto-publishes!)
         self.report_progress(jid, "pack", 90)
