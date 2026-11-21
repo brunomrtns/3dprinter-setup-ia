@@ -77,13 +77,21 @@ export const App: React.FC = () => {
   useEffect(() => {
     apiFetch<{ user: any }>('/auth/me')
       .then((r) => {
+        sessionStorage.removeItem('fab3d_sso_hops');
         setUser(r.user);
         setAuthChecking(false);
         refreshAll();
       })
       .catch(() => {
         setAuthChecking(false);
-        redirectToSsoLogin();
+        const now = Date.now();
+        const raw = sessionStorage.getItem('fab3d_sso_hops');
+        const hops: number[] = raw ? JSON.parse(raw).filter((t: number) => now - t < 15000) : [];
+        if (hops.length < 2) {
+          hops.push(now);
+          sessionStorage.setItem('fab3d_sso_hops', JSON.stringify(hops));
+          redirectToSsoLogin();
+        }
       });
   }, []);
 

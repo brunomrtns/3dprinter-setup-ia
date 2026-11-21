@@ -50,6 +50,7 @@ services:
     networks:
       - fab3d-net
       - trivestia-net
+      - bi-net
 
   fab3d-web:
     build:
@@ -61,6 +62,7 @@ services:
     networks:
       - fab3d-net
       - trivestia-net
+      - bi-net
 
 volumes:
   fab3d_pgdata:
@@ -71,4 +73,6 @@ networks:
   fab3d-net:
     driver: bridge
   trivestia-net:
+    external: true
+  bi-net:
     external: true
