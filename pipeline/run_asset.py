@@ -153,7 +153,8 @@ def ensure_uv_obj(mesh_path: Path, uv_out_path: Path, target_faces: int = 100000
             ms.add_mesh(pymeshlab.Mesh(np.asarray(mesh.vertices, dtype=np.float64), np.asarray(mesh.faces, dtype=np.int32)))
             ms.meshing_remove_duplicate_vertices()
             ms.meshing_remove_duplicate_faces()
-            ms.meshing_remove_zero_area_faces()
+            if hasattr(ms, "meshing_remove_null_faces"):
+                ms.meshing_remove_null_faces()
             ms.meshing_decimation_quadric_edge_collapse(
                 targetfacenum=target_faces,
                 preserveboundary=True,
