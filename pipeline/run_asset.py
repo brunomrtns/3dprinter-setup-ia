@@ -469,99 +469,17 @@ def main() -> int:
 
     compat_cfg = build_compat_config(cfg, uv_obj_path, prev_tex, ref_imgs, out_root, out_root / "_compat_cfg.json")
 
-    # ── 02_paint (provider = "tripo" default | "hunyuan" local fallback) ──────
+    # ── 02_paint_hunyuan (uses pipeline/paint_quality.py -> etapa_a) ──────────
     d02 = out_root / "etapa_a"
-    d02.mkdir(parents=True, exist_ok=True)
-    paint_provider = str(cfg["paint"].get("provider", "tripo")).lower()
-    tripo_meta: dict = {}
-    tripo_mr_path: Path | None = None
-
-    if paint_provider == "tripo":
-        tripo_tex = d02 / f"{vid}_tripo_albedo.png"
-        if args.resume and tripo_tex.is_file() and stage_is_cached(d02, tripo_tex, chash):
-            rep02 = json.loads((d02 / "report.json").read_text(encoding="utf-8"))
-            print("[02_paint_tripo] RESUME (cached)", flush=True)
-        else:
-            from tripo_client import (
-                extract_glb_textures,
-                tripo_download,
-                tripo_poll,
-                tripo_sts_upload_mesh,
-                tripo_texture_model,
-                tripo_upload_image,
-            )
-
-            t_cfg = cfg["paint"].get("tripo", {})
-            quality = str(t_cfg.get("quality", "detailed"))
-            use_pbr = bool(t_cfg.get("pbr", True))
-            v3_base = str(t_cfg.get("api_base", "https://openapi.tripo3d.ai/v3"))
-            v2_base = str(t_cfg.get("sts_base", "https://api.tripo3d.ai/v2/openapi"))
-
-            # Ensure GLB mesh for upload (smaller & faster than OBJ)
-            upload_mesh_p = out_root / "work" / vid / "tripo_upload.glb"
-            if not upload_mesh_p.is_file():
-                trimesh.load(uv_obj_path, force="mesh", process=False).export(str(upload_mesh_p))
-
-            print(f"[02_paint_tripo] STS uploading mesh ({upload_mesh_p.stat().st_size / 1e6:.2f} MB)...", flush=True)
-            up_info = tripo_sts_upload_mesh(upload_mesh_p, v2_base=v2_base)
-            ref_tok = tripo_upload_image(ref_imgs[0], v2_base=v2_base) if ref_imgs and Path(ref_imgs[0]).is_file() else None
-
-            print(f"[02_paint_tripo] Starting texture_model (quality={quality}, pbr={use_pbr})...", flush=True)
-            task_info = tripo_texture_model(
-                up_info,
-                quality=quality,
-                pbr=use_pbr,
-                ref_image_token=ref_tok,
-                seed=int(cfg.get("seed", 42)),
-                v3_base=v3_base,
-                v2_base=v2_base,
-            )
-            polled = tripo_poll(
-                task_info["task_id"],
-                timeout_s=1200.0,
-                poll_interval_s=10.0,
-                v2_base=v2_base,
-                v3_base=v3_base,
-                use_v3=("/v3/" in task_info["endpoint_used"]),
-            )
-            tripo_glb = d02 / f"{vid}_tripo_raw.glb"
-            tripo_download(polled["model_url"], tripo_glb)
-            ext_info = extract_glb_textures(tripo_glb, d02, variant_id=vid)
-            rep02 = {
-                "provider": "tripo",
-                "upload": up_info,
-                "tripo_task_id": task_info["task_id"],
-                "tripo_endpoint": task_info["endpoint_used"],
-                "tripo_quality": quality,
-                "tripo_cost_credits": polled.get("cost_credits"),
-                "elapsed_s": polled.get("elapsed_s"),
-                "tripo_glb": str(tripo_glb),
-                **ext_info,
-            }
-            write_stage_report(d02, chash, rep02)
-            print(
-                f"[02_paint_tripo] OK task={rep02['tripo_task_id']} cost={rep02['tripo_cost_credits']} "
-                f"mr_source={rep02['mr_source']} res={rep02['texture_resolution']}",
-                flush=True,
-            )
-        tripo_meta = {
-            "tripo_task_id": rep02.get("tripo_task_id"),
-            "tripo_quality": rep02.get("tripo_quality"),
-            "tripo_cost_credits": rep02.get("tripo_cost_credits"),
-            "texture_resolution": rep02.get("texture_resolution"),
-        }
-        if rep02.get("mr_path") and Path(rep02["mr_path"]).is_file():
-            tripo_mr_path = Path(rep02["mr_path"])
+    tex_02_candidates = sorted(d02.glob(f"{vid}_native_*.png")) if d02.exists() else []
+    if args.resume and tex_02_candidates and stage_is_cached(d02, tex_02_candidates[0], chash):
+        rep02 = json.loads((d02 / "report.json").read_text(encoding="utf-8"))
+        print("[02_paint_hunyuan] RESUME (cached)", flush=True)
     else:
-        tex_02_candidates = sorted(d02.glob(f"{vid}_native_*.png")) if d02.exists() else []
-        if args.resume and tex_02_candidates and stage_is_cached(d02, tex_02_candidates[0], chash):
-            rep02 = json.loads((d02 / "report.json").read_text(encoding="utf-8"))
-            print("[02_paint_hunyuan] RESUME (cached)", flush=True)
-        else:
-            run_cmd([HUNYUAN_PY, str(PIPELINE_DIR / "paint_quality.py"), "--config", str(compat_cfg)], label="02_paint_hunyuan")
-            rep02 = json.loads((d02 / "report.json").read_text(encoding="utf-8"))
-            write_stage_report(d02, chash, rep02)
-        peak_vram_overall = max(peak_vram_overall, int(rep02.get("vram_pico_mib", 0)))
+        run_cmd([HUNYUAN_PY, str(PIPELINE_DIR / "paint_quality.py"), "--config", str(compat_cfg)], label="02_paint_hunyuan")
+        rep02 = json.loads((d02 / "report.json").read_text(encoding="utf-8"))
+        write_stage_report(d02, chash, rep02)
+    peak_vram_overall = max(peak_vram_overall, int(rep02.get("vram_pico_mib", 0)))
 
     # ── 03_photo_blend (tier == "photos" only) ────────────────────────────────
     d03 = out_root / "etapa_b"
@@ -585,10 +503,9 @@ def main() -> int:
         in_for_04 = d02
         photo_ref_arg = []
 
-    # ── 04_patch_repair (report-only for provider='tripo', active repair for 'hunyuan') ──
+    # ── 04_patch_repair ───────────────────────────────────────────────────────
     d04 = out_root / "etapa_c"
     art04 = d04 / f"{vid}_repaired.png"
-    pr_extra_args = ["--report-only", "--no-vlm"] if paint_provider == "tripo" else []
     if not (args.resume and stage_is_cached(d04, art04, chash)):
         run_cmd(
             [
@@ -598,7 +515,6 @@ def main() -> int:
                 "--output-dir", str(d04),
                 "--report-out", str(d04 / "report.json"),
                 *photo_ref_arg,
-                *pr_extra_args,
             ],
             label="04_patch_repair",
         )
@@ -607,19 +523,13 @@ def main() -> int:
     else:
         print("[04_patch_repair] RESUME (cached)", flush=True)
 
-    # ── 05_trellis_pbr (skipped when Tripo GLB already provides metallicRoughness) ──
+    # ── 05_trellis_pbr (MetallicRoughness 2048 PNG) ───────────────────────────
     d05 = out_root / "etapa_trellis_pbr"
     d05.mkdir(parents=True, exist_ok=True)
     mr_final_dir = d05 / "mr_final"
     mr_final_dir.mkdir(parents=True, exist_ok=True)
     mr_dst = mr_final_dir / f"{vid}_metallic_roughness.png"
-    mr_source = "none"
-    if tripo_mr_path is not None and tripo_mr_path.is_file():
-        shutil.copy2(tripo_mr_path, mr_dst)
-        mr_source = "tripo"
-        write_stage_report(d05, chash, {"skipped": True, "mr_source": "tripo", "mr_path": str(mr_dst)})
-        print("[05_trellis_pbr] SKIPPED (reusing metallicRoughness from Tripo GLB)", flush=True)
-    elif cfg["trellis_pbr"].get("enabled", True):
+    if cfg["trellis_pbr"].get("enabled", True):
         if not (args.resume and stage_is_cached(d05, mr_dst, chash)):
             env_t2 = dict(os.environ)
             env_t2["ATTN_BACKEND"] = cfg["trellis_pbr"].get("attn_backend", "xformers")
@@ -642,8 +552,6 @@ def main() -> int:
         else:
             rep05 = json.loads((d05 / "report.json").read_text(encoding="utf-8"))
             print("[05_trellis_pbr] RESUME (cached)", flush=True)
-        if mr_dst.exists():
-            mr_source = "trellis"
         peak_vram_overall = max(peak_vram_overall, int(rep05.get("vram_pico_mib", 0)))
 
     # ── 06_pack_glb (8K/4K JPEG q95 + MR 2048 PNG) ────────────────────────────
@@ -692,9 +600,6 @@ def main() -> int:
 
     qa = compute_qa_gates(cfg, rep07, rep06, mr_dst.exists())
     total_s = round(time.time() - t_start, 2)
-    qa["paint_provider"] = paint_provider
-    qa["mr_source"] = mr_source
-    qa.update(tripo_meta)
     qa["tempo_total_s"] = total_s
     qa["vram_pico_mib"] = peak_vram_overall
     qa["timestamp_utc"] = datetime.now(timezone.utc).isoformat()
