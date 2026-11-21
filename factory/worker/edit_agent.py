@@ -59,28 +59,37 @@ def build_edit_plan(user_prompt: str, qa_summary: dict[str, Any], provider: str 
     if prov == "zai" and api_key:
         import httpx
 
-        model = os.environ.get("ZAI_MODEL", "glm-4.5")
+        api_url = os.environ.get("ZAI_API_URL", "https://api.z.ai/api/coding/paas/v4/chat/completions").strip()
+        model = os.environ.get("ZAI_MODEL", "glm-4.5-air").strip()
         sys_prompt = (
-            "Você é o agente de edição da Fábrica 3D. Responda APENAS JSON com "
-            '{"summary": "...", "steps": [{"tool": "patch_repair|eval_texture|pack_glb|run_asset", "args": [...]}]}. '
-            "Nunca inclua publish ou comandos fora da whitelist."
+            "Agente de edição da Fábrica 3D. Responda APENAS JSON compacto sem markdown: "
+            '{"summary":"...","steps":[{"tool":"patch_repair|eval_texture|pack_glb|run_asset|blender","args":[]}]}. '
+            "Nunca use publish ou ferramentas fora da whitelist."
         )
         r = httpx.post(
-            "https://api.z.ai/api/paas/v4/chat/completions",
+            api_url,
             headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
             json={
                 "model": model,
                 "messages": [
                     {"role": "system", "content": sys_prompt},
-                    {"role": "user", "content": f"Pedido: {user_prompt}\nQA atual: {json.dumps(qa_summary)[:1500]}"},
+                    {"role": "user", "content": f"Pedido: {user_prompt}\nQA: {json.dumps(qa_summary)[:800]}"},
                 ],
-                "temperature": 0.2,
+                "temperature": 0.1,
+                "max_tokens": 350,
+                "thinking": {"type": "disabled"},
             },
             timeout=60,
         )
         r.raise_for_status()
-        txt = r.json()["choices"][0]["message"]["content"]
-        return {"provider": f"zai:{model}", **json.loads(txt)}
+        data = r.json()
+        txt = (data["choices"][0]["message"].get("content") or "").strip()
+        if txt.startswith("```"):
+            txt = txt.strip("`")
+            if txt.startswith("json"):
+                txt = txt[4:].strip()
+        usage = data.get("usage", {})
+        return {"provider": f"zai:{model}", "tokens_used": usage.get("total_tokens", 0), **json.loads(txt)}
 
     # Deterministic MOCK provider (default for offline/no-key testing)
     low = user_prompt.lower()
