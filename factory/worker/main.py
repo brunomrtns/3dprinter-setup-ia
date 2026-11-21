@@ -181,14 +181,19 @@ class FactoryWorker:
                 self.report_progress(jid, "shape", 20)
                 gen_out = evid_dir / "shape_gen"
                 gen_out.mkdir(parents=True, exist_ok=True)
-                subprocess.run(
-                    ["bash", str(REPO_ROOT / "tools" / "generator" / "pipeline_imagem3d.sh"), str(img_paths[0]), str(gen_out), "42"],
-                    check=True,
-                )
-                cands = list(gen_out.glob("*.obj")) + list(gen_out.glob("*.glb"))
-                if not cands:
-                    raise RuntimeError("Geração de malha não produziu .obj/.glb")
-                mesh_path = str(cands[0])
+                triposf_obj = gen_out / "2_triposf512" / "mesh_reconstruction.obj"
+                if not triposf_obj.exists():
+                    subprocess.run(
+                        ["bash", str(REPO_ROOT / "tools" / "generator" / "pipeline_imagem3d.sh"), str(img_paths[0]), str(gen_out), "42"],
+                        check=True,
+                    )
+                if triposf_obj.exists():
+                    mesh_path = str(triposf_obj)
+                else:
+                    cands = list(gen_out.rglob("*.obj")) + list(gen_out.rglob("*.glb"))
+                    if not cands:
+                        raise RuntimeError("Geração de malha não produziu .obj/.glb")
+                    mesh_path = str(cands[0])
             tier = "photos" if mode == "multi" and len(img_paths) >= 3 else ("single" if img_paths else "none")
 
         # Build asset config JSON from pipeline/defaults.json schema
