@@ -307,8 +307,8 @@ async function start() {
     const asset = await prisma.asset.findUnique({
       where: { id },
       include: {
-        versions: { orderBy: { versionNum: 'desc' }, take: 1 },
-        jobs: { orderBy: { createdAt: 'desc' }, take: 1 },
+        versions: { orderBy: { versionNum: 'desc' }, take: 5 },
+        jobs: { orderBy: { createdAt: 'desc' }, take: 15 },
       },
     });
     if (!asset) return reply.code(404).send({ error: 'Peça não encontrada' });
@@ -319,9 +319,19 @@ async function start() {
     let targetKey = q.key || '';
     if (!targetKey) {
       const variant = q.variant === '4k' ? 'glb_4k' : 'glb_8k';
-      const verFiles = (asset.versions[0]?.filesJson || {}) as Record<string, string>;
-      const jobFiles = ((asset.jobs[0]?.resultsJson as Record<string, unknown>)?.files || {}) as Record<string, string>;
-      targetKey = verFiles[variant] || jobFiles[variant] || verFiles['glb_8k'] || jobFiles['glb_8k'] || '';
+      const fallbackVariant = variant === 'glb_4k' ? 'glb_8k' : 'glb_4k';
+      const fileMaps: Array<Record<string, string>> = [
+        ...asset.versions.map((v) => (v.filesJson || {}) as Record<string, string>),
+        ...asset.jobs.map((j) => ((j.resultsJson as Record<string, unknown>)?.files || {}) as Record<string, string>),
+      ];
+      for (const fm of fileMaps) {
+        if (fm[variant]) { targetKey = fm[variant]; break; }
+      }
+      if (!targetKey) {
+        for (const fm of fileMaps) {
+          if (fm[fallbackVariant]) { targetKey = fm[fallbackVariant]; break; }
+        }
+      }
     }
     if (!targetKey || !targetKey.includes(`/${asset.id}/`)) {
       return reply.code(404).send({ error: 'Arquivo não disponível para esta peça' });
@@ -459,6 +469,30 @@ async function start() {
     if (!job) return reply.code(404).send({ error: 'Job não encontrado' });
 
     const res = (job.resultsJson || {}) as { files?: Record<string, string>; qa?: Record<string, unknown> };
+    let filesToSave = res.files || {};
+    if (!filesToSave.glb_8k && !filesToSave.glb_4k) {
+      const prevVer = await prisma.assetVersion.findFirst({
+        where: { assetId: job.assetId },
+        orderBy: { versionNum: 'desc' },
+      });
+      const prevJobs = await prisma.job.findMany({
+        where: { assetId: job.assetId, resultsJson: { not: null as any } },
+        orderBy: { createdAt: 'desc' },
+        take: 10,
+      });
+      const prevVerFiles = (prevVer?.filesJson || {}) as Record<string, string>;
+      if (prevVerFiles.glb_8k || prevVerFiles.glb_4k) {
+        filesToSave = prevVerFiles;
+      } else {
+        for (const pj of prevJobs) {
+          const pf = ((pj.resultsJson as Record<string, unknown>)?.files || {}) as Record<string, string>;
+          if (pf.glb_8k || pf.glb_4k) {
+            filesToSave = pf;
+            break;
+          }
+        }
+      }
+    }
     const nextVer = (job.asset.currentVersion || 0) + 1;
 
     const version = await prisma.assetVersion.create({
@@ -466,7 +500,7 @@ async function start() {
         assetId: job.assetId,
         jobId: job.id,
         versionNum: nextVer,
-        filesJson: (res.files || {}) as object,
+        filesJson: filesToSave as object,
         qaJson: (res.qa || {}) as object,
         publishedAt: new Date(),
       },

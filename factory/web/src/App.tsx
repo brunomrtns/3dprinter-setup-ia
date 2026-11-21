@@ -331,8 +331,11 @@ export const App: React.FC = () => {
 
   const latestJob = detail?.jobs?.[0];
   const verFiles = (detail?.versions?.[0]?.filesJson || {}) as Record<string, string>;
-  const jobFiles = (latestJob?.resultsJson?.files || {}) as Record<string, string>;
-  const filesMap = Object.keys(verFiles).length > 0 ? verFiles : jobFiles;
+  const latestJobWithFiles = (detail?.jobs || []).find(
+    (j: any) => j?.resultsJson?.files?.glb_4k || j?.resultsJson?.files?.glb_8k
+  );
+  const jobFiles = (latestJobWithFiles?.resultsJson?.files || {}) as Record<string, string>;
+  const filesMap = (verFiles.glb_4k || verFiles.glb_8k) ? verFiles : jobFiles;
   const has4k = Boolean(filesMap.glb_4k);
   const has8k = Boolean(filesMap.glb_8k);
   const hasGlb = has4k || has8k;
