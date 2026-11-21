@@ -5,6 +5,14 @@
   "manifest_path": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/tools/modelos3d-site/manifest.json",
   "evidence_root": "/mnt/c/Users/Bruno/OneDrive/Documentos/Default Project/3dprinter-setup-ia/evidence/rtx3060-12gb/pipe_std",
   "paint": {
+    "provider": "tripo",
+    "tripo": {
+      "quality": "detailed",
+      "pbr": true,
+      "max_cost_credits": 30,
+      "api_base": "https://openapi.tripo3d.ai/v3",
+      "sts_base": "https://api.tripo3d.ai/v2/openapi"
+    },
     "target_texture_size": 2048,
     "fallback_texture_size": 1024,
     "vram_limit_mib": 11000,

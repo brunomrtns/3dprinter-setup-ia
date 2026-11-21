@@ -16,7 +16,7 @@
 | **P — Fábrica 3D (`fab3d`, `v0.1.0-fab3d`)** | `[x]` **NO AR (`https://brunointegrations.com/fab3d/`)** — M0–M7 concluídos, BI Identity SSO (`/id/login`), Obsidian Studio UI, share links públicos read-only (`?share=`), Chat IA blindado (`glm-4.5-air`), UV Limpo QEM 100k + `paintfix_v2` (outliers Lab + VLM `glm-4.5v`) |
 | 3 — Pose / 4 — Operador IA | `[ ]` não abertas |
 
-**Gatilho atual:** Veredito visual do dono na nova versão `paintfix_v2` do Crash (`?share=589ad043dfbd30ac35653a2433ebffd4`) e decisão sobre o olho esquerdo.
+**Gatilho atual:** **PARADA HUMANA (`tripo_paint_v1`)** — dono fornece `TRIPO_API_KEY` para executar o smoke real de US\$ 0,10 e a Etapa C (re-pintura Tripo do Crash + 1 asset do `pipe_std`).
 
 ---
 
@@ -114,6 +114,18 @@
     - O Kit de Montagem CSG voltará a ser testado **exclusivamente** sobre a base nova vencedora das Tarefas B/C (Hi3DGen / Hunyuan-2.1).
 - **Fotos do kit = as MESMAS do C6** (`Downloads/fox/no-windows/` = `~/printer3d-work/carro/fotos-c7/` + `c7-prep/`): 5 fotos de 2400x1792 px (frente, frente-e-lado-diagonal, lado, traseira, de-fora-pegando-interna). Prep `*_tinted.png` reutilizado. C7-E (fotogrametria densa VGGT) retirado da fila (só reabrir se B/C falharem e houver sessão de 20-40 fotos completas).
 - **Publicação**: caso `carro_csg` (modos `kit`, `casca`, `interna`, `kit_corte`) mantido no viewer para histórico/comparação. Evidência: `evidence/rtx3060-12gb/carro-csg/report.json`.
+
+### Registro Pintor Principal = API Tripo (`tripo_paint_v1`, 2026-11-21) — `[~]` ETAPAS A/B/ADR PRONTAS · AGUARDANDO `TRIPO_API_KEY` (PARADA HUMANA)
+
+- **ETAPA A (`pipeline/tripo_client.py` + `pipeline/test_tripo_client.py` + `factory/worker/.env.example`):**
+  - Cliente Tripo OpenAPI implementado: fluxo **STS upload** (`POST /v2/openapi/upload/sts/token` + PUT S3 SigV4 puro em Python, retry 3×, fallback upload direto, limite 150 MB), upload de imagem de referência (≤ 20 MB), `tripo_texture_model` (v3 `/v3/models/texture` com fallback v2 `/v2/openapi/task`), `tripo_poll` a cada 10s com logger, `tripo_download` e `extract_glb_textures` (extrai `baseColor` + `metallicRoughness` com `mr_source: "tripo" | "none"`).
+  - Testes unitários offline com mock: **`UNIT_TEST_TRIPO_CLIENT_PASS`** (STS + SigV4 + poll queued→running→success + abort em failed + GLB com/sem MR).
+  - Pendente (PARADA HUMANA): smoke real de US\$ 0,10 (`fast`) após dono configurar `TRIPO_API_KEY`.
+- **ETAPA B (`pipeline/defaults.json` + `pipeline/run_asset.py` + `pipeline/patch_repair.py`):**
+  - `defaults.json` §`paint`: `provider: "tripo"` (default) | `"hunyuan"` (fallback local preservado), `tripo: {quality: "detailed", pbr: true, max_cost_credits: 30}`.
+  - `run_asset.py`: suporta `provider=tripo` (pula `02_paint_hunyuan`, usa `mr_source: "tripo"` pulando TRELLIS.2 quando o GLB do Tripo já traz MR, roda `patch_repair` em `--report-only`, grava `tripo_task_id`, `tripo_quality`, `tripo_cost_credits`, `mr_source`, `texture_resolution` em `qa.json`).
+- **ETAPA D (ADR):** criado `docs/fase-p-fabrica3d/ADR-009-pintor-principal-tripo-api.md`.
+- **ETAPA C (`[ ]` aguardando `TRIPO_API_KEY`):** smoke real US\$ 0,10 → re-pintura do Crash (`detailed` HD) → upload como nova versão no mesmo share link (`?share=589ad043...`) → 1 asset do `pipe_std`.
 
 ### Registro Acabamento Universal + Triagem VLM (`paintfix_v2`, 2026-11-21) — `[x]` CONCLUÍDO (AGUARDA VEREDITO VISUAL DO DONO)
 

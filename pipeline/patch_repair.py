@@ -711,6 +711,7 @@ def main() -> int:
     ap.add_argument("--photo-ref-dir", default="", help="Optional Stage B dir with <vid>_photo_ref_*.png and <vid>_photo_cos_*.npy")
     ap.add_argument("--report-out", required=True)
     ap.add_argument("--no-vlm", action="store_true", help="Force conservative offline triage without VLM API calls")
+    ap.add_argument("--report-only", action="store_true", help="Detect and report defects/outliers without modifying texture")
     args = ap.parse_args()
 
     cfg = json.loads(Path(args.config).read_text(encoding="utf-8"))
@@ -753,12 +754,17 @@ def main() -> int:
             photo_ref_rgb=photo_ref_rgb,
             allow_vlm=(not args.no_vlm),
         )
-        if uv_obj.exists() and pr_cfg.get("repair_dark_specks", False):
+        if uv_obj.exists() and pr_cfg.get("repair_dark_specks", False) and not args.report_only:
             repaired, fixed_3d, blocked_3d = repair_3d_uv_island_specks(uv_obj, repaired, pr_cfg, photo_ref_lum, photo_cos)
             stats["dark_3d_uv_islands_repaired"] = fixed_3d
             stats["blocked_by_photo_guard_3d"] = blocked_3d
         dst = out_dir / f"{vid}_repaired.png"
-        Image.fromarray(repaired, mode="RGB").save(dst)
+        if args.report_only:
+            stats["mode"] = "report_only"
+            Image.fromarray(rgb, mode="RGB").save(dst)
+        else:
+            stats["mode"] = "repair"
+            Image.fromarray(repaired, mode="RGB").save(dst)
         summary["variants"][vid] = {"src": str(src), "dst": str(dst), **stats}
         cob = stats["color_outliers_before"]
         coa = stats["color_outliers_after"]
