@@ -16,7 +16,7 @@
 | **P — Fábrica 3D (`fab3d`, `v0.1.0-fab3d`)** | `[x]` **NO AR (`https://brunointegrations.com/fab3d/`)** — M0–M7 concluídos, BI Identity SSO (`/id/login`), Obsidian Studio UI, share links públicos read-only (`?share=`), Chat IA blindado (`glm-4.5-air`), UV Limpo QEM 100k + `paintfix_v2` (outliers Lab + VLM `glm-4.5v`) |
 | 3 — Pose / 4 — Operador IA | `[ ]` não abertas |
 
-**Gatilho atual:** RUN `fab3d_mega_v2` em execução — TAREFA 1 `[x]` concluída (ADR-007 + ADR-010/Lei 8 + inventário real); ver painel de gates pendentes (`docs/operations/gates-pendentes.md`).
+**Gatilho atual:** RUN `fab3d_mega_v2` concluído — **veredito do dono nos 5 gates consolidados em `docs/operations/gates-pendentes.md`** (Crash `paintfix_v2`, Gate B Hi3DGen, E2E `anubis_a` / `.env` worker, 2 duplicidades Lei 8, prioridade pós-Fase C).
 
 ---
 
@@ -27,7 +27,7 @@
   - Pré-checagem + fix real em `factory/worker/main.py` (trocado `mesh_reconstruction.obj` fixo pelo glob real `2_triposf512/*_reconstruction.obj` com filtro anti-`*_gt.obj`) + normalização LF em `tools/generator/pipeline_imagem3d.sh`.
   - Job real ponta-a-ponta em `anubis_a_preproc.png` (`seed 42`, zero download): `preproc C2 → TripoSG → TripoSF 512` (`127s`, `644.824` faces, pico `6.450 MiB`, guard 10 GB OK) → `pipeline/run_asset.py` (`379s`, pico `9.957 MiB`, `lap_var=8104.21 >= 1200`, `color_outliers=0,009% <= 0,02%`, `MR=True`, `8K=16,62 MB` / `4K=8,99 MB`, `patches=0,6115%` → `qa_pass=False` segurou corretamente em `status=review`, `published=False`). Evidência: `evidence/fase-c/worker-triposg-e2e/`.
   - **`[!]` Pendência honesta (sem improviso de credencial):** upload/claim via fila HTTP da VPS (`factory/worker/main.py --once`) bloqueado porque `factory/worker/.env` (`VPS_URL` + `WORKER_TOKEN`) não está presente no disco local; restaurar `.env` destrava o envio direto à fila.
-- **[~] TAREFA 3 — Painel único de gates pendentes (`docs/operations/gates-pendentes.md`):** em andamento.
+- **[x] TAREFA 3 — Painel único de gates pendentes (`docs/operations/gates-pendentes.md`, 2026-11-22):** consolidados 5 gates abertos reais com links exatos, opções binárias A/B e o que cada decisão destrava.
 
 ---
 
