@@ -11,24 +11,32 @@
 |---|---|
 | 0 — Fundação | `[x]` aprovada pelo dono (2026-11-04) |
 | 1 — Gerador de Peças (venv + TRELLIS/TripoSR + benchmark) | `[x]` encerrada 2026-11-16 com **veredito NEGATIVO do dono** — sem default mode (ADR-005); infra validada e reaproveitável |
-| **C — Nova geração de geradores + qualidade de entrada** | `[~]` **EM ANDAMENTO (aberta 2026-11-16)** — C2 concluído; C1 na máquina do colega; C3 na 3060 |
+| **C — Nova geração de geradores + qualidade de entrada** | `[x]` **ENCERRADA (2026-11-22 — ADR-007)** — Pipeline oficial = `preproc C2 → TripoSG → TripoSF 512` (`engine=triposg`); **C1 (TRELLIS.2 gerador) CANCELADA**; Lei 8 (`ADR-010`) + inventário real em `docs/knowledge/inventario-pesos.md` |
 | 2 — Forja (parcial: pacote entregue na Fase 1) | `[~]` pipeline/reparo funcionais; catálogo completo é Fase 2 propriamente dita — depois da Fase C |
 | **P — Fábrica 3D (`fab3d`, `v0.1.0-fab3d`)** | `[x]` **NO AR (`https://brunointegrations.com/fab3d/`)** — M0–M7 concluídos, BI Identity SSO (`/id/login`), Obsidian Studio UI, share links públicos read-only (`?share=`), Chat IA blindado (`glm-4.5-air`), UV Limpo QEM 100k + `paintfix_v2` (outliers Lab + VLM `glm-4.5v`) |
 | 3 — Pose / 4 — Operador IA | `[ ]` não abertas |
 
-**Gatilho atual:** Veredito visual do dono na nova versão `paintfix_v2` do Crash (`?share=589ad043dfbd30ac35653a2433ebffd4`) e decisão sobre o olho esquerdo.
+**Gatilho atual:** RUN `fab3d_mega_v2` em execução — TAREFA 1 `[x]` concluída (ADR-007 + ADR-010/Lei 8 + inventário real); ver painel de gates pendentes (`docs/operations/gates-pendentes.md`).
 
 ---
 
-## Fase C — Nova geração de geradores + qualidade de entrada `[~] EM ANDAMENTO (aberta 2026-11-16)`
+## RUN `fab3d_mega_v2` (2026-11-22) — TripoSG Oficial + Lei 8 + E2E Worker + Painel de Gates
+
+- **[x] TAREFA 1 — Fechamento decisório (2026-11-22):** `ADR-007` (Fase C encerrada, TripoSG→TripoSF 512 oficial, C1 cancelada, ADR-005 superada) + `ADR-010` (Lei 8 Disco Único) + `tools/generator/inventario_pesos.py` & `docs/knowledge/inventario-pesos.md` (`45` arquivos, `61.68 GiB`) + atualização de `roadmap.md`, `PROGRESS.md` e `HANDOFF.md`.
+- **[~] TAREFA 2 — E2E do fluxo oficial no worker (`engine=triposg`):** em andamento.
+- **[ ] TAREFA 3 — Painel único de gates pendentes (`docs/operations/gates-pendentes.md`):** pendente.
+
+---
+
+## Fase C — Nova geração de geradores + qualidade de entrada `[x] ENCERRADA (2026-11-22 — ADR-007)`
 
 > Contexto: ADR-005 encerrou a Fase 1 sem gerador eleito. O dono decidiu abrir a Fase C: geradores de nova geração + ataque ao elo mais fraco medido (qualidade da entrada). Detalhes no roadmap §Fase C. Entra ANTES da Fase 2 por decisão do dono.
 
 | # | Tarefa | Status |
 |---|---|---|
 | C2 | `tools/generator/preprocess_input.py` (fundo removido via rembg, pad quadrado sem corte, 1024px, sidecar ADR-003, upscale opcional OFF) + 10 casos do testset → `~/printer3d-work/testset_preproc/` + evidência `evidence/fase-c/preproc/` | [x] 10/10 OK |
-| C1 | TRELLIS.2 (fork IgorAherne, VRAM reduzida) na máquina `rtx5060ti-8gb` — tarefa do colega | [ ] aguardando |
-| C3 | Comparativo formal na 3060: TRELLIS.2 + TripoSG + TRELLIS 1 + TripoSR na mesma entrada pré-processada, galeria lado a lado | `[~]` **GERAÇÃO+EVIDÊNCIA PUBLICADAS** — trellis2 10/10 OK, triposr 10/10, trellis 1/10 (9 OOM), triposg 7/10 (3 casos pulados por decisão do dono); gallery.md + scores.md + results.json em `evidence/fase-c/comparativo-3060/` — **aguarda veredito visual do dono → ADR-007** |
+| C1 | TRELLIS.2 (fork IgorAherne, VRAM reduzida) na máquina `rtx5060ti-8gb` — tarefa do colega | **CANCELADA (2026-11-22 — ADR-007)** — alinhar com o colega fora do repo |
+| C3 | Comparativo formal na 3060: TRELLIS.2 + TripoSG + TRELLIS 1 + TripoSR na mesma entrada pré-processada, galeria lado a lado | `[x]` **ENCERRADO COMO EVIDÊNCIA HISTÓRICA (ADR-007)** — `evidence/fase-c/comparativo-3060/` (trellis2 10/10, triposr 10/10, trellis 1/10, triposg 7/10) |
 | C4 | Fila de jobs entre máquinas | [ ] FUTURO (fora da fase) |
 | C6 | **Hunyuan3D-2.1 + Hunyuan3D-2mv multi-vista + TripoSG→TripoSF512 Multi-Partes + VGGT no carro fox (`no-windows`)** | `[x]` **CONCLUÍDO E PUBLICADO NO VIEWER (2026-11-18)** — `reclaim_windows_vram` (`NVIDIA Broadcast.exe`) no `gpu_guard.py`; CFG sequencial `batch=1` + offload por estágio no `hunyuan_runner.py` reduziu pico de VRAM do `Hunyuan3D-2mv` (4 vistas) de `12.054 MiB` (OOM) para **`3.369 MiB`** (`801.352` faces) + refino `TripoSF 512` (`1.465.074` faces, `6.569 MiB` VRAM) + pós-proc (`280k` faces watertight); **`TripoSG 505³ → TripoSF 512 → Pós-proc Multi-Partes`** (`--min-comp-faces 1000` em `posproc_impressao.py`) reconstruiu o **Fox com cabine interna completa (bancos, encostos, painel, volante) + teto 100% sólido c/ rack e antena + 4 rodas + placa** (`3.497.404` faces → `280k` watertight, pico `10.227 MiB`); `vggt_recon.py` + `captura-fotogrametria.md` prontos; 5 GLBs deployados em `https://brunointegrations.com/modelos3d/?case=carro_nowin` + STLs 200mm em `Downloads/fox-posproc/`. Evidência: `evidence/rtx3060-12gb/hunyuan-carro/` |
 | C5 | Benchmark TripoSF na 3060 (ordem direta do dono, 2026-11-17): caso anubis apenas, TripoSG × TripoSF | `[x]` **CONCLUÍDO COM VEREDITO DO DONO (2026-11-17)**: *"o triposf512 ganhou, melhor até agora"* — gate visual feito no viewer (modelos3d) com `triposg` × `triposf512`; 4/4 runs OK (256/512 × vistas a/b), picos 5,6–7,5 GB, guard 10 GB intacto; 1024³ **BLOQUEADO pelo guard**; evidência em `evidence/rtx3060-12gb/triposf-benchmark/`. **Pendência de decisão do dono**: promover o pipeline gerador→TripoSF512 como etapa oficial (exige Forja antes de imprimir — 512 não é watertight) |

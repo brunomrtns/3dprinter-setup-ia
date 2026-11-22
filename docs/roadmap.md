@@ -50,24 +50,24 @@ Critérios de aceite:
 
 ---
 
-## Fase C — Nova geração de geradores + qualidade de entrada `[~] EM ANDAMENTO (aberta 2026-11-16)`
+## Fase C — Nova geração de geradores + qualidade de entrada `[x] ENCERRADA (2026-11-22 — ADR-007)`
 
-> Entra ANTES da Fase 2 (Forja) por decisão do dono — a Forja segue no roadmap como fase seguinte e não é cancelada. Contexto: ADR-005 encerrou a Fase 1 sem gerador eleito (reprovação qualitativa do dono sobre TRELLIS e TripoSR de 1ª geração).
+> **Decisão oficial (`ADR-007`, 2026-11-22):** Fase C encerrada com o pipeline oficial **`imagem → preproc C2 → TripoSG → refino TripoSF 512`** (`tools/generator/pipeline_imagem3d.sh`; worker default `engine=triposg`). **TRELLIS.2 cancelado como gerador de forma** (estágio `05_trellis_pbr` de pintura MR mantido — `ADR-009`). **Lei 8 (`ADR-010`):** Disco Único de pesos (`docs/knowledge/inventario-pesos.md`).
 
-**Objetivo:** levar ao menos 1 gerador de nova geração ao gate visual do dono, com entradas padronizadas e medição pelo método do projeto (mesmo testset, mesmos gates, evidência namespaced — ADR-006). O dono não tem apego a modelo nenhum — só a resultado (fidelidade, detalhe, printabilidade). O elo mais fraco medido é a qualidade da IMAGEM DE ENTRADA.
+**Objetivo:** levar ao menos 1 gerador de nova geração ao gate visual do dono, com entradas padronizadas e medição pelo método do projeto (mesmo testset, mesmos gates, evidência namespaced — ADR-006).
 
 Escopo:
-- **C1** — TRELLIS.2 via fork de VRAM reduzida na máquina `rtx5060ti-8gb` (IgorAherne/TRELLIS.2-stableprojectorz; a oficial da Microsoft exige 24GB — o fork publica regras de offload para caber em 8GB);
-- **C2** — pré-processamento de entrada no repo: `tools/generator/preprocess_input.py` (fundo removido, pad quadrado sem cortar o sujeito, 1024px, sidecar ADR-003). Uso: `tools/setup/py.sh tools/generator/preprocess_input.py --batch <dir> --output-dir ~/printer3d-work/testset_preproc/`;
-- **C3** — comparativo formal na `rtx3060-12gb`: TRELLIS.2 + TripoSG (VAST-AI, MIT, 1.5B, ~8GB, shape-only — ideal para impressão) + baselines TRELLIS 1 e TripoSR na MESMA entrada pré-processada, galeria lado a lado;
-- **C4** — fila de jobs entre as duas máquinas (FUTURO, fora desta fase).
-
-Watchlist (avaliar só se os anteriores falharem no gate do dono, mesma metodologia): Hunyuan3D-2mini/2 (Tencent; shape ~5-6GB; textura 21GB — não cabe aqui) · PartCrafter (multi-peça, pesquisa) · Hitem3D 2.0 (plataforma/serviço, sem pesos abertos conhecidos — vigiar) · Hunyuan3D 3.0 (exige cluster, inviável local).
+- **C1** — **CANCELADA (2026-11-22 — ADR-007):** TRELLIS.2 via fork de VRAM reduzida na máquina `rtx5060ti-8gb` cancelada junto com o uso do TRELLIS.2 como gerador de forma (alinhar com o colega fora do repo);
+- **C2** — `[x]` pré-processamento de entrada no repo: `tools/generator/preprocess_input.py` (`10/10 OK`);
+- **C3** — `[x]` comparativo formal na `rtx3060-12gb` preservado como evidência histórica (`evidence/fase-c/comparativo-3060/`);
+- **C5/C6** — `[x]` benchmark TripoSF 512 + pipeline oficial one-command `tools/generator/pipeline_imagem3d.sh` validado;
+- **C7-B (Gate B — Hi3DGen)** e **C7-C (Hunyuan 2.1)** — mantidos como experimentos futuros opcionais; C7-C só reabre após veredito do dono no Gate B;
+- **C4** — absorvida pela Fase P (`factory/`).
 
 Critérios de aceite:
-- [ ] Pico de VRAM e tempo por caso medidos com o guard (perfis de máquina — ADR-006);
-- [ ] Galeria de comparação mesma câmera/luz (`tools/generator/render_preview.py`);
-- [ ] Veredito do dono registrado em ADR novo (ADR-007).
+- [x] Pico de VRAM e tempo por caso medidos com o guard (perfis de máquina — ADR-006);
+- [x] Galeria de comparação mesma câmera/luz (`tools/generator/render_preview.py`);
+- [x] Veredito do dono registrado em `docs/decisions/ADR-007-fase-c-encerrada-triposg-oficial.md` + Lei 8 em `docs/decisions/ADR-010-lei-8-disco-unico-pesos.md`.
 
 ---
 

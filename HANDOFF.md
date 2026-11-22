@@ -2,8 +2,13 @@
 
 > Leia isto DEPOIS de `PROGRESS.md` (fonte da verdade) e ANTES de executar qualquer coisa. Contexto mínimo para um agente frio continuar o projeto sem conversa anterior.
 
-## Estado atual (2026-11-20)
+## Estado atual (2026-11-22)
 
+- **✅ FASE C ENCERRADA — `ADR-007` + `ADR-010` / Lei 8 (2026-11-22)**:
+  - **Pipeline oficial de geração image→3D:** `imagem → preproc C2 → TripoSG → refino TripoSF 512` (`tools/generator/pipeline_imagem3d.sh`; worker default `engine=triposg` em `factory/worker/main.py`). Supera explicitamente a `ADR-005` neste ponto.
+  - **TRELLIS.2 cancelado como gerador de forma** (`C1` na 5060 Ti cancelada — alinhar com o colega fora do repo). **Não confundir:** o estágio `05_trellis_pbr` (mapa `MetallicRoughness` na pintura) permanece ativo pela `ADR-009`.
+  - **Lei 8 (`ADR-010`) — Disco Único de Pesos:** inventário real somente-leitura + SHA-256 em `docs/knowledge/inventario-pesos.md` (gerado por `tools/generator/inventario_pesos.py`). Nunca baixar peso sem conferir/registrar no inventário; compartilhar via cache HF ou symlink.
+  - **Experimentos opcionais / histórico:** C3, Gate B (Hi3DGen em `?case=carro_nowin&mode=hi3dgen`) e C7-C (Hunyuan 2.1 — só reabre após veredito do dono no Gate B).
 - **✅ FASE P — FÁBRICA 3D (`v0.1.0-fab3d`, CONCLUÍDA EM 2026-11-20)**:
   - **URL ao vivo**: `https://brunointegrations.com/fab3d/` (API: `/api/fab3d/health`, uso estritamente privado/pessoal — ADR-008).
   - **Infra VPS**: 5 containers dedicados (`fab3d-postgres`, `fab3d-redis`, `fab3d-minio`, `fab3d-api`, `fab3d-web`) em `/opt/fab3d/` (`factory/deploy.sh`), segredos apenas em `/opt/fab3d/.env` (`chmod 600`); apps existentes (`/modelos3d/`, `/gpcg/api/health`, `/3dpanel/api/health`, `/`) intocados e `HTTP 200`.
