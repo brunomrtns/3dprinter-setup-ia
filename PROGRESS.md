@@ -16,7 +16,12 @@
 | **P — Fábrica 3D (`fab3d`, `v0.1.0-fab3d`)** | `[x]` **NO AR (`https://brunointegrations.com/fab3d/`)** — M0–M7 concluídos, BI Identity SSO (`/id/login`), Obsidian Studio UI, share links públicos read-only (`?share=`), Chat IA blindado (`glm-4.5-air`), UV Limpo QEM 100k + `paintfix_v2` (outliers Lab + VLM `glm-4.5v`) |
 | 3 — Pose / 4 — Operador IA | `[ ]` não abertas |
 
-**Gatilho atual:** RUN `fab3d_mega_v2` concluído — **veredito do dono nos 5 gates consolidados em `docs/operations/gates-pendentes.md`** (Crash `paintfix_v2`, Gate B Hi3DGen, E2E `anubis_a` / `.env` worker, 2 duplicidades Lei 8, prioridade pós-Fase C).
+**Gatilho atual:** **C5 do CONCERTO em andamento** (`game-concerto`, props batch-1 + conceitos Porca/Dez). Todos os 5 gates da Fábrica fechados em 2026-11-22 (`1C ARQUIVADO · 2B · 3B · 4B · 5B`, `docs/operations/gates-pendentes.md`); `paintfix_v2` (Crash) arquivado pelo dono sem repaint; Fase 2 (Forja) preservada para próxima demanda de impressão.
+
+---
+
+## RUN `mega_v3` — TAREFA 1 (2026-11-22) — Fechamento dos 5 Gates (SEM GPU)
+- **[x] TAREFA 1 (`1C · 2B · 3B · 4B · 5B`):** vereditos gravados em `docs/operations/gates-pendentes.md`, duplicidades aceitas registradas em `docs/knowledge/inventario-pesos.md`, `PROGRESS.md` e `HANDOFF.md` atualizados. Crash `paintfix_v2` arquivado como aprendizado (zero GPU gasta); foco deslocado para o C5 do CONCERTO.
 
 ---
 

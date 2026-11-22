@@ -26,8 +26,10 @@
 
 ## Duplicidades Detectadas (mesmo SHA-256 em caminhos físicos distintos)
 
-- `dcb2e45127cccbf1…` (1.13 GiB): `~/.cache/huggingface/hub/models--camenduru--dinov3-vitl16-pretrain-lvd1689m/snapshots/3c276edd87d6f6e569ff0c4400e086807d0f3881/model.safetensors`, `~/tools/TRELLIS.2/MODELS/dinov3/model.safetensors`
-- `9ab37426bf4de056…` (423.9 MiB): `~/.cache/huggingface/hub/models--ZhengPeng7--BiRefNet/snapshots/e2bf8e4460fc8fa32bba5ea4d94b3233d367b0e4/model.safetensors`, `~/tools/TRELLIS.2/MODELS/RMBG-2.0/model.safetensors`
+> **Status (Gate 4B, 2026-11-22 — DECISÃO DO DONO):** As 2 duplicidades abaixo (`~1,55 GiB`) ficam **ACEITAS**. A cópia em `~/tools/TRELLIS.2/MODELS/` é canônica do TRELLIS.2 (que segue rodando no estágio `05_trellis_pbr` e como fallback oficial do jogo); só reabrir sob pressão real de disco, com teste obrigatório do `05_trellis_pbr` após eventual troca por symlink.
+
+- `dcb2e45127cccbf1…` (1.13 GiB): `~/.cache/huggingface/hub/models--camenduru--dinov3-vitl16-pretrain-lvd1689m/snapshots/3c276edd87d6f6e569ff0c4400e086807d0f3881/model.safetensors`, `~/tools/TRELLIS.2/MODELS/dinov3/model.safetensors` — **ACEITA (Gate 4B)**
+- `9ab37426bf4de056…` (423.9 MiB): `~/.cache/huggingface/hub/models--ZhengPeng7--BiRefNet/snapshots/e2bf8e4460fc8fa32bba5ea4d94b3233d367b0e4/model.safetensors`, `~/tools/TRELLIS.2/MODELS/RMBG-2.0/model.safetensors` — **ACEITA (Gate 4B)**
 
 ## Tabela Completa de Pesos (Read-Only + SHA-256)
 

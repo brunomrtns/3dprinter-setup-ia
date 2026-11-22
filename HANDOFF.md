@@ -4,6 +4,12 @@
 
 ## Estado atual (2026-11-22)
 
+- **✅ 5 GATES DA FÁBRICA FECHADOS (2026-11-22 — `docs/operations/gates-pendentes.md`, vereditos `1C · 2B · 3B · 4B · 5B`)**:
+  - **1C:** Crash `paintfix_v2` arquivado sem repaint (peça de teste do acervo; fix de outliers herdado pelo C5 do jogo; olho esquerdo lavado fica como limitação conhecida).
+  - **2B:** `TripoSG → TripoSF 512` mantido (ADR-007); Hi3DGen e C7-C arquivados como histórico (Hi3DGen documentado como caminho rápido opcional futuro para hard-surface).
+  - **3B:** E2E local encerrado (`506s`, `0` OOM, glob `*_reconstruction.obj` corrigido); restaurar `factory/worker/.env` segue como ação humana de 1 linha.
+  - **4B:** 2 duplicidades físicas (`1,55 GiB` em `~/tools/TRELLIS.2/MODELS/`) aceitas até pressão real de disco.
+  - **5B:** Foco imediato no **C5 do CONCERTO** (`game-concerto`); Fase 2 (Forja) preservada para próxima demanda de impressão.
 - **✅ FASE C ENCERRADA — `ADR-007` + `ADR-010` / Lei 8 (2026-11-22)**:
   - **Pipeline oficial de geração image→3D:** `imagem → preproc C2 → TripoSG → refino TripoSF 512` (`tools/generator/pipeline_imagem3d.sh`; worker default `engine=triposg` em `factory/worker/main.py`). Supera explicitamente a `ADR-005` neste ponto.
   - **TRELLIS.2 cancelado como gerador de forma** (`C1` na 5060 Ti cancelada — alinhar com o colega fora do repo). **Não confundir:** o estágio `05_trellis_pbr` (mapa `MetallicRoughness` na pintura) permanece ativo pela `ADR-009`.
