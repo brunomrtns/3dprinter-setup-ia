@@ -1,0 +1,43 @@
+{
+  "run": "fab3d_mega_v2_tarefa2_e2e",
+  "timestamp_utc": "2026-11-22T22:18:56.243107+00:00",
+  "input_image": "/home/bruno/printer3d-work/anubis/anubis_a_preproc.png",
+  "engine": "triposg",
+  "shape_pipeline": "preproc C2 -> TripoSG -> TripoSF 512",
+  "recon_glob_matched": "/home/bruno/printer3d-work/worker-triposg-e2e/shape_gen/2_triposf512/mesh_reconstruction.obj",
+  "shape_elapsed_sec": 127,
+  "paint_qa_elapsed_sec": 379,
+  "total_elapsed_sec": 506,
+  "triposf_telemetry": {
+    "label": "pipeline",
+    "mesh_path": "/home/bruno/printer3d-work/worker-triposg-e2e/shape_gen/1_triposg/mesh.obj",
+    "config": "/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/tools/generator/triposf/TripoSFVAE_o512.yaml",
+    "erros": [],
+    "vram_wait_s": 0.1,
+    "vram_baseline_mib": 709,
+    "tempo_total_s": 34.51,
+    "exit_code": 0,
+    "vram_pico_mib": 6450,
+    "guard_tripped": false,
+    "tempo_normalize_s": 3.24,
+    "tempo_load_s": 2.9,
+    "tempo_recon_s": 7.23,
+    "mesh_recon": "/home/bruno/printer3d-work/worker-triposg-e2e/shape_gen/2_triposf512/mesh_reconstruction.obj",
+    "vertices": 322477,
+    "faces": 644824,
+    "bbox": [
+      0.4521,
+      1.0,
+      0.3195
+    ],
+    "watertight": false
+  },
+  "qa_overall_pass": false,
+  "staged_glbs_bytes": {
+    "e2e_anubis_triposg__pbr_4k.glb": 9426000,
+    "e2e_anubis_triposg__pbr_8k.glb": 17429396
+  },
+  "status": "review",
+  "auto_published": false,
+  "vps_worker_queue_status": "BLOCKED_MISSING_LOCAL_DOTENV (factory/worker/.env ausente no disco local)"
+}

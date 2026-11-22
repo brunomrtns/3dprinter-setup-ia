@@ -298,16 +298,18 @@ class FactoryWorker:
                 self.report_progress(jid, "shape", 20)
                 gen_out = evid_dir / "shape_gen"
                 gen_out.mkdir(parents=True, exist_ok=True)
-                triposf_obj = gen_out / "2_triposf512" / "mesh_reconstruction.obj"
-                if not triposf_obj.exists():
+                triposf_dir = gen_out / "2_triposf512"
+                recon_cands = sorted(triposf_dir.glob("*_reconstruction.obj")) if triposf_dir.is_dir() else []
+                if not recon_cands:
                     subprocess.run(
                         ["bash", str(REPO_ROOT / "tools" / "generator" / "pipeline_imagem3d.sh"), str(img_paths[0]), str(gen_out), "42"],
                         check=True,
                     )
-                if triposf_obj.exists():
-                    mesh_path = str(triposf_obj)
+                    recon_cands = sorted(triposf_dir.glob("*_reconstruction.obj")) if triposf_dir.is_dir() else []
+                if recon_cands:
+                    mesh_path = str(recon_cands[0])
                 else:
-                    cands = list(gen_out.rglob("*.obj")) + list(gen_out.rglob("*.glb"))
+                    cands = [p for p in (list(gen_out.rglob("*.obj")) + list(gen_out.rglob("*.glb"))) if not p.name.endswith("_gt.obj")]
                     if not cands:
                         raise RuntimeError("Geração de malha não produziu .obj/.glb")
                     mesh_path = str(cands[0])

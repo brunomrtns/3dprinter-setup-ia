@@ -1,0 +1,14 @@
+{
+  "id": "e2e_anubis_triposg",
+  "variant_id": "pbr",
+  "mesh": "/home/bruno/printer3d-work/worker-triposg-e2e/shape_gen/2_triposf512/mesh_reconstruction.obj",
+  "uv": "/home/bruno/printer3d-work/worker-triposg-e2e/shape_gen/2_triposf512/mesh_reconstruction.obj",
+  "tier": "single",
+  "input_images": ["/home/bruno/printer3d-work/worker-triposg-e2e/shape_gen/entrada_preproc.png"],
+  "outputs": {
+    "mode_8k": "pbr_8k",
+    "mode_4k": "pbr_4k",
+    "glb_names": ["e2e_anubis_triposg__pbr_8k.glb", "e2e_anubis_triposg__pbr_4k.glb"]
+  },
+  "notes": "E2E TAREFA 2 fab3d_mega_v2 - engine=triposg -> TripoSF512 -> run_asset.py -> review"
+}

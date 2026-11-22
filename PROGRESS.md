@@ -23,8 +23,11 @@
 ## RUN `fab3d_mega_v2` (2026-11-22) — TripoSG Oficial + Lei 8 + E2E Worker + Painel de Gates
 
 - **[x] TAREFA 1 — Fechamento decisório (2026-11-22):** `ADR-007` (Fase C encerrada, TripoSG→TripoSF 512 oficial, C1 cancelada, ADR-005 superada) + `ADR-010` (Lei 8 Disco Único) + `tools/generator/inventario_pesos.py` & `docs/knowledge/inventario-pesos.md` (`45` arquivos, `61.68 GiB`) + atualização de `roadmap.md`, `PROGRESS.md` e `HANDOFF.md`.
-- **[~] TAREFA 2 — E2E do fluxo oficial no worker (`engine=triposg`):** em andamento.
-- **[ ] TAREFA 3 — Painel único de gates pendentes (`docs/operations/gates-pendentes.md`):** pendente.
+- **[x] TAREFA 2 — E2E do fluxo oficial no worker (`engine=triposg`, 2026-11-22):**
+  - Pré-checagem + fix real em `factory/worker/main.py` (trocado `mesh_reconstruction.obj` fixo pelo glob real `2_triposf512/*_reconstruction.obj` com filtro anti-`*_gt.obj`) + normalização LF em `tools/generator/pipeline_imagem3d.sh`.
+  - Job real ponta-a-ponta em `anubis_a_preproc.png` (`seed 42`, zero download): `preproc C2 → TripoSG → TripoSF 512` (`127s`, `644.824` faces, pico `6.450 MiB`, guard 10 GB OK) → `pipeline/run_asset.py` (`379s`, pico `9.957 MiB`, `lap_var=8104.21 >= 1200`, `color_outliers=0,009% <= 0,02%`, `MR=True`, `8K=16,62 MB` / `4K=8,99 MB`, `patches=0,6115%` → `qa_pass=False` segurou corretamente em `status=review`, `published=False`). Evidência: `evidence/fase-c/worker-triposg-e2e/`.
+  - **`[!]` Pendência honesta (sem improviso de credencial):** upload/claim via fila HTTP da VPS (`factory/worker/main.py --once`) bloqueado porque `factory/worker/.env` (`VPS_URL` + `WORKER_TOKEN`) não está presente no disco local; restaurar `.env` destrava o envio direto à fila.
+- **[~] TAREFA 3 — Painel único de gates pendentes (`docs/operations/gates-pendentes.md`):** em andamento.
 
 ---
 

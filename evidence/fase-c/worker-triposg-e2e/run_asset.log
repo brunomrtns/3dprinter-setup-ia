@@ -1,0 +1,49 @@
+=== [pipe_std] Asset=e2e_anubis_triposg tier=single hash=9f6559e0f9cba4a6 ===
+[ensure_uv_obj] QEM decimated 644824 -> 100000 faces before xatlas
+[00_preflight] OK: islands=646 warning=UV muito fragmentado (ilhas mínimas <= 1px) — qualidade de pintura limitada por UV. | UV com sobreposição alta (19.32%) — qualidade de pintura limitada por UV.
+[run_asset] >>> 02_paint_hunyuan: /home/bruno/.venvs/hunyuan/bin/python /mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/pipeline/paint_quality.py --config /home/bruno/printer3d-work/worker-triposg-e2e/run/_compat_cfg.json
+[gpu_guard] e2e_anubis_triposg_stage_a: liberado com 11402 MiB livres
+[stage_a] Running delight on 1 references...
+
+=== [STAGE A] Painting pbr (target=2048) ===
+  [stage_a] 6 multiviews generated (VRAM now 884 MiB)
+[stage_a] Per-view Real-ESRGAN x4 SR (6 views -> 2048px)...
+  tile 4/4
+  tile 4/4
+  tile 4/4
+  tile 4/4
+  tile 4/4
+  tile 4/4
+  [stage_a] UV gutter bleed: islands=644, gutter_px=24
+  pbr OK: tex=2048 lap_var=861.4 sat=31.382% t=135.0s peak=9957MiB
+[gpu_guard] e2e_anubis_triposg_stage_a: fim, VRAM used=1024 free=11087
+STAGE_A_OK={"peak_mib": 9957, "tempo_s": 152.64}
+[run_asset] >>> 04_patch_repair: /home/bruno/.venvs/hunyuan/bin/python /mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/pipeline/patch_repair.py --config /home/bruno/printer3d-work/worker-triposg-e2e/run/_compat_cfg.json --input-dir /home/bruno/printer3d-work/worker-triposg-e2e/run/etapa_a --output-dir /home/bruno/printer3d-work/worker-triposg-e2e/run/etapa_c --report-out /home/bruno/printer3d-work/worker-triposg-e2e/run/etapa_c/report.json
+[stage_c] pbr: bright=0 (0.0%->0.5955%) | dark_2d=0 | dark_3d=1 | color_outliers=102(0.0734%)->19(0.009%) | vlm(calls=0, protected=0, deferred=487)
+STAGE_C_OK
+[run_asset] >>> 05_trellis_pbr: /home/bruno/.venvs/trellis2/bin/python /mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/pipeline/retexture_trellis.py --config /home/bruno/printer3d-work/worker-triposg-e2e/run/_compat_cfg.json --cond-image /home/bruno/printer3d-work/worker-triposg-e2e/shape_gen/entrada_preproc.png --cond-tag primary --report-out /home/bruno/printer3d-work/worker-triposg-e2e/run/etapa_trellis_pbr/report.json
+[SPARSE] Conv backend: flex_gemm; Attention backend: xformers
+[gpu_guard] e2e_anubis_triposg_stage_b_trellis2: liberado com 11396 MiB livres
+[stage_b] Loading Trellis2TexturingPipeline (microsoft/TRELLIS.2-4B)...
+[ATTENTION] Using backend: xformers
+[stage_b] Loaded! quant={'tex_slat_flow_model_512': 'fp16_bf16_native', 'tex_slat_flow_model_1024': 'fp16_bf16_native'}
+
+=== [STAGE B] TRELLIS.2 PBR pbr (cond=primary) ===
+Intersect QEF computation took 1.01346 seconds.
+Face QEF computation took 0.662366 seconds.
+Boundary QEF computation took 0.082635 seconds.
+Dual vertices computation took 0.20943 seconds.
+  pbr OK: res=1024 tex=2048 lap=39.39 t=32.83s guard=True peak=4130MiB
+[gpu_guard] e2e_anubis_triposg_stage_b_trellis2: fim, VRAM used=902 free=11209
+STAGE_B_DONE={"status": "OK", "peak_mib": 4130, "tempo_s": 80.49}
+[run_asset] >>> 06_pack_glb: /home/bruno/.venvs/hunyuan/bin/python /mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/pipeline/pack_glb.py --config /home/bruno/printer3d-work/worker-triposg-e2e/run/_compat_cfg.json --input-dir /home/bruno/printer3d-work/worker-triposg-e2e/run/etapa_c --variants pbr --report-out /home/bruno/printer3d-work/worker-triposg-e2e/run/etapa_e/report.json --pbr-dir /home/bruno/printer3d-work/worker-triposg-e2e/run/etapa_trellis_pbr/mr_final
+  tile 4/16
+  tile 8/16
+  tile 12/16
+  tile 16/16
+[stage_e] pbr OK: sat 31.363%->34.821% | 8K=16.62MB, 4K=8.99MB (PBR=True)
+STAGE_E_OK peak=6834MiB t=56.24s
+[run_asset] >>> 07_qa_eval: /home/bruno/.venvs/hunyuan/bin/python /mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/pipeline/eval_texture.py --config /home/bruno/printer3d-work/worker-triposg-e2e/run/_compat_cfg.json --final-dir /home/bruno/printer3d-work/worker-triposg-e2e/run/etapa_c --report-out /home/bruno/printer3d-work/worker-triposg-e2e/run/etapa_d/report.json
+[stage_d] pbr: tex_lap 0.0->855.45 (855450000.0x) | view_lap 4000.49->8104.21 (2.03x) | patches 0(0.0%)->70(0.6021%) | color_outliers=19(0.009%) | all_defects=0.6115% | wins=False
+STAGE_D_OK
+RUN_ASSET_DONE asset=e2e_anubis_triposg tier=single qa_pass=False published=False peak_vram=9957MiB tempo=376.98s
