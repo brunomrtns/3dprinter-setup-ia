@@ -271,7 +271,7 @@ def run_one_job(
 
     prov = {
         "runner": "3dprinter-setup-ia/tools/generator/concept_flux.py",
-        "backend": "ComfyUI headless (--lowvram)",
+        "backend": "ComfyUI headless (--lowvram --reserve-vram 3.5)",
         "model": ckpt_name.replace(".safetensors", ""),
         "weights_file": str(comfy_dir / "models" / "checkpoints" / ckpt_name),
         "weights_sha256": ckpt_sha256,
@@ -289,11 +289,21 @@ def run_one_job(
         "guard_ok": not mon.guard_breached,
         "timestamp_utc": datetime.now(timezone.utc).isoformat(),
     }
+    # Gate Anti-Grade / Sujeito Unico obrigatorio (RUN mega_v5)
+    try:
+        from gate_concept_image import evaluate_image as _eval_gate
+        gate = _eval_gate(out_path, write_sidecar=True)
+        prov["gate_pass"] = gate["gate_pass"]
+        prov["gate_razao"] = gate["razao"]
+    except Exception as _gexc:
+        prov["gate_pass"] = None
+        prov["gate_razao"] = f"gate_error: {_gexc}"
+
     prov_path = out_path.with_suffix(".provenance.json")
     prov_path.write_text(json.dumps(prov, indent=2, ensure_ascii=False), encoding="utf-8")
     print(
         f"[concept_flux] OK {out_path.name} | {elapsed}s | peak_vram={mon.peak_used_mib} MiB "
-        f"(guard {vram_limit_mib} MiB: {'PASS' if prov['guard_ok'] else 'BREACHED'})",
+        f"(guard {vram_limit_mib} MiB: {'PASS' if prov['guard_ok'] else 'BREACHED'}) | gate_pass={prov['gate_pass']}",
         flush=True,
     )
     return prov

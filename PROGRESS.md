@@ -20,6 +20,13 @@
 
 ---
 
+## RUN `mega_v5` — TAREFA 2 (2026-11-23) — Gate Anti-Grade + Auditoria Retroativa (CPU-only)
+- **[x] `tools/generator/gate_concept_image.py`:** gate CPU-only (0 VRAM) verificando componentes conexos (`>=2` peças `>=5%` → FAIL), calhas internas (`15%..85%` → FAIL) e corte de borda (`>8%` → FAIL); grava `.gate.json` ao lado de cada imagem.
+- **[x] Integração obrigatória:** integrado em `tools/generator/concept_flux.py` e em `game-concerto/tools/art/ai_generator/concept_bridge.py` (`gate_pass` + `gate_razao` no provenance JSON).
+- **[x] Auditoria retroativa:** `tools/generator/auditar_conceitos_v5.py` rodado em 100% das imagens de conceito existentes (`evidence/fase-p/gate-anti-grade/auditoria_retroativa_v5.{json,md}`). Todos os contact sheets (`*_sheet.png`, `painel_*.png`) reprovados como esperado (ref. humana apenas); todas as candidatas individuais FLUX (Batch-1 A/B, Batch-2, Dez e Porca) verificadas em vista única.
+
+---
+
 ## RUN `mega_v4` — TAREFA 1 (2026-11-22) — ComfyUI Headless + FLUX.1-dev FP8 (Lei 8)
 - **[x] Sonda Lei 8:** `/mnt/d` vazio, nenhum ComfyUI nem peso FLUX pré-existente em `~/tools`, `~/ComfyUI`, `C:\Users\Bruno` ou `~/.cache/huggingface/hub` (apenas `sdxl-turbo` 6,46 GiB). `715 GiB` livres em `/`.
 - **[x] Porta do repo + Peso único autorizado:** `tools/setup/install_comfyui.sh` instalou `ComfyUI` em `~/tools/comfyui` + venv dedicada `~/.venvs/comfyui` (`torch 2.11.0+cu128`) e baixou `Comfy-Org/flux1-dev` (`flux1-dev-fp8.safetensors`, `16,06 GiB` all-in-one, SHA-256 `8e91b68084b53a7fc44ed2a3756d821e355ac1a7b6fe29be760c1db532f3d88a`), registrado em `docs/knowledge/inventario-pesos.md` (`46` arquivos, `77,74 GiB`).
