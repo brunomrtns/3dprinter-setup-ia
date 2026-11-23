@@ -1,0 +1,15 @@
+{
+  "id": "npc_juno",
+  "variant_id": "pbr",
+  "mesh": "/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/work/npcs/npc_juno/mesh_30k.obj",
+  "uv": "/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/work/npcs/npc_juno/mesh_30k.obj",
+  "tier": "single",
+  "input_images": ["/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/evidence/npcs/npc_juno.png"],
+  "outputs": {
+    "mode_8k": "pbr_8k",
+    "mode_4k": "pbr_4k",
+    "glb_names": ["npc_juno__pbr_8k.glb", "npc_juno__pbr_4k.glb"]
+  },
+  "qa": { "lap_min": 500.0, "patch_max_pct": 0.25, "sat_min_pct": 3.0, "sat_max_pct": 98.0 },
+  "notes": "NPC alienigena inteligente (npc_juno) — motor de forma EXCLUSIVAMENTE TripoSG."
+}
