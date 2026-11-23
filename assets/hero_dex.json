@@ -1,0 +1,22 @@
+{
+  "id": "hero_dex",
+  "variant_id": "pbr",
+  "mesh": "/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/work/dex_rig/cand_a_triposg/mesh_40k.obj",
+  "uv": "/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/work/dex_rig/cand_a_triposg/mesh_40k.obj",
+  "tier": "single",
+  "input_images": [
+    "/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/evidence/dex_rig/preproc/dex_front.png"
+  ],
+  "outputs": {
+    "mode_8k": "pbr_8k",
+    "mode_4k": "pbr_4k",
+    "glb_names": ["hero_dex__pbr_8k.glb", "hero_dex__pbr_4k.glb"]
+  },
+  "qa": {
+    "lap_min": 800.0,
+    "patch_max_pct": 0.10,
+    "sat_min_pct": 5.0,
+    "sat_max_pct": 90.0
+  },
+  "notes": "RUN dex_rig_v1 — Novo protagonista Dex (pose canônica simétrica A-pose, motor de forma TripoSG oficial, ordem do dono 2026-11-23)."
+}

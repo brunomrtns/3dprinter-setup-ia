@@ -1,0 +1,22 @@
+{
+  "candidate": "A_TripoSG_front_official",
+  "obj_path": "/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/work/dex_rig/cand_a_triposg/mesh.obj",
+  "vertices": 458440,
+  "faces": 916852,
+  "bbox_extents": [
+    1.5617,
+    1.8746,
+    0.6007
+  ],
+  "bbox_diag": 2.5127,
+  "connected_components": 8,
+  "main_component_face_ratio": 0.9993,
+  "single_main_body_pass": true,
+  "watertight_raw": true,
+  "watertight_after_repair": true,
+  "mirror_symmetry_axis": "X",
+  "mirror_distance_mean_pct_bbox": 0.622,
+  "mirror_distance_p95_pct_bbox": 1.23,
+  "symmetry_pass_lt_1pct": true,
+  "note_b_skipped": "Candidato B (Hunyuan3D-2mv multi-vista) pulado por ordem expl\u00edcita do dono (2026-11-23): usar TripoSG + pipeline oficial 3dprinter-setup-ia."
+}
