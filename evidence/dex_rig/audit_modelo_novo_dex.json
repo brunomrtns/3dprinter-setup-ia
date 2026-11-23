@@ -1,0 +1,18 @@
+{
+  "model": "/mnt/c/Users/Bruno/workspace/game-concerto/unity/Assets/Game/Art/Generated/hero_dex/hero_dex_humanoid.fbx",
+  "has_uv_layer": true,
+  "bones_total": 30,
+  "mesh_mirror_mean_pct_bbox": 0.951,
+  "mesh_mirror_p95_pct_bbox": 2.024,
+  "skeleton_max_pair_asym_pct_height": 0.781,
+  "skeleton_symmetry_pass_lt_2pct": true,
+  "skeleton_pairs_pct": {
+    "LeftShoulder_vs_RightShoulder": 0.781,
+    "LeftUpperArm_vs_RightUpperArm": 0.781,
+    "LeftLowerArm_vs_RightLowerArm": 0.781,
+    "LeftHand_vs_RightHand": 0.781,
+    "LeftUpperLeg_vs_RightUpperLeg": 0.552,
+    "LeftLowerLeg_vs_RightLowerLeg": 0.391,
+    "LeftFoot_vs_RightFoot": 0.552
+  }
+}
