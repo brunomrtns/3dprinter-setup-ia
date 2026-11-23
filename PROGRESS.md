@@ -20,10 +20,11 @@
 
 ---
 
-## RUN `mega_v6` — Preparação & Docs (2026-11-23) — PRONTO PARA EXECUÇÃO AMANHÃ
-- **[x] `ADR-011` ratificado como OFICIAL:** `FLUX.1-dev FP8` = gerador oficial 2D do pipeline.
-- **[x] `ADR-012` criado (`docs/decisions/ADR-012-lei-9-animacao-aaa.md`):** Lei 9 (Anti-Chilique, 3 pilares + checklist 8 itens + QA automático de foot-slide/60 fps) + stack **100% GRATUITA** verificada por curl-gate (`UniRig` MIT · `MoMask` MIT com 4 checkpoints já no disco · `CMU MoCap` uso comercial permitido + crédito `NSF EIA-0196217` · `Quaternius UAL` + `Kenney` CC0 · `Unity Animation Rigging` + `Unity Recorder` grátis · `SpringBone` C# próprio · `JLPM22/MotionMatching` MIT para Fase 2). **Cascadeur Indie e MagicaCloth 2 removidos/banidos** por ordem explícita do dono (zero ferramenta paga).
-- **[ ] Execução `RUN mega_v6` (TAREFAS 1→4):** pronta para iniciar amanhã em `game-concerto/docs/art/plano-animacao-aaa-mega-v6.md`.
+## RUN `mega_v6` — Módulo de Animação AAA (2026-11-23, 100% Gratuito)
+- **[x] TAREFA 1 — `ADR-011` (OFICIAL) + `ADR-012` (Lei 9) + `tools/animation/momask_to_fbx.py`:**
+  - `ADR-012` gravado com stack 100% gratuita verificada por curl-gate (zero ferramentas pagas; Cascadeur/MagicaCloth banidos).
+  - Conversor reutilizável `tools/animation/momask_to_fbx.py` + `bvh_to_humanoid_fbx.py` validado no smoke `evidence/fase-p/momask-anim-smoke/smoke_walk_momask.fbx` (`238` frames @ **60 fps**, `in_place=True`, `gen=18,96s`, pico **`1.786 MiB <= 10.000 MiB`**, `guard_ok=True`).
+- **[~] TAREFAS 2→4 (`game-concerto`):** gerando pacote de locomoção MoMask 60 fps + Rig Chibi (`Ear_L`, `Ear_R`, `Antenna_Top`) + `SpringBone` + `FootIK` + Blend Tree 2D + `Unity Recorder` 60 fps + QA automático.
 
 ---
 

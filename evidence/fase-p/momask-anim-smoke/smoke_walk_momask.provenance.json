@@ -1,0 +1,19 @@
+{
+  "runner": "3dprinter-setup-ia/tools/animation/momask_to_fbx.py",
+  "model": "MoMask (t2m_nlayer8_nhead6_ld384_ff1024_cdp0.1_rvq6ns)",
+  "license": "MIT (code) / HumanML3D checkpoints (same policy as FLUX-dev, ADR-012)",
+  "name": "smoke_walk_momask",
+  "prompt": "a person walks forward naturally",
+  "seed": 42,
+  "src_frames_20fps": 80,
+  "target_fps": 60,
+  "in_place": true,
+  "bvh_path": "/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/evidence/fase-p/momask-anim-smoke/smoke_walk_momask.bvh",
+  "fbx_path": "/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/evidence/fase-p/momask-anim-smoke/smoke_walk_momask.fbx",
+  "fbx_bytes": 484780,
+  "elapsed_gen_sec": 18.96,
+  "peak_vram_mib": 1786,
+  "vram_guard_mib": 10000,
+  "guard_ok": true,
+  "timestamp_utc": "2026-11-23T11:55:53.570957+00:00"
+}
