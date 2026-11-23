@@ -1,7 +1,7 @@
 # ADR-011 — Gerador de Imagem 2D do Pipeline (`FLUX.1-dev FP8` provisório + Provenance Obrigatória)
 
-- **Data:** 2026-11-22
-- **Status:** PROVISÓRIO (vencedor técnico do A/B `RUN mega_v4`; aguardando ratificação final do dono como gerador oficial permanente)
+- **Data:** 2026-11-22 (ratificado 2026-11-23)
+- **Status:** **OFICIAL** (`FLUX.1-dev FP8` = gerador oficial 2D do pipeline; A/B `20/20` vs `14/20`)
 - **Contexto:** Na Fase C5 do CONCERTO (`RUN mega_v3`), o `stabilityai/sdxl-turbo` (4 steps) mostrou perda severa de aderência a briefings complexos (ex.: omitiu volante vermelho na válvula, tampo de madeira na bancada, corneta na sirene, e os 4 braços + macacão do herói Dez).
 
 ---

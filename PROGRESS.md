@@ -20,6 +20,13 @@
 
 ---
 
+## RUN `mega_v6` — Preparação & Docs (2026-11-23) — PRONTO PARA EXECUÇÃO AMANHÃ
+- **[x] `ADR-011` ratificado como OFICIAL:** `FLUX.1-dev FP8` = gerador oficial 2D do pipeline.
+- **[x] `ADR-012` criado (`docs/decisions/ADR-012-lei-9-animacao-aaa.md`):** Lei 9 (Anti-Chilique, 3 pilares + checklist 8 itens + QA automático de foot-slide/60 fps) + stack **100% GRATUITA** verificada por curl-gate (`UniRig` MIT · `MoMask` MIT com 4 checkpoints já no disco · `CMU MoCap` uso comercial permitido + crédito `NSF EIA-0196217` · `Quaternius UAL` + `Kenney` CC0 · `Unity Animation Rigging` + `Unity Recorder` grátis · `SpringBone` C# próprio · `JLPM22/MotionMatching` MIT para Fase 2). **Cascadeur Indie e MagicaCloth 2 removidos/banidos** por ordem explícita do dono (zero ferramenta paga).
+- **[ ] Execução `RUN mega_v6` (TAREFAS 1→4):** pronta para iniciar amanhã em `game-concerto/docs/art/plano-animacao-aaa-mega-v6.md`.
+
+---
+
 ## RUN `mega_v5` — TAREFA 2 (2026-11-23) — Gate Anti-Grade + Auditoria Retroativa (CPU-only)
 - **[x] `tools/generator/gate_concept_image.py`:** gate CPU-only (0 VRAM) verificando componentes conexos (`>=2` peças `>=5%` → FAIL), calhas internas (`15%..85%` → FAIL) e corte de borda (`>8%` → FAIL); grava `.gate.json` ao lado de cada imagem.
 - **[x] Integração obrigatória:** integrado em `tools/generator/concept_flux.py` e em `game-concerto/tools/art/ai_generator/concept_bridge.py` (`gate_pass` + `gate_razao` no provenance JSON).
