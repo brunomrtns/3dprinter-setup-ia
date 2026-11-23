@@ -119,6 +119,47 @@ bpy.ops.object.mode_set(mode="OBJECT")
 
 sec = add_secondary_head_bones(arm, clean_mesh)
 
+# Limpeza cirurgica de pesos vazados do UniRig no queixo/pescoco/cabeca:
+# Em rigs chibi, pesos de ombros/bracos (Left/RightShoulder, UpperArm, etc.) vazam para o queixo
+# e fazem a parte inferior do queixo balancar junto com os bracos durante a corrida.
+arm_limb_groups = {
+    "LeftShoulder", "RightShoulder",
+    "LeftUpperArm", "RightUpperArm",
+    "LeftLowerArm", "RightLowerArm",
+    "LeftHand", "RightHand",
+}
+neck_bone = arm.data.bones.get("Neck")
+head_bone = arm.data.bones.get("Head")
+if neck_bone is not None and head_bone is not None:
+    neck_z = (arm.matrix_world @ neck_bone.head_local).z
+    head_z = (arm.matrix_world @ head_bone.head_local).z
+    vg_by_name = {g.name: g for g in clean_mesh.vertex_groups}
+    vg_by_idx = {g.index: g.name for g in clean_mesh.vertex_groups}
+    vg_head = vg_by_name.get("Head")
+    vg_neck = vg_by_name.get("Neck")
+    cleaned_chin_verts = 0
+    for v in clean_mesh.data.vertices:
+        p = clean_mesh.matrix_world @ v.co
+        if p.z >= neck_z:
+            leaked = 0.0
+            to_remove = []
+            for g in v.groups:
+                bname = vg_by_idx.get(g.group, "")
+                if bname in arm_limb_groups and g.weight > 0.0:
+                    leaked += g.weight
+                    to_remove.append(vg_by_name[bname])
+                elif p.z >= (head_z - 0.03) and bname in ("Chest", "UpperChest", "Spine") and g.weight > 0.0:
+                    leaked += g.weight
+                    to_remove.append(vg_by_name[bname])
+            if leaked > 0.0:
+                for vg in to_remove:
+                    vg.remove([v.index])
+                target_vg = vg_head if (p.z >= head_z - 0.03 and vg_head is not None) else vg_neck
+                if target_vg is not None:
+                    target_vg.add([v.index], leaked, "ADD")
+                cleaned_chin_verts += 1
+    print(f"CHIN_WEIGHT_CLEANUP: cleaned={cleaned_chin_verts} verts (neck_z={neck_z:.3f}, head_z={head_z:.3f})")
+
 # Normaliza pesos de todos os vertices
 bpy.context.view_layer.objects.active = clean_mesh
 bpy.ops.object.vertex_group_normalize_all(group_select_mode="ALL", lock_active=False)
