@@ -1,0 +1,109 @@
+{
+  "model": "/mnt/c/Users/Bruno/workspace/game-concerto/unity/Assets/Game/Art/Generated/hero_dez/hero_dez_humanoid.fbx",
+  "vertices": 8437,
+  "bbox_size": [
+    0.7895,
+    0.2716,
+    1.0016
+  ],
+  "bbox_diag": 1.3039,
+  "height": 1.0016,
+  "mesh_mirror_distance_mean_pct_bbox": 0.81,
+  "mesh_mirror_distance_p95_pct_bbox": 2.587,
+  "mesh_mirror_distance_max_pct_bbox": 5.273,
+  "skeleton_max_pair_asym_pct_height": 0.873,
+  "skeleton_pairs": {
+    "LeftShoulder_vs_RightShoulder": {
+      "left_world": [
+        0.0333,
+        0.1964,
+        0.1154
+      ],
+      "right_world": [
+        -0.0293,
+        0.1964,
+        0.1154
+      ],
+      "mirror_error_pct_height": 0.391
+    },
+    "LeftUpperArm_vs_RightUpperArm": {
+      "left_world": [
+        0.0959,
+        0.2004,
+        0.088
+      ],
+      "right_world": [
+        -0.0919,
+        0.1964,
+        0.088
+      ],
+      "mirror_error_pct_height": 0.552
+    },
+    "LeftLowerArm_vs_RightLowerArm": {
+      "left_world": [
+        0.1819,
+        0.2199,
+        0.0059
+      ],
+      "right_world": [
+        -0.178,
+        0.2199,
+        0.0059
+      ],
+      "mirror_error_pct_height": 0.391
+    },
+    "LeftHand_vs_RightHand": {
+      "left_world": [
+        0.2719,
+        0.1378,
+        -0.088
+      ],
+      "right_world": [
+        -0.268,
+        0.1299,
+        -0.088
+      ],
+      "mirror_error_pct_height": 0.873
+    },
+    "LeftUpperLeg_vs_RightUpperLeg": {
+      "left_world": [
+        0.0606,
+        0.1456,
+        -0.1311
+      ],
+      "right_world": [
+        -0.0567,
+        0.1456,
+        -0.1311
+      ],
+      "mirror_error_pct_height": 0.391
+    },
+    "LeftLowerLeg_vs_RightLowerLeg": {
+      "left_world": [
+        0.0998,
+        0.1378,
+        -0.2876
+      ],
+      "right_world": [
+        -0.0959,
+        0.1338,
+        -0.2876
+      ],
+      "mirror_error_pct_height": 0.552
+    },
+    "LeftFoot_vs_RightFoot": {
+      "left_world": [
+        0.1232,
+        0.2121,
+        -0.4206
+      ],
+      "right_world": [
+        -0.1193,
+        0.2121,
+        -0.4206
+      ],
+      "mirror_error_pct_height": 0.391
+    }
+  },
+  "verdict_asymmetric_base": false
+}

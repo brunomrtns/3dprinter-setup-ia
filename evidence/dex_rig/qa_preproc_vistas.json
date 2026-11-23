@@ -1,0 +1,70 @@
+{
+  "source_turnaround": "/mnt/c/Users/Bruno/.gemini/antigravity/brain/430e8586-6e41-4737-9ee8-884f505b33ac/.user_uploaded/media_1795453774959_80cdb106.jpg",
+  "views": {
+    "dex_front": {
+      "path": "/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/evidence/dex_rig/preproc/dex_front.png",
+      "crop_size": [
+        295,
+        350
+      ],
+      "aligned_size": [
+        725,
+        860
+      ],
+      "border_white_pct": 100.0,
+      "border_pass_ge_95": true
+    },
+    "dex_right": {
+      "path": "/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/evidence/dex_rig/preproc/dex_right.png",
+      "crop_size": [
+        151,
+        351
+      ],
+      "aligned_size": [
+        370,
+        860
+      ],
+      "border_white_pct": 100.0,
+      "border_pass_ge_95": true
+    },
+    "dex_left": {
+      "path": "/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/evidence/dex_rig/preproc/dex_left.png",
+      "crop_size": [
+        151,
+        351
+      ],
+      "aligned_size": [
+        370,
+        860
+      ],
+      "border_white_pct": 100.0,
+      "border_pass_ge_95": true
+    },
+    "dex_back": {
+      "path": "/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/evidence/dex_rig/preproc/dex_back.png",
+      "crop_size": [
+        286,
+        360
+      ],
+      "aligned_size": [
+        683,
+        860
+      ],
+      "border_white_pct": 100.0,
+      "border_pass_ge_95": true
+    }
+  },
+  "front_symmetry_qa": {
+    "left_arm_angle_deg": 31.09,
+    "right_arm_angle_deg": 30.49,
+    "arm_angle_diff_deg": 0.6,
+    "arms_pass_le_3deg": true,
+    "left_foot_bottom_y": 942,
+    "right_foot_bottom_y": 942,
+    "foot_axis_tilt_deg": 0.0,
+    "feet_parallel_pass": true,
+    "no_text_verified": true
+  },
+  "preproc_sheet": "/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/evidence/dex_rig/preproc/dex_4views_preproc_sheet.png",
+  "all_qa_pass": true
+}
