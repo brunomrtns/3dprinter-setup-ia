@@ -42,6 +42,8 @@ FAMILY_RULES = [
     ("birefnet", ("rembg (BiRefNet)", "ZhengPeng7/BiRefNet", "~/.venvs/printer3d-ia · tools/generator/preprocess_input.py")),
     ("dinov3", ("DINOv3 (TRELLIS.2)", "camenduru/dinov3-vitl16-pretrain-lvd1689m", "~/.venvs/trellis2 · pipeline/retexture_trellis.py")),
     ("dinov2", ("DINOv2", "facebook/dinov2*", "~/.venvs/printer3d-ia / hunyuan / trellis2")),
+    ("flux1-dev", ("FLUX.1-dev FP8 (2D)", "Comfy-Org/flux1-dev (BFL non-commercial)", "~/.venvs/comfyui · tools/generator/concept_flux.py (conceito 2D Concerto)")),
+    ("flux1-schnell", ("FLUX.1-schnell FP8 (2D)", "Comfy-Org/flux1-schnell (Apache 2.0)", "~/.venvs/comfyui · tools/generator/concept_flux.py (fallback Apache 2.0)")),
     ("sdxl", ("SDXL-Turbo (2D)", "stabilityai/sdxl-turbo", "~/.venvs/hunyuan · concept_bridge (game-concerto)")),
     ("vggt", ("VGGT", "facebook/VGGT-1B", "~/.venvs/hunyuan · tools/generator/vggt_recon.py")),
 ]

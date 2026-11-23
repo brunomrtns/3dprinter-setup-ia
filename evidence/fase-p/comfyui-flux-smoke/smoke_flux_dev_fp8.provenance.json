@@ -1,0 +1,20 @@
+{
+  "runner": "3dprinter-setup-ia/tools/generator/concept_flux.py",
+  "backend": "ComfyUI headless (--lowvram)",
+  "model": "flux1-dev-fp8",
+  "weights_file": "/home/bruno/tools/comfyui/models/checkpoints/flux1-dev-fp8.safetensors",
+  "weights_sha256": "8e91b68084b53a7fc44ed2a3756d821e355ac1a7b6fe29be760c1db532f3d88a",
+  "license_note": "FLUX.1-dev = BFL non-commercial (personal/vertical-slice OK; migrate to FLUX.1-schnell Apache 2.0 or BFL license for commercial release)",
+  "seed": 42,
+  "width": 768,
+  "height": 768,
+  "steps": 20,
+  "guidance": 3.5,
+  "prompt": "stylized detailed 3d game asset, weathered brass and dark iron clockwork steam valve pedestal with red handwheel, pressure gauge dial and riveted pipes, crisp sharp edges, single isolated object, 3/4 view, pure solid white background, diffuse studio lighting, no text",
+  "output_png": "/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/evidence/fase-p/comfyui-flux-smoke/smoke_flux_dev_fp8.png",
+  "elapsed_sec": 63.14,
+  "peak_vram_mib": 9730,
+  "vram_guard_mib": 10000,
+  "guard_ok": true,
+  "timestamp_utc": "2026-11-23T00:32:09.135589+00:00"
+}

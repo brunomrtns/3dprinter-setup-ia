@@ -20,6 +20,13 @@
 
 ---
 
+## RUN `mega_v4` — TAREFA 1 (2026-11-22) — ComfyUI Headless + FLUX.1-dev FP8 (Lei 8)
+- **[x] Sonda Lei 8:** `/mnt/d` vazio, nenhum ComfyUI nem peso FLUX pré-existente em `~/tools`, `~/ComfyUI`, `C:\Users\Bruno` ou `~/.cache/huggingface/hub` (apenas `sdxl-turbo` 6,46 GiB). `715 GiB` livres em `/`.
+- **[x] Porta do repo + Peso único autorizado:** `tools/setup/install_comfyui.sh` instalou `ComfyUI` em `~/tools/comfyui` + venv dedicada `~/.venvs/comfyui` (`torch 2.11.0+cu128`) e baixou `Comfy-Org/flux1-dev` (`flux1-dev-fp8.safetensors`, `16,06 GiB` all-in-one, SHA-256 `8e91b68084b53a7fc44ed2a3756d821e355ac1a7b6fe29be760c1db532f3d88a`), registrado em `docs/knowledge/inventario-pesos.md` (`46` arquivos, `77,74 GiB`).
+- **[x] Runner + Smoke + Doc:** `tools/generator/concept_flux.py` (`--lowvram --reserve-vram 3.5`, guard 10 GB, logger VRAM 1 Hz, provenance JSON + SHA-256) validado no smoke `evidence/fase-p/comfyui-flux-smoke/smoke_flux_dev_fp8.png` (`63,14s`, pico **`9.730 MiB <= 10.000 MiB`**, `guard_ok=true`, VRAM pós-run `709 MiB`); doc `docs/knowledge/gerador-imagem.md`.
+
+---
+
 ## RUN `mega_v3` — TAREFA 1 (2026-11-22) — Fechamento dos 5 Gates (SEM GPU)
 - **[x] TAREFA 1 (`1C · 2B · 3B · 4B · 5B`):** vereditos gravados em `docs/operations/gates-pendentes.md`, duplicidades aceitas registradas em `docs/knowledge/inventario-pesos.md`, `PROGRESS.md` e `HANDOFF.md` atualizados. Crash `paintfix_v2` arquivado como aprendizado (zero GPU gasta); foco deslocado para o C5 do CONCERTO.
 

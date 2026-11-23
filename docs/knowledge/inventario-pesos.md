@@ -1,7 +1,7 @@
 # Inventário de Pesos Locais (Lei 8 / ADR-010)
 
-> Gerado automaticamente por `tools/generator/inventario_pesos.py` em **2026-11-22 22:01 UTC** (somente leitura — zero downloads).
-> **Total inventariado:** **45 arquivos** (`>= 5 MiB`) · **61.68 GiB** · **Duplicidades por SHA-256:** **2**.
+> Gerado automaticamente por `tools/generator/inventario_pesos.py` em **2026-11-23 00:30 UTC** (somente leitura — zero downloads).
+> **Total inventariado:** **46 arquivos** (`>= 5 MiB`) · **77.74 GiB** · **Duplicidades por SHA-256:** **2**.
 
 ## Resumo por Família
 
@@ -11,6 +11,7 @@
 | DINOv3 (TRELLIS.2) | 1 | 1.13 GiB | `~/.venvs/trellis2 · pipeline/retexture_trellis.py` |
 | faster-whisper-large-v3 | 1 | 2.88 GiB | `cache HF compartilhado` |
 | faster-whisper-tiny | 1 | 72.0 MiB | `cache HF compartilhado` |
+| FLUX.1-dev FP8 (2D) | 1 | 16.06 GiB | `~/.venvs/comfyui · tools/generator/concept_flux.py (conceito 2D Concerto)` |
 | Hunyuan3D (dit/paint/mv) | 8 | 12.57 GiB | `~/.venvs/hunyuan · pipeline/paint_quality.py & hunyuan_runner.py` |
 | rembg (BiRefNet) | 1 | 423.9 MiB | `~/.venvs/printer3d-ia · tools/generator/preprocess_input.py` |
 | rembg (u2net/isnet) | 1 | 167.8 MiB | `~/.venvs/printer3d-ia · tools/generator/preprocess_input.py` |
@@ -26,10 +27,8 @@
 
 ## Duplicidades Detectadas (mesmo SHA-256 em caminhos físicos distintos)
 
-> **Status (Gate 4B, 2026-11-22 — DECISÃO DO DONO):** As 2 duplicidades abaixo (`~1,55 GiB`) ficam **ACEITAS**. A cópia em `~/tools/TRELLIS.2/MODELS/` é canônica do TRELLIS.2 (que segue rodando no estágio `05_trellis_pbr` e como fallback oficial do jogo); só reabrir sob pressão real de disco, com teste obrigatório do `05_trellis_pbr` após eventual troca por symlink.
-
-- `dcb2e45127cccbf1…` (1.13 GiB): `~/.cache/huggingface/hub/models--camenduru--dinov3-vitl16-pretrain-lvd1689m/snapshots/3c276edd87d6f6e569ff0c4400e086807d0f3881/model.safetensors`, `~/tools/TRELLIS.2/MODELS/dinov3/model.safetensors` — **ACEITA (Gate 4B)**
-- `9ab37426bf4de056…` (423.9 MiB): `~/.cache/huggingface/hub/models--ZhengPeng7--BiRefNet/snapshots/e2bf8e4460fc8fa32bba5ea4d94b3233d367b0e4/model.safetensors`, `~/tools/TRELLIS.2/MODELS/RMBG-2.0/model.safetensors` — **ACEITA (Gate 4B)**
+- `dcb2e45127cccbf1…` (1.13 GiB): `~/.cache/huggingface/hub/models--camenduru--dinov3-vitl16-pretrain-lvd1689m/snapshots/3c276edd87d6f6e569ff0c4400e086807d0f3881/model.safetensors`, `~/tools/TRELLIS.2/MODELS/dinov3/model.safetensors`
+- `9ab37426bf4de056…` (423.9 MiB): `~/.cache/huggingface/hub/models--ZhengPeng7--BiRefNet/snapshots/e2bf8e4460fc8fa32bba5ea4d94b3233d367b0e4/model.safetensors`, `~/tools/TRELLIS.2/MODELS/RMBG-2.0/model.safetensors`
 
 ## Tabela Completa de Pesos (Read-Only + SHA-256)
 
@@ -39,6 +38,7 @@
 | DINOv3 (TRELLIS.2) | `~/.cache/huggingface/hub/models--camenduru--dinov3-vitl16-pretrain-lvd1689m/snapshots/3c276edd87d6f6e569ff0c4400e086807d0f3881/model.safetensors` | `camenduru/dinov3-vitl16-pretrain-lvd1689m` | 1.13 GiB | `dcb2e45127cccbf1` | `~/.venvs/trellis2 · pipeline/retexture_trellis.py` |
 | faster-whisper-large-v3 | `~/.cache/huggingface/hub/models--Systran--faster-whisper-large-v3/snapshots/edaa852ec7e145841d8ffdb056a99866b5f0a478/model.bin` | `Systran/faster-whisper-large-v3` | 2.88 GiB | `69f74147e3334731` | `cache HF compartilhado` |
 | faster-whisper-tiny | `~/.cache/huggingface/hub/models--Systran--faster-whisper-tiny/snapshots/d90ca5fe260221311c53c58e660288d3deb8d356/model.bin` | `Systran/faster-whisper-tiny` | 72.0 MiB | `dcb76c6586fc06cb` | `cache HF compartilhado` |
+| FLUX.1-dev FP8 (2D) | `~/tools/comfyui/models/checkpoints/flux1-dev-fp8.safetensors` | `Comfy-Org/flux1-dev (BFL non-commercial)` | 16.06 GiB | `8e91b68084b53a7f` | `~/.venvs/comfyui · tools/generator/concept_flux.py (conceito 2D Concerto)` |
 | Hunyuan3D (dit/paint/mv) | `~/.cache/huggingface/hub/models--tencent--Hunyuan3D-2/snapshots/9cd649ba6913f7a852e3286bad86bfa9a2d83dcf/hunyuan3d-paint-v2-0/unet/diffusion_pytorch_model.bin` | `tencent/Hunyuan3D-2*` | 3.41 GiB | `2efb4438e649e1ce` | `~/.venvs/hunyuan · pipeline/paint_quality.py & hunyuan_runner.py` |
 | Hunyuan3D (dit/paint/mv) | `~/.cache/huggingface/hub/models--tencent--Hunyuan3D-2/snapshots/9cd649ba6913f7a852e3286bad86bfa9a2d83dcf/hunyuan3d-paint-v2-0/unet/diffusion_pytorch_model.safetensors` | `tencent/Hunyuan3D-2*` | 3.41 GiB | `1c5ce434ba976b30` | `~/.venvs/hunyuan · pipeline/paint_quality.py & hunyuan_runner.py` |
 | Hunyuan3D (dit/paint/mv) | `~/.cache/huggingface/hub/models--tencent--Hunyuan3D-2/snapshots/9cd649ba6913f7a852e3286bad86bfa9a2d83dcf/hunyuan3d-delight-v2-0/unet/diffusion_pytorch_model.safetensors` | `tencent/Hunyuan3D-2*` | 3.23 GiB | `0ce61d15a43d11ba` | `~/.venvs/hunyuan · pipeline/paint_quality.py & hunyuan_runner.py` |
