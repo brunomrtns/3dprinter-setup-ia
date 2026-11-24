@@ -1,0 +1,15 @@
+{
+  "id": "sector_prop_gerador",
+  "variant_id": "pbr",
+  "mesh": "/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/work/sector/sector_prop_gerador/mesh_30k.obj",
+  "uv": "/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/work/sector/sector_prop_gerador/mesh_30k.obj",
+  "tier": "single",
+  "input_images": ["/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/evidence/sector/sector_prop_gerador.png"],
+  "outputs": {
+    "mode_8k": "pbr_8k",
+    "mode_4k": "pbr_4k",
+    "glb_names": ["sector_prop_gerador__pbr_8k.glb", "sector_prop_gerador__pbr_4k.glb"]
+  },
+  "qa": { "lap_min": 400.0, "patch_max_pct": 0.30, "sat_min_pct": 3.0, "sat_max_pct": 98.0 },
+  "notes": "Setor Externo asset (sector_prop_gerador) — EXCLUSIVAMENTE TripoSG."
+}

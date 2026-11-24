@@ -1,0 +1,15 @@
+{
+  "id": "npc_engenheira_vera",
+  "variant_id": "pbr",
+  "mesh": "/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/work/sector/npc_engenheira_vera/mesh_30k.obj",
+  "uv": "/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/work/sector/npc_engenheira_vera/mesh_30k.obj",
+  "tier": "single",
+  "input_images": ["/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/evidence/sector/npc_engenheira_vera.png"],
+  "outputs": {
+    "mode_8k": "pbr_8k",
+    "mode_4k": "pbr_4k",
+    "glb_names": ["npc_engenheira_vera__pbr_8k.glb", "npc_engenheira_vera__pbr_4k.glb"]
+  },
+  "qa": { "lap_min": 400.0, "patch_max_pct": 0.30, "sat_min_pct": 3.0, "sat_max_pct": 98.0 },
+  "notes": "Setor Externo asset (npc_engenheira_vera) — EXCLUSIVAMENTE TripoSG."
+}
