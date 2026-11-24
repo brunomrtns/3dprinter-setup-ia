@@ -1,0 +1,15 @@
+{
+  "id": "enemy_egide",
+  "variant_id": "pbr",
+  "mesh": "/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/work/combat_v2/enemy_egide/mesh_30k.obj",
+  "uv": "/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/work/combat_v2/enemy_egide/mesh_30k.obj",
+  "tier": "single",
+  "input_images": ["/mnt/c/Users/Bruno/workspace/3dprinter-setup-ia/evidence/combat_v2/enemy_egide.png"],
+  "outputs": {
+    "mode_8k": "pbr_8k",
+    "mode_4k": "pbr_4k",
+    "glb_names": ["enemy_egide__pbr_8k.glb", "enemy_egide__pbr_4k.glb"]
+  },
+  "qa": { "lap_min": 400.0, "patch_max_pct": 0.30, "sat_min_pct": 3.0, "sat_max_pct": 98.0 },
+  "notes": "Combate v2 enemy Egide (enemy_egide) — EXCLUSIVAMENTE TripoSG (#109)."
+}
